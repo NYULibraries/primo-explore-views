@@ -1,46 +1,64 @@
 // vid
-let viewName = "NYU-NUI";
+let viewName = "NYHS-NUI";
 
 import 'primo-explore-custom-actions';
-import 'primo-explore-custom-library-card-menu';
 import 'primo-explore-clickable-logo-to-any-link';
 import 'primo-explore-custom-no-search-results';
-import 'primo-explore-libraryh3lp-widget';
-import 'primo-explore-getit-to-link-resolver';
-import 'primo-explore-nyu-eshelf';
 
 import { customActionsConfig } from './customActions';
-import { customLibraryCardMenuItemsConfig } from './customLibraryCardMenu';
 import { clickableLogoLinkConfig } from './clickableLogoToAnyLink';
-import { libraryh3lpWidgetConfig } from './libraryh3lpWidget';
-import { getitToLinkResolverConfig } from './getitToLinkResolver';
-import { nyuEshelfConfig } from './nyuEshelf';
+
+angular
+  .module('customBookmarkToolbar', [])
+  .controller('customBookmarkToolbarController', ['customBookmarkToolbarItems', '$scope', '$filter', function(items, $scope, $filter) {
+    this.$onInit = () => {
+      $scope.items = items;
+    }
+    $scope.translate = (original) => {
+      return original.replace(/\{(.+)\}/g, (match, p1) => $filter('translate')(p1));
+    }
+    $scope.goToUrl = (url) => {
+      window.open(url, '_blank');
+    }
+  }])
+  .component('customBookmarkToolbar', {
+    controller: 'customBookmarkToolbarController',
+    template: '<button ng-repeat="item in items" aria-label="{{ translate(item.description) }}" ng-click="goToUrl(translate(item.action))" class="button-with-icon bookmark-toolbar zero-margin md-button" type="button">'+
+                '<prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{item.icon.set}}" icon-definition="{{item.icon.icon}}"></prm-icon>'+
+                '<span class="customBookmarkToolbarItem">{{ translate(item.name) }}</span>'+
+              '</button>'
+
+  });
+
 
 let app = angular.module('viewCustom', [
-                                        'angularLoad',
                                         'customActions',
-                                        'customLibraryCardMenu',
                                         'clickableLogoToAnyLink',
                                         'customNoSearchResults',
-                                        'libraryh3lpWidget',
-                                        'getitToLinkResolver',
-                                        'nyuEshelf'
+                                        'customBookmarkToolbar'
                                       ]);
+
+let customBookmarkToolbarConfig = {
+  name: 'customBookmarkToolbarItems',
+  config: [
+    {
+      name: "Collections Request System",
+      description: "Go to Collections Request System",
+      action: "https://nyhs.aeon.atlas-sys.com/aeon/",
+      icon: {
+        set: 'social',
+        icon: 'ic_person_outline_24px'
+      }
+    }
+  ]
+};
+
 
 app
   .constant(customActionsConfig.name, customActionsConfig.config)
-  .constant(customLibraryCardMenuItemsConfig.name, customLibraryCardMenuItemsConfig.config)
   .constant(clickableLogoLinkConfig.name, clickableLogoLinkConfig.config)
-  .constant(libraryh3lpWidgetConfig.name, libraryh3lpWidgetConfig.config)
-  .constant(getitToLinkResolverConfig.name, getitToLinkResolverConfig.config)
-  .constant(nyuEshelfConfig.name, nyuEshelfConfig.config)
-  .value('customNoSearchResultsTemplateUrl', 'custom/' + viewName + '/html/noSearchResults.html')
-  .component('prmOpacAfter', {
-    template: '<getit-to-link-resolver-full></getit-to-link-resolver-full>'
-  })
-  .component('prmSearchResultAvailabilityLineAfter', {
-    template: '<nyu-eshelf></nyu-eshelf>'
-  })
+  .constant(customBookmarkToolbarConfig.name, customBookmarkToolbarConfig.config)
   .component('prmSearchBookmarkFilterAfter', {
-    template: '<nyu-eshelf-toolbar></nyu-eshelf-toolbar>'
+    template: '<custom-bookmark-toolbar></custom-bookmark-toolbar>'
   })
+  .value('customNoSearchResultsTemplateUrl', 'custom/' + viewName + '/html/noSearchResults.html')
