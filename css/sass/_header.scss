@@ -5,16 +5,29 @@ prm-spinner.prm-hue1.overlay-cover.light-on-dark:after,
 prm-topbar .top-nav-bar {
   background-color: white;
 }
+.__xs prm-topbar prm-logo,
+prm-topbar prm-logo {
+  max-width: inherit;
+}
+prm-logo div.product-logo {
+  display: none;
+}
+prm-logo div.product-logo-local {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
 prm-topbar {
-  height: 100px;
+  height: 160px;
+  img { height: 136px; }
 }
 prm-main-menu {
   display: none;
 }
-prm-search-bookmark-filter-after button.bookmark-toolbar {
+prm-search-bookmark-filter-after button.search-bookmark-filter-item {
   border-radius: 20px !important;
   min-width: 40px !important;
 }
-prm-search-bookmark-filter .md-button.button-over-dark{
-    color: $dark_gray;
+prm-search-bookmark-filter .md-button.button-over-dark {
+  color: $dark_gray;
 }
