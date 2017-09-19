@@ -1,0 +1,9 @@
+prm-user-area .md-button.mobile-menu-button,
+prm-main-menu .md-button {
+  color: $nysid-red !important;
+}
+
+a.md-button[aria-label="Browse"],
+a.md-button[aria-label="mainmenu.label.Browse"] {
+  display: none;
+}
