@@ -5,19 +5,25 @@ prm-topbar {
     background-color: white;
   }
 }
-.__xs prm-topbar prm-logo,
-prm-topbar prm-logo {
-  max-width: inherit;
-}
+
 prm-search-bookmark-filter-after button.search-bookmark-filter-item {
   border-radius: 20px !important;
   min-width: 40px !important;
 }
-prm-logo div.product-logo {
-  display: none;
+.__xs prm-topbar prm-logo,
+prm-topbar prm-logo {
+  max-width: inherit;
 }
-prm-logo div.product-logo-local {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+prm-topbar {
+  height: 150px;
+  prm-logo img {
+    height: 110px;
+  }
+  div.product-logo {
+    background-color: white;
+  }
+  .md-button.button-over-dark,
+  prm-user-area .user-menu-button .user-name {
+    color: white;
+  }
 }
