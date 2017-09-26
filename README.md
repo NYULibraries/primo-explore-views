@@ -1,11 +1,9 @@
-# NYU Primo-explore package
+# Cooper Union primo-explore package
 
-[![Dependency Status](https://gemnasium.com/badges/github.com/NYULibraries/primo-explore-nyu.svg)](https://gemnasium.com/github.com/NYULibraries/primo-explore-nyu)
-
-This the NYU Libraries primo-explore view package.
+This the NYU Consortium Libraries Cooper Union primo-explore view package. Forked from https://github.com/nyulibraries/primo-explore-nyu.
 
 For more information about primo-explore views please review the example package that this package was cloned from: https://github.com/ExLibrisGroup/primo-explore-package.
 
 For information about developing in the primo-explore UI please review that relevant repository: https://github.com/ExLibrisGroup/primo-explore-devenv
 
-For more information about NYU's customizations read the [wiki](https://github.com/nyulibraries/primo-explore-nyu/wiki).
+For more information about NYU Consortium Libraries customizations read the [wiki](https://github.com/nyulibraries/primo-explore-nyu/wiki).

@@ -1,7 +1,7 @@
 export let clickableLogoLinkConfig = {
   name: 'clickableLogoLinkConfig',
   config: {
-    url: '{urls.library}',
-    altText: '{nui.header.logoAlt}'
+    url: 'http://library.cooper.edu/',
+    altText: 'Cooper Union'
   }
 };
