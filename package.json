@@ -1,22 +1,22 @@
 {
   "name": "NYU-NUI",
   "version": "1.0.0",
-  "description": "This the NYU Consortium primo-explore view package.",
+  "description": "This the NYU Abu Dhabi primo-explore view package.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NYULibraries/primo-explore-nyu.git"
+    "url": "git+https://github.com/NYULibraries/primo-explore-nyuad.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/NYULibraries/primo-explore-nyu/issues"
+    "url": "https://github.com/NYULibraries/primo-explore-nyuad/issues"
   },
-  "homepage": "https://github.com/NYULibraries/primo-explore-nyu#readme",
+  "homepage": "https://github.com/NYULibraries/primo-explore-nyuad#readme",
   "devDependencies": {
     "primo-explore-clickable-logo-to-any-link": "^1.0.0",
     "primo-explore-custom-actions": "^2.0.0",

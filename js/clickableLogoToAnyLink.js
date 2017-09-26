@@ -1,7 +1,7 @@
 export let clickableLogoLinkConfig = {
   name: 'clickableLogoLinkConfig',
   config: {
-    url: '{urls.library}',
-    altText: '{nui.header.logoAlt}'
+    url: 'http://nyuad.nyu.edu/en/research/library.html',
+    altText: 'NYUAD Library'
   }
 };
