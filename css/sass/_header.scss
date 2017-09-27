@@ -21,6 +21,9 @@ prm-topbar {
 prm-search-bookmark-filter-after button.search-bookmark-filter-item {
   border-radius: 20px !important;
   min-width: 40px !important;
+  &:hover {
+    box-shadow: 0 1px 0 #888888;
+  }
 }
 // Hide default library card options
 prm-library-card-menu > button {
