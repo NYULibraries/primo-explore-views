@@ -1,32 +1,14 @@
-/* Top nav */
-prm-topbar {
-  height: 120px;
-  prm-logo {
-    background-color: white;
-  }
-}
-
-prm-search-bookmark-filter-after button.search-bookmark-filter-item {
-  border-radius: 20px !important;
-  min-width: 40px !important;
-  &:hover {
-    box-shadow: 0 1px 0 #888888;
-  }
-}
-
-.__xs prm-topbar prm-logo,
-prm-topbar prm-logo {
-  max-width: inherit;
-}
 prm-topbar {
   height: 150px;
-  prm-logo img {
-  }
   div.product-logo {
     background-color: white;
   }
-  .md-button.button-over-dark,
-  prm-user-area .user-menu-button .user-name {
-    color: white;
-  }
+}
+
+/* Search bar */
+prm-search-bar,
+prm-tags-search-bar,
+prm-browse-search-bar {
+  background-image: none;
+  background-color: $background_light_gray;
 }
