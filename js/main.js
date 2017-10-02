@@ -1,6 +1,5 @@
 import 'primo-explore-custom-actions';
 import 'primo-explore-clickable-logo-to-any-link';
-import 'primo-explore-custom-no-search-results';
 import 'primo-explore-custom-search-bookmark-filter';
 
 import { viewName } from './viewName';
@@ -11,7 +10,6 @@ import { clickableLogoLinkConfig } from './clickableLogoToAnyLink';
 let app = angular.module('viewCustom', [
                                         'customActions',
                                         'clickableLogoToAnyLink',
-                                        'customNoSearchResults',
                                         'customSearchBookmarkFilter'
                                       ]);
 
@@ -22,4 +20,3 @@ app
   .component('prmSearchBookmarkFilterAfter', {
     template: '<custom-search-bookmark-filter></custom-search-bookmark-filter>'
   })
-  .value('customNoSearchResultsTemplateUrl', 'custom/' + viewName + '/html/noSearchResults.html')
