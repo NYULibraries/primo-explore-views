@@ -3,22 +3,25 @@
 prm-search-bar.prm-hue1,
 prm-spinner.prm-hue1.overlay-cover.light-on-dark:after,
 prm-topbar .top-nav-bar {
+  // background-image: none;
   background-color: white;
 }
+
 prm-topbar {
   .md-button.button-over-dark,
   prm-user-area .user-menu-button .user-name {
-    color: $cu-gray;
+    color: $cu_gray;
   }
 }
-prm-search-bookmark-filter-after button.search-bookmark-filter-item {
-  border-radius: 20px !important;
-  min-width: 40px !important;
-}
-// Hide default library card options
-prm-library-card-menu > button {
-  display: none !important;
-}
+
 prm-user-area md-fab-toolbar md-toolbar {
-  background: linear-gradient(to right, white 50%, $cu-gray);
+  background: linear-gradient(to right, white 50%, $cu_gray);
+}
+
+/* Search bar */
+prm-search-bar,
+prm-tags-search-bar,
+prm-browse-search-bar {
+  background-image: none;
+  background-color: $background_light_gray;
 }
