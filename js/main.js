@@ -8,6 +8,7 @@ import { clickableLogoLinkConfig } from './clickableLogoToAnyLink';
 import { nyuEshelfConfig } from './nyuEshelf';
 
 let app = angular.module('viewCustom', [
+                                        'angularLoad',
                                         'customActions',
                                         'clickableLogoToAnyLink',
                                         'nyuEshelf'
