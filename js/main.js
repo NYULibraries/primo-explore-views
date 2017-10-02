@@ -8,6 +8,7 @@ import { customSearchBookmarkFilterConfig } from './customSearchBookmarkFilter';
 import { clickableLogoLinkConfig } from './clickableLogoToAnyLink';
 
 let app = angular.module('viewCustom', [
+                                        'angularLoad',
                                         'customActions',
                                         'clickableLogoToAnyLink',
                                         'customSearchBookmarkFilter'
