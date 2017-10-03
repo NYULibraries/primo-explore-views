@@ -1,7 +1,6 @@
 import 'primo-explore-custom-actions';
 import 'primo-explore-custom-library-card-menu';
 import 'primo-explore-clickable-logo-to-any-link';
-import 'primo-explore-custom-no-search-results';
 import 'primo-explore-libraryh3lp-widget';
 import 'primo-explore-getit-to-link-resolver';
 import 'primo-explore-nyu-eshelf';
@@ -18,7 +17,6 @@ let app = angular.module('viewCustom', [
                                         'customActions',
                                         'customLibraryCardMenu',
                                         'clickableLogoToAnyLink',
-                                        'customNoSearchResults',
                                         'libraryh3lpWidget',
                                         'getitToLinkResolver',
                                         'nyuEshelf'
@@ -31,7 +29,6 @@ app
   .constant(libraryh3lpWidgetConfig.name, libraryh3lpWidgetConfig.config)
   .constant(getitToLinkResolverConfig.name, getitToLinkResolverConfig.config)
   .constant(nyuEshelfConfig.name, nyuEshelfConfig.config)
-  .value('customNoSearchResultsTemplateUrl', 'custom/' + viewName + '/html/noSearchResults.html')
   .component('prmFullViewServiceContainerAfter', {
     template: '<getit-to-link-resolver-full></getit-to-link-resolver-full>'
   })
