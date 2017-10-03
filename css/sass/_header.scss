@@ -7,25 +7,27 @@ prm-topbar .top-nav-bar {
 }
 prm-topbar {
   height: 150px;
-  border-bottom: 10px solid $nysid-red;
+  border-bottom: 10px solid $nysid_red;
   prm-logo img {
   }
   div.product-logo {
-    background-color: $nysid-red;
+    background-color: $nysid_red;
   }
   .md-button.button-over-dark,
   prm-user-area .user-menu-button .user-name {
-    color: $nysid-red;
+    color: $nysid_red;
   }
 }
-prm-search-bookmark-filter-after button.search-bookmark-filter-item {
-  border-radius: 20px !important;
-  min-width: 40px !important;
-  &:hover {
-    box-shadow: 0 1px 0 #888888;
-  }
+
+prm-user-area .md-button.mobile-menu-button,
+prm-main-menu .md-button {
+  color: $nysid_red !important;
 }
-// Hide default library card options
-prm-library-card-menu > button {
-  display: none !important;
+
+/* Search bar */
+prm-search-bar,
+prm-tags-search-bar,
+prm-browse-search-bar {
+  background-image: none;
+  background-color: $background_light_gray;
 }
