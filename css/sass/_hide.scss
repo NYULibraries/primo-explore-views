@@ -27,7 +27,7 @@ prm-favorites md-tab-item:first-child {
 
 // Hide Get It section on full view
 [aria-label="Get It"],
-&[id^='getit_link1_'] {
+[id^='getit_link1_'] {
   display: none;
 }
 
