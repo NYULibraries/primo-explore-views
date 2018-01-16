@@ -30,7 +30,7 @@ prm-browse-search-bar {
   min-width: 0;
   transition: background-color 0.3s ease 0s;
   color: $text_black !important;
-  background-color: white;
+  background-color: white !important;
 }
 .md-button.button-confirm {
   background-color: $text_black;
