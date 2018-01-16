@@ -2,7 +2,7 @@ export let getitToLinkResolverConfig = {
   name: 'getitToLinkResolverConfig',
   config: {
     serviceSectionHeader: '{nui.getit.tab1_check}',
-    linkField: 'lln10',
+    linkField: 'lln13',
     linkText: 'Check Availability',
     iconBefore: {
       set: 'primo-ui',
