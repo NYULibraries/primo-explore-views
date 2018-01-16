@@ -9,3 +9,9 @@ prm-topbar .top-nav-bar {
 prm-topbar prm-logo {
   max-width: inherit;
 }
+// Undo something in the angular CSS that is causing
+// popover tips to clip the text weirdly
+.item-description.popover.animate-popover {
+  -webkit-clip-path: none !important;
+  clip-path: none !important;
+}
