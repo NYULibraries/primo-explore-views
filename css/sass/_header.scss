@@ -15,3 +15,10 @@ prm-topbar prm-logo {
   -webkit-clip-path: none !important;
   clip-path: none !important;
 }
+// Make the library logo responsive, namely for XS screens i.e. phones
+.__xs prm-topbar prm-logo {
+  min-width: 50%;
+}
+.__xs prm-logo .logo-image, .__xs prm-logo img {
+  width: 100%;
+}
