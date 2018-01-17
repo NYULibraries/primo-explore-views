@@ -31,3 +31,7 @@ prm-browse-search-bar {
   background-image: none;
   background-color: $background_light_gray;
 }
+
+prm-main-menu[menu-type="full"] .md-button, prm-main-menu[menu-type="full"] .overlay-menu-item {
+  color: white !important;
+}
