@@ -29,6 +29,7 @@ app
   .constant(libraryh3lpWidgetConfig.name, libraryh3lpWidgetConfig.config)
   .constant(getitToLinkResolverConfig.name, getitToLinkResolverConfig.config)
   .constant(nyuEshelfConfig.name, nyuEshelfConfig.config)
+  .value('customNoSearchResultsTemplateUrl', 'custom/'+viewName+'/html/noSearchResults.html')
   .component('prmFullViewServiceContainerAfter', {
     template: '<getit-to-link-resolver-full></getit-to-link-resolver-full>'
   })
