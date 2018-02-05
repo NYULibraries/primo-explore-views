@@ -10,6 +10,10 @@ primo-explore-custom-actions@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/primo-explore-custom-actions/-/primo-explore-custom-actions-2.0.0.tgz#a173e02d2a4dcbdfdb13c4b5d402853d823e1711"
 
+primo-explore-custom-no-search-results@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/primo-explore-custom-no-search-results/-/primo-explore-custom-no-search-results-1.0.0.tgz#061f22fca6671f538f4b0c7452fc887804c5f735"
+
 primo-explore-custom-search-bookmark-filter@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/primo-explore-custom-search-bookmark-filter/-/primo-explore-custom-search-bookmark-filter-1.0.2.tgz#0601a5aee83316e97e63d6039b3f1417704df08b"
