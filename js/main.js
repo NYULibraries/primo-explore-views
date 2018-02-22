@@ -4,6 +4,7 @@ import 'primo-explore-clickable-logo-to-any-link';
 import 'primo-explore-libraryh3lp-widget';
 import 'primo-explore-getit-to-link-resolver';
 import 'primo-explore-nyu-eshelf';
+import 'primo-explore-search-bar-sub-menu';
 
 import { viewName } from './viewName';
 import { customActionsConfig } from './customActions';
@@ -12,6 +13,7 @@ import { clickableLogoLinkConfig } from './clickableLogoToAnyLink';
 import { libraryh3lpWidgetConfig } from './libraryh3lpWidget';
 import { getitToLinkResolverConfig } from './getitToLinkResolver';
 import { nyuEshelfConfig } from './nyuEshelf';
+import { searchBarSubMenuItemsConfig } from './searchBarSubMenu';
 
 let app = angular.module('viewCustom', [
                                         'customActions',
@@ -19,7 +21,8 @@ let app = angular.module('viewCustom', [
                                         'clickableLogoToAnyLink',
                                         'libraryh3lpWidget',
                                         'getitToLinkResolver',
-                                        'nyuEshelf'
+                                        'nyuEshelf',
+                                        'searchBarSubMenu'
                                       ]);
 
 app
@@ -29,6 +32,7 @@ app
   .constant(libraryh3lpWidgetConfig.name, libraryh3lpWidgetConfig.config)
   .constant(getitToLinkResolverConfig.name, getitToLinkResolverConfig.config)
   .constant(nyuEshelfConfig.name, nyuEshelfConfig.config)
+  .constant(searchBarSubMenuItemsConfig.name, searchBarSubMenuItemsConfig.config)
   .value('customNoSearchResultsTemplateUrl', 'custom/'+viewName+'/html/noSearchResults.html')
   .component('prmFullViewServiceContainerAfter', {
     template: '<getit-to-link-resolver-full></getit-to-link-resolver-full>'
@@ -38,4 +42,7 @@ app
   })
   .component('prmSearchBookmarkFilterAfter', {
     template: '<nyu-eshelf-toolbar></nyu-eshelf-toolbar>'
+  })
+  .component('prmSearchBarAfter', {
+    template: '<search-bar-sub-menu></search-bar-sub-menu>'
   })
