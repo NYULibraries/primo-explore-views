@@ -26,7 +26,7 @@ prm-browse-search-bar {
 .md-button.button-confirm:hover:not([disabled]) {
   border: medium none;
   border-radius: 0;
-  margin: 0;
+  // margin: 0;
   min-width: 0;
   transition: background-color 0.3s ease 0s;
   color: $text_black !important;
