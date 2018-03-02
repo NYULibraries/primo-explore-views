@@ -14,9 +14,9 @@ primo-explore-custom-no-search-results@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/primo-explore-custom-no-search-results/-/primo-explore-custom-no-search-results-1.0.0.tgz#061f22fca6671f538f4b0c7452fc887804c5f735"
 
-primo-explore-nyu-eshelf@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/primo-explore-nyu-eshelf/-/primo-explore-nyu-eshelf-2.0.1.tgz#bcb0282ac26fb9dcf9cacabbb87ea0a1198545f2"
+primo-explore-nyu-eshelf@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/primo-explore-nyu-eshelf/-/primo-explore-nyu-eshelf-2.0.2.tgz#c436a6abd3c0b3327e1d32bcd5c24fcf07d5df50"
 
 primo-explore-search-bar-sub-menu@^1.0.1:
   version "1.0.1"
