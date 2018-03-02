@@ -5,12 +5,11 @@ export let nyuEshelfConfig = {
     guestEshelf: 'Temporary e-Shelf',
     inGuestEshelf: 'In temporary e-Shelf',
     loginToSave: '',
-    pdsUrl: {
-      base: 'https://pds.library.nyu.edu/pds',
-      callingSystem: 'primo',
-      institution: 'BHS-NUI'
+    defaultUrls: {
+      institution: "BHS"
     },
-    bobcatBaseUrl: 'http://bobcat.library.nyu.edu:80',
-    eshelfBaseUrl: 'https://eshelf.library.nyu.edu'
+    "bobcat.library.nyu.edu": {
+      institution: "BHS"
+    }
   }
 };
