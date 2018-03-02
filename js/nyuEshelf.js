@@ -2,13 +2,11 @@ export let nyuEshelfConfig = {
   name: 'nyuEshelfConfig',
   config: {
     myEshelfButtonClasses: 'button-over-dark search-bookmark-filter-item',
-    institution: 'NYUAD',
-    pdsUrl: {
-      base: 'https://pds.library.nyu.edu/pds',
-      callingSystem: 'primo',
-      institution: 'NYUAD-NUI'
+    defaultUrls: {
+      institution: "NYUAD"
     },
-    bobcatBaseUrl: 'http://bobcat.library.nyu.edu:80',
-    eshelfBaseUrl: 'https://eshelf.library.nyu.edu'
+    "bobcat.library.nyu.edu": {
+      institution: "NYUAD"
+    }
   }
 };
