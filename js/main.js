@@ -26,7 +26,6 @@ let app = angular.module('viewCustom', [
                                       ]);
 
 app
-  .constant(customActionsConfig.name, customActionsConfig.config)
   .constant(customLibraryCardMenuItemsConfig.name, customLibraryCardMenuItemsConfig.config)
   .constant(clickableLogoLinkConfig.name, clickableLogoLinkConfig.config)
   .constant(libraryh3lpWidgetConfig.name, libraryh3lpWidgetConfig.config)
@@ -34,6 +33,9 @@ app
   .constant(nyuEshelfConfig.name, nyuEshelfConfig.config)
   .constant(searchBarSubMenuItemsConfig.name, searchBarSubMenuItemsConfig.config)
   .value('customNoSearchResultsTemplateUrl', 'custom/'+viewName+'/html/noSearchResults.html')
+  .component('prmActionListAfter', {
+    template: customActionsConfig.template
+  })
   .component('prmFullViewServiceContainerAfter', {
     template: '<getit-to-link-resolver-full></getit-to-link-resolver-full>'
   })
