@@ -18,10 +18,12 @@ let app = angular.module('viewCustom', [
                                       ]);
 
 app
-  .constant(customActionsConfig.name, customActionsConfig.config)
   .constant(clickableLogoLinkConfig.name, clickableLogoLinkConfig.config)
   .constant(customSearchBookmarkFilterConfig.name, customSearchBookmarkFilterConfig.config)
   .constant(searchBarSubMenuItemsConfig.name, searchBarSubMenuItemsConfig.config)
+  .component('prmActionListAfter', {
+    template: customActionsConfig.template
+  })
   .component('prmSearchBookmarkFilterAfter', {
     template: '<custom-search-bookmark-filter></custom-search-bookmark-filter>'
   })
