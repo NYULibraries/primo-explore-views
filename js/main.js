@@ -23,12 +23,14 @@ let app = angular.module('viewCustom', [
                                       ]);
 
 app
-  .constant(customActionsConfig.name, customActionsConfig.config)
   .constant(customLibraryCardMenuItemsConfig.name, customLibraryCardMenuItemsConfig.config)
   .constant(clickableLogoLinkConfig.name, clickableLogoLinkConfig.config)
   .constant(nyuEshelfConfig.name, nyuEshelfConfig.config)
   .constant(libraryh3lpWidgetConfig.name, libraryh3lpWidgetConfig.config)
   .constant(searchBarSubMenuItemsConfig.name, searchBarSubMenuItemsConfig.config)
+  .component('prmActionListAfter', {
+    template: customActionsConfig.template
+  })
   .component('prmSearchResultAvailabilityLineAfter', {
     template: '<nyu-eshelf></nyu-eshelf>'
   })
