@@ -2,10 +2,6 @@
 # yarn lockfile v1
 
 
-primo-explore-clickable-logo-to-any-link@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/primo-explore-clickable-logo-to-any-link/-/primo-explore-clickable-logo-to-any-link-1.0.0.tgz#6d394f0c4e98c4a2c1d4d10d12c9ffef5df40592"
-
 primo-explore-custom-actions@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/primo-explore-custom-actions/-/primo-explore-custom-actions-3.0.0.tgz#414b56c583e248b472719a9f1645fb648d85ae27"
