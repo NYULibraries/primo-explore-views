@@ -1,25 +1,21 @@
 import 'primo-explore-custom-actions';
-import 'primo-explore-clickable-logo-to-any-link';
 import 'primo-explore-nyu-eshelf';
 import 'primo-explore-search-bar-sub-menu';
 
 import { viewName } from './viewName';
 import { customActionsConfig } from './customActions';
-import { clickableLogoLinkConfig } from './clickableLogoToAnyLink';
 import { nyuEshelfConfig } from './nyuEshelf';
 import { searchBarSubMenuItemsConfig } from './searchBarSubMenu';
 
 let app = angular.module('viewCustom', [
                                         'angularLoad',
                                         'customActions',
-                                        'clickableLogoToAnyLink',
                                         'nyuEshelf',
                                         'searchBarSubMenu'
                                       ]);
 
 app
   .constant(nyuEshelfConfig.name, nyuEshelfConfig.config)
-  .constant(clickableLogoLinkConfig.name, clickableLogoLinkConfig.config)
   .constant(searchBarSubMenuItemsConfig.name, searchBarSubMenuItemsConfig.config)
   .component('prmActionListAfter', {
     template: customActionsConfig.template
