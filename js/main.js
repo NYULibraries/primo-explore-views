@@ -28,4 +28,4 @@ app
   })
   .component('prmSearchBarAfter', {
     template: '<search-bar-sub-menu></search-bar-sub-menu>'
-  })
+  });
