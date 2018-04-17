@@ -29,3 +29,11 @@ app
   .component('prmSearchBarAfter', {
     template: '<search-bar-sub-menu></search-bar-sub-menu>'
   });
+
+app.run(runBlock);
+
+runBlock.$inject = ['nyuEshelfService'];
+
+function runBlock(nyuEshelfService) {
+  nyuEshelfService.initEshelf();
+}
