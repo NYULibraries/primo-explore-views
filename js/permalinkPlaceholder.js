@@ -3,12 +3,15 @@ export let permalinkPlaceholder = angular
   .controller('permalinkPlaceholderController', ['$scope', '$location', function($scope, $location) {
     this.$onInit = () => {
       $scope.viewName = $location.search().vid.split('-NUI')[0];
-    }
+    };
+    $scope.hidePermalink = () => {
+      return !['NYU','NYUAD','NYUSH'].includes($location.search().vid);
+    };
   }])
   .component('permalinkPlaceholder', {
     controller: 'permalinkPlaceholderController',
     template: `
-              <div class="send-actions-content-item layout-column" layout="column" layout-align="center center">
+              <div ng-if="hidePermalink()" class="send-actions-content-item layout-column" layout="column" layout-align="center center">
                 <md-content class="layout-fill layout-padding layout-wrap _md md-primoExplore-theme">
                   <div class="container">
                     <md-content layout="row">

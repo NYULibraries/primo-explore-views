@@ -5,3 +5,8 @@
 @import 'searchbar';
 @import 'spinner';
 @import 'full';
+
+// Force hiding of permalink
+prm-permalink > div {
+  display: none !important;
+}
