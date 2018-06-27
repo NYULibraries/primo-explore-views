@@ -6,13 +6,13 @@ primo-explore-custom-actions@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/primo-explore-custom-actions/-/primo-explore-custom-actions-3.0.0.tgz#414b56c583e248b472719a9f1645fb648d85ae27"
 
-primo-explore-custom-no-search-results@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/primo-explore-custom-no-search-results/-/primo-explore-custom-no-search-results-1.0.2.tgz#2e71b950f4164f293c0e2126b782ad67d48eeb53"
-
-primo-explore-custom-search-bookmark-filter@^1.0.4:
+primo-explore-custom-no-search-results@^1.0.4:
   version "1.0.4"
-  resolved "https://registry.yarnpkg.com/primo-explore-custom-search-bookmark-filter/-/primo-explore-custom-search-bookmark-filter-1.0.4.tgz#e5a944413f0ba756e5ac2967e2592af2f7e8a451"
+  resolved "https://registry.yarnpkg.com/primo-explore-custom-no-search-results/-/primo-explore-custom-no-search-results-1.0.4.tgz#358d17e9cc242ca9949bdfb7e14fe3920e83f493"
+
+primo-explore-custom-search-bookmark-filter@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/primo-explore-custom-search-bookmark-filter/-/primo-explore-custom-search-bookmark-filter-1.0.7.tgz#75756b40f2b1528e1a401791a60d1f329ac65fd6"
 
 primo-explore-search-bar-sub-menu@^1.0.6:
   version "1.0.6"
