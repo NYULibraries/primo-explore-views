@@ -9,6 +9,15 @@ export let searchBarSubMenuItemsConfig = {
         set: 'communication',
         icon: 'ic_forum_24px'
       }
+    },
+    {
+      name: "Library Hours",
+      description: "Library Hours",
+      action: "https://nyuad.nyu.edu/en/library/using-the-library/contact/opening-hours.html",
+      icon: {
+        set: 'av',
+        icon: 'ic_av_timer_24px'
+      }
     }
   ]
 };
