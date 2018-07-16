@@ -5,7 +5,7 @@ export let permalinkPlaceholder = angular
       $scope.viewName = $location.search().vid.split('-NUI')[0];
     };
     $scope.hidePermalink = () => {
-      return !['NYU','NYUAD','NYUSH','CU'].includes($location.search().vid);
+      return !['NYU','NYUAD','NYUSH','CU','NYHS'].includes($location.search().vid);
     };
   }])
   .component('permalinkPlaceholder', {
