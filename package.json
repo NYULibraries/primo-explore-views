@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/NYULibraries/primo-explore-bhs#readme",
   "devDependencies": {
-    "primo-explore-custom-actions": "^3.0.0",
+    "primo-explore-custom-actions": "^3.1.0",
     "primo-explore-nyu-eshelf": "^3.1.5",
     "primo-explore-search-bar-sub-menu": "^1.0.6"
   }
