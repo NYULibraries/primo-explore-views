@@ -4,7 +4,7 @@ export let customLibraryCardMenuItemsConfig = {
     {
       name: "{nui.menu.librarycard}",
       description: "Go to {nui.menu.librarycard}",
-      action: "https://qa.eshelf.library.nyu.edu/login?institution=NYUAD;return_url=https://qa.eshelf.library.nyu.edu/account?institution=NYUAD",
+      action: "{urls.eshelf}/account?institution=NYUAD",
       icon: {
         set: 'social',
         icon: 'ic_person_outline_24px'
