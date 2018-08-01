@@ -6,9 +6,9 @@ primo-explore-clickable-logo-to-any-link@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/primo-explore-clickable-logo-to-any-link/-/primo-explore-clickable-logo-to-any-link-1.0.4.tgz#a37316baf2893b83ea96ee0266f9ce3b28f3c23e"
 
-primo-explore-custom-actions@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/primo-explore-custom-actions/-/primo-explore-custom-actions-3.0.0.tgz#414b56c583e248b472719a9f1645fb648d85ae27"
+primo-explore-custom-actions@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/primo-explore-custom-actions/-/primo-explore-custom-actions-3.1.0.tgz#e9d3f7138040cbf3b8a8a2805cf83c609079de54"
 
 primo-explore-custom-library-card-menu@^1.1.5:
   version "1.1.5"
