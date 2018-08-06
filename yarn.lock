@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-primo-explore-custom-actions@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/primo-explore-custom-actions/-/primo-explore-custom-actions-3.0.0.tgz#414b56c583e248b472719a9f1645fb648d85ae27"
+primo-explore-custom-actions@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/primo-explore-custom-actions/-/primo-explore-custom-actions-3.1.0.tgz#e9d3f7138040cbf3b8a8a2805cf83c609079de54"
 
 primo-explore-custom-no-search-results@^1.0.4:
   version "1.0.4"
