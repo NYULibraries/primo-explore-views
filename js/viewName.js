@@ -1,2 +1,2 @@
 // vid
-export let viewName = "BHS-NUI";
+export let viewName = "BHS";
