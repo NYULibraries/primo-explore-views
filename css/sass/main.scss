@@ -2,8 +2,3 @@
 @import 'header';
 @import 'hide';
 @import 'home';
-
-// Force permalink to Display
-prm-permalink > div {
-  display: block !important;
-}
