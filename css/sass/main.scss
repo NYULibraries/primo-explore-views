@@ -6,8 +6,3 @@
 @import 'spinner';
 @import 'full';
 @import 'notifications';
-
-// Force hiding of permalink
-prm-permalink > div {
-  display: none !important;
-}
