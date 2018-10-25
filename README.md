@@ -1,3 +1,6 @@
+[![GitHub package version](https://img.shields.io/github/package-json/v/NYULibraries/primo-explore-cu.svg)](https://github.com/NYULibraries/primo-explore-cu/releases)
+[![Github commits (since latest release)](https://img.shields.io/github/commits-since/NYULibraries/primo-explore-cu/latest.svg)](https://github.com/NYULibraries/primo-explore-cu/releases/latest)
+
 # Cooper Union primo-explore package
 
 This the NYU Consortium Libraries Cooper Union primo-explore view package. Forked from https://github.com/nyulibraries/primo-explore-nyu.
