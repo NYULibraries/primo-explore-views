@@ -1,6 +1,6 @@
 {
   "name": "NYSID",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This the NYSID Consortium primo-explore view package.",
   "main": "index.js",
   "scripts": {
