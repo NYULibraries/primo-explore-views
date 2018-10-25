@@ -1,6 +1,8 @@
-# NYU Abu Dhabi Primo-explore package
+[![GitHub package version](https://img.shields.io/github/package-json/v/NYULibraries/primo-explore-nyush.svg)](https://github.com/NYULibraries/primo-explore-nyush/releases)
+[![Github commits (since latest release)](https://img.shields.io/github/commits-since/NYULibraries/primo-explore-nyush/latest.svg)](https://github.com/NYULibraries/primo-explore-nyush/releases/latest)
+# NYU Shanghai Primo-explore package
 
-This the NYU Libraries Abu Dhabi primo-explore view package.
+This the NYU Libraries Shanghai primo-explore view package.
 
 For more information about primo-explore views please review the example package that this package was cloned from: https://github.com/ExLibrisGroup/primo-explore-package.
 
