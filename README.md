@@ -1,5 +1,5 @@
-[![Github commits (since latest release)](https://img.shields.io/github/commits-since/NYULibraries/primo-explore-central-package/latest.svg)](https://github.com/NYULibraries/primo-explore-central-package/commits/master)
 [![GitHub package version](https://img.shields.io/github/package-json/v/NYULibraries/primo-explore-central-package.svg)](https://github.com/NYULibraries/primo-explore-central-package/releases)
+[![Github commits (since latest release)](https://img.shields.io/github/commits-since/NYULibraries/primo-explore-central-package/latest.svg)](https://github.com/NYULibraries/primo-explore-central-package/releases/latest)
 
 # NYU Primo-explore CENTRAL_PACKAGE
 
