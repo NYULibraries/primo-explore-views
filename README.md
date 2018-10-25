@@ -1,5 +1,5 @@
-[![GitHub package version](https://img.shields.io/github/package-json/v/NYULibraries/primo-explore-nyhs.svg)](https://github.com/NYULibraries/primo-explore-nyhs/releases)
-[![Github commits (since latest release)](https://img.shields.io/github/commits-since/NYULibraries/primo-explore-nyhs/latest.svg)](https://github.com/NYULibraries/primo-explore-nyhs/releases/latest)
+[![GitHub package version](https://img.shields.io/github/package-json/v/NYULibraries/primo-explore-bhs.svg)](https://github.com/NYULibraries/primo-explore-bhs/releases)
+[![Github commits (since latest release)](https://img.shields.io/github/commits-since/NYULibraries/primo-explore-bhs/latest.svg)](https://github.com/NYULibraries/primo-explore-bhs/releases/latest)
 # BHS Primo-explore package
 
 This the NYU Consortium Libraries BHS primo-explore view package. Forked from https://github.com/nyulibraries/primo-explore-nyu.
