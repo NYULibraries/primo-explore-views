@@ -1,4 +1,3 @@
-[![GitHub package version](https://img.shields.io/github/package-json/v/NYULibraries/primo-explore-bhs.svg)](https://github.com/NYULibraries/primo-explore-bhs/releases)
 [![Github commits (since latest release)](https://img.shields.io/github/commits-since/NYULibraries/primo-explore-bhs/latest.svg)](https://github.com/NYULibraries/primo-explore-bhs/releases/latest)
 # BHS Primo-explore package
 
