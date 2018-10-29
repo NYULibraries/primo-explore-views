@@ -1,4 +1,3 @@
-[![GitHub package version](https://img.shields.io/github/package-json/v/NYULibraries/primo-explore-nyuad.svg)](https://github.com/NYULibraries/primo-explore-nyuad/releases)
 [![Github commits (since latest release)](https://img.shields.io/github/commits-since/NYULibraries/primo-explore-nyuad/latest.svg)](https://github.com/NYULibraries/primo-explore-nyuad/releases/latest)
 # NYU Abu Dhabi Primo-explore package
 
