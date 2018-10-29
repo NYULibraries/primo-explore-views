@@ -1,4 +1,4 @@
-import 'primo-explore-custom-actions';
+import '@orbis-cascade/primo-explore-custom-actions';
 import 'primo-explore-custom-search-bookmark-filter';
 import 'primo-explore-search-bar-sub-menu';
 
