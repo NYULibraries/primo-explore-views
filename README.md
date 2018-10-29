@@ -1,4 +1,3 @@
-[![GitHub package version](https://img.shields.io/github/package-json/v/NYULibraries/primo-explore-nyhs.svg)](https://github.com/NYULibraries/primo-explore-nyhs/releases)
 [![Github commits (since latest release)](https://img.shields.io/github/commits-since/NYULibraries/primo-explore-nyhs/latest.svg)](https://github.com/NYULibraries/primo-explore-nyhs/releases/latest)
 # NYHS primo-explore package
 
