@@ -6,7 +6,7 @@ let app = angular.module('centralCustom', [
                                       ]);
 
 app
-  .filter('encodeURIComponent', function($window) {
+  .filter('encodeURIComponent', ['$window', function($window) {
     return $window.encodeURIComponent;
-  })
+  }])
   .value('customNoSearchResultsTemplateUrl', 'custom/CENTRAL_PACKAGE/html/noSearchResults.html');
