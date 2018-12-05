@@ -22,9 +22,10 @@ primo-explore-getit-to-link-resolver@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/primo-explore-getit-to-link-resolver/-/primo-explore-getit-to-link-resolver-2.0.5.tgz#ca13837815558839cc72e18dd481b12a9b40c15e"
 
-primo-explore-nyu-eshelf@^3.1.6:
-  version "3.1.6"
-  resolved "https://registry.yarnpkg.com/primo-explore-nyu-eshelf/-/primo-explore-nyu-eshelf-3.1.6.tgz#a72e868598977f892efb96aeb294e105c5b693b4"
+primo-explore-nyu-eshelf@^3.1.7:
+  version "3.1.7"
+  resolved "https://registry.yarnpkg.com/primo-explore-nyu-eshelf/-/primo-explore-nyu-eshelf-3.1.7.tgz#b69c0c5044d0d48e662843a05501975221f61334"
+  integrity sha512-hcZoS/DNc9OI7PxHY+RmBF8jDGsIOCwVaLaSa6FAJbqI48t+vaxs9Dz4wSKXvf68S7Xy4L68MInCqzuUj2+3eg==
 
 primo-explore-search-bar-sub-menu@^1.0.7:
   version "1.0.7"
