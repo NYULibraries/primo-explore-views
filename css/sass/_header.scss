@@ -51,8 +51,38 @@ prm-logo div.product-logo a {
   max-width: none;
   padding: 0;
 }
+
 prm-logo div.product-logo a:hover,
 prm-logo div.product-logo a:active {
   box-shadow: none !important;
   background-color: inherit !important;
 }
+
+// Fix icon spacing on some browser in menu
+md-menu-content {
+  prm-icon {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }
+}
+
+// Hide menu items we're not yet implementing
+md-menu-content {
+  md-menu-divider,
+  .my-library-card-ctm,
+  .my-loans-ctm,
+  .my-requests-ctm,
+  .my-favorties-ctm {
+    display: none !important;
+  }
+}
+
+// Hide library card items from mobile overlay menu
+prm-library-card-menu {
+  display: none !important;
+}
+
+.overlay-menu-content md-divider.vertical-divider.hide-xs {
+  display: none;
+}
+
