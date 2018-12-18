@@ -8,3 +8,7 @@ button:focus,
 a:focus {
     @include focusOutline;
 }
+
+prm-search a {
+    color: $link_color !important;
+}
