@@ -8,9 +8,16 @@ prm-topbar .top-nav-bar {
 prm-topbar {
   height: 120px;
 }
+// Make menu links black for accessibility contrast
+.md-button.button-over-dark,
+prm-user-area .user-menu-button .user-name,
+prm-user-area-expandable .md-button.user-button,
+prm-search-bookmark-filter .md-button,
+.menu-arrow,
+.md-button.button-with-menu-arrow,
 prm-main-menu .md-button.button-over-dark,
 prm-search-bookmark-filter .md-button.button-over-dark {
-  color: $dark_gray;
+  color: $dark_gray !important;
 }
 prm-search-bar,
 prm-tags-search-bar,
