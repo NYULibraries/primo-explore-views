@@ -13,15 +13,21 @@ prm-topbar {
   div.product-logo {
     background-color: $nysid_red;
   }
+  // Make menu links black for accessibility contrast
   .md-button.button-over-dark,
-  prm-user-area .user-menu-button .user-name {
-    color: $nysid_red;
+  prm-user-area .user-menu-button .user-name,
+  prm-user-area-expandable .md-button.user-button,
+  prm-search-bookmark-filter .md-button,
+  .menu-arrow,
+  .md-button.button-with-menu-arrow {
+    color: $text_black !important;
   }
 }
 
+// Make menu links black for accessibility contrast
 prm-user-area .md-button.mobile-menu-button,
 prm-main-menu .md-button {
-  color: $nysid_red !important;
+  color: $text_black !important;
 }
 
 /* Search bar */
