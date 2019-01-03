@@ -12,3 +12,18 @@ prm-browse-search-bar {
   background-image: none;
   background-color: $background_light_gray;
 }
+
+// Make menu links black for accessibility contrast
+.md-button.button-over-dark,
+prm-user-area .user-menu-button .user-name,
+prm-user-area-expandable .md-button.user-button,
+prm-search-bookmark-filter .md-button,
+.menu-arrow,
+.md-button.button-with-menu-arrow,
+prm-main-menu .md-button.button-over-dark,
+prm-search-bookmark-filter .md-button.button-over-dark,
+.result-item-actions .md-icon-button,
+.result-item-actions .custom-button,
+md-tabs md-tabs-wrapper md-tabs-canvas md-pagination-wrapper md-tab-item.md-active:not([disabled]) {
+  color: $text_black !important;
+}
