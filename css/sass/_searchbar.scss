@@ -24,21 +24,20 @@ prm-browse-search-bar {
 .md-button.button-confirm.md-focused:not([disabled]),
 .md-button.button-confirm:focus:not([disabled]),
 .md-button.button-confirm:hover:not([disabled]) {
-  &, * {
-    border: medium none;
-    border-radius: 0;
-    // margin: 0;
-    min-width: 0;
-    transition: background-color 0.3s ease 0s;
+  border: medium none;
+  border-radius: 0;
+  min-width: 0;
+  transition: background-color 0.3s ease 0s;
+  background-color: white !important;
+  &, span, prm-icon * {
     color: $text_black !important;
-    background-color: white !important;
   }
 }
 .md-button.button-confirm {
-  &, * {
-    background-color: $text_black;
+  background-color: $text_black;
+  border-radius: 0 !important;
+  &, span, prm-icon * {
     color: white !important;
-    border-radius: 0 !important;
   }
 }
 
