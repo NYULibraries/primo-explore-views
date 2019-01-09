@@ -14,7 +14,7 @@ angular
     return Object.freeze(angular.merge({}, config));
   }])
   // Injects prmAuthentication's handleLogin as a global service
-  .service('customLoginService', ['$window', '$http', 'customLoginConfigService', function ($window, $http, config) {
+  .service('primoExploreCustomLoginService', ['$window', '$http', 'customLoginConfigService', function ($window, $http, config) {
     const svc = this;
     svc.store = {
       user: undefined,
@@ -70,8 +70,7 @@ angular
   }]);
 
 
-customLoginController.$inject = ['customLoginService'];
-
+customLoginController.$inject = ['primoExploreCustomLoginService'];
 function customLoginController(customLoginService) {
   const ctrl = this;
   ctrl.$onInit = function () {
