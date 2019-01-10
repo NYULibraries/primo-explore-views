@@ -33,9 +33,9 @@ app
   .constant(nyuEshelfConfig.name, nyuEshelfConfig.config)
   .constant(searchBarSubMenuItemsConfig.name, searchBarSubMenuItemsConfig.config)
   .value('customNoSearchResultsTemplateUrl', 'custom/'+viewName+'/html/noSearchResults.html')
-  .filter('encodeURIComponent', function($window) {
+  .filter('encodeURIComponent', ['$window', function($window) {
     return $window.encodeURIComponent;
-  })
+  }])
   .component('prmActionListAfter', {
     template: customActionsConfig.template
   })
