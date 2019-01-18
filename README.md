@@ -51,27 +51,40 @@ All of the functionality of this module is contained in the `primoExploreCustomL
 
 This function is asynchronous and returns an AngularJS promise (see [$http documentation](https://docs.angularjs.org/api/ng/service/$http))
 
-The first time fetchPDSUser is called, the function fetches the user data via the PDS API (as configured). This value is then cached throughout the user's session within the SPA.
+The first time fetchPDSUser is called, the function fetches the user data via the PDS API (as configured). This value is then cached throughout the user's session within the SPA. Exiting or refreshing the page will require a new PDS API call to get user data.
 
-If multiple components simultaneously execute `fetchPDSUser`, the promise of the original `$http` request is returned and handled in a similarly asynchronous manner. This means you can safely call `fetchPDSUser` from as many components as you want without worrying about redundate API calls!
+If within the same session multiple components execute `fetchPDSUser` before the request returns, the promise of the first `$http` request is returned and handled in a similarly asynchronous manner. This means you can safely call `fetchPDSUser` from as many components as you want without worrying about redundate API calls!
 
-`fetchPDSUser` returns a POJO representation of the user based on the `selectors` in the configuration.
+Once the user is fetched, subsequent `fetchPDSUser` calls simply return a resolved promised of the user. The user is represented as a POJO with properties based on the `selectors` set in the configuration.
 
 `fetchPDSUser` relies on the `PDS_HANDLE` cookie value in Primo, so it is imperative that your library and `pds` are on the same domain for the function to properly work.
 
 ```js
-fetchPDSUser()
-  .then(function(user) {
-    if (user['bor-status'] === '20') {
-      // do one thing
-    } else {
-      // do something else
-    }
+// config
+app
+  .constant('primoExploreCustomLoginConfig', {
+    pdsUrl: 'https://pds.library.edu/pds',
+    queryString: 'func=get-attribute&attribute=bor_info',
+    selectors: ['id', 'bor-status'],
   })
-  .catch(function(error) {
-    console.error(err);
-    // do other stuff if the request fails
-  })
+
+// controller
+myController.$inject = ['primoExploreCustomLoginService'];
+function myController(customLoginService) {
+  customLoginService.fetchPDSUser()
+    .then(function(user) {
+      // user is a POJO with properties: id, bor-status. All values are string values.
+      if (user['bor-status'] === '20') {
+        // do one thing
+      } else {
+        // do something else
+      }
+    })
+    .catch(function(error) {
+      console.error(err);
+      // do other stuff if the request fails
+    })
+}
 ```
 
 ### `login`
@@ -92,10 +105,14 @@ primoExploreCustomLoginService.logout();
 
 ### `isLoggedIn`
 
-Returns a boolean value of whethe the user is logged in.
+Returns a boolean value of whether the user is logged in.
 
 ```js
-const loggedIn = primoExploreCustomLoginService.isLoggedIn();
+const loggedIn = primoExploreCustomLoginService.isLoggedIn;
+
+if (loggedIn) {
+  //...
+}
 ```
 
 ## See also
