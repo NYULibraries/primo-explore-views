@@ -5,6 +5,8 @@ import 'primo-explore-libraryh3lp-widget';
 import 'primo-explore-getit-to-link-resolver';
 import 'primo-explore-nyu-eshelf';
 import 'primo-explore-search-bar-sub-menu';
+import 'primo-explore-custom-requests';
+import 'primo-explore-custom-login';
 
 import { viewName } from './viewName';
 import { customActionsConfig } from './customActions';
@@ -14,6 +16,10 @@ import { libraryh3lpWidgetConfig } from './libraryh3lpWidget';
 import { getitToLinkResolverConfig } from './getitToLinkResolver';
 import { nyuEshelfConfig } from './nyuEshelf';
 import { searchBarSubMenuItemsConfig } from './searchBarSubMenu';
+import customRequestsConfig from './customRequestsConfig';
+import customLoginConfig from './customLoginConfig';
+
+import prmLocationItemAfterPartial from '../html/prm_location_items_after_partial.html';
 
 let app = angular.module('viewCustom', [
                                         'customActions',
@@ -22,7 +28,9 @@ let app = angular.module('viewCustom', [
                                         'libraryh3lpWidget',
                                         // 'getitToLinkResolver',
                                         'nyuEshelf',
-                                        'searchBarSubMenu'
+                                        'searchBarSubMenu',
+                                        'primoExploreCustomLogin',
+                                        'primoExploreCustomRequests',
                                       ]);
 
 app
@@ -32,6 +40,8 @@ app
   .constant(getitToLinkResolverConfig.name, getitToLinkResolverConfig.config)
   .constant(nyuEshelfConfig.name, nyuEshelfConfig.config)
   .constant(searchBarSubMenuItemsConfig.name, searchBarSubMenuItemsConfig.config)
+  .constant(customRequestsConfig.name, customRequestsConfig.config)
+  .constant(customLoginConfig.name, customLoginConfig.config)
   .value('customNoSearchResultsTemplateUrl', 'custom/'+viewName+'/html/noSearchResults.html')
   .filter('encodeURIComponent', ['$window', function($window) {
     return $window.encodeURIComponent;
@@ -50,6 +60,24 @@ app
   })
   .component('prmSearchBarAfter', {
     template: '<search-bar-sub-menu></search-bar-sub-menu>'
+  })
+  .component('prmAuthenticationAfter', {
+    template: `<primo-explore-custom-login></primo-explore-custom-login>`
+  })
+  .component('prmLocationItemAfter', {
+    template: `<primo-explore-custom-requests></primo-explore-custom-requests>`,
+    controller: ['$element', function ($element) {
+      const ctrl = this;
+      ctrl.$postLink = () => {
+        const $target = $element.parent().query('div.md-list-item-text');
+        const $el = $element.detach();
+        $target.append($el);
+        $element.addClass('layout-align-center-center layout-row');
+      };
+    }]
+  })
+  .component('prmLocationItemsAfter', {
+    template: `${prmLocationItemAfterPartial}`
   });
 
 app.run(runBlock);
