@@ -49,11 +49,11 @@ function primoExploreCustomLoginService($window, $http, config) {
     return store.user;
   };
 
-  if (config.mockConfig && config.mockConfig.enabled) {
+  if (config.mockUserConfig && config.mockUserConfig.enabled) {
     // reassigns fetchPDSUser function
     svc.fetchPDSUser = store => {
-      const user = config.mockConfig.user || {};
-      const delayTime = config.mockConfig.delay || 1000;
+      const user = config.mockUserConfig.user || {};
+      const delayTime = config.mockUserConfig.delay || 1000;
 
       const delay = (t, v) => new Promise((res) => setTimeout(res.bind(null, v), t));
       return delay(delayTime, user)
