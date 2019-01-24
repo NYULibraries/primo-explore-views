@@ -42,6 +42,7 @@ app
 `pdsUrl`| `string` | The base url for the PDS API
 `queryString` | `string` | The query string used for the PDS function you would like to use.
 `selectors` | `array` | The document selectors used to obtain the data fields you are looking for. Selectors will be mapped to keys in the resulting POJO object.
+`mockUserConfig`| `Object` | Settings for mocking a user (especially for offline development)
 
 ## `primoExploreCustomLoginService`
 
@@ -66,6 +67,14 @@ app
     pdsUrl: 'https://pds.library.edu/pds',
     queryString: 'func=get-attribute&attribute=bor_info',
     selectors: ['id', 'bor-status'],
+    mockUserConfig: {
+      enabled: true,
+      user: {
+        'id': '1234567',
+        'bor-status': '55',
+      },
+      delay: 500,
+    }
   })
 
 // controller
