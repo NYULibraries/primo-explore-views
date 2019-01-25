@@ -12,7 +12,7 @@ export default {
       enabled: process.env.NODE_ENV === 'development' ? (mockUserWarning(), true) : false,
       user: {
         'id': '1234567',
-        'bor-status': '50',
+        'bor-status': '20',
       },
       delay: 500,
     }
