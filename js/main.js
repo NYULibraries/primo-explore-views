@@ -19,6 +19,8 @@ import { searchBarSubMenuItemsConfig } from './searchBarSubMenu';
 import customRequestsConfig from './customRequestsConfig';
 import customLoginConfig from './customLoginConfig';
 
+import prmLocationItemAfterPartial from '../html/prm_location_items_after_partial.html';
+
 let app = angular.module('viewCustom', [
                                         'customActions',
                                         'customLibraryCardMenu',
@@ -63,20 +65,20 @@ app
     template: `<primo-explore-custom-login></primo-explore-custom-login>`
   })
   .component('prmLocationItemAfter', {
-    template: `<primo-explore-custom-requests></primo-explore-custom-requests>`,
-    controller: ['$element', function($element) {
-      const ctrl = this;
-      ctrl.$postLink = () => {
-        const $target = $element.parent().query('div.md-list-item-text');
-        const $el = $element.detach();
-        $target.append($el);
-        $element.addClass('layout-align-center-center layout-row');
-      };
-    }]
-  })
-  .component('prmLocationItemsAfter', {
-    template: `${prmLocationItemAfterPartial}`
-  });
+      template: `<primo-explore-custom-requests layout="row" layout-align="end center" layout-wrap></primo-explore-custom-requests>`,
+      controller: ['$element', function ($element) {
+        const ctrl = this;
+        ctrl.$postLink = () => {
+          const $target = $element.parent().query('div.md-list-item-text');
+          const $el = $element.detach();
+          $target.append($el);
+          $element.addClass('layout-row flex-sm-30 flex-xs-100');
+        };
+      }]
+    })
+    .component('prmLocationItemsAfter', {
+      template: `${prmLocationItemAfterPartial}`
+    });
 
 app.run(runBlock);
 
