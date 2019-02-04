@@ -60,6 +60,8 @@ Once the user is fetched, subsequent `fetchPDSUser` calls simply return a resolv
 
 `fetchPDSUser` relies on the `PDS_HANDLE` cookie value in Primo, so it is imperative that your library and `pds` are on the same domain for the function to properly work.
 
+`mockUserConfig` values will allow you to mock a user, which is especially useful within a devleopment environment; as long as you are logged in, the `fetchPDSUser` function will instead return whatever is set in the `user` value, as long as `enabled` is set to `true`. The `delay` parameter allows you to set a specific amount of time to delay the resolved promise, to better observe and experiment with delayed API behavior.
+
 ```js
 // config
 app
