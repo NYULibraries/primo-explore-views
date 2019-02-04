@@ -100,7 +100,7 @@ function myController(customLoginService) {
 
 ### `login`
 
-Action which executes user login (the same that is used the `<prm-authetication>` components).
+Action which executes user login (the same that is used the `<prm-authentication>` components).
 
 ```js
 primoExploreCustomLoginService.login();
