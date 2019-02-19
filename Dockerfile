@@ -18,7 +18,7 @@ WORKDIR ${CUSTOM_VIEW_PATH}
 ADD yarn.lock package.json ./
 RUN yarn install --prod
 
-# Adds NYU files to image
+# Adds NYUSH files to image
 ADD . .
 
 ## Sets up for running as a container
