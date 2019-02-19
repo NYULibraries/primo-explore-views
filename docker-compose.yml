@@ -9,7 +9,7 @@ x-build: &x-build
 
 x-environment: &x-environment
   PROXY_SERVER: http://bobcatdev.library.nyu.edu:80
-  VIEW: NYU
+  VIEW: NYUSH
   NODE_ENV: ${NODE_ENV-development}
 
 x-defaults: &x-defaults
