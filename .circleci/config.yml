@@ -49,7 +49,7 @@ jobs:
       - checkout
       - setup_remote_docker
       - <<: *auth_quay
-      - <<: *pull_docker
+      # - <<: *pull_docker
       - <<: *build_docker
       - <<: *test
       - <<: *store-test
