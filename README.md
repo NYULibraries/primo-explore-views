@@ -1,4 +1,7 @@
 [![Github commits (since latest release)](https://img.shields.io/github/commits-since/NYULibraries/primo-explore-nysid/latest.svg)](https://github.com/NYULibraries/primo-explore-nysid/releases/latest)
+[![CircleCI](https://circleci.com/gh/NYULibraries/primo-explore-nysid.svg?style=svg)](https://circleci.com/gh/NYULibraries/primo-explore-nysid)
+
+
 # NYSID primo-explore package
 
 This the NYU Consortium Libraries NYSID primo-explore view package. Forked from https://github.com/nyulibraries/primo-explore-nyu.
