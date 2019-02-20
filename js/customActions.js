@@ -1,6 +1,6 @@
 export default {
-        name: 'customActions',
-        template: /*html*/`
+  name: 'customActions',
+  template: /*html*/`
   <custom-action name="feedback"
     label="Feedback"
     index=3
