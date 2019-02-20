@@ -8,18 +8,18 @@ import 'primo-explore-search-bar-sub-menu';
 import 'primo-explore-custom-requests';
 import 'primo-explore-custom-login';
 
-import { viewName } from './viewName';
-import { customActionsConfig } from './customActions';
-import { customLibraryCardMenuItemsConfig } from './customLibraryCardMenu';
-import { clickableLogoLinkConfig } from './clickableLogoToAnyLink';
-import { libraryh3lpWidgetConfig } from './libraryh3lpWidget';
-import { getitToLinkResolverConfig } from './getitToLinkResolver';
-import { nyuEshelfConfig } from './nyuEshelf';
-import { searchBarSubMenuItemsConfig } from './searchBarSubMenu';
+import viewName from './viewName';
+import customActionsConfig from './customActions';
+import customLibraryCardMenuItemsConfig from './customLibraryCardMenu';
+import clickableLogoLinkConfig from './clickableLogoToAnyLink';
+import libraryh3lpWidgetConfig from './libraryh3lpWidget';
+import getitToLinkResolverConfig from './getitToLinkResolver';
+import nyuEshelfConfig from './nyuEshelf';
+import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import customRequestsConfig from './customRequestsConfig';
 import customLoginConfig from './customLoginConfig';
 
-import prmLocationItemAfterPartial from '../html/prm_location_items_after_partial.html';
+import customRequestsRequestInformationTemplate from '../html/prm_location_items_after_partial.html';
 
 let app = angular.module('viewCustom', [
                                         'customActions',
@@ -42,7 +42,7 @@ app
   .constant(searchBarSubMenuItemsConfig.name, searchBarSubMenuItemsConfig.config)
   .constant(customRequestsConfig.name, customRequestsConfig.config)
   .constant(customLoginConfig.name, customLoginConfig.config)
-  .value('customNoSearchResultsTemplateUrl', 'custom/'+viewName+'/html/noSearchResults.html')
+  .value('customNoSearchResultsTemplateUrl', `custom/${viewName}/html/noSearchResults.html`)
   .filter('encodeURIComponent', ['$window', function($window) {
     return $window.encodeURIComponent;
   }])
@@ -50,22 +50,71 @@ app
     template: customActionsConfig.template
   })
   .component('prmFullViewServiceContainerAfter', {
-    template: '<getit-to-link-resolver-full></getit-to-link-resolver-full>'
+    template: /*html*/`
+      <getit-to-link-resolver-full></getit-to-link-resolver-full>
+      <div ng-if="$ctrl.isSendTo" class="getit-to-link-resolver-full-container">
+        <div class="section-head">
+          <div layout="row" layout-align="center center">
+            <h4 class="section-title md-title light-text">New Feature Alert!</h4>
+              <md-divider flex class="md-primoExplore-theme"></md-divider>
+          </div>
+        </div>
+        <div class="section-body">
+          <div
+            layout="row"
+            layout-align="center center"
+            class="bar alert-bar zero-margin-bottom"
+          >
+            <span class="bar-text margin-right-small">
+              Don't see E-journals, E-books, or HathiTrust results, etc.? Use the
+              <a href="#getit-full" ng-click="$ctrl.handleAnchor('getit-full', $event)">
+                GetIt (Legacy Feature)
+                <span class="sr-only">Skip to GetIt Legacy</span>
+              </a>
+              link below while we work to add those results to this new feature.
+            </span>
+          </div>
+        </div>
+      </div>
+    `,
+    controller: ['$anchorScroll', '$window', function ($anchorScroll, $window) {
+      const ctrl = this;
+      ctrl.$onInit = function () {
+        ctrl.isSendTo = ctrl.parentCtrl.service.title === 'nui.brief.results.tabs.send_to';
+
+        ctrl.handleAnchor = (id, $event) => {
+          $event.preventDefault();
+          // sets yOffsetProperty based on jQuery element height, then resets to default value
+          $anchorScroll.yOffset = angular.element($window.document.querySelector(`md-toolbar.default-toolbar`));
+          $anchorScroll(id);
+          // focuses element
+          angular.element($window.document.querySelector(`#${id} a`)).focus();
+        };
+      };
+    }],
+    bindings: {
+      parentCtrl: '<',
+    }
   })
   .component('prmSearchResultAvailabilityLineAfter', {
-    template: '<nyu-eshelf></nyu-eshelf>'
+    template: /*html*/`<nyu-eshelf></nyu-eshelf>`
   })
   .component('prmSearchBookmarkFilterAfter', {
-    template: '<nyu-eshelf-toolbar></nyu-eshelf-toolbar>'
+    template: /*html*/ `<nyu-eshelf-toolbar></nyu-eshelf-toolbar>`
   })
   .component('prmSearchBarAfter', {
-    template: '<search-bar-sub-menu></search-bar-sub-menu>'
+    template: /*html*/ `<search-bar-sub-menu></search-bar-sub-menu>`
   })
   .component('prmAuthenticationAfter', {
-    template: `<primo-explore-custom-login></primo-explore-custom-login>`
+    template: /*html*/ `<primo-explore-custom-login></primo-explore-custom-login>`
   })
   .component('prmLocationItemAfter', {
-    template: `<primo-explore-custom-requests layout="row" layout-align="end center" layout-wrap></primo-explore-custom-requests>`,
+    template: /*html*/ `
+      <primo-explore-custom-requests
+        layout="row"
+        layout-align="end center"
+        layout-wrap
+      ></primo-explore-custom-requests>`,
     controller: ['$element', function ($element) {
       const ctrl = this;
       ctrl.$postLink = () => {
@@ -77,7 +126,7 @@ app
     }]
   })
   .component('prmLocationItemsAfter', {
-    template: `${prmLocationItemAfterPartial}`
+    template: `${customRequestsRequestInformationTemplate}`
   });
 
 app.run(runBlock);
