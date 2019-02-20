@@ -1,4 +1,4 @@
-export let libraryh3lpWidgetConfig = {
+export default {
   name: 'libraryh3lpWidgetConfig',
   config: {
     url: 'https://libraryh3lp.com/chat/askbobst@chat.libraryh3lp.com?skin=23106&theme=gota&title=Ask+NYU+Libraries&identity=NYU',
