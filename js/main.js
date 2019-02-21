@@ -1,3 +1,5 @@
+import * as Sentry from '@sentry/browser';
+
 import '@orbis-cascade/primo-explore-custom-actions';
 import 'primo-explore-custom-library-card-menu';
 import 'primo-explore-clickable-logo-to-any-link';
@@ -22,16 +24,16 @@ import customLoginConfig from './customLoginConfig';
 import customRequestsRequestInformationTemplate from '../html/prm_location_items_after_partial.html';
 
 let app = angular.module('viewCustom', [
-                                        'customActions',
-                                        'customLibraryCardMenu',
-                                        'clickableLogoToAnyLink',
-                                        'libraryh3lpWidget',
-                                        'getitToLinkResolver',
-                                        'nyuEshelf',
-                                        'searchBarSubMenu',
-                                        'primoExploreCustomLogin',
-                                        'primoExploreCustomRequests',
-                                      ]);
+  'customActions',
+  'customLibraryCardMenu',
+  'clickableLogoToAnyLink',
+  'libraryh3lpWidget',
+  'getitToLinkResolver',
+  'nyuEshelf',
+  'searchBarSubMenu',
+  'primoExploreCustomLogin',
+  'primoExploreCustomRequests',
+]);
 
 app
   .constant(customLibraryCardMenuItemsConfig.name, customLibraryCardMenuItemsConfig.config)
@@ -134,5 +136,8 @@ app.run(runBlock);
 runBlock.$inject = ['nyuEshelfService'];
 
 function runBlock(nyuEshelfService) {
+  Sentry.init({
+    dsn: 'https://3ef6b855957c4b678882cbe74954a3e6@sentry.io/1398888',
+  });
   nyuEshelfService.initEshelf();
 }
