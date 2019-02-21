@@ -18,6 +18,12 @@
   },
   "homepage": "https://github.com/NYULibraries/primo-explore-nyu#readme",
   "devDependencies": {
+    "cypress": "^3.1.5"
+  },
+  "optionalDependencies": {
+    "eslint": "^5.14.1"
+  },
+  "dependencies": {
     "primo-explore-custom-no-search-results": "^1.0.4"
   }
 }
