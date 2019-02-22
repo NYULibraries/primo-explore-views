@@ -5,4 +5,4 @@ ENV VIEW ${VIEW}
 ADD cypress.json .
 ADD ./cypress/ ./cypress/
 
-CMD cypress run  --spec "cypress/integration/${VIEW}"
+CMD cypress run  --spec "cypress/integration/${VIEW}/**/*.spec.js"
