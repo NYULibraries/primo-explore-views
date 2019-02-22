@@ -31,7 +31,16 @@ test: &test
   run:
     name: Run E2E Tests
     command: |
-      docker-compose run e2e cypress run --reporter junit --reporter-options "mochaFile=test-results/results-[hash].xml"
+      VIEWS='NYU NYUSH NYUAD NYSID BHS NYHS HSL'
+      for VIEW in $VIEWS
+      do
+        git diff-tree --no-commit-id --name-only -r HEAD | grep /${VIEW}/
+        if [[ $? == 0 ]]; then
+          VIEW=$VIEW docker-compose run e2e cypress run --spec "cypress/integration/${VIEW}/**/*.spec.js" --reporter junit --reporter-options "mochaFile=test-results/${VIEW}/results-[hash].xml"
+        else
+          echo "No files changed in $VIEW package. Skipping tests."
+        fi
+      done
 
 store-test: &store-test
   run:
@@ -48,12 +57,23 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+      - run:
+          name: Check package_jsons.tgz
+          command: |
+            CURRENT=$(sha256sum package_jsons.tgz | awk '{ print $1 }')
+            script/tgz_packages.sh
+            NEW=$(sha256sum package_jsons.tgz | awk '{ print $1 }')
+            if [[ $CURRENT == $NEW ]]; then
+              echo 'success'
+            else
+              echo 'A package.json file has changed. Run script/tgz_packages in your next commit to ensure your image has the latest node_modules.'
+            fi
       - <<: *auth_quay
-      - <<: *pull_docker
+      # - <<: *pull_docker
       - <<: *build_docker
       - <<: *test
       - <<: *store-test
-      - <<: *push_docker
+      # - <<: *push_docker
       - store_artifacts:
           path: cypress-results/videos
       - store_artifacts:
@@ -67,13 +87,23 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - <<: *pull_docker
+      # - <<: *pull_docker
       - run:
           name: Build asset package and store
           command: |
-            export NODE_ENV=$([[ $CIRCLE_BRANCH = master ]] && echo "production" || echo "staging")
-            docker-compose run create-package
+            VIEWS='NYU NYUSH NYUAD NYSID BHS NYHS HSL'
+            for VIEW in $VIEWS
+            do
+              git diff-tree --no-commit-id --name-only -r HEAD | grep /${VIEW}/
+              if [[ $? == 0 ]]; then
+                export NODE_ENV=$([[ $CIRCLE_BRANCH = master ]] && echo "production" || echo "staging")
+                VIEW=$VIEW docker-compose run create-package
+              else
+                echo "No files changed in $VIEW package. Skipping build."
+              fi
+            done
             docker cp "$(docker ps -q -a -l -f name=create-package)":/app/packages packages
+
       - store_artifacts:
           path: packages
 
