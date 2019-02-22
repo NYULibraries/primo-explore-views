@@ -31,7 +31,7 @@ test: &test-and-store
   run:
     name: Run E2E Tests
     command: |
-      scripts/run_tests.sh
+      script/run_tests.sh
 
 version: 2
 jobs:
@@ -65,7 +65,7 @@ jobs:
       # - <<: *pull_docker
       - run:
           name: Build asset package and store
-          command: scripts/create_package.sh
+          command: script/create_package.sh
 
       - store_artifacts:
           path: packages
