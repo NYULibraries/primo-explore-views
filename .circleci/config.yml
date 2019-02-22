@@ -27,28 +27,24 @@ push_docker: &push_docker
     command: |
       script/push_docker.sh
 
-test: &test
+test: &test-and-store
   run:
     name: Run E2E Tests
     command: |
+      cd /root/app/
       VIEWS='NYU NYUSH NYUAD NYSID BHS NYHS HSL'
       for VIEW in $VIEWS
       do
         git diff-tree --no-commit-id --name-only -r HEAD | grep /${VIEW}/
         if [[ $? == 0 ]]; then
+          echo "Files changed in $VIEW package. Running tests."
           VIEW=$VIEW docker-compose run e2e cypress run --spec "cypress/integration/${VIEW}/**/*.spec.js" --reporter junit --reporter-options "mochaFile=test-results/${VIEW}/results-[hash].xml"
+          docker cp "$(docker ps -q -a -l -f name=e2e)":/app/cypress cypress-results
+          docker cp "$(docker ps -q -a -l -f name=e2e)":/app/test-results test-results
         else
           echo "No files changed in $VIEW package. Skipping tests."
         fi
       done
-
-store-test: &store-test
-  run:
-    name: Copy testing artifacts
-    when: always
-    command: |
-      docker cp "$(docker ps -q -a -l -f name=e2e)":/app/cypress cypress-results
-      docker cp "$(docker ps -q -a -l -f name=e2e)":/app/test-results test-results
 
 version: 2
 jobs:
@@ -60,19 +56,19 @@ jobs:
       - run:
           name: Check package_jsons.tgz
           command: |
-            CURRENT=$(sha256sum package_jsons.tgz | awk '{ print $1 }')
             script/tgz_packages.sh
-            NEW=$(sha256sum package_jsons.tgz | awk '{ print $1 }')
-            if [[ $CURRENT == $NEW ]]; then
-              echo 'success'
-            else
-              echo 'A package.json file has changed. Run script/tgz_packages in your next commit to ensure your image has the latest node_modules.'
-            fi
+            # CURRENT=$(sha256sum package_jsons.tgz | awk '{ print $1 }')
+            # script/tgz_packages.sh
+            # NEW=$(sha256sum package_jsons.tgz | awk '{ print $1 }')
+            # if [[ $CURRENT == $NEW ]]; then
+            #   echo 'success'
+            # else
+            #   echo 'A package.json file has changed. Run script/tgz_packages in your next commit to ensure your image has the latest node_modules.'
+            # fi
       - <<: *auth_quay
       # - <<: *pull_docker
       - <<: *build_docker
-      - <<: *test
-      - <<: *store-test
+      - <<: *test-and-store
       # - <<: *push_docker
       - store_artifacts:
           path: cypress-results/videos
@@ -91,6 +87,7 @@ jobs:
       - run:
           name: Build asset package and store
           command: |
+            cd /root/app/
             VIEWS='NYU NYUSH NYUAD NYSID BHS NYHS HSL'
             for VIEW in $VIEWS
             do
@@ -98,11 +95,11 @@ jobs:
               if [[ $? == 0 ]]; then
                 export NODE_ENV=$([[ $CIRCLE_BRANCH = master ]] && echo "production" || echo "staging")
                 VIEW=$VIEW docker-compose run create-package
+                docker cp "$(docker ps -q -a -l -f name=create-package)":/app/packages packages
               else
                 echo "No files changed in $VIEW package. Skipping build."
               fi
             done
-            docker cp "$(docker ps -q -a -l -f name=create-package)":/app/packages packages
 
       - store_artifacts:
           path: packages

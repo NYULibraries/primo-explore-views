@@ -1,3 +1,3 @@
 #!/bin/bash
 
-tar cvzf packages.tgz custom/**/package.json
+tar cvzf package_jsons.tgz custom/**/package.json
