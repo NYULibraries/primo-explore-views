@@ -1,0 +1,89 @@
+/* Top nav */
+.prm-primary-bg.prm-hue1,
+prm-search-bar.prm-hue1,
+prm-spinner.prm-hue1.overlay-cover.light-on-dark:after,
+prm-topbar .top-nav-bar {
+  background-color: $dark_purple;
+}
+.__xs prm-topbar prm-logo,
+prm-topbar prm-logo {
+  max-width: inherit;
+}
+// Undo something in the angular CSS that is causing
+// popover tips to clip the text weirdly
+.item-description.popover.animate-popover {
+  -webkit-clip-path: none !important;
+  clip-path: none !important;
+}
+// Make the library logo responsive, namely for XS screens i.e. phones
+.__xs prm-topbar prm-logo {
+  min-width: 50%;
+}
+.__xs prm-logo .logo-image, .__xs prm-logo img {
+  width: 100%;
+}
+
+// copied from angular-material styles: layout-fill layout-align-start-center layout-row
+prm-logo div.product-logo {
+  //angular-material layout-align-start-center
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  max-width: 100%;
+
+  // angular-material layout-row
+  box-sizing: border-box;
+  flex-direction: row;
+
+  //angular-material layout-fill
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+prm-logo div.product-logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+prm-logo div.product-logo a {
+  max-width: none;
+  padding: 0;
+}
+
+prm-logo div.product-logo a:hover,
+prm-logo div.product-logo a:active {
+  box-shadow: none !important;
+  background-color: inherit !important;
+}
+
+// Fix icon spacing on some browser in menu
+md-menu-content {
+  prm-icon {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }
+}
+
+// Hide menu items we're not yet implementing
+md-menu-content {
+  md-menu-divider,
+  .my-library-card-ctm,
+  .my-loans-ctm,
+  .my-requests-ctm,
+  .my-favorties-ctm,
+  .ovl-button-ctm {
+    display: none !important;
+  }
+}
+
+// Hide library card items from mobile overlay menu
+prm-library-card-menu {
+  display: none !important;
+}
+
+.overlay-menu-content md-divider.vertical-divider.hide-xs {
+  display: none;
+}
+

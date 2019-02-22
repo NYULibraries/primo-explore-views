@@ -1,0 +1,9 @@
+// Hide "Additional Services" section in full page view
+[aria-label="Additional Services"],
+[id^='getit_link2'] {
+  display: none;
+}
+
+.custom-request-user-failure {
+  padding: 0 10px;
+}
