@@ -1,6 +1,6 @@
 #!/bin/sh -ex
 
-VIEWS='NYU NYUSH NYUAD NYSID BHS NYHS HSL'
+VIEWS='NYU NYUSH NYUAD NYSID BHS NYHS HSL CENTRAL_PACKAGE'
 for VIEW in $VIEWS
 do
   MATCHES=$(git diff-tree --no-commit-id --name-only -r HEAD | grep -c /${VIEW}/) || true
