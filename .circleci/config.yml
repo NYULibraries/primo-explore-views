@@ -45,7 +45,7 @@ jobs:
           command: |
             script/tgz_packages.sh
       - <<: *auth_quay
-      # - <<: *pull_docker
+      - <<: *pull_docker
       - <<: *build_docker
       - <<: *test-and-store
       - <<: *push_docker
@@ -62,7 +62,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      # - <<: *pull_docker
+      - <<: *pull_docker
       - run:
           name: Build asset package and store
           command: script/create_package.sh
