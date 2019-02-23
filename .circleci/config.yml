@@ -48,7 +48,7 @@ jobs:
       # - <<: *pull_docker
       - <<: *build_docker
       - <<: *test-and-store
-      # - <<: *push_docker
+      - <<: *push_docker
       - store_artifacts:
           path: cypress-results/videos
       - store_artifacts:
