@@ -7,6 +7,7 @@
 # Finds current branch locally or via CIRCLE
 CURRENT_BRANCH=${CIRCLE_BRANCH-$(git rev-parse --abbrev-ref HEAD)}
 
+mkdir -p cypress-results
 VIEWS='NYU NYUSH NYUAD NYSID BHS NYHS HSL CENTRAL_PACKAGE'
 for VIEW in $VIEWS
 do
