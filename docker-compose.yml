@@ -21,8 +21,8 @@ services:
     ports:
     - 8004:8004
     - 3001:3001
-    volumes:
-    - ./custom:/app/primo-explore/custom/
+    # volumes:
+    # - ./custom:/app/primo-explore/custom/
 
   web-test:
     <<: *x-defaults
@@ -55,5 +55,5 @@ services:
       <<: *x-environment
       NODE_ENV: test
       CYPRESS_BASE_URL: http://web-test:8004/primo-explore/search
-    volumes:
-    - ./cypress/:/app/cypress
+    # volumes:
+    # - ./cypress/:/app/cypress
