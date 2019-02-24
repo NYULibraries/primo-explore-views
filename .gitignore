@@ -2,3 +2,4 @@ node_modules/
 *.wiki/
 wiki/
 yarn-error.log
+cypress-results

@@ -47,13 +47,9 @@ jobs:
       - <<: *test-and-store
       - <<: *push_docker
       - store_artifacts:
-          path: cypress-results/videos
-      - store_artifacts:
-          path: cypress-results/screenshots
-      - store_artifacts:
-          path: test-results
+          path: cypress-results
       - store_test_results:
-          path: test-results
+          path: cypress-results/test-results
   create-package:
     <<: *docker-defaults
     steps:

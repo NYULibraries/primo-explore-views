@@ -1,10 +1,3 @@
-x-build: &x-build
-  context: .
-  cache_from:
-    - primo-explore-views
-    - quay.io/nyulibraries/primo-explore-views
-    - quay.io/nyulibraries/primo-explore-views:$BRANCH_NO_SLASH
-
 x-environment: &x-environment
   PROXY_SERVER: http://bobcatdev.library.nyu.edu:80
   VIEW: ${VIEW-NYU}
@@ -12,7 +5,11 @@ x-environment: &x-environment
 
 x-defaults: &x-defaults
   build:
-    <<: *x-build
+    context: .
+    cache_from:
+      - primo-explore-views
+      - quay.io/nyulibraries/primo-explore-views
+      - quay.io/nyulibraries/primo-explore-views:$BRANCH_NO_SLASH
   image: primo-explore-views
   environment:
     <<: *x-environment
@@ -24,8 +21,8 @@ services:
     ports:
     - 8004:8004
     - 3001:3001
-    # volumes:
-    # - ./custom:/app/primo-explore/custom/
+    volumes:
+    - ./custom:/app/primo-explore/custom/
 
   web-test:
     <<: *x-defaults
@@ -49,8 +46,7 @@ services:
   e2e:
     image: primo-explore-cypress
     build:
-      <<: *x-build
-      args: {}
+      context: .
       dockerfile: cypress/Dockerfile
     # command: cypress run # --browser chrome
     depends_on:
@@ -59,5 +55,5 @@ services:
       <<: *x-environment
       NODE_ENV: test
       CYPRESS_BASE_URL: http://web-test:8004/primo-explore/search
-    # volumes:
-    # - ./cypress/:/app/cypress
+    volumes:
+    - ./cypress/:/app/cypress
