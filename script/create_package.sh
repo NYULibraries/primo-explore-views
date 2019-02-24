@@ -5,15 +5,15 @@
 # All packages are created on the master branch.
 
 # Finds current branch locally or via CIRCLE
-CURRENT_BRANCH=${CIRCLE_BRANCH-$(git rev-parse --abbrev-ref HEAD)}
+export CURRENT_BRANCH=${CIRCLE_BRANCH-$(git rev-parse --abbrev-ref HEAD)}
 
 mkdir -p cypress-results
-VIEWS='NYU NYUSH NYUAD NYSID BHS NYHS HSL CENTRAL_PACKAGE'
+VIEWS='NYU NYUSH NYUAD CENTRAL_PACKAGE' # to implement: NYSID BHS NYHS HSL
 for VIEW in $VIEWS
 do
   MATCHES=$(git diff --name-only origin/master | grep -c /${VIEW}/) || true
-  if [[ $MATCHES != 0 || CURRENT_BRANCH == master ]]; then
-    export NODE_ENV=$([[ $CIRCLE_BRANCH = master ]] && echo "production" || echo "staging")
+  if [[ $MATCHES != 0 || $CURRENT_BRANCH == master ]]; then
+    export NODE_ENV=$([[ $CURRENT_BRANCH == master ]] && echo "production" || echo "staging")
     VIEW=$VIEW docker-compose run create-package
     docker cp "$(docker ps -q -a -l -f name=create-package)":/app/packages/. packages
   else
