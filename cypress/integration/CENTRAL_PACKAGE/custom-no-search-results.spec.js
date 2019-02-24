@@ -2,7 +2,7 @@ describe('primo-explore-custom-no-search-results', function () {
   describe('when a search returns no results', () => {
     // bad search:asf;afsd;/1!
     before(() => {
-      cy.visit(`?query=any,contains,asf;afsd;~2F1!&tab=all&search_scope=all&vid=NYU&offset=0`);
+      cy.visit(`?query=any,contains,asf;afsd;~2F1!&tab=all&search_scope=all&vid=NYU&offset=0`)
     })
 
     it('renders No records found', () => {
@@ -24,6 +24,6 @@ describe('primo-explore-custom-no-search-results', function () {
             .should('have.attr', 'href', href)
         })
       })
-    });
+    })
   })
 })
