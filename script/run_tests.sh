@@ -3,13 +3,17 @@
 # This script runs tests only for a VIEW that has changed since origin/master.
 # Will continue executing all tests for applicable VIEWs and terminate with a non-zero exit code if any test fails.
 # All resuls will be copied locally to cypress-results
+# All tests are run on the master branch.
+
+# Finds current branch locally or via CIRCLE
+CURRENT_BRANCH=${CIRCLE_BRANCH-$(git rev-parse --abbrev-ref HEAD)}
 
 mkdir -p cypress-results
 VIEWS='NYU NYUSH NYUAD NYSID BHS NYHS HSL CENTRAL_PACKAGE'
 for VIEW in $VIEWS
 do
   MATCHES=$(git diff --name-only origin/master | grep -c /${VIEW}/) || true
-  if [[ $MATCHES > 0 ]]; then
+  if [[ $MATCHES > 0 || CURRENT_BRANCH == master ]]; then
     echo "Files changed in $VIEW package. Running tests."
     # will add any non-zero exit code to ANY_FAILS if a failure occurred
     docker-compose run e2e cypress run --spec "cypress/integration/${VIEW}/**/*.spec.js" --reporter junit --reporter-options "mochaFile=test-results/${VIEW}/results-[hash].xml" \
