@@ -9,11 +9,11 @@
 export CURRENT_BRANCH=${CIRCLE_BRANCH-$(git rev-parse --abbrev-ref HEAD)}
 
 mkdir -p cypress-results
-VIEWS='NYU NYUSH NYUAD CENTRAL_PACKAGE NYSID BHS NYHS CU'
+VIEWS=$(cat $(pwd)/script/VIEWS.txt)
 for VIEW in $VIEWS
 do
   MATCHES=$(git diff --name-only origin/master | grep -c /${VIEW}/) || true
-  if [[ $MATCHES > 0 || $CURRENT_BRANCH == master ]]; then
+  if [[ $MATCHES != 0 || $CURRENT_BRANCH == master ]]; then
     echo "Files changed in $VIEW package. Running tests."
     # will add any non-zero exit code to ANY_FAILS if a failure occurred
     VIEW=$VIEW docker-compose run e2e cypress run --spec "cypress/integration/$VIEW/**/*.spec.js" --reporter junit --reporter-options "mochaFile=test-results/${VIEW}/results-[hash].xml" \
