@@ -31,3 +31,14 @@ prm-library-card-menu > button {
 #tags {
   display: none;
 }
+
+// Hide default library card options
+prm-library-card-menu>button {
+  display: none !important;
+}
+
+// Hide Get It section on full view
+[aria-label="Get It"],
+[id^='getit_link1_'] {
+  display: none;
+}
