@@ -1,0 +1,7 @@
+prm-edit-notification-settings {
+  md-dialog-actions {
+    .md-button.button-confirm:hover:not([disabled]) {
+      min-width: 88px !important;
+    }
+  }
+}
