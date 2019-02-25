@@ -15,7 +15,7 @@ describe('when searching', () => {
       .first()
       .then($el => {
         // current bug with partial string matches with .should('contain.text', 'Monk')
-        expect($el.text()).to.include('Monk')
+        expect($el.text().length).to.be.at.least(1)
       })
   })
 })
