@@ -1,0 +1,43 @@
+/* Top nav */
+.prm-primary-bg.prm-hue1,
+prm-search-bar.prm-hue1,
+prm-spinner.prm-hue1.overlay-cover.light-on-dark:after,
+prm-topbar .top-nav-bar {
+  background-color: white;
+}
+prm-topbar {
+  height: 150px;
+  border-bottom: 10px solid $nysid_red;
+  prm-logo img {
+  }
+  div.product-logo {
+    background-color: $nysid_red;
+  }
+  // Make menu links black for accessibility contrast
+  .md-button.button-over-dark,
+  prm-user-area .user-menu-button .user-name,
+  prm-user-area-expandable .md-button.user-button,
+  prm-search-bookmark-filter .md-button,
+  .menu-arrow,
+  .md-button.button-with-menu-arrow {
+    color: $text_black !important;
+  }
+}
+
+// Make menu links black for accessibility contrast
+prm-user-area .md-button.mobile-menu-button,
+prm-main-menu .md-button {
+  color: $text_black !important;
+}
+
+/* Search bar */
+prm-search-bar,
+prm-tags-search-bar,
+prm-browse-search-bar {
+  background-image: none;
+  background-color: $background_light_gray;
+}
+
+prm-main-menu[menu-type="full"] .md-button, prm-main-menu[menu-type="full"] .overlay-menu-item {
+  color: white !important;
+}
