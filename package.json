@@ -1,0 +1,30 @@
+{
+  "name": "primo-explore-views",
+  "private": true,
+  "version": "1.0.0",
+  "description": "This the NYU Consortium primo-explore view package.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NYULibraries/primo-explore-views.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NYULibraries/primo-explore-views/issues"
+  },
+  "homepage": "https://github.com/NYULibraries/primo-explore-views#readme",
+  "devDependencies": {
+    "cypress": "^3.1.5"
+  },
+  "optionalDependencies": {
+    "eslint": "^5.14.1"
+  },
+  "workspaces": [
+    "custom/*"
+  ]
+}

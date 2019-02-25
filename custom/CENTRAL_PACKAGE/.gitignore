@@ -1,6 +1,0 @@
-node_modules/
-*.wiki/
-wiki/
-dist
-cypress/videos
-cypress/screenshots
