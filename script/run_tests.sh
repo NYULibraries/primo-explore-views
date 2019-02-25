@@ -9,7 +9,7 @@
 export CURRENT_BRANCH=${CIRCLE_BRANCH-$(git rev-parse --abbrev-ref HEAD)}
 
 mkdir -p cypress-results
-VIEWS='NYU NYUSH NYUAD CENTRAL_PACKAGE NYSID' # to implement: BHS NYHS HSL
+VIEWS='NYU NYUSH NYUAD CENTRAL_PACKAGE NYSID BHS NYHS CU'
 for VIEW in $VIEWS
 do
   MATCHES=$(git diff --name-only origin/master | grep -c /${VIEW}/) || true

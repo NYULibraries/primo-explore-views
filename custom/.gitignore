@@ -1,4 +1,6 @@
 .sass-cache
 custom1.css
+*.css.map
 *.css.map*
 main.css
+custom.js*
