@@ -40,23 +40,10 @@ VIEW=CENTRAL_PACKAGE docker-compose run web
 
 `js/main.js` is considered the 'entry' file for compiling JavaScript files. You can use ES6 `import` syntax here to consume dependencies.
 
-`css/main.scss` is the 'entry' file for compiling to CSS. To refer to CSS files in the root `node_modules` directory, you can append an `alias` to each view's webpack configuration:
-
-```js
-module.exports = {
-  // modifications to the devenv webpack process can go here
-  resolve: {
-    alias: {
-      'node_modules': path.resolve(__dirname, '../node_modules/')
-    }
-  }
-};
-```
-
-This allows you to refer to the `node_modules` directory in your `scss`/`sass` files as well:
+`css/main.scss` is the 'entry' file for compiling to CSS. To refer to CSS files in the root `node_modules` directory, you can simply use `~` as an alias.
 
 ```scss
-@import '/node_modules/primo-explore-clickable-logo-to-any-link/css/custom1.css';
+@import '~/primo-explore-clickable-logo-to-any-link/css/custom1.css';
 ```
 
 ### Running locally
