@@ -27,4 +27,4 @@ do
   fi
 done
 # Checks if non-zero exit code occurred
-[[ $ANY_FAILS  == '' ]]
+[ ! $ANY_FAILS ]
