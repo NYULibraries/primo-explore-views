@@ -19,7 +19,7 @@ do
     docker-compose run e2e cypress run --spec "cypress/integration/${VIEW}/**/*.spec.js" --reporter junit --reporter-options "mochaFile=test-results/${VIEW}/results-[hash].xml" \
       || ANY_FAILS=$ANY_FAILS$?
     docker cp "$(docker ps -q -a -l -f name=e2e)":/app/cypress/videos cypress-results/
-    docker cp "$(docker ps -q -a -l -f name=e2e)":/app/cypress/screenshots cypress-results/
+    docker cp "$(docker ps -q -a -l -f name=e2e)":/app/cypress/screenshots cypress-results/ || true # screenshots only on failures
     docker cp "$(docker ps -q -a -l -f name=e2e)":/app/test-results cypress-results/
   else
     echo "No files changed in $VIEW package. Skipping tests."
