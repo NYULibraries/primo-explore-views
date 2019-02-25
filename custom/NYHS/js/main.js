@@ -8,7 +8,6 @@ import { customSearchBookmarkFilterConfig } from './customSearchBookmarkFilter';
 import { searchBarSubMenuItemsConfig } from './searchBarSubMenu';
 
 let app = angular.module('viewCustom', [
-                                        'angularLoad',
                                         'customActions',
                                         'customSearchBookmarkFilter',
                                         'searchBarSubMenu'
