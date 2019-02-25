@@ -1,0 +1,30 @@
+{
+  "name": "primo-explore-nysid",
+  "version": "1.1.1",
+  "description": "This the NYSID Consortium primo-explore view package.",
+  "main": "js/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NYULibraries/primo-explore-nysid.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NYULibraries/primo-explore-nysid/issues"
+  },
+  "homepage": "https://github.com/NYULibraries/primo-explore-nysid#readme",
+  "dependencies": {
+    "@orbis-cascade/primo-explore-custom-actions": "3.1.1",
+    "primo-explore-clickable-logo-to-any-link": "1.1.1",
+    "primo-explore-custom-actions": "3.1.0",
+    "primo-explore-custom-library-card-menu": "1.1.6",
+    "primo-explore-custom-no-search-results": "1.0.4",
+    "primo-explore-libraryh3lp-widget": "1.0.9",
+    "primo-explore-nyu-eshelf": "3.1.7",
+    "primo-explore-search-bar-sub-menu": "1.0.7"
+  }
+}
