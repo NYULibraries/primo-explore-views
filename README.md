@@ -13,58 +13,63 @@ For information about developing in the primo-explore UI please review that rele
 
 For more information about NYU's customizations read the [wiki](https://github.com/nyulibraries/primo-explore-views/wiki).
 
-## Run the Development Environment (only in Docker)
+## Run the Development Environment
+
+VIEW package files are organized into `custom/VIEW_NAME` directories.
 
 With recommended volumes enabled in the `docker-compose.yml`:
 
 With Docker and docker-compose installed:
 
-1. Configure `docker-compose.yml` to fit your institutional setup in the `x-environment` section.
-1. `docker-compose build web`
-1. `VIEW=NYU docker-compose up web`
+1. Configure `docker-compose.yml` to fit your institutional setup in the `x-environment` section. ([docker-compose environment variables](https://docs.docker.com/compose/environment-variables/))
+1. Use the `up` command to `docker-compose build web`
+1. `NODE_ENV=[stage] VIEW=[view_name] docker-compose up web`
 
 On your local machine, the developer server will be accessible at `http://localhost:8004/primo-explore/search?vid={VIEW}`
 
 Within the [docker network](https://docs.docker.com/network/), this will be accordingly be accessible at the address `http://web:8004`
 
-## Developing in-tandem with CENTRAL_PACKAGE
+The server will automatically refresh pages if `CENTRAL_PACKAGE` or `NYU` files are changed. However, `.css` or `.js` `CENTRAL_PACKAGE` changes will not be reflected without running a recompile process for `CENTRAL_PACKAGE` simultaneously
 
-You can mount your local `central-package` directory with compiled assets to the container's own CENTRAL_PACKAGE
-
-```yml
-web:
-  volumes:
-  - /path/to/primo-explore-central-package:/primo-explore/custom/CENTRAL_PACKAGE
-```
-
-If you need to actively develop with your local view and central package together, you can perform the following separate containerized processes.
-
-`primo-explore-central-package`:
-Mount local central package rep to volumes
-```yml
-web:
-  volumes:
-  - ./:/primo-explore/custom/CENTRAL_PACKAGE
-```
-then `run` service `web` (without exposing ports) to dynamically recompile JS/CSS.
+(Optional)
 ```sh
-docker-compose run web
+VIEW=CENTRAL_PACKAGE docker-compose run web
 ```
 
-`primo-explore-views`:
+### Entry files
+
+`js/main.js` is considered the 'entry' file for compiling JavaScript files. You can use ES6 `import` syntax here to consume dependencies.
+
+`css/main.scss` is the 'entry' file for compiling to CSS. To refer to CSS files in the root `node_modules` directory, you can append an `alias` to each view's webpack configuration:
+
+```js
+module.exports = {
+  // modifications to the devenv webpack process can go here
+  resolve: {
+    alias: {
+      'node_modules': path.resolve(__dirname, '../node_modules/')
+    }
+  }
+};
+```
+
+This allows you to refer to the `node_modules` directory in your `scss`/`sass` files as well:
+
+```scss
+@import '/node_modules/primo-explore-clickable-logo-to-any-link/css/custom1.css';
+```
+
+### Running locally
+
+You can run the development environment locally using [our fork of primo-explore-devenv](https://github.com/nyulibraries/primo-explore-devenv) as well, and symlinking this `custom` directory to that repostory's `primo-explore/custom` directory.
+
 ```sh
-docker-compose up web
+# In primo-explore-views
+yarn install
+# In primo-explore-devenv
+yarn install
+VIEW=[view] NODE_ENV=[stage] yarn start
 ```
-
-## Build a Package (only in Docker)
-
-With recommended volumes enabled in the `docker-compose.yml`:
-
-```sh
-NODE_ENV=[stage] docker-compose run create-package
-```
-
-This will output a package to your `./packages/` directory
 
 ## Run Tests
 
@@ -73,5 +78,72 @@ Integration/end-to-end testing has been implemented in cypress. Cypress can run 
 Simply execute:
 
 ```sh
-docker-compose run e2e
+VIEW=[view_name] docker-compose run e2e
 ```
+
+Tests will run in the Cypress Electron Browser[https://docs.cypress.io/guides/core-concepts/launching-browsers.html#Electron-Browser] so that videos and screenshots (on failures) are recorded. The default testing command in Docker only runs tests matching the glob pattern `cypress/integration/$VIEW/**/*.spec.js`. To copy output files from the stopped container, use:
+
+```sh
+  # video recordings of tests
+  docker cp "$(docker ps -q -a -l -f name=e2e)":/app/cypress/videos cypress-results/
+  # screenshots only on failures
+  docker cp "$(docker ps -q -a -l -f name=e2e)":/app/cypress/screenshots cypress-results/
+  # Output xml test results in jUnit with flag: --reporter-options "mochaFile=test-results/${VIEW}/results-[hash].xml"
+  docker cp "$(docker ps -q -a -l -f name=e2e)":/app/test-results cypress-results/
+```
+
+Between running tests, ensure that current docker containers are completely stopped with `docker-compose down`, or you may be running tests in a VIEW webserver you do not intend!
+
+For convenience, a `script/run_tests.sh` is an `sh` script that will build all packages for files that have been changed in the current `git` branch relative to `origin/master`. This is used during the CI process. If on the `master` branch, all VIEW packages will be created with `production` stage values.
+
+See [cypress command line documentation](https://docs.cypress.io/guides/guides/command-line.html) for more information.
+
+* [Example execution in Circle CI](https://circleci.com/gh/NYULibraries/primo-explore-views/38)
+
+### Cypress GUI (Running locally)
+
+The Cypress GUI is accessible in a local development environment only, since a GUI is required.
+
+```sh
+yarn install
+# Open Cypress GUI
+yarn cypress open
+```
+
+This is extremely helpful for writing integration/end-to-end tests to see the consequences of your testing in real-time. See the [Cypress documentation](https://docs.cypress.io/guides/overview/why-cypress.html) for information about the GUI and [best practices](https://docs.cypress.io/guides/references/best-practices.html) in Cypress testing.
+
+## Build a Package
+
+With recommended volumes enabled in the `docker-compose.yml`:
+
+```sh
+NODE_ENV=[stage] VIEW=[view_name] docker-compose run create-package
+```
+
+This will output a package to your `./packages/` directory in the container. Add volume mounting properties to your `docker-compose.yml` to acess these files on your local machine. Or, to copy them manually from the stopped container:
+
+`docker cp "$(docker ps -q -a -l -f name=create-package)":/app/packages/. packages`
+
+For convenience, `script/create_package.sh` is a `sh` script that will build all packages for files that have been changed in the current `git` branch relative to `origin/master`. This is used during the CI process. If on the `master` branch, all VIEW packages will be created with `production` values.
+
+* [Example execution in Circle CI](https://circleci.com/gh/NYULibraries/primo-explore-views/38)
+
+### Running locally
+
+You can run the development environment locally using [our fork of primo-explore-devenv](https://github.com/nyulibraries/primo-explore-devenv) as well, and symlinking this `custom` directory to that repostory's `primo-explore/custom` directory.
+
+```sh
+# In primo-explore-views
+yarn install
+# In primo-explore-devenv
+yarn install
+VIEW=[view] NODE_ENV=[stage] yarn create-package
+```
+
+## Other notes
+
+This package has a loose 'monorepo' structure. Resolving dependencies in a monorepo can have difficulties in resolving Node dependencies. `yarn` overcomes these problems using [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/). The basic important points are:
+
+* You only need to run `yarn install` once inside the root directory of the repository. All `node_modules` are installed once and resolved in the root directory.
+* Using the `workspaces` parameter in `package.json`, yarn knows to look in `custom` for other `package.json` files to resolve dependencies.
+* Only a single `yarn.lock` file is generated in the root.

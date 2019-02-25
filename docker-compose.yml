@@ -2,6 +2,10 @@ x-environment: &x-environment
   PROXY_SERVER: http://bobcatdev.library.nyu.edu:80
   VIEW: ${VIEW-NYU}
   NODE_ENV: ${NODE_ENV-development}
+  VE:
+  SAML:
+  CAS:
+  PACK:
 
 x-defaults: &x-defaults
   build:
@@ -48,7 +52,7 @@ services:
     build:
       context: .
       dockerfile: cypress/Dockerfile
-    # command: cypress run # --browser chrome
+    # command: cypress run --browser chrome
     depends_on:
       - web-test
     environment:
@@ -57,3 +61,4 @@ services:
       CYPRESS_BASE_URL: http://web-test:8004/primo-explore/search
     # volumes:
     # - ./cypress/:/app/cypress
+    # - ./custom:/app/primo-explore/custom/
