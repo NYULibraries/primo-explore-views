@@ -1,0 +1,31 @@
+// Hide browse button from main menu
+a.md-button[aria-label="Browse"],
+a.md-button[aria-label="mainmenu.label.Browse"] {
+  display: none;
+}
+
+// Disable built in e-shelf
+.pin-button,
+prm-favorites-labels,
+prm-search-bookmark-filter a[aria-label='Go to my favorites'],
+prm-search-bookmark-filter a[aria-label="nui.favorites.goFavorites.tooltip"],
+prm-favorites md-tab-item:first-child {
+  display: none !important;
+}
+
+// Disable Login
+prm-user-area-expandable,
+prm-alert-bar,
+prm-user-area {
+  display: none !important;
+}
+
+// Hide Tags in Detailed Display
+// From: https://knowledge.exlibrisgroup.com/Primo/Knowledge_Articles/How_to_disable_the_tags_in_Primo_classic_and_new_UI
+[aria-label="Tags"],
+#tags,
+// Hide Tags in Menu Tab
+a.md-button[aria-label="Tags"],
+a.md-buttom[aria-label="nui.mainmenu.label.tags"] {
+  display: none;
+}
