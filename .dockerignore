@@ -4,3 +4,4 @@ node_modules
 .circleci/
 cypress/videos/
 cypress/screenshots/
+script
