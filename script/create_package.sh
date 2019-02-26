@@ -20,3 +20,5 @@ do
     echo "No files changed in $VIEW package. Skipping build."
   fi
 done
+
+tar -czvf packages/package-files.zip packages/*
