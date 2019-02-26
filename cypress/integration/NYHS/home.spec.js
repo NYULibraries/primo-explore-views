@@ -41,7 +41,7 @@ describe('The Home Page', function () {
 
     it(`includes the expected number of links`, () => {
       cy.get(`[data-cy=home-additional-options] a`)
-        .should('have.lengthOf', 12)
+        .should('have.lengthOf', Object.keys(links).length)
     })
 
     Object.entries(links).forEach(([text, href]) => {
