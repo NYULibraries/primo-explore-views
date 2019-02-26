@@ -2,11 +2,11 @@ describe('primo-explore-custom-no-search-results', function () {
   describe('when a search returns no results', () => {
     // bad search:asf;afsd;/1!
     before(() => {
-      cy.visit(`?query=any,contains,asf;afsd;~2F1!&tab=all&search_scope=all&vid=NYUSH&offset=0`);
+      cy.visit(`?query=any,contains,asf;afsd;~2F1!&tab=all&search_scope=all&vid=NYUSH&offset=0`)
     })
 
     it('renders No records found', () => {
-      cy.get(`.primo-explore-custom-no-search-results`)
+      cy.get(`[data-cy=no-search-results]`)
         .contains(`No records found`)
     })
 
@@ -16,9 +16,14 @@ describe('primo-explore-custom-no-search-results', function () {
         [`Ask a Librarian`]: `https://shanghai.nyu.edu/academics/library/services/aal`,
       }
 
+      it(`includes the expected number of links`, () => {
+        cy.get(`[data-cy=no-results-more-info] a`)
+          .should('have.lengthOf', Object.keys(links).length)
+      })
+
       Object.entries(links).forEach(([text, href]) => {
         it(`includes information about: ${text}`, () => {
-          cy.get(`[data-cy=no-results-more-info]`)
+          cy.get(`[data-cy=no-results-more-info] a`)
             .contains(text)
             .should('have.attr', 'href', href)
         })
