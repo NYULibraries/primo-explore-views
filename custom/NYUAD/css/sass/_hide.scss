@@ -20,25 +20,9 @@ a.md-button[aria-label="mainmenu.label.Browse"] {
   display: none;
 }
 
-// Hide default library card options
-prm-library-card-menu > button {
-  display: none !important;
-}
-
 // Hide Tags in Detailed Display
 // From: https://knowledge.exlibrisgroup.com/Primo/Knowledge_Articles/How_to_disable_the_tags_in_Primo_classic_and_new_UI
 [aria-label="Tags"],
 #tags {
-  display: none;
-}
-
-// Hide default library card options
-prm-library-card-menu>button {
-  display: none !important;
-}
-
-// Hide Get It section on full view
-[aria-label="Get It"],
-[id^='getit_link1_'] {
   display: none;
 }
