@@ -6,8 +6,9 @@ describe('primo-explore-custom-no-search-results', function () {
     })
 
     it('renders No records found', () => {
-      cy.get(`.primo-explore-custom-no-search-results`)
+      cy.get(`[data-cy=no-search-results]`)
         .contains(`No records found`)
+        .should('exist')
     })
 
     describe('its links', () => {
@@ -19,7 +20,7 @@ describe('primo-explore-custom-no-search-results', function () {
 
       Object.entries(links).forEach(([text, href]) => {
         it(`includes information about: ${text}`, () => {
-          cy.get(`.no-results-more-info`)
+          cy.get(`[data-cy=no-results-more-info]`)
             .contains(text)
             .should('have.attr', 'href', href)
         })
