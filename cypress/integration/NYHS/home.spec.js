@@ -39,10 +39,14 @@ describe('The Home Page', function () {
       ["Rights and Reproductions"]: `http://www.nyhistory.org/about/rights-reproductions`,
     }
 
+    it(`includes the expected number of links`, () => {
+      cy.get(`[data-cy=home-additional-options] a`)
+        .should('have.lengthOf', 12)
+    })
+
     Object.entries(links).forEach(([text, href]) => {
       it(`includes information about: ${text}`, () => {
         cy.get(`[data-cy=home-additional-options] a`)
-          .should('have.lengthOf', 12)
           .contains(text)
           .should('have.attr', 'href', href)
           .should('have.attr', 'target', '_blank')
