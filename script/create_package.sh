@@ -15,8 +15,13 @@ do
   MATCHES=$(git diff --name-only origin/master | grep -c /${VIEW}/) || true
   if [[ $MATCHES != 0 || $CURRENT_BRANCH == master ]]; then
     NODE_ENV=staging VIEW=$VIEW docker-compose run create-package
-    if [[ $CURRENT_BRANCH == master ]]; then NODE_ENV=production VIEW=$VIEW docker-compose run create-package; fi
     docker cp "$(docker ps -q -a -l -f name=create-package)":/app/packages/. packages
+    docker-compose down
+    if [[ $CURRENT_BRANCH == master ]]; then
+      NODE_ENV=production VIEW=$VIEW docker-compose run create-package
+      docker cp "$(docker ps -q -a -l -f name=create-package)":/app/packages/. packages
+      docker-compose down
+    fi
   else
     echo "No files changed in $VIEW package. Skipping build."
   fi
