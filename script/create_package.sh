@@ -8,6 +8,7 @@
 export CURRENT_BRANCH=${CIRCLE_BRANCH-$(git rev-parse --abbrev-ref HEAD)}
 
 mkdir -p cypress-results
+mkdir -p packages
 VIEWS=$(cat $(pwd)/script/VIEWS.txt)
 for VIEW in $VIEWS
 do
@@ -20,3 +21,8 @@ do
     echo "No files changed in $VIEW package. Skipping build."
   fi
 done
+
+COUNT=$(ls packages | wc -l)
+if [[ $COUNT != 0 ]]; then
+  tar -czvf packages/package-files.zip packages/*
+fi
