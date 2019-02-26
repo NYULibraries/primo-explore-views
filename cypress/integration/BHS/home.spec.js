@@ -1,6 +1,6 @@
 describe('The Home Page', function () {
   before(() => {
-    cy.visit('?vid=NYUAD') // change URL to match your dev URL
+    cy.visit('?vid=BHS') // change URL to match your dev URL
   })
 
   it('successfully loads', function () {
