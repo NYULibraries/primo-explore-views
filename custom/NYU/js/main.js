@@ -141,5 +141,4 @@ function runBlock(gaInjectionService, nyuEshelfService) {
   });
   gaInjectionService.injectGACode();
   nyuEshelfService.initEshelf();
-
 }
