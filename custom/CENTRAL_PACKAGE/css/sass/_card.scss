@@ -1,4 +1,10 @@
 md-card {
+  md-card-content {
+    :first-child {
+      margin-top: 0;
+    }
+  }
+
   ul {
     margin: .5em auto;
     margin-block-start: 0;
