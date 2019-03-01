@@ -25,8 +25,8 @@ services:
     ports:
     - 8004:8004
     - 3001:3001
-    volumes:
-    - ./custom:/app/primo-explore/custom/
+    # volumes:
+    # - ./custom:/app/primo-explore/custom/
 
   web-test:
     <<: *x-defaults
