@@ -18,8 +18,8 @@ import { libraryh3lpWidgetConfig } from './libraryh3lpWidget';
 import { getitToLinkResolverConfig } from './getitToLinkResolver';
 import { nyuEshelfConfig } from './nyuEshelf';
 import { searchBarSubMenuItemsConfig } from './searchBarSubMenu';
-import customRequestsConfig from './customRequestsConfig';
-import customLoginConfig from './customLoginConfig';
+import customRequestsConfig from 'Common/js/customRequestsConfig';
+import customLoginConfig from 'Common/js/customLoginConfig';
 
 import prmLocationItemAfterPartial from '../html/prm_location_items_after_partial.html';
 
