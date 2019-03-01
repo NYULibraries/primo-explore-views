@@ -22,7 +22,10 @@
     "cypress": "^3.1.5"
   },
   "optionalDependencies": {
-    "eslint": "^5.14.1"
+    "eslint": "^5.14.1",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-import-resolver-webpack": "^0.11.0",
+    "eslint-plugin-import": "^2.16.0"
   },
   "workspaces": [
     "custom/*"
