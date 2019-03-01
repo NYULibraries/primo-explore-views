@@ -19,8 +19,8 @@ import getitToLinkResolverConfig from './getitToLinkResolver';
 import nyuEshelfConfig from './nyuEshelf';
 import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import googleAnalyticsConfig from './googleAnalyticsConfig';
-import customRequestsConfig from './customRequestsConfig';
-import customLoginConfig from './customLoginConfig';
+import customRequestsConfig from 'Common/js/customRequestsConfig';
+import customLoginConfig from 'Common/js/customLoginConfig';
 
 import customRequestsRequestInformationTemplate from '../html/custom_requests_request_information.html';
 
