@@ -20,8 +20,8 @@ import nyuEshelfConfig from './nyuEshelf';
 import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
+import customRequestsRequestInformationTemplate from '../html/custom_requests_request_information.html';
 
-import customRequestsRequestInformationTemplate from '../html/prm_location_items_after_partial.html';
 
 let app = angular.module('viewCustom', [
   'customActions',
