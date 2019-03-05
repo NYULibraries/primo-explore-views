@@ -1,5 +1,9 @@
 {
-  "extends": "eslint:recommended",
+  "extends":[
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module"
@@ -15,6 +19,6 @@
   },
   "env": {
     "node": true,
-    "browser": true,
+    "browser": true
   }
 }
