@@ -9,8 +9,8 @@ a:focus {
     @include focusOutline;
 }
 
-prm-search a {
-    color: $link_color !important;
+.neutralized-button:focus {
+    @include focusOutline;
 }
 
 // Borrowed from Bootstrap
