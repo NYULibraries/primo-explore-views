@@ -20,7 +20,8 @@ import { nyuEshelfConfig } from './nyuEshelf';
 import { searchBarSubMenuItemsConfig } from './searchBarSubMenu';
 import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
-import customRequestsRequestInformationTemplate from '../html/custom_requests_request_information.html';
+// Common alias does not work for HTML imports
+import customRequestsRequestInformationTemplate from '../../common/html/custom_requests_request_information.html';
 
 
 let app = angular.module('viewCustom', [
