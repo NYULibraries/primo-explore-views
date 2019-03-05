@@ -19,13 +19,17 @@
   "homepage": "https://github.com/NYULibraries/primo-explore-nyu#readme",
   "dependencies": {
     "@orbis-cascade/primo-explore-custom-actions": "3.1.1",
+    "@sentry/browser": "^4.6.4",
     "primo-explore-clickable-logo-to-any-link": "1.1.1",
     "primo-explore-custom-library-card-menu": "1.1.6",
+    "primo-explore-custom-login": "0.0.5",
     "primo-explore-custom-no-search-results": "1.0.4",
-    "primo-explore-getit-to-link-resolver": "2.0.5",
+    "primo-explore-custom-requests": "0.0.13",
+    "primo-explore-getit-to-link-resolver": "2.0.7",
     "primo-explore-google-analytics": "1.0.0",
     "primo-explore-libraryh3lp-widget": "1.0.9",
     "primo-explore-nyu-eshelf": "3.1.7",
     "primo-explore-search-bar-sub-menu": "1.0.7"
-  }
+  },
+  "devDependencies": {}
 }
