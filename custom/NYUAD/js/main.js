@@ -112,20 +112,25 @@ app
     template: `<primo-explore-custom-login></primo-explore-custom-login>`
   })
   .component('prmLocationItemAfter', {
-      template: `<primo-explore-custom-requests layout="row" layout-align="end center" layout-wrap></primo-explore-custom-requests>`,
-      controller: ['$element', function ($element) {
-        const ctrl = this;
-        ctrl.$postLink = () => {
-          const $target = $element.parent().query('div.md-list-item-text');
-          const $el = $element.detach();
-          $target.append($el);
-          $element.addClass('layout-row flex-sm-30 flex-xs-100');
-        };
-      }]
-    })
-    .component('prmLocationItemsAfter', {
-      template: `${customRequestsRequestInformationTemplate}`
-    });
+    template: /*html*/ `
+      <primo-explore-custom-requests
+        layout="row"
+        layout-align="end center"
+        layout-wrap
+        flex-sm="30" flex-xs="100"
+      ></primo-explore-custom-requests>`,
+    controller: ['$element', function ($element) {
+      const ctrl = this;
+      ctrl.$postLink = () => {
+        const $target = $element.parent().query('div.md-list-item-text');
+        const $el = $element.query(`primo-explore-custom-requests`).detach();
+        $target.append($el);
+      };
+    }]
+  })
+  .component('prmLocationItemsAfter', {
+    template: `${customRequestsRequestInformationTemplate}`
+  });
 
 app.run(runBlock);
 
