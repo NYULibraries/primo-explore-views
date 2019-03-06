@@ -117,14 +117,14 @@ app
         layout="row"
         layout-align="end center"
         layout-wrap
+        flex-sm="30" flex-xs="100"
       ></primo-explore-custom-requests>`,
     controller: ['$element', function ($element) {
       const ctrl = this;
       ctrl.$postLink = () => {
         const $target = $element.parent().query('div.md-list-item-text');
-        const $el = $element.detach();
+        const $el = $element.query(`primo-explore-custom-requests`).detach();
         $target.append($el);
-        $element.addClass('layout-row flex-sm-30 flex-xs-100');
       };
     }]
   })
