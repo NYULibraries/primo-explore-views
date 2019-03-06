@@ -117,7 +117,7 @@ app
         layout="row"
         layout-align="end center"
         layout-wrap
-        flex-sm="30" flex-xs="100"
+        flex-xs="100"
       ></primo-explore-custom-requests>`,
     controller: ['$element', function ($element) {
       const ctrl = this;
