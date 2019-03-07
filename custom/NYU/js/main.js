@@ -22,7 +22,7 @@ import googleAnalyticsConfig from './googleAnalyticsConfig';
 import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
 // Common alias does not work for HTML imports
-import customRequestsRequestInformationTemplate from '../../common/html/custom_requests_request_information.html';
+import customRequestsRequestInformationTemplate from '../html/custom_requests_request_information.html';
 
 
 let app = angular.module('viewCustom', [
