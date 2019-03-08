@@ -1,5 +1,3 @@
-import * as Sentry from '@sentry/browser';
-
 import '@orbis-cascade/primo-explore-custom-actions';
 import 'primo-explore-custom-library-card-menu';
 import 'primo-explore-clickable-logo-to-any-link';
@@ -21,7 +19,6 @@ import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import googleAnalyticsConfig from './googleAnalyticsConfig';
 import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
-import sentryConfig from 'Common/js/sentryConfig';
 // Common alias does not work for HTML imports
 import customRequestsRequestInformationTemplate from '../html/custom_requests_request_information.html';
 
@@ -131,26 +128,13 @@ app
   })
   .component('prmLocationItemsAfter', {
     template: `${customRequestsRequestInformationTemplate}`
-  })
-  .config(['$httpProvider', function($httpProvider) {
-    // log response errors using $http to Sentry
-    $httpProvider.interceptors.push(function ($q) {
-      return {
-        responseError(rejection) {
-          const isLibraryNyuEdu = /http?s:\/\/.*library\.nyu\.edu/.test(rejection.config.url);
-          isLibraryNyuEdu && Sentry.captureException(rejection);
-          return $q.reject(rejection);
-        }
-      };
-    });
-  }]);
+  });
 
 app.run(runBlock);
 
 runBlock.$inject = ['gaInjectionService', 'nyuEshelfService'];
 
 function runBlock(gaInjectionService, nyuEshelfService) {
-  Sentry.init(sentryConfig);
   gaInjectionService.injectGACode();
   nyuEshelfService.initEshelf();
 }
