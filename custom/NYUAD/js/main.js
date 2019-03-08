@@ -20,6 +20,7 @@ import { nyuEshelfConfig } from './nyuEshelf';
 import { searchBarSubMenuItemsConfig } from './searchBarSubMenu';
 import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
+import sentryConfig from 'Common/js/sentryConfig';
 // Common alias does not work for HTML imports
 import customRequestsRequestInformationTemplate from '../../common/html/custom_requests_request_information.html';
 
@@ -137,8 +138,6 @@ app.run(runBlock);
 runBlock.$inject = ['nyuEshelfService'];
 
 function runBlock(nyuEshelfService) {
-  Sentry.init({
-    dsn: 'https://3ef6b855957c4b678882cbe74954a3e6@sentry.io/1404219',
-  });
+  Sentry.init(sentryConfig);
   nyuEshelfService.initEshelf();
 }
