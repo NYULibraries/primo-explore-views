@@ -25,8 +25,8 @@ services:
     ports:
     - 8004:8004
     - 3001:3001
-    volumes:
-    - ./custom:/app/primo-explore/custom/
+    # volumes:
+    # - ./custom:/app/primo-explore/custom/
 
   web-test:
     <<: *x-defaults
@@ -44,9 +44,9 @@ services:
       NODE_ENV: ${NODE_ENV-staging}
       PACK: 'true'
     command: yarn build
-    volumes:
-    - ./packages/:/app/packages
-    - ./custom:/app/primo-explore/custom/
+    # volumes:
+    # - ./packages/:/app/packages
+    # - ./custom:/app/primo-explore/custom/
 
   e2e:
     image: primo-explore-cypress
@@ -58,8 +58,7 @@ services:
       - web-test
     environment:
       <<: *x-environment
-      HOST: web-test
-      PORT: '8004'
+      DOMAIN: http://web-test:8004/primo-explore/search
       NODE_ENV: test
       CYPRESS_BASE_URL: http://web-test:8004/primo-explore/search
     # volumes:
