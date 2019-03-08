@@ -58,7 +58,7 @@ jobs:
       - <<: *pull_docker
       - run:
           name: Build asset package and store
-          command: script/create_package.sh
+          command: script/create_packages.sh
 
       - store_artifacts:
           path: packages
