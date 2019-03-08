@@ -19,7 +19,6 @@
   "homepage": "https://github.com/NYULibraries/primo-explore-nysid#readme",
   "dependencies": {
     "@orbis-cascade/primo-explore-custom-actions": "3.1.1",
-    "@sentry/browser": "^4.6.4",
     "primo-explore-clickable-logo-to-any-link": "1.1.1",
     "primo-explore-custom-actions": "3.1.0",
     "primo-explore-custom-library-card-menu": "1.1.6",

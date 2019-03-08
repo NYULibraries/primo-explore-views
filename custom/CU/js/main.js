@@ -1,5 +1,3 @@
-import * as Sentry from '@sentry/browser';
-
 import '@orbis-cascade/primo-explore-custom-actions';
 import 'primo-explore-custom-library-card-menu';
 import 'primo-explore-clickable-logo-to-any-link';
@@ -14,7 +12,6 @@ import { clickableLogoLinkConfig } from './clickableLogoToAnyLink';
 import { getitToLinkResolverConfig } from './getitToLinkResolver';
 import { nyuEshelfConfig } from './nyuEshelf';
 import { searchBarSubMenuItemsConfig } from './searchBarSubMenu';
-import sentryConfig from 'Common/js/sentryConfig';
 
 let app = angular.module('viewCustom', [
                                         'angularLoad',
@@ -53,6 +50,5 @@ app.run(runBlock);
 runBlock.$inject = ['nyuEshelfService'];
 
 function runBlock(nyuEshelfService) {
-  Sentry.init(sentryConfig);
   nyuEshelfService.initEshelf();
 }
