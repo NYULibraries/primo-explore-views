@@ -21,6 +21,7 @@ import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import googleAnalyticsConfig from './googleAnalyticsConfig';
 import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
+import sentryConfig from 'Common/js/sentryConfig';
 // Common alias does not work for HTML imports
 import customRequestsRequestInformationTemplate from '../html/custom_requests_request_information.html';
 
@@ -137,16 +138,7 @@ app.run(runBlock);
 runBlock.$inject = ['gaInjectionService', 'nyuEshelfService'];
 
 function runBlock(gaInjectionService, nyuEshelfService) {
-  Sentry.init({
-    dsn: 'https://7527da50c7da4590ae8dcd1d6b56ee55@sentry.io/1394419',
-    whitelistUrls: [
-      /library\.nyu\.edu/,
-    ],
-    sanitizeKeys: [
-      'pds_handle',
-    ],
-    debug: process.env.NODE_ENV === 'development',
-  });
+  Sentry.init(sentryConfig);
   gaInjectionService.injectGACode();
   nyuEshelfService.initEshelf();
 }
