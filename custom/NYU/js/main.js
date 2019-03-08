@@ -131,7 +131,19 @@ app
   })
   .component('prmLocationItemsAfter', {
     template: `${customRequestsRequestInformationTemplate}`
-  });
+  })
+  .config(['$httpProvider', function($httpProvider) {
+    // log response errors using $http to Sentry
+    $httpProvider.interceptors.push(function ($q) {
+      return {
+        responseError(rejection) {
+          const isLibraryNyuEdu = /http?s:\/\/.*library\.nyu\.edu/.test(rejection.config.url);
+          isLibraryNyuEdu && Sentry.captureException(rejection);
+          return $q.reject(rejection);
+        }
+      };
+    });
+  }]);
 
 app.run(runBlock);
 
@@ -142,3 +154,4 @@ function runBlock(gaInjectionService, nyuEshelfService) {
   gaInjectionService.injectGACode();
   nyuEshelfService.initEshelf();
 }
+
