@@ -15,7 +15,7 @@ app
   .value('customNoSearchResultsTemplateUrl', 'custom/CENTRAL_PACKAGE/html/noSearchResults.html')
   .config(['$httpProvider', function ($httpProvider) {
     // log response errors using $http to Sentry
-    $httpProvider.interceptors.push(function ($q) {
+    $httpProvider.interceptors.push(['$q', function ($q) {
       return {
         responseError(rejection) {
           const isLibraryNyuEdu = /http?s:\/\/.*library\.nyu\.edu/.test(rejection.config.url);
@@ -23,7 +23,7 @@ app
           return $q.reject(rejection);
         }
       };
-    });
+    }]);
   }]);
 
 app.run(runBlock);
