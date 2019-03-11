@@ -33,29 +33,17 @@ The server will automatically refresh pages if `CENTRAL_PACKAGE` or `NYU` files 
 
 (Optional)
 ```sh
-VIEW=CENTRAL_PACKAGE docker-compose run web
+NODE_ENV=[stage] VIEW=CENTRAL_PACKAGE docker-compose run web
 ```
 
 ### Entry files
 
 `js/main.js` is considered the 'entry' file for compiling JavaScript files. You can use ES6 `import` syntax here to consume dependencies.
 
-`css/main.scss` is the 'entry' file for compiling to CSS. To refer to CSS files in the root `node_modules` directory, you can simply use `~` as an alias.
+`css/sass/main.scss` is the 'entry' file for compiling to CSS. To refer to CSS files in the root `node_modules` directory, you can simply use `~` as an alias.
 
 ```scss
 @import '~/primo-explore-clickable-logo-to-any-link/css/custom1.css';
-```
-
-### Running locally
-
-You can run the development environment locally using [our fork of primo-explore-devenv](https://github.com/nyulibraries/primo-explore-devenv) as well, and symlinking this `custom` directory to that repostory's `primo-explore/custom` directory.
-
-```sh
-# In primo-explore-views
-yarn install
-# In primo-explore-devenv
-yarn install
-VIEW=[view] NODE_ENV=[stage] yarn start
 ```
 
 ## Run Tests
@@ -68,7 +56,7 @@ Simply execute:
 VIEW=[view_name] docker-compose run e2e
 ```
 
-Tests will run in the Cypress Electron Browser[https://docs.cypress.io/guides/core-concepts/launching-browsers.html#Electron-Browser] so that videos and screenshots (on failures) are recorded. The default testing command in Docker only runs tests matching the glob pattern `cypress/integration/$VIEW/**/*.spec.js`. To copy output files from the stopped container, use:
+Tests will run in the Cypress Electron Browser[https://docs.cypress.io/guides/core-concepts/launching-browsers.html#Electron-Browser] so that videos and screenshots (on failures) are recorded. The default testing command in Docker runs tests matching the glob pattern `cypress/integration/$VIEW/**/*.spec.js`. To copy output files from the stopped container, use:
 
 ```sh
   # video recordings of tests
@@ -115,22 +103,23 @@ For convenience, `script/create_package.sh` is a `sh` script that will build all
 
 * [Example execution in Circle CI](https://circleci.com/gh/NYULibraries/primo-explore-views/38)
 
-### Running locally
+## Running locally
 
-You can run the development environment locally using [our fork of primo-explore-devenv](https://github.com/nyulibraries/primo-explore-devenv) as well, and symlinking this `custom` directory to that repostory's `primo-explore/custom` directory.
+You can run the development environment locally using [our fork of primo-explore-devenv](https://github.com/nyulibraries/primo-explore-devenv) as well, and symlinking this `custom` directory to that repostory's `primo-explore/custom/` directory. However, because this monorepo is designed to work with [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/), this means that `node_modules` shared across packages will be installed (i.e. hoisted and deduped) to a parent directory. This means the monorepo's hoisted `node_modules` folder should also be symlinked to `primo-explore/node_modules` so they can be properly resolved.
 
 ```sh
 # In primo-explore-views
 yarn install
 # In primo-explore-devenv
 yarn install
-VIEW=[view] NODE_ENV=[stage] yarn create-package
+VIEW=[view] NODE_ENV=[stage] yarn start
 ```
 
 ## Other notes
 
 This package has a loose 'monorepo' structure. Resolving dependencies in a monorepo can have difficulties in resolving Node dependencies. `yarn` overcomes these problems using [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/). The basic important points are:
 
-* You only need to run `yarn install` once inside the root directory of the repository. All `node_modules` are installed once and resolved in the root directory.
+* You only need to run `yarn install` once inside the root directory of the repository. All `node_modules` are installed once and resolved in the root directory. If different versions of a package are required across repositories, specific versions are installed to the corresponding VIEW subdirectory.
 * Using the `workspaces` parameter in `package.json`, yarn knows to look in `custom` for other `package.json` files to resolve dependencies.
-* Only a single `yarn.lock` file is generated in the root.
+* To add dependencies to a specific workspace: `yarn workspaces primo-explore-{view-name} add package-name-1 package-name-2 ...`.
+* Only a single `yarn.lock` file is generated in the root. Keep this file checked in when updating and changing dependencies.
