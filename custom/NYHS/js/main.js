@@ -24,4 +24,12 @@ app
   })
   .component('prmSearchBarAfter', {
     template: '<search-bar-sub-menu></search-bar-sub-menu>'
-  })
+  });
+
+app.run(runBlock);
+
+runBlock.$inject = [];
+
+function runBlock() {
+  // run steps here
+}

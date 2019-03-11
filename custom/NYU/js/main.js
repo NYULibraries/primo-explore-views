@@ -1,5 +1,3 @@
-import * as Sentry from '@sentry/browser';
-
 import '@orbis-cascade/primo-explore-custom-actions';
 import 'primo-explore-custom-library-card-menu';
 import 'primo-explore-clickable-logo-to-any-link';
@@ -137,9 +135,7 @@ app.run(runBlock);
 runBlock.$inject = ['gaInjectionService', 'nyuEshelfService'];
 
 function runBlock(gaInjectionService, nyuEshelfService) {
-  Sentry.init({
-    dsn: 'https://7527da50c7da4590ae8dcd1d6b56ee55@sentry.io/1394419'
-  });
   gaInjectionService.injectGACode();
   nyuEshelfService.initEshelf();
 }
+

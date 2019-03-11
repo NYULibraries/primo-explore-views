@@ -1,5 +1,10 @@
 const path = require('path');
 
 module.exports = {
-  // modifications to the devenv webpack process can go here
+  resolve: {
+    alias: {
+      // resolves import 'Common' to refer to common directory.
+      Common: path.resolve(__dirname, '../common'),
+    },
+  }
 };

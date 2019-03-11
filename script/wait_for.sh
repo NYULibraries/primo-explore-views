@@ -1,0 +1,1 @@
+wget --waitretry=5 --retry-connrefused -vO- $1 > /dev/null
