@@ -1,8 +1,11 @@
 FROM quay.io/nyulibraries/cypress-global
 
 ENV VIEW ${VIEW}
+ENV HOST ${HOST}
+ENV PORT ${PORT}
 
-ADD cypress.json .
-ADD ./cypress/ ./cypress/
+COPY script/wait_for.sh script/wait_for.sh
+COPY cypress.json .
+COPY ./cypress/ ./cypress/
 
-CMD cypress run --spec "cypress/integration/${VIEW}/**/*.spec.js"
+CMD /app/script/wait_for.sh $DOMAIN && cypress run --spec "cypress/integration/${VIEW}/**/*.spec.js"

@@ -16,7 +16,7 @@ do
   if [[ $MATCHES != 0 || $CURRENT_BRANCH == master ]]; then
     echo "Files changed in $VIEW package. Running tests."
     # will add any non-zero exit code to ANY_FAILS if a failure occurred
-    VIEW=$VIEW docker-compose run e2e cypress run --spec "cypress/integration/$VIEW/**/*.spec.js" --reporter junit --reporter-options "mochaFile=test-results/${VIEW}/results-[hash].xml" \
+    VIEW=$VIEW docker-compose run e2e bash -c '/app/script/wait_for.sh http://web-test:8004/primo-explore/search && cypress run --spec="cypress/integration/$VIEW/**/*.spec.js" --reporter="junit" --reporter-options="mochaFile=test-results/${VIEW}/results-[hash].xml"' \
       || ANY_FAILS=$ANY_FAILS$?
     docker cp "$(docker ps -q -a -l -f name=e2e)":/app/cypress/videos cypress-results/
     docker cp "$(docker ps -q -a -l -f name=e2e)":/app/cypress/screenshots cypress-results/ || true # screenshots only on failures
