@@ -86,6 +86,6 @@ workflows:
         - build-and-push-image
     - create-view-packages:
         requires:
-        - build-and-test-views
+        - run-views-e2e-tests
         - run-module-unit-tests
 
