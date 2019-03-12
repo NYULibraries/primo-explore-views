@@ -68,11 +68,11 @@ jobs:
 
 workflows:
   version: 2
-  build:
+  build-test-and-deliver:
     jobs:
     - run-module-unit-tests
     - build-and-test-views
-    - create-package:
+    - create-view-packages:
         requires:
           - build-and-test-views
           - run-module-unit-tests
