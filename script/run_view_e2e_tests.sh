@@ -12,7 +12,7 @@ mkdir -p cypress-results
 VIEWS=$(cat $(pwd)/script/VIEWS.txt)
 for VIEW in $VIEWS
 do
-  MATCHES=$(git diff --name-only origin/master | grep -c /${VIEW}/) || true
+  MATCHES=$(git diff --name-only origin/master | grep -c custom/${VIEW}/) || true
   if [[ $MATCHES != 0 || $CURRENT_BRANCH == master ]]; then
     echo "Files changed in $VIEW package. Running tests."
     # will add any non-zero exit code to ANY_FAILS if a failure occurred

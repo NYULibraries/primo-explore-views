@@ -1,0 +1,54 @@
+{
+  "name": "primo-explore-custom-requests",
+  "version": "0.0.13",
+  "description": "Customized item requests in Primo NUI",
+  "main": "./dist/index.js",
+  "scripts": {
+    "test": "yarn karma start --single-run",
+    "test:chrome-debugger": "yarn karma start --browsers=Chrome --single-run=false --debug",
+    "clean:dist": "rimraf dist",
+    "build": "yarn webpack --mode=production",
+    "preinstall": "yarn clean:dist",
+    "install": "yarn build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NYULibraries/primo-explore-custom-requests.git"
+  },
+  "keywords": [
+    "primo-explore"
+  ],
+  "author": "Elliott Grieco",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NYULibraries/primo-explore-custom-requests/issues"
+  },
+  "homepage": "https://github.com/NYULibraries/primo-explore-custom-requests#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
+    "@babel/preset-env": "^7.2.3",
+    "angular": "^1.7.8",
+    "angular-mocks": "^1.7.8",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-transform-html-import-to-string": "^0.0.1",
+    "jasmine-core": "^3.3.0",
+    "karma": "^4.0.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^2.0.1",
+    "karma-junit-reporter": "^1.2.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-spec-reporter": "^0.0.32",
+    "karma-webpack": "^4.0.0-rc.6",
+    "puppeteer": "^1.13.0",
+    "rimraf": "^2.6.3",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  },
+  "dependencies": {
+    "ng-attr": "^0.0.1"
+  },
+  "peerDependencies": {},
+  "optionalDependencies": {}
+}

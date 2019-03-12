@@ -28,6 +28,7 @@
     "eslint-plugin-import": "^2.16.0"
   },
   "workspaces": [
-    "custom/*"
+    "custom/*",
+    "modules/*"
   ]
 }
