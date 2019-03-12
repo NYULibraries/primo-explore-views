@@ -60,7 +60,7 @@ jobs:
       - run:
           name: Run unit tests
           command: script/run_module_unit_tests.sh
-      - store_artificts:
+      - store_artifacts:
           path: karma-unit-test-results
       - store_test_results:
           path: karma-unit-test-results/test-results
