@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  test:
+    build:
+      context: .
+    command: yarn test --browsers=ChromiumHeadless_without_sandbox
+    # volumes:
+    #   - ./src/:/app/src/
+    #   - ./karma.conf.js:/app/karma.conf.js
+  test-watch:
+    build:
+      context: .
+    command: yarn test --browsers=ChromiumHeadless_without_sandbox --single-run=false
+    # volumes:
+    #   - ./src/:/app/src/
+    #   - ./karma.conf.js:/app/karma.conf.js

@@ -1,0 +1,14 @@
+/* Imitates prm-service-button styles */
+button[class*="custom-request-"] {
+  padding: .5em .35em !important;
+}
+
+/* Useful for the 'attributes' in prmIconBefore/prmIconAfter to make it fit in button appropriately */
+[custom-requests] md-icon {
+  height: 15px;
+  width: 15px;
+  min-height: 15px;
+  min-width: 15px;
+  top: -1px;
+  position: relative;
+}
