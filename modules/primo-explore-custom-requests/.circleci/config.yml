@@ -1,0 +1,28 @@
+docker-defaults: &docker-defaults
+  docker:
+    - image: quay.io/nyulibraries/circleci_docker:18.06.1-dc-1.23.2-0
+  working_directory: ~/app
+
+test: &test
+  run:
+    name: Run E2E Tests
+    command: |
+      docker-compose run test
+      mkdir -p test-results && docker cp "$(docker ps -q -a -l -f name=test)":/app/test-results .
+
+version: 2
+jobs:
+  test:
+    <<: *docker-defaults
+    steps:
+      - checkout
+      - setup_remote_docker
+      - <<: *test
+      - store_test_results:
+          path: test-results
+
+workflows:
+  version: 2
+  build:
+    jobs:
+    - test

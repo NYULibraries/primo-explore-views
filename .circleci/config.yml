@@ -3,18 +3,6 @@ docker-defaults: &docker-defaults
     - image: quay.io/nyulibraries/circleci_docker:18.06.1-dc-1.23.2-0
   working_directory: ~/app
 
-build_docker: &build_docker
-  run:
-    name: Build Docker
-    command: |
-      export BRANCH_NO_SLASH=${CIRCLE_BRANCH//\//_}
-      docker-compose build web e2e
-
-auth_quay: &auth_quay
-  run:
-    name: Authenticate Quay
-    command: |
-      docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
 
 pull_docker: &pull_docker
   run:
@@ -22,35 +10,37 @@ pull_docker: &pull_docker
     command: |
       script/pull_docker.sh
 
-push_docker: &push_docker
-  run:
-    name: Push Docker
-    command: |
-      script/push_docker.sh
-
-test: &test-and-store
-  run:
-    name: Run E2E Tests
-    command: |
-      script/run_tests.sh
-
 version: 2
 jobs:
-  build-and-test:
+  build-and-test-views:
     <<: *docker-defaults
     steps:
       - checkout
       - setup_remote_docker
-      - <<: *auth_quay
+      - run:
+          name: Authenticate Quay
+          command: |
+            docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
       - <<: *pull_docker
-      - <<: *build_docker
-      - <<: *test-and-store
-      - <<: *push_docker
+      - run:
+          name: Build Docker
+          command: |
+            export BRANCH_NO_SLASH=${CIRCLE_BRANCH//\//_}
+            docker-compose build web e2e
+      - run:
+          name: Run E2E Tests
+          command: |
+            script/run_view_e2e_tests.sh
+      - run:
+          name: Push Docker
+          command: |
+            script/push_docker.sh
       - store_artifacts:
           path: cypress-results
       - store_test_results:
           path: cypress-results/test-results
-  create-package:
+
+  create-view-packages:
     <<: *docker-defaults
     steps:
       - checkout
@@ -58,17 +48,32 @@ jobs:
       - <<: *pull_docker
       - run:
           name: Build asset package and store
-          command: script/create_packages.sh
-
+          command: script/create_view_packages.sh
       - store_artifacts:
           path: packages
+
+  run-module-unit-tests:
+    <<: *docker-defaults
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Run unit tests
+          command: script/run_module_unit_tests.sh
+      - store_artificats:
+          path: karma-unit-test-results
+      - store_test_results:
+          path: karma-unit-test-results/test-results
+
 
 workflows:
   version: 2
   build:
     jobs:
-    - build-and-test
+    - run-module-unit-tests
+    - build-and-test-views
     - create-package:
         requires:
-          - build-and-test
+          - build-and-test-views
+          - run-module-unit-tests
 

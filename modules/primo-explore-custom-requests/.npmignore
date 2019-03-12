@@ -1,0 +1,4 @@
+src/
+.*
+karma.conf.js
+screeshot*
