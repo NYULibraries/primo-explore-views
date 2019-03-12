@@ -12,7 +12,7 @@ pull_docker: &pull_docker
 
 version: 2
 jobs:
-  build-and-test-views:
+  build-and-push-image:
     <<: *docker-defaults
     steps:
       - checkout
@@ -28,13 +28,20 @@ jobs:
             export BRANCH_NO_SLASH=${CIRCLE_BRANCH//\//_}
             docker-compose build web e2e
       - run:
-          name: Run E2E Tests
-          command: |
-            script/run_view_e2e_tests.sh
-      - run:
           name: Push Docker
           command: |
             script/push_docker.sh
+
+  run-views-e2e-tests:
+    <<: *docker-defaults
+    steps:
+      - checkout
+      - setup_remote_docker
+      - <<: *pull_docker
+      - run:
+          name: Run E2E Tests
+          command: |
+            script/run_view_e2e_tests.sh
       - store_artifacts:
           path: cypress-results
       - store_test_results:
@@ -70,10 +77,15 @@ workflows:
   version: 2
   build-test-and-deliver:
     jobs:
-    - run-module-unit-tests
-    - build-and-test-views
+    - build-and-push-image
+    - run-module-unit-tests:
+        requires:
+        - build-and-push-image
+    - run-views-e2e-tests:
+        requires:
+        - build-and-push-image
     - create-view-packages:
         requires:
-          - build-and-test-views
-          - run-module-unit-tests
+        - build-and-test-views
+        - run-module-unit-tests
 
