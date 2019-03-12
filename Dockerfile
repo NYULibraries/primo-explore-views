@@ -16,8 +16,13 @@ COPY custom/NYHS/package.json ./custom/NYHS/package.json
 COPY custom/BHS/package.json ./custom/BHS/package.json
 COPY custom/CU/package.json ./custom/CU/package.json
 
+# First installs production dependencies for VIEWs
 RUN yarn install --prod --frozen-lockfile
 COPY ./custom/ ./custom/
+
+# Adds modules with source files for native build processes
+COPY ./modules/ ./modules/
+RUN yarn install --frozen-lockfile
 
 # Sets up for running as a container
 WORKDIR ${DEVENV_PATH}
