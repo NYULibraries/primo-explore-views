@@ -20,7 +20,8 @@ do
     cd $PROJECT_ROOT/modules/$MODULE
     docker-compose run test || ANY_FAILS=$ANY_FAILS$?
     cd $PROJECT_ROOT
-    docker cp "$(docker ps -q -a -l -f name=test)":/app/test-results karma-unit-test-results/
+    mkdir -p karma-unit-test-results/$MODULE
+    docker cp "$(docker ps -q -a -l -f name=test)":/app/test-results karma-unit-test-results/$MODULE
     docker-compose down
   else
     echo "No files changed in $MODULE package. Skipping tests."
