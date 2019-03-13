@@ -7,9 +7,7 @@
     "test": "NODE_ENV=test yarn karma start --single-run",
     "test:chrome-debugger": "yarn karma start --browsers=Chrome --single-run=false --debug",
     "build": "yarn webpack --mode=production",
-    "preinstall": "yarn rimraf dist",
-    "install": "yarn build",
-    "prepublish": "yarn rimraf dist && yarn build"
+    "prepare": "yarn build"
   },
   "repository": {
     "type": "git",
@@ -34,6 +32,7 @@
     "babel-loader": "^8.0.5",
     "babel-plugin-istanbul": "^5.1.1",
     "babel-plugin-transform-html-import-to-string": "^0.0.1",
+    "clean-webpack-plugin": "^2.0.0",
     "jasmine-core": "^3.3.0",
     "karma": "^4.0.1",
     "karma-chrome-launcher": "^2.2.0",
@@ -44,7 +43,6 @@
     "karma-spec-reporter": "^0.0.32",
     "karma-webpack": "^4.0.0-rc.6",
     "puppeteer": "^1.13.0",
-    "rimraf": "^2.6.3",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3"
   },
