@@ -9,7 +9,7 @@
     "build": "yarn webpack --mode=production",
     "preinstall": "yarn rimraf dist",
     "install": "yarn build",
-    "prepublish": "yarn preinstall && yarn install"
+    "prepublish": "yarn rimraf dist && yarn build"
   },
   "repository": {
     "type": "git",

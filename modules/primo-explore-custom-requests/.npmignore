@@ -2,3 +2,4 @@ src/
 .*
 karma.conf.js
 screeshot*
+test-results
