@@ -1,0 +1,48 @@
+{
+  "name": "primo-explore-custom-login",
+  "version": "0.0.5",
+  "description": "Customized login service",
+  "main": "./dist/index.js",
+  "scripts": {
+    "test": "NODE_ENV=test yarn karma start --single-run",
+    "test:chrome-debugger": "yarn karma start --browsers=Chrome --single-run=false --debug",
+    "build": "yarn webpack --mode=production",
+    "prepare": "yarn build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NYULibraries/primo-explore-custom-login.git"
+  },
+  "keywords": [
+    "primo-explore"
+  ],
+  "author": "Elliott Grieco",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NYULibraries/primo-explore-custom-login/issues"
+  },
+  "homepage": "https://github.com/NYULibraries/primo-explore-custom-login#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
+    "@babel/preset-env": "^7.2.3",
+    "angular": "^1.7.8",
+    "angular-mocks": "^1.7.8",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-istanbul": "^5.1.1",
+    "clean-webpack-plugin": "^2.0.0",
+    "jasmine-core": "^3.3.0",
+    "karma": "^4.0.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^2.0.1",
+    "karma-junit-reporter": "^1.2.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-spec-reporter": "^0.0.32",
+    "karma-webpack": "^4.0.0-rc.6",
+    "puppeteer": "^1.13.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  },
+  "dependencies": {}
+}
