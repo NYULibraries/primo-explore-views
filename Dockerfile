@@ -9,7 +9,7 @@ WORKDIR /app/primo-explore/
 COPY yarn.lock package.json ./
 COPY ./custom/ ./custom/
 COPY ./modules/ ./modules/
-RUN yarn install --frozen-lockfile
+RUN yarn install --frozen-lockfile && yarn cache clean
 
 # Sets up for running as a container
 WORKDIR ${DEVENV_PATH}
