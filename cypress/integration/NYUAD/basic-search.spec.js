@@ -1,6 +1,6 @@
 describe('The Home Page', function () {
   before(() => {
-    cy.visit('?vid=NYUAD') // change URL to match your dev URL
+    cy.visit('/search?vid=NYUAD') // change URL to match your dev URL
   })
 
   it('successfully loads', function () {
@@ -9,7 +9,7 @@ describe('The Home Page', function () {
 
   describe('when searching', () => {
     before(() => {
-      cy.visit('?vid=NYUAD')
+      cy.visit('/search?vid=NYUAD')
     })
 
     it('allows for a basic search', () => {

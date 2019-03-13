@@ -1,6 +1,6 @@
 describe('The Home Page', function () {
   before(() => {
-    cy.visit('?vid=NYSID') // change URL to match your dev URL
+    cy.visit('/search?vid=NYSID') // change URL to match your dev URL
   })
 
   it('successfully loads', function () {
@@ -9,7 +9,7 @@ describe('The Home Page', function () {
 
   describe('when searching', () => {
     before(() => {
-      cy.visit('?vid=NYSID')
+      cy.visit('/search?vid=NYSID')
     })
 
     it('allows for a basic search', () => {
