@@ -1,15 +1,15 @@
 {
   "name": "primo-explore-custom-requests",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Customized item requests in Primo NUI",
   "main": "./dist/index.js",
   "scripts": {
     "test": "NODE_ENV=test yarn karma start --single-run",
     "test:chrome-debugger": "yarn karma start --browsers=Chrome --single-run=false --debug",
-    "clean:dist": "rimraf dist",
     "build": "yarn webpack --mode=production",
-    "preinstall": "yarn clean:dist",
-    "install": "yarn build"
+    "preinstall": "yarn rimraf dist",
+    "install": "yarn build",
+    "prepublish": "yarn preinstall && yarn install"
   },
   "repository": {
     "type": "git",
