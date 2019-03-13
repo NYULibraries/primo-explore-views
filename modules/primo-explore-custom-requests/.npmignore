@@ -1,5 +1,8 @@
 src/
 .*
-karma.conf.js
+*.conf*.js
 screeshot*
 test-results
+*.log
+Dockerfile
+docker-compose.yml
