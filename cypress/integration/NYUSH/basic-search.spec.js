@@ -1,10 +1,10 @@
 describe('when searching', () => {
   before(() => {
-    cy.visit('?vid=NYUSH')
+    cy.visit('/search?vid=NYUSH')
   })
 
   after(() => {
-    cy.visit('?vid=NYUSH')
+    cy.visit('/search?vid=NYUSH')
   })
 
   it('allows for a basic search', () => {
