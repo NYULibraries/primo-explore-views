@@ -476,26 +476,101 @@ describe('customRequestsController', () => {
       });
 
       describe(`when state's item/items differ from controller's`, () => {
+        let mockState;
         beforeEach(() => {
-          stateService.getState.and.returnValue({
+          mockState = {
             item: {
               name: 'Monk'
             },
             items: parentCtrl.currLoc.items,
-          });
+            user: {
+              name: 'monk'
+            }
+          };
+          stateService.getState.and.returnValue(mockState);
         });
 
         it('calls setButtonsInState', () => {
-          spyOn(controller, 'setButtonsInState').and.returnValue(Promise.resolve({ id: '12345' }));
+          spyOn(controller, 'setButtonsInState').and.returnValue(Promise.resolve(undefined));
           controller.$onInit();
           expect(controller.setButtonsInState).toHaveBeenCalled();
         });
 
-        // it('calls config.hideDefaultRequests', (done) => {
-        //   controller.$onInit();
-        //   done();
-        //   expect(configService.hideDefaultRequests).toHaveBeenCalled();
-        // });
+        it('calls hideDefaultRequests', (done) => {
+          spyOn(controller, 'setButtonsInState').and.returnValue(Promise.resolve(undefined));
+          controller.$onInit();
+
+          // awaits setButtonsInState to resolve first
+          setTimeout(() => {
+            expect(configService.hideDefaultRequests).toHaveBeenCalled();
+            done();
+          }, 100);
+        });
+
+        it('calls hideDefaultRequests', (done) => {
+          spyOn(controller, 'setButtonsInState').and.returnValue(Promise.resolve(undefined));
+
+          controller.$onInit();
+          // awaits setButtonsInState to resolve first
+          setTimeout(() => {
+            expect(configService.hideDefaultRequests).toHaveBeenCalled();
+
+            // checks was called with item, items, and user in state
+            Object.entries(mockState).forEach(([key, val]) => {
+              expect(configService.hideDefaultRequests.calls.mostRecent().args[0][key]).toEqual(val);
+            });
+
+            done();
+          }, 100);
+        });
+
+        it('calls controller.DOMRefresh', (done) => {
+          spyOn(controller, 'DOMRefresh');
+
+          controller.$onInit();
+
+           // awaits setButtonsInState to resolve first
+          setTimeout(() => {
+            expect(configService.hideDefaultRequests).toHaveBeenCalled();
+            done();
+          }, 100);
+        });
+      });
+
+      describe('$doCheck', () => {
+        describe(`when currLocID matches component's currLocId`, () => {
+          beforeEach(() => {
+            stateService.getState.and.returnValue({ currLocId: '123' });
+            spyOn(controller, 'getCurrLocId').and.returnValue('123');
+          });
+
+          it('neither calls $onInit nor $postLink', () => {
+            spyOn(controller, '$onInit');
+            spyOn(controller, '$postLink');
+
+            controller.$doCheck();
+
+            expect(controller.$onInit).not.toHaveBeenCalled();
+            expect(controller.$postLink).not.toHaveBeenCalled();
+          });
+        });
+
+        describe(`when currLocID does not match component's currLocId`, () => {
+          beforeEach(() => {
+            stateService.getState.and.returnValue({ currLocId: '123' });
+            spyOn(controller, 'getCurrLocId').and.returnValue('345');
+          });
+
+          it('calls $onInit and $postLink', () => {
+            spyOn(controller, '$onInit');
+            spyOn(controller, '$postLink');
+
+            controller.$doCheck();
+
+            expect(controller.$onInit).toHaveBeenCalled();
+            expect(controller.$postLink).toHaveBeenCalled();
+          });
+        });
       });
     });
   });
