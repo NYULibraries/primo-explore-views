@@ -5,7 +5,7 @@
   "description": "This the NYU Consortium primo-explore view package.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepare": "yarn lerna run prepare"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/NYULibraries/primo-explore-views#readme",
   "devDependencies": {
-    "cypress": "^3.1.5"
+    "lerna": "^3.13.1"
   },
   "optionalDependencies": {
     "eslint": "^5.14.1",

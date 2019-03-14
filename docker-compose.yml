@@ -20,6 +20,7 @@ x-defaults: &x-defaults
 
 version: '3.7'
 services:
+  # Dockerfile that uses production versions of dependencies from  npm/yarn registries
   web:
     <<: *x-defaults
     ports:
@@ -28,6 +29,24 @@ services:
     # volumes:
     # - ./custom:/app/primo-explore/custom/
 
+  # Dockerfile that relies on local symlink to primo-explore modules if required version matches current version
+  # Has been separated from "web" so that by default only production-ready versions of packages are delivered
+  # Also, takes longer to rebuild since entire file tree must be copied over, and all development dependencies must be installed
+  # In order to actively develop with modules, mount the "modules" folder as a volume
+  # Webpack devserver must be restarted each time for a recompiled module to be rebundled into the package
+  web-dev-modules:
+    build:
+      context: .
+      dockerfile: Dockerfile.development
+    ports:
+    - 8004:8004
+    - 3001:3001
+    # volumes:
+    # - ./custom:/app/primo-explore/custom/
+    # - ./custom:/app/primo-explore/modules/
+
+  # Runs tests using production version dependencies
+  # NODE_ENV=test will produce a production-like environment, including minified assets and a devserver without hot module reload
   web-test:
     <<: *x-defaults
     environment:
@@ -37,6 +56,7 @@ services:
     - 8004:8004
     - 3001:3001
 
+  # Creates VIEW packages using production version dependencies
   create-package:
     <<: *x-defaults
     environment:
@@ -48,11 +68,10 @@ services:
     # - ./packages/:/app/packages
     # - ./custom:/app/primo-explore/custom/
 
+  # Runs e2e tests against the web-test service (above)
   e2e:
     image: primo-explore-cypress
-    build:
-      context: .
-      dockerfile: cypress/Dockerfile
+    build: cypress
     # command: cypress run --browser chrome
     depends_on:
       - web-test
