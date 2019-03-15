@@ -1,0 +1,20 @@
+{
+  "presets": [
+    ["@babel/preset-env", {
+      "targets": "last 2 versions, not dead"
+    }]
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-object-rest-spread"
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        ["istanbul", {
+          "exclude": ["**/*.spec.js"],
+        }],
+      ]
+    },
+  },
+  "comments": false,
+}
