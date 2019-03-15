@@ -7,58 +7,66 @@ x-environment: &x-environment
   CAS:
   PACK:
 
-x-defaults: &x-defaults
+x-build: &x-build
   build:
     context: .
     cache_from:
       - primo-explore-views
       - quay.io/nyulibraries/primo-explore-views
       - quay.io/nyulibraries/primo-explore-views:$BRANCH_NO_SLASH
-  image: primo-explore-views
-  environment:
-    <<: *x-environment
+x-ports: &x-ports
+  ports:
+    - 8004:8004
+    - 3001:3001
 
 version: '3.7'
 services:
-  # Dockerfile that uses production versions of dependencies from  npm/yarn registries
+  # Dockerfile that uses production versions of dependencies from npm/yarn registries
+  # VIEW=[VIEW-NAME] NODE_ENV=[env] docker-compose up web
   web:
-    <<: *x-defaults
-    ports:
-    - 8004:8004
-    - 3001:3001
+    <<: *x-build
+    image: primo-explore-views
+    <<: *x-ports
+    environment:
+      <<: *x-environment
     # volumes:
     # - ./custom:/app/primo-explore/custom/
 
-  # Dockerfile that relies on local symlink to primo-explore modules if required version matches current version
+  # Runs tests using production version dependencies
+  # NODE_ENV=test will produce a production-like environment, including minified assets and a devserver without hot module reload
+  # VIEW=[VIEW-NAME] NODE_ENV=[env] docker-compose up web-test
+  web-test:
+    <<: *x-build
+    image: primo-explore-views
+    environment:
+      <<: *x-environment
+      NODE_ENV: test
+    <<: *x-ports
+
+  # Dockerfile that relies on l ocal symlink to 'modules' if required version matches current version
   # Has been separated from "web" so that by default only production-ready versions of packages are delivered
-  # Also, takes longer to rebuild since entire file tree must be copied over, and all development dependencies must be installed
+  # Also, this is a much larger image since entire file tree must be copied over,
+  # and all development dependencies must be installed
   # In order to actively develop with modules, mount the "modules" folder as a volume
   # Webpack devserver must be restarted each time for a recompiled module to be rebundled into the package
+  # VIEW=[VIEW-NAME] NODE_ENV=[env] docker-compose up web-dev-modules
   web-dev-modules:
     build:
       context: .
       dockerfile: Dockerfile.development
-    ports:
-    - 8004:8004
-    - 3001:3001
+    <<: *x-ports
+    environment:
+      <<: *x-environment
     # volumes:
     # - ./custom:/app/primo-explore/custom/
     # - ./custom:/app/primo-explore/modules/
 
-  # Runs tests using production version dependencies
-  # NODE_ENV=test will produce a production-like environment, including minified assets and a devserver without hot module reload
-  web-test:
-    <<: *x-defaults
-    environment:
-      <<: *x-environment
-      NODE_ENV: test
-    ports:
-    - 8004:8004
-    - 3001:3001
-
   # Creates VIEW packages using production version dependencies
+  # Builds to /app/packages
+  # VIEW=[VIEW-NAME] NODE_ENV=[env] docker-compose create-package
   create-package:
-    <<: *x-defaults
+    <<: *x-build
+    image: primo-explore-views
     environment:
       <<: *x-environment
       NODE_ENV: ${NODE_ENV-staging}
@@ -68,11 +76,11 @@ services:
     # - ./packages/:/app/packages
     # - ./custom:/app/primo-explore/custom/
 
-  # Runs e2e tests against the web-test service (above)
+  # Runs e2e tests against the web-test service (defined above)
+  # VIEW=[VIEW-NAME] docker-compose run e2e
   e2e:
     image: primo-explore-cypress
-    build: cypress
-    # command: cypress run --browser chrome
+    build: primo-explore-e2e-cypress
     depends_on:
       - web-test
     environment:
