@@ -5,4 +5,4 @@ node_modules
 cypress/videos/
 cypress/screenshots/
 script
-!script/wait_for.sh
+custom/*/dist
