@@ -5,8 +5,7 @@
     }]
   ],
   "plugins": [
-    "@babel/plugin-proposal-object-rest-spread",
-    "transform-html-import-to-string",
+    "@babel/plugin-proposal-object-rest-spread"
   ],
   "env": {
     "test": {
