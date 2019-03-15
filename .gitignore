@@ -3,4 +3,5 @@ node_modules/
 wiki/
 yarn-error.log
 cypress-results
+karma-unit-test-results
 packages
