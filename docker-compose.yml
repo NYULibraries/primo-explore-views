@@ -87,6 +87,22 @@ services:
     # - ./packages/:/app/packages
     # - ./custom:/app/primo-explore/custom/
 
+  # Creates VIEW packages using local dependencies, if package.json version is compatible with local version
+  # Builds to /app/packages
+  # VIEW=[VIEW-NAME] NODE_ENV=[env] docker-compose create-package
+  create-dev-modules-package:
+    build:
+      context: .
+      dockerfile: Dockerfile.development
+    environment:
+      <<: *x-environment
+      NODE_ENV: ${NODE_ENV-staging}
+      PACK: 'true'
+    command: yarn build
+    # volumes:
+    # - ./packages/:/app/packages
+    # - ./custom:/app/primo-explore/custom/
+
   # Runs e2e tests against the web-test service (defined above)
   # Uses only production version of modules published on NPM
   # VIEW=[VIEW-NAME] docker-compose run e2e

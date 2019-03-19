@@ -78,7 +78,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - <<: *pull_docker
       - run:
           name: Build asset VIEW package and store
           command: script/create_view_dev_modules_packages.sh

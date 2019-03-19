@@ -16,13 +16,13 @@ do
 done
 
 if [[ $ANY_MATCHES ]]; then
-  echo "Files changed in at least one module package. Building staging versions of all VIEW packages."
+  echo "Files changed in at least one module package. Building staging versions for all VIEW packages."
 
   VIEWS=$(cat $(pwd)/script/VIEWS.txt)
   for VIEW in $VIEWS
   do
-    NODE_ENV=staging VIEW=$VIEW docker-compose run create-package
-    docker cp "$(docker ps -q -a -l -f name=create-package)":/app/packages/. packages
+    NODE_ENV=staging VIEW=$VIEW docker-compose run create-dev-modules-package
+    docker cp "$(docker ps -q -a -l -f name=create-dev-modules-package)":/app/packages/. packages
     docker-compose down
   done
 fi
