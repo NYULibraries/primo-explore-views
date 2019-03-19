@@ -8,23 +8,24 @@
 export CURRENT_BRANCH=${CIRCLE_BRANCH-$(git rev-parse --abbrev-ref HEAD)}
 
 mkdir -p packages
-VIEWS=$(cat $(pwd)/script/VIEWS.txt)
-for VIEW in $VIEWS
+
+ANY_MATCHES=''
+for MODULE in $MODULES
 do
-  MATCHES=$(git diff --name-only origin/master | grep -c custom/${VIEW}/) || true
-  if [[ $MATCHES != 0 || $CURRENT_BRANCH == master ]]; then
+  ANY_MATCHES=$ANY_MATCHES$(git diff --name-only origin/master | grep -c modules/${MODULE}/ | awk '/^[^0]/ {print}') || :
+done
+
+if [[ $ANY_MATCHES ]]; then
+  echo "Files changed in at least one module package. Building staging versions of all VIEW packages."
+
+  VIEWS=$(cat $(pwd)/script/VIEWS.txt)
+  for VIEW in $VIEWS
+  do
     NODE_ENV=staging VIEW=$VIEW docker-compose run create-package
     docker cp "$(docker ps -q -a -l -f name=create-package)":/app/packages/. packages
     docker-compose down
-    if [[ $CURRENT_BRANCH == master ]]; then
-      NODE_ENV=production VIEW=$VIEW docker-compose run create-package
-      docker cp "$(docker ps -q -a -l -f name=create-package)":/app/packages/. packages
-      docker-compose down
-    fi
-  else
-    echo "No files changed in $VIEW package. Skipping build."
-  fi
-done
+  done
+fi
 
 COUNT=$(ls packages | wc -l)
 if [[ $COUNT != 0 ]]; then
