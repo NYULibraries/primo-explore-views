@@ -1,8 +1,10 @@
 describe('primo-explore-custom-requests', () => {
   describe('if the user is not logged in', () => {
     before(() => {
-      cy.visit('/fulldisplay?docid=nyu_aleph006344819&vid=NYUAD').then(win => {
-        win.$$mockUserLoggedIn = false
+      cy.visit('/fulldisplay?docid=nyu_aleph006344819&vid=NYU', {
+        onBeforeLoad: (contentWindow) => {
+          contentWindow.$$mockUserLoggedIn = false
+        }
       })
     })
 
@@ -26,11 +28,13 @@ describe('primo-explore-custom-requests', () => {
       })
     })
   })
- describe(`if the user is logged in`, () => {
+  describe(`if the user is logged in`, () => {
     before(() => {
-        cy.visit('/fulldisplay?docid=nyu_aleph006344819&vid=NYUAD').then(win => {
-          win.$$mockUserLoggedIn = true
-        })
+      cy.visit('/fulldisplay?docid=nyu_aleph006344819&vid=NYU', {
+        onBeforeLoad: (contentWindow) => {
+          contentWindow.$$mockUserLoggedIn = true
+        }
+      })
     })
 
     it('has visible primo-explore-custom-requests options', () => {
