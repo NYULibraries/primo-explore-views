@@ -67,6 +67,10 @@ function primoExploreCustomLoginService($window, $http, config) {
     logout: () => store.logout(),
     fetchPDSUser: () => store.user ? Promise.resolve(store.user) : svc.fetchPDSUser(store),
     get isLoggedIn() {
+      if (config.mockUserConfig.enabled) {
+        // returns mock user's isLoggedIn value strictly if true or false explicitly. Otherwise, use store value.
+        return config.mockUserConfig.isLoggedIn === true || (config.mockUserConfig.isLoggedIn === false ? false : store.isLoggedIn);
+      }
       return store.isLoggedIn;
     }
   };

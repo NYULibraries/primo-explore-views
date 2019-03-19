@@ -13,6 +13,21 @@ export default {
         development: (mockUserWarning(), true),
         test: (mockUserWarning(), true),
       }[process.env.NODE_ENV] || false,
+      get isLoggedIn() {
+        let loggedIn;
+        switch (process.env.NODE_ENV) {
+          case 'development':
+            loggedIn = window.$$devUserLoggedIn;
+            break;
+          case 'test':
+            loggedIn = window.$$testUserLoggedIn;
+            break;
+          default:
+            break;
+        }
+
+        return loggedIn;
+      },
       user: {
         'id': '1234567',
         'bor-status': '50',
