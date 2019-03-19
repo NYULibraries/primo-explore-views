@@ -25,7 +25,7 @@ jobs:
       - setup_remote_docker
       - <<: *pull_docker
       - run:
-          name: Run E2E Tests
+          name: Run View E2E Tests
           command: |
             script/run_view_e2e_tests.sh
       - <<: *push_docker
@@ -34,17 +34,19 @@ jobs:
       - store_test_results:
           path: cypress-results/test-results
 
-  create-view-packages:
+  run-module-e2e-tests:
     <<: *docker-defaults
     steps:
       - checkout
       - setup_remote_docker
-      - <<: *pull_docker
       - run:
-          name: Build asset VIEW package and store
-          command: script/create_view_packages.sh
+          name: Run Module E2E Tests
+          command: |
+            script/run_module_e2e_tests.sh
       - store_artifacts:
-          path: packages
+          path: cypress-results
+      - store_test_results:
+          path: cypress-results/test-results
 
   run-module-unit-tests:
     <<: *docker-defaults
@@ -59,14 +61,41 @@ jobs:
       - store_test_results:
           path: karma-unit-test-results
 
+  create-view-packages:
+    <<: *docker-defaults
+    steps:
+      - checkout
+      - setup_remote_docker
+      - <<: *pull_docker
+      - run:
+          name: Build asset VIEW package and store
+          command: script/create_view_packages.sh
+      - store_artifacts:
+          path: packages
+
+  create-view-dev-modules-packages:
+    <<: *docker-defaults
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build asset VIEW package and store
+          command: script/create_view_dev_modules_packages.sh
+      - store_artifacts:
+          path: packages
+
 workflows:
   version: 2
   build-test-and-deliver:
     jobs:
     - run-module-unit-tests
     - run-views-e2e-tests
+    - run-module-e2e-tests
     - create-view-packages:
         requires:
         - run-views-e2e-tests
+    - create-view-dev-modules-packages:
+        requires:
         - run-module-unit-tests
+        - run-module-e2e-tests
 
