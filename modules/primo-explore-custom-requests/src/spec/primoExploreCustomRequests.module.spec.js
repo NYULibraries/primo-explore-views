@@ -1,5 +1,4 @@
 describe('primoExploreCustomRequests', function() {
-
   beforeEach(module('primoExploreCustomRequests', $provide => {}));
 
   let $http;

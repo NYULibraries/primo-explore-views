@@ -1,0 +1,4 @@
+{
+  "baseUrl": "http://localhost:8004/primo-explore/",
+  "defaultCommandTimeout": 8000
+}
