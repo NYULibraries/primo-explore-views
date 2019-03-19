@@ -6140,6 +6140,11 @@ primo-explore-custom-library-card-menu@1.1.6:
   resolved "https://registry.yarnpkg.com/primo-explore-custom-library-card-menu/-/primo-explore-custom-library-card-menu-1.1.6.tgz#d8dbda15baa38eaef13339167cc1e9a5d61c8e99"
   integrity sha512-HUq3gLdcqLjOjoytglB0PTumIZ8wbdjinV5Sq/K/VEtDGpxFEJgtB7iua5IdAivKKWI52bewVFZPANyhqJ8Bog==
 
+primo-explore-custom-login@0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/primo-explore-custom-login/-/primo-explore-custom-login-0.0.5.tgz#d11a4a3c1f2a56941f2fdd28e557c64816e8a0e9"
+  integrity sha512-FvRe46/nE47l+xiWX/toPOLKE0Glnor+LygC6Mk4JXNYX5HoH/QWLElaOWPev3SmXmChiMbsWL0yz3pIeBr3iw==
+
 primo-explore-custom-no-search-results@1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/primo-explore-custom-no-search-results/-/primo-explore-custom-no-search-results-1.0.4.tgz#358d17e9cc242ca9949bdfb7e14fe3920e83f493"
