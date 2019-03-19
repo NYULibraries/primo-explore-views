@@ -14,7 +14,6 @@ export default {
       },
       get isLoggedIn() {
         const devEnvironment = /^(development|test)$/.test(process.env.NODE_ENV);
-        console.log(devEnvironment ? JSON.stringify(window.$$mockUserLoggedIn) : undefined)
         return devEnvironment ? window.$$mockUserLoggedIn : undefined;
       },
       user: {
