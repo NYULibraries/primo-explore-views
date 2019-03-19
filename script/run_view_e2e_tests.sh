@@ -9,7 +9,7 @@
 export CURRENT_BRANCH=${CIRCLE_BRANCH-$(git rev-parse --abbrev-ref HEAD)}
 
 mkdir -p cypress-results
-Run tests against production modules if VIEW has been changed, or common
+# Run tests against production modules if VIEW has been changed, or common
 VIEWS=$(cat $(pwd)/script/VIEWS.txt)
 for VIEW in $VIEWS
 do

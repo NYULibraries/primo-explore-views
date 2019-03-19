@@ -34,7 +34,7 @@ jobs:
       - store_test_results:
           path: cypress-results/test-results
 
-  run-modules-e2e-tests:
+  run-module-e2e-tests:
     <<: *docker-defaults
     steps:
       - checkout
@@ -42,7 +42,7 @@ jobs:
       - run:
           name: Run Module E2E Tests
           command: |
-            script/run_view_e2e_tests.sh
+            script/run_module_e2e_tests.sh
       - store_artifacts:
           path: cypress-results
       - store_test_results:
@@ -91,12 +91,12 @@ workflows:
     jobs:
     - run-module-unit-tests
     - run-views-e2e-tests
-    - run-modules-e2e-tests
+    - run-module-e2e-tests
     - create-view-packages:
         requires:
         - run-views-e2e-tests
     - create-view-dev-modules-packages:
         requires:
         - run-module-unit-tests
-        - run-modules-e2e-tests
+        - run-module-e2e-tests
 
