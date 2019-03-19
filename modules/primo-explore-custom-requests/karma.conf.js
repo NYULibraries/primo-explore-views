@@ -7,20 +7,19 @@ module.exports = function(config) {
     reporters: [
       'spec',
       'junit',
-      // 'coverage',
-      // 'coveralls'
+      'coverage'
     ],
     browsers: ['ChromeHeadless', 'ChromiumHeadless_without_sandbox'],
-    basePath: 'src/',
+    basePath: './',
     files: [
-      '../node_modules/angular/angular.js',
-      '../node_modules/angular-mocks/angular-mocks.js',
-      'index.js',
-      'spec/**/*.js',
+      require.resolve('angular/angular.js'),
+      require.resolve('angular-mocks/angular-mocks.js'),
+      'src/index.js',
+      'src/spec/**/*.spec.js',
     ],
     preprocessors: {
-      'index.js': ['webpack', 'sourcemap'],
-      'spec/**/*.spec.js': ['webpack', 'sourcemap'],
+      'src/index.js': ['webpack', 'sourcemap'],
+      'src/spec/**/*.spec.js': ['webpack', 'sourcemap'],
     },
     webpack: {
       mode: 'development',
@@ -50,7 +49,11 @@ module.exports = function(config) {
       }
     },
     junitReporter: {
-      outputDir: '../test-results/'
-    }
+      outputDir: 'test-results'
+    },
+    coverageReporter: {
+      type: 'lcov', // lcov or lcovonly are required for generating lcov.info files
+      dir: 'test-results/coverage',
+    },
   });
 };
