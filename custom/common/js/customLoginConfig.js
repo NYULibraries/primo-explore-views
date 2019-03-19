@@ -9,24 +9,12 @@ export default {
     queryString: 'func=get-attribute&attribute=bor_info',
     selectors: ['id', 'bor-status'],
     mockUserConfig: {
-      enabled: {
-        development: (mockUserWarning(), true),
-        test: (mockUserWarning(), true),
-      }[process.env.NODE_ENV] || false,
+      get enabled() {
+        return /^(development|test)$/.test(process.env.NODE_ENV) ? mockUserWarning() || true : false;
+      },
       get isLoggedIn() {
-        let loggedIn;
-        switch (process.env.NODE_ENV) {
-          case 'development':
-            loggedIn = window.$$devUserLoggedIn;
-            break;
-          case 'test':
-            loggedIn = window.$$testUserLoggedIn;
-            break;
-          default:
-            break;
-        }
-
-        return loggedIn;
+        const devEnvironment = /^(development|test)$/.test(process.env.NODE_ENV);
+        return devEnvironment ? window.$$mockUserLoggedIn : undefined;
       },
       user: {
         'id': '1234567',
