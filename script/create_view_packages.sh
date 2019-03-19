@@ -7,7 +7,6 @@
 # Finds current branch locally or via CIRCLE
 export CURRENT_BRANCH=${CIRCLE_BRANCH-$(git rev-parse --abbrev-ref HEAD)}
 
-mkdir -p cypress-results
 mkdir -p packages
 VIEWS=$(cat $(pwd)/script/VIEWS.txt)
 for VIEW in $VIEWS
