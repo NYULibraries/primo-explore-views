@@ -5,7 +5,7 @@ ENV DEVENV_PATH /app/
 
 WORKDIR /app/primo-explore/
 
-# Installs Node modules, along with inner repository node_modueles
+# Installs Node modules, along with inner repository node_modules
 COPY yarn.lock package.json ./
 COPY custom/CENTRAL_PACKAGE/package.json ./custom/CENTRAL_PACKAGE/package.json
 COPY custom/NYU/package.json ./custom/NYU/package.json
@@ -16,13 +16,9 @@ COPY custom/NYHS/package.json ./custom/NYHS/package.json
 COPY custom/BHS/package.json ./custom/BHS/package.json
 COPY custom/CU/package.json ./custom/CU/package.json
 
-# First installs production dependencies for VIEWs
+# Installs production version of dependencies from NPM, especially local modules
 RUN yarn install --prod --frozen-lockfile
 COPY ./custom/ ./custom/
-
-# Adds modules with source files for native build processes
-COPY ./modules/ ./modules/
-RUN yarn install --frozen-lockfile
 
 # Sets up for running as a container
 WORKDIR ${DEVENV_PATH}

@@ -1,5 +1,5 @@
 const mockUserWarning = () => console.warn(`This build is using a mock user!` +
-  ` Use NODE_ENV that is not 'development' (e.g. 'staging')` +
+  ` Use NODE_ENV that is not 'development' or 'test' (e.g. 'staging')` +
   ` to disable the mock user feature`);
 
 export default {
@@ -9,7 +9,10 @@ export default {
     queryString: 'func=get-attribute&attribute=bor_info',
     selectors: ['id', 'bor-status'],
     mockUserConfig: {
-      enabled: process.env.NODE_ENV === 'development' ? (mockUserWarning(), true) : false,
+      enabled: {
+        development: (mockUserWarning(), true),
+        test: (mockUserWarning(), true),
+      }[process.env.NODE_ENV] || false,
       user: {
         'id': '1234567',
         'bor-status': '50',

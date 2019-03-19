@@ -1,4 +1,5 @@
 #!/bin/sh -ex
+docker-compose build web
 
 docker tag primo-explore-views quay.io/nyulibraries/primo-explore-views:latest
 docker tag primo-explore-views quay.io/nyulibraries/primo-explore-views:${CIRCLE_BRANCH//\//_}

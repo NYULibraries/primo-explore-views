@@ -12,7 +12,7 @@ mkdir -p packages
 VIEWS=$(cat $(pwd)/script/VIEWS.txt)
 for VIEW in $VIEWS
 do
-  MATCHES=$(git diff --name-only origin/master | grep -c /${VIEW}/) || true
+  MATCHES=$(git diff --name-only origin/master | grep -c custom/${VIEW}/) || true
   if [[ $MATCHES != 0 || $CURRENT_BRANCH == master ]]; then
     NODE_ENV=staging VIEW=$VIEW docker-compose run create-package
     docker cp "$(docker ps -q -a -l -f name=create-package)":/app/packages/. packages
