@@ -1,5 +1,8 @@
 #!/bin/sh -ex
 
+# Finds current branch locally or via CIRCLE
+export CURRENT_BRANCH=${CIRCLE_BRANCH-$(git rev-parse --abbrev-ref HEAD)}
+
 mkdir -p cypress-results
 # Run tests against production modules if any module has been changed
 MODULES=$(cat $(pwd)/script/MODULES.txt)
@@ -9,8 +12,8 @@ do
   ANY_MATCHES=$ANY_MATCHES$(git diff --name-only origin/master | grep -c modules/${MODULE}/ | awk '/^[^0]/ {print}') || :
 done
 
-if [[ $ANY_MATCHES ]]; then
-  echo "Files changed in at least one module package. Running development module tests on all views."
+if [[ $ANY_MATCHES || $CURRENT_BRANCH == master ]]; then
+  echo "Running development module tests on all views."
 
   VIEWS=$(cat $(pwd)/script/VIEWS.txt)
   for VIEW in $VIEWS
