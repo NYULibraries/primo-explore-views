@@ -42,8 +42,10 @@ services:
       <<: *x-environment
       NODE_ENV: test
     <<: *x-ports
+    # volumes:
+    # - ./custom:/app/primo-explore/custom/
 
-  # Dockerfile that relies on l ocal symlink to 'modules' if required version matches current version
+  # Dockerfile that relies on local symlink to 'modules' if required version matches current version
   # Has been separated from "web" so that by default only production-ready versions of packages are delivered
   # Also, this is a much larger image since entire file tree must be copied over,
   # and all development dependencies must be installed
@@ -59,7 +61,16 @@ services:
       <<: *x-environment
     # volumes:
     # - ./custom:/app/primo-explore/custom/
-    # - ./custom:/app/primo-explore/modules/
+    # - ./modules:/app/primo-explore/modules/
+
+  web-test-modules:
+    build:
+      context: .
+      dockerfile: Dockerfile.development
+    <<: *x-ports
+    environment:
+      <<: *x-environment
+      NODE_ENV: test
 
   # Creates VIEW packages using production version dependencies
   # Builds to /app/packages
@@ -77,6 +88,7 @@ services:
     # - ./custom:/app/primo-explore/custom/
 
   # Runs e2e tests against the web-test service (defined above)
+  # Uses only production version of modules published on NPM
   # VIEW=[VIEW-NAME] docker-compose run e2e
   e2e:
     image: primo-explore-cypress
@@ -91,3 +103,21 @@ services:
     # volumes:
     # - ./cypress/:/app/cypress
     # - ./custom:/app/primo-explore/custom/
+
+  # Runs e2e tests against the web-test-modules service (defined above)
+  # Uses local development version of modules from modules directory
+  # VIEW=[VIEW-NAME] docker-compose run e2e-test-modules
+  e2e-test-modules:
+    image: primo-explore-cypress
+    build: primo-explore-e2e-cypress
+    depends_on:
+      - web-test-modules
+    environment:
+      <<: *x-environment
+      DOMAIN: http://web-test-modules:8004/primo-explore/search
+      NODE_ENV: test
+      CYPRESS_BASE_URL: http://web-test-modules:8004/primo-explore/search
+    # volumes:
+    # - ./cypress/:/app/cypress
+    # - ./custom:/app/primo-explore/custom/
+    # - ./modules:/app/primo-explore/modules/
