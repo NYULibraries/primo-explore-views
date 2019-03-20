@@ -6,9 +6,8 @@
   "scripts": {
     "test": "NODE_ENV=test yarn karma start --single-run --browsers=ChromeHeadless",
     "test:chrome-debugger": "yarn karma start --browsers=ChromeHeadless --single-run=false --debug",
-    "build:node": "yarn babel src --ignore=src/spec --out-dir=dist",
-    "build:bundle": "yarn webpack --mode=production",
-    "prepare": "yarn rimraf dist/* && yarn build:bundle && yarn build:node"
+    "build": "yarn webpack --mode=production",
+    "prepare": "yarn rimraf dist/* && yarn build"
   },
   "repository": {
     "type": "git",
@@ -25,9 +24,9 @@
   "homepage": "https://github.com/NYULibraries/primo-explore-custom-login#readme",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
-    "@babel/preset-env": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.0",
+    "@babel/preset-env": "^7.4.0",
     "angular": "^1.7.8",
     "angular-cookies": "1.6.3",
     "angular-mocks": "^1.7.8",
