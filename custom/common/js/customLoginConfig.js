@@ -5,7 +5,9 @@ const mockUserWarning = () => console.warn(`This build is using a mock user!` +
 export default {
   name: 'primoExploreCustomLoginConfig',
   config: {
-    pdsUrl: `https://pds${process.env.NODE_ENV !== 'production' ? 'dev' : ''}.library.nyu.edu/pds?func=get-attribute&attribute=bor_info`,
+    pdsUrl($cookies) {
+      return `https://pds${process.env.NODE_ENV !== 'production' ? 'dev' : ''}.library.nyu.edu/pds?func=get-attribute&attribute=bor_info&pds_handle=${$cookies.get('PDS_HANDLE')}`;
+    },
     callback(response, $window) {
       const selectors = ['id', 'bor-status'];
       const xml = response.data;
