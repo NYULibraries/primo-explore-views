@@ -59,25 +59,31 @@ export default function customRequestsController($window, $scope, $injector, sta
   // then generates the buttons with buttonIds and sets those buttons in the state.
   // if fetchPDS fails, then console logs error and sets state with userFailure, buttons, and user
   ctrl.setButtonsInState = () => {
-    let loggedIn, promise;
+    let promise;
     if (ctrl.customLoginService) {
-      loggedIn = ctrl.customLoginService.isLoggedIn;
-      promise = loggedIn ? ctrl.customLoginService.fetchPDSUser() : Promise.resolve(undefined);
-      stateService.setState({ loggedIn });
+      ctrl.loggedIn = ctrl.customLoginService.isLoggedIn;
+      promise = ctrl.loggedIn ? ctrl.customLoginService.fetchPDSUser() : Promise.resolve(undefined);
+      stateService.setState({ loggedIn: ctrl.loggedIn });
     } else {
       promise = Promise.resolve(undefined);
     }
 
     const { item } = stateService.getState();
     return promise
-      .then(user => {
-        const buttons = ctrl.generateButtons({ item, user });
-        stateService.setState({ buttons, user });
-      })
-      .catch(err => {
-        console.error(err);
-        stateService.setState({ userFailure: true, buttons: undefined, user: null });
-      });
+      .then(
+        function(user) {
+          const buttons = ctrl.generateButtons({ item, user });
+          stateService.setState({ buttons, user });
+        },
+        function(err) {
+          console.error(err);
+          stateService.setState({
+            userFailure: true,
+            buttons: undefined,
+            user: null
+          });
+        }
+      );
   };
 
   ctrl.refreshControllerValues = () => {

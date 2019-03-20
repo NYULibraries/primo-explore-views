@@ -1584,6 +1584,11 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
+angular-cookies@1.6.3:
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/angular-cookies/-/angular-cookies-1.6.3.tgz#1336af49684348538c329ac07b99e961db99858f"
+  integrity sha1-EzavSWhDSFOMMprAe5npYduZhY8=
+
 angular-mocks@^1.7.8:
   version "1.7.8"
   resolved "https://registry.yarnpkg.com/angular-mocks/-/angular-mocks-1.7.8.tgz#95e7887ca91d1a3e176cc22f2d1941d284ce9767"

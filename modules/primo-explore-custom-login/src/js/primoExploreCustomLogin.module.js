@@ -1,5 +1,9 @@
+import ngCookies from 'angular-cookies';
+
 angular
-  .module('primoExploreCustomLogin', [])
+  .module('primoExploreCustomLogin', [
+    ngCookies,
+  ])
   .component('primoExploreCustomLogin', {
     controller: customLoginController,
     require: {
@@ -11,10 +15,22 @@ angular
       console.warn('the constant primoExploreCustomLoginConfig is not defined');
     }
 
-    return Object.freeze(angular.merge({}, config));
+    return Object.freeze(angular.merge({
+      timeout: 6000,
+      mockUserConfig: {
+        delay: 1000,
+      }
+    }, config));
   }])
   // Injects prmAuthentication's handleLogin as a global service
-  .service('primoExploreCustomLoginService', ['$window', '$http', 'customLoginConfigService', primoExploreCustomLoginService]);
+  .service('primoExploreCustomLoginService', [
+    '$window',
+    '$http',
+    '$timeout',
+    '$cookies',
+    'customLoginConfigService',
+    primoExploreCustomLoginService
+  ]);
 
 
 const store = {
@@ -24,24 +40,15 @@ const store = {
   isLoggedIn: undefined,
 };
 
-function primoExploreCustomLoginService($window, $http, config) {
+function primoExploreCustomLoginService($window, $http, $timeout, $cookies, config) {
   const svc = this;
 
   svc.fetchPDSUser = store => {
-    // source: https://stackoverflow.com/a/21125098/8603212
-    const getCookie = function (name) {
-      var match = $window.document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-      return match ? match[2] : undefined;
-    };
-
-    store.user = $http.get(`${config.pdsUrl}?${config.queryString}&pds_handle=${getCookie('PDS_HANDLE')}`, {
-      timeout: 6000
+    store.user = $http.get(`${config.pdsUrl}?${config.queryString}&pds_handle=${$cookies.get('PDS_HANDLE')}`, {
+      timeout: config.timeout,
     })
       .then(response => {
-        const xml = response.data;
-        const getXMLProp = prop => (new $window.DOMParser).parseFromString(xml, 'text/xml').querySelector(prop).textContent;
-        const user = config.selectors.reduce((res, prop) => ({ ...res, [prop]: getXMLProp(prop) }), {});
-
+        const user = config.callback(response, $window);
         store.user = user;
         return user;
       });
@@ -53,11 +60,11 @@ function primoExploreCustomLoginService($window, $http, config) {
     // reassigns fetchPDSUser function
     svc.fetchPDSUser = store => {
       const user = config.mockUserConfig.user || {};
-      const delayTime = config.mockUserConfig.delay || 1000;
+      const delayTime = config.mockUserConfig.delay;
 
-      const delay = (t, v) => new Promise((res) => setTimeout(res.bind(null, v), t));
+      const delay = (t, v) => new Promise((res) => $timeout(res.bind(null, v), t));
       return delay(delayTime, user)
-        .then((user) => { store.user = user; return user; });
+              .then((user) => { store.user = user; return user; });
     };
   }
 
