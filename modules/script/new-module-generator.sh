@@ -17,8 +17,9 @@ cat > package.json <<-EOF
   "scripts": {
     "test": "NODE_ENV=test yarn karma start --browsers=ChromeHeadless --single-run",
     "test:chrome-debugger": "yarn karma start --browsers=Chrome --single-run=false --debug",
-    "build": "yarn webpack --mode=production",
-    "prepare": "yarn build"
+    "build:node": "yarn babel src --ignore=src/spec --out-dir=dist",
+    "build:bundle": "yarn webpack --mode=production",
+    "prepare": "yarn rimraf dist/* && yarn build:bundle && yarn build:node"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -29,7 +30,6 @@ cat > package.json <<-EOF
     "angular-mocks": "^1.7.8",
     "babel-loader": "^8.0.5",
     "babel-plugin-istanbul": "^5.1.1",
-    "clean-webpack-plugin": "^2.0.0",
     "jasmine-core": "^3.3.0",
     "karma": "^4.0.1",
     "karma-chrome-launcher": "^2.2.0",
@@ -209,27 +209,28 @@ Dockerfile
 docker-compose.yml
 EOF
 
-cat > webpack.config.js <<- "EOF"
+cat > webpack.config.js <<- EOF
 const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
     index: path.resolve(__dirname, 'src/index.js'),
   },
+  target: 'web',
   output: {
-    filename: 'index.js'
+    filename: '$CAMELCASE_MODULE_NAME.min.js',
+    library: '$CAMELCASE_MODULE_NAME',
+    libraryTarget: 'var',
   },
   module: {
-    rules: [{
-      test: /\.js$/,
-      loader: 'babel-loader'
-    }]
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader'
+      }
+    ]
   },
   devtool: 'sourcemap',
-  plugins: [
-    new CleanWebpackPlugin(),
-  ],
 };
 EOF
 
