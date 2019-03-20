@@ -27,7 +27,7 @@ if [[ $ANY_MATCHES ]] || [[ $CURRENT_BRANCH == master ]]; then
   done
 fi
 
-COUNT=$(ls packages | grep -c '')
+COUNT=$(ls packages | grep -c '') || :
 if [ $COUNT ]; then
   tar -czvf packages/package-files.zip packages/*
 fi
