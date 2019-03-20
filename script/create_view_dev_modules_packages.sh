@@ -15,7 +15,7 @@ do
   ANY_MATCHES=$ANY_MATCHES$(git diff --name-only origin/master | grep -c modules/${MODULE}/ | awk '/^[^0]/ {print}') || :
 done
 
-if [[ $ANY_MATCHES ]]; then
+if [[ $ANY_MATCHES || $CURRENT_BRANCH == master ]]; then
   echo "Files changed in at least one module package. Building staging versions for all VIEW packages."
 
   VIEWS=$(cat $(pwd)/script/VIEWS.txt)
