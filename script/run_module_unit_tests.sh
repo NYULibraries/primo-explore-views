@@ -13,8 +13,8 @@ mkdir -p karma-unit-test-results
 MODULES=$(cat $PROJECT_ROOT/script/MODULES.txt)
 for MODULE in $MODULES
 do
-  MATCHES=$(git diff --name-only origin/master | grep -c modules/${MODULE}/) || true
-  if [[ $MATCHES != 0 || $CURRENT_BRANCH == master ]]; then
+  MATCHES=$(git diff --name-only origin/master | grep -c modules/$MODULE/) || true
+  if [[ $MATCHES != 0 ]] || [[ $CURRENT_BRANCH == master ]]; then
     echo "Files changed in $MODULE package. Running tests."
     # will add any non-zero exit code to ANY_FAILS if a failure occurred
     cd $PROJECT_ROOT/modules/$MODULE
