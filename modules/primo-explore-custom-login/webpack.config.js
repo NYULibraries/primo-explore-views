@@ -1,14 +1,9 @@
 const path = require('path');
+const merge = require('webpack-merge');
 
-module.exports = {
+const commonConfig = {
   entry: {
     index: path.resolve(__dirname, 'src/index.js'),
-  },
-  target: 'web',
-  output: {
-    filename: 'primoExploreCustomLogin.min.js',
-    library: 'primoExploreCustomLogin',
-    libraryTarget: 'var',
   },
   module: {
     rules: [{
@@ -18,3 +13,30 @@ module.exports = {
   },
   devtool: 'sourcemap',
 };
+
+const webConfig = {
+  target: 'web',
+  output: {
+    filename: 'primoExploreCustomLogin.min.js',
+    library: 'primoExploreCustomLogin',
+    libraryTarget: 'var',
+  },
+};
+
+const nodeConfig = {
+  target: 'node',
+  output: {
+    library: 'primoExploreCustomLogin',
+  },
+};
+
+module.exports = [
+  merge.smart(
+    commonConfig,
+    webConfig,
+  ),
+  merge.smart(
+    commonConfig,
+    nodeConfig
+  ),
+];

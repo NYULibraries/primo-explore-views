@@ -28,3 +28,6 @@ if [[ $ANY_MATCHES || $CURRENT_BRANCH == master ]]; then
     docker-compose down
   done
 fi
+
+# Checks if non-zero exit code occurred
+[ ! $ANY_FAILS ]
