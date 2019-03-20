@@ -38,7 +38,7 @@ app
 
 |name|type|usage|
 |---|---|---|
-`pdsUrl`| `string` | The function url from the PDS API for getting user information
+`pdsUrl`| `function` | A function that takes an angular [`$cookies` service object](https://docs.angularjs.org/api/ngCookies/service/$cookies) and returns url string for the PDS API for getting user information.
 `callback` | `function` | A callback function that takes a `response` object and an `$window` object for convenient usage.
 `timeout` | `integer` | The time limit before an API fetch fails
 `mockUserConfig`| `Object` | Settings for mocking a user (especially for offline development and testing)
@@ -65,7 +65,9 @@ Once the user is fetched, subsequent `fetchPDSUser` calls simply return a resolv
 // config
 app
   .constant('primoExploreCustomLoginConfig', {
-    pdsUrl: 'https://pds.library.edu/pds?func=get-attribute&attribute=bor_info',
+    pdsUrl($cookies) {
+      return `https://pds.library.edu/pds?func=get-attribute&attribute=bor_info${$cookies.get('PDS_HANDLE')}`
+    },
     callback(response, $window) {
       const selectors = ['id', 'bor-status']
       const xml = response.data;

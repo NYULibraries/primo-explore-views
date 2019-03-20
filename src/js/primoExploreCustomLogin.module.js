@@ -44,14 +44,14 @@ function primoExploreCustomLoginService($window, $http, $timeout, $cookies, conf
   const svc = this;
 
   svc.fetchPDSUser = store => {
-    store.user = $http.get(`${config.pdsUrl}?${config.queryString}&pds_handle=${$cookies.get('PDS_HANDLE')}`, {
+    store.user = $http.get(`${config.pdsUrl($cookies)}`, {
       timeout: config.timeout,
     })
-      .then(response => {
-        const user = config.callback(response, $window);
-        store.user = user;
-        return user;
-      });
+    .then(response => {
+      const user = config.callback(response, $window);
+      store.user = user;
+      return user;
+    });
 
     return store.user;
   };
