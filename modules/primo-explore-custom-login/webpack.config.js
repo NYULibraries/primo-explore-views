@@ -1,12 +1,14 @@
 const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
     index: path.resolve(__dirname, 'src/index.js'),
   },
+  target: 'web',
   output: {
-    filename: 'index.js'
+    filename: 'primoExploreCustomLogin.min.js',
+    library: 'primoExploreCustomLogin',
+    libraryTarget: 'var',
   },
   module: {
     rules: [{
@@ -15,7 +17,4 @@ module.exports = {
     }]
   },
   devtool: 'sourcemap',
-  plugins: [
-    new CleanWebpackPlugin(),
-  ],
 };
