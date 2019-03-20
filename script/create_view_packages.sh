@@ -27,6 +27,6 @@ do
 done
 
 COUNT=$(ls packages | grep -c '') || :
-if [ $COUNT ]; then
+if [[ $COUNT != 0 ]]; then
   tar -czvf packages/package-files.zip packages/*
 fi
