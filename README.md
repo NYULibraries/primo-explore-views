@@ -29,9 +29,8 @@ Set configuration values as an angular constant named `primoExploreCustomLoginCo
 ```js
 app
   .constant('primoExploreCustomLoginConfig', {
-    pdsUrl: 'https://pds.library.edu/pds',
-    queryString: 'func=get-attribute&attribute=bor_info',
-    selectors: ['id', 'bor-status'],
+    pdsUrl: 'https://pds.library.edu/pds?func=get-attribute&attribute=bor_info',
+    //... etc. (see below)
   })
 ```
 
@@ -39,10 +38,10 @@ app
 
 |name|type|usage|
 |---|---|---|
-`pdsUrl`| `string` | The base url for the PDS API
-`queryString` | `string` | The query string used for the PDS function you would like to use.
-`selectors` | `array` | The document selectors used to obtain the data fields you are looking for. Selectors will be mapped to keys in the resulting POJO object.
-`mockUserConfig`| `Object` | Settings for mocking a user (especially for offline development)
+`pdsUrl`| `string` | The function url from the PDS API for getting user information
+`callback` | `function` | A callback function that takes a `response` object and an `$window` object for convenient usage.
+`timeout` | `integer` | The time limit before an API fetch fails
+`mockUserConfig`| `Object` | Settings for mocking a user (especially for offline development and testing)
 
 ## `primoExploreCustomLoginService`
 
@@ -66,9 +65,18 @@ Once the user is fetched, subsequent `fetchPDSUser` calls simply return a resolv
 // config
 app
   .constant('primoExploreCustomLoginConfig', {
-    pdsUrl: 'https://pds.library.edu/pds',
-    queryString: 'func=get-attribute&attribute=bor_info',
-    selectors: ['id', 'bor-status'],
+    pdsUrl: 'https://pds.library.edu/pds?func=get-attribute&attribute=bor_info',
+    callback(response, $window) {
+      const selectors = ['id', 'bor-status']
+      const xml = response.data;
+      const getXMLProp = prop => (new $window.DOMParser)
+                                    .parseFromString(xml, 'text/xml')
+                                    .querySelector(prop).textContent;
+      const user = selectors.reduce((res, prop) => ({ ...res, [prop]: getXMLProp(prop) }), {});
+
+      return user;
+    },
+    timeout: 5000,
     mockUserConfig: {
       enabled: true,
       user: {
@@ -90,8 +98,8 @@ function myController(customLoginService) {
       } else {
         // do something else
       }
-    })
-    .catch(function(error) {
+    },
+    function(error) {
       console.error(err);
       // do other stuff if the request fails
     })
