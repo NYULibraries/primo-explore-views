@@ -5,28 +5,30 @@ const mockUserWarning = () => console.warn(`This build is using a mock user!` +
 export default {
   name: 'primoExploreCustomLoginConfig',
   config: {
-    pdsUrl: `https://pds${process.env.NODE_ENV !== 'production' ? 'dev' : ''}.library.nyu.edu/pds`,
-    queryString: 'func=get-attribute&attribute=bor_info',
-    selectors: ['id', 'bor-status'],
-    mockUserConfig: {
-      enabled: {
-        development: (mockUserWarning(), true),
-        test: (mockUserWarning(), true),
-      }[process.env.NODE_ENV] || false,
-      get isLoggedIn() {
-        let loggedIn;
-        switch (process.env.NODE_ENV) {
-          case 'development':
-            loggedIn = window.$$devUserLoggedIn;
-            break;
-          case 'test':
-            loggedIn = window.$$testUserLoggedIn;
-            break;
-          default:
-            break;
-        }
+    pdsUrl($cookies) {
+      return `https://pds${process.env.NODE_ENV !== 'production' ? 'dev' : ''}.library.nyu.edu/pds?func=get-attribute&attribute=bor_info&pds_handle=${$cookies.get('PDS_HANDLE')}`;
+    },
+    callback(response, $window) {
+      const selectors = ['id', 'bor-status'];
+      const xml = response.data;
+      const getXMLProp = prop => (new $window.DOMParser).parseFromString(xml, 'text/xml').querySelector(prop).textContent;
 
-        return loggedIn;
+      // getXMLProp for each selector, then merge to object
+      const user = selectors.reduce((res, prop) => ({ ...res, [prop]: getXMLProp(prop) }), {});
+
+      return user;
+    },
+    mockUserConfig: {
+      get enabled() {
+        if (/^(development|test)$/.test(process.env.NODE_ENV)) {
+          mockUserWarning();
+          return true;
+        } else {
+          return false;
+        }
+      },
+      get isLoggedIn() {
+        return /^(development|test)$/.test(process.env.NODE_ENV) ? window.$$mockUserLoggedIn : undefined;
       },
       user: {
         'id': '1234567',

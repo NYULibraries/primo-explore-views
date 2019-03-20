@@ -71,6 +71,9 @@ services:
     environment:
       <<: *x-environment
       NODE_ENV: test
+    # volumes:
+    # - ./custom:/app/primo-explore/custom/
+    # - ./modules:/app/primo-explore/modules/
 
   # Creates VIEW packages using production version dependencies
   # Builds to /app/packages

@@ -1,23 +1,42 @@
 const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const merge = require('webpack-merge');
 
-module.exports = {
+const commonConfig = {
   entry: {
     index: path.resolve(__dirname, 'src/index.js'),
   },
-  output: {
-    filename: 'index.js'
-  },
   module: {
-    rules: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader'
-      }
-    ]
+    rules: [{
+      test: /\.js$/,
+      loader: 'babel-loader'
+    }]
   },
   devtool: 'sourcemap',
-  plugins: [
-    new CleanWebpackPlugin(),
-  ],
 };
+
+const webConfig = {
+  target: 'web',
+  output: {
+    filename: 'primoExploreCustomRequests.min.js',
+    library: 'primoExploreCustomRequests',
+    libraryTarget: 'var',
+  },
+};
+
+const nodeConfig = {
+  target: 'node',
+  output: {
+    library: 'primoExploreCustomRequests',
+  },
+};
+
+module.exports = [
+  merge.smart(
+    commonConfig,
+    webConfig,
+  ),
+  merge.smart(
+    commonConfig,
+    nodeConfig
+  ),
+];
