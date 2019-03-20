@@ -32,7 +32,7 @@ export default {
         'id': '1234567',
         'bor-status': '50',
       },
-      delay: 3000,
+      delay: 500,
     }
   },
 };
