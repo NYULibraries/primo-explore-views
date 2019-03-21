@@ -7,14 +7,14 @@
 
 # Finds current branch locally or via CIRCLE
 export CURRENT_BRANCH=${CIRCLE_BRANCH-$(git rev-parse --abbrev-ref HEAD)}
-export PROJECT_ROOT=$(pwd)
 
 mkdir -p karma-unit-test-results
-MODULES=$(cat $PROJECT_ROOT/script/MODULES.txt)
+# Finds all module directories matching modules/primo-explore-*, and outputs as "primo-explore-module-1 primo-explore-module-2"
+MODULES=$(ls -d modules/primo-explore-* | sed 's/modules\///g')
 for MODULE in $MODULES
 do
-  if git diff --name-only origin/master | grep -q modules/$MODULE/ || [[ $CURRENT_BRANCH == master ]]; then
-    echo "Files changed in $MODULE package. Running tests."
+  if git diff --name-only origin/master | grep -q $MODULE || [[ $CURRENT_BRANCH == master ]]; then
+    echo "Files changed in $MODULE directory. Running tests."
     # will add any non-zero exit code to ANY_FAILS if a failure occurred
     cd $PROJECT_ROOT/modules/$MODULE
     docker-compose run test || ANY_FAILS=$ANY_FAILS$?

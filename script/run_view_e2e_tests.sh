@@ -9,8 +9,8 @@
 export CURRENT_BRANCH=${CIRCLE_BRANCH-$(git rev-parse --abbrev-ref HEAD)}
 
 mkdir -p cypress-results
-# Run tests against production modules if VIEW has been changed, or common
-VIEWS=$(cat $(pwd)/script/VIEWS.txt)
+# gets all "CAPITALIZED" directories in custom/*
+VIEWS=$(echo $(ls -d custom/*) | tr -d 'a-z/')
 for VIEW in $VIEWS
 do
   # If VIEW or common folder changed, run tests
