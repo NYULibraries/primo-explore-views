@@ -4,18 +4,14 @@
 export CURRENT_BRANCH=${CIRCLE_BRANCH-$(git rev-parse --abbrev-ref HEAD)}
 
 mkdir -p cypress-results
-# Run tests against production modules if any module has been changed
-MODULES=$(cat $(pwd)/script/MODULES.txt)
-ANY_MATCHES=''
-for MODULE in $MODULES
-do
-  ANY_MATCHES=$ANY_MATCHES$(git diff --name-only origin/master | grep -c modules/${MODULE}/ | awk '/^[^0]/ {print}') || :
-done
 
-if [[ $ANY_MATCHES || $CURRENT_BRANCH == master ]]; then
+# Finds modules as modules/primo-explore-custom-module-1|modules/primo-explore-custom-module-2
+MODULES_PATTERN=$(echo $(ls -d modules/primo-explore-*) | tr ' ' '|')
+if [ git diff --name-only origin/master | grep -Eq "$MODULES_PATTERN" ] || [[ $CURRENT_BRANCH == master ]]; then
   echo "Running development module tests on all views."
 
-  VIEWS=$(cat $(pwd)/script/VIEWS.txt)
+  # gets all "CAPITALIZED" directoriesin custom/*
+  VIEWS=$(echo $(ls -d custom/*) | tr -d 'a-z/')
   for VIEW in $VIEWS
   do
     echo "Running tests in $VIEW package."
