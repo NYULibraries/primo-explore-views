@@ -7,6 +7,7 @@
 
 # Finds current branch locally or via CIRCLE
 export CURRENT_BRANCH=${CIRCLE_BRANCH-$(git rev-parse --abbrev-ref HEAD)}
+PROJECT_ROOT=$(pwd)
 
 mkdir -p karma-unit-test-results
 # Finds all module directories matching modules/primo-explore-*, and outputs as "primo-explore-module-1 primo-explore-module-2"
