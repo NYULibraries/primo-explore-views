@@ -9,13 +9,10 @@ export CURRENT_BRANCH=${CIRCLE_BRANCH-$(git rev-parse --abbrev-ref HEAD)}
 
 mkdir -p packages
 
-ANY_MATCHES=''
-for MODULE in $MODULES
-do
-  git diff --name-only origin/master | grep -q modules/${MODULE}/ && ANY_MATCHES=$ANY_MATCHES$? || :
-done
 
-if [ $ANY_MATCHES ] || [[ $CURRENT_BRANCH == master ]]; then
+# Finds modules as modules/primo-explore-custom-module-1|modules/primo-explore-custom-module-2
+MODULES_PATTERN=$(echo $(ls -d modules/primo-explore-*) | tr ' ' '|')
+if [ git diff --name-only origin/master | grep -Eq $MODULES_PATTERN ] || [[ $CURRENT_BRANCH == master ]]; then
   echo "Files changed in at least one module package. Building staging versions for all VIEW packages."
 
   VIEWS=$(cat $(pwd)/script/VIEWS.txt)
