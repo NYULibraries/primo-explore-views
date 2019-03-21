@@ -14,7 +14,8 @@ MODULES_PATTERN=$(echo $(ls -d modules/primo-explore-*) | tr ' ' '|')
 if [ git diff --name-only origin/master | grep -Eq "$MODULES_PATTERN" ] || [[ $CURRENT_BRANCH == master ]]; then
   echo "Files changed in at least one module package. Building staging versions for all VIEW packages."
 
-  VIEWS=$(cat $(pwd)/script/VIEWS.txt)
+  # gets all "CAPITALIZED" directories in custom/*
+  VIEWS=$(echo $(ls -d custom/*) | tr -d 'a-z/')
   for VIEW in $VIEWS
   do
     NODE_ENV=staging VIEW=$VIEW docker-compose run create-dev-modules-package
