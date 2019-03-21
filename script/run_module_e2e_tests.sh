@@ -9,9 +9,10 @@ MODULES=$(cat $(pwd)/script/MODULES.txt)
 ANY_MATCHES=''
 for MODULE in $MODULES
 do
-  ANY_MATCHES=$ANY_MATCHES$(git diff --name-only origin/master | grep -c modules/$MODULE/ | awk '/^[^0]/ {print}') || :
+  git diff --name-only origin/master | grep -q modules/${MODULE}/ && ANY_MATCHES=$ANY_MATCHES$? || :
 done
 
+# If ANY_MATCHES contains any 0s (i.e. match found) or on master
 if [ $ANY_MATCHES ] || [[ $CURRENT_BRANCH == master ]]; then
   echo "Running development module tests on all views."
 

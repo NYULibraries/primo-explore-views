@@ -12,10 +12,10 @@ mkdir -p packages
 ANY_MATCHES=''
 for MODULE in $MODULES
 do
-  ANY_MATCHES=$ANY_MATCHES$(git diff --name-only origin/master | grep -c modules/${MODULE}/ | awk '/^[^0]/ {print}') || :
+  git diff --name-only origin/master | grep -q modules/${MODULE}/ && ANY_MATCHES=$ANY_MATCHES$? || :
 done
 
-if [[ $ANY_MATCHES ]] || [[ $CURRENT_BRANCH == master ]]; then
+if [ $ANY_MATCHES ] || [[ $CURRENT_BRANCH == master ]]; then
   echo "Files changed in at least one module package. Building staging versions for all VIEW packages."
 
   VIEWS=$(cat $(pwd)/script/VIEWS.txt)
@@ -27,7 +27,6 @@ if [[ $ANY_MATCHES ]] || [[ $CURRENT_BRANCH == master ]]; then
   done
 fi
 
-COUNT=$(ls packages | grep -c '') || :
-if [[ $COUNT != 0 ]]; then
+if ls -A packages/*; then
   tar -czvf packages/package-files.zip packages/*
 fi
