@@ -10,7 +10,8 @@ MODULES_PATTERN=$(echo $(ls -d modules/primo-explore-*) | tr ' ' '|')
 if [ git diff --name-only origin/master | grep -Eq $MODULES_PATTERN ] || [[ $CURRENT_BRANCH == master ]]; then
   echo "Running development module tests on all views."
 
-  VIEWS=$(cat $(pwd)/script/VIEWS.txt)
+  # gets all "CAPITALIZED" directoriesin custom/*
+  VIEWS=$(echo $(ls -d custom/*) | tr -d 'a-z/')
   for VIEW in $VIEWS
   do
     echo "Running tests in $VIEW package."
