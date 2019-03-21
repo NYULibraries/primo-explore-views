@@ -16,8 +16,10 @@ COPY custom/NYHS/package.json ./custom/NYHS/package.json
 COPY custom/BHS/package.json ./custom/BHS/package.json
 COPY custom/CU/package.json ./custom/CU/package.json
 
-# Installs production version of dependencies from NPM, especially local modules
+# Installs production version of dependencies from NPM
 RUN yarn install --prod --frozen-lockfile
+
+# Copies remaining VIEW files
 COPY ./custom/ ./custom/
 
 # Sets up for running as a container
@@ -25,5 +27,5 @@ WORKDIR ${DEVENV_PATH}
 
 EXPOSE 8004 3001
 
-# Sets up functional CENTRAL_PACKAGE in image, then runs devServer
+# Webpacks a functional CENTRAL_PACKAGE in container before running devServer
 CMD VIEW=CENTRAL_PACKAGE NODE_ENV=${NODE_ENV-development} yarn build && VIEW=${VIEW} yarn start
