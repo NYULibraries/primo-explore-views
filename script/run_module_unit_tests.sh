@@ -13,7 +13,7 @@ mkdir -p karma-unit-test-results
 MODULES=$(ls -d modules/primo-explore-* | sed 's/modules\///g')
 for MODULE in $MODULES
 do
-  if git diff --name-only origin/master | grep -q $MODULE || [[ $CURRENT_BRANCH == master ]]; then
+  if git diff --name-only origin/master | grep -q "$MODULE" || [[ $CURRENT_BRANCH == master ]]; then
     echo "Files changed in $MODULE directory. Running tests."
     # will add any non-zero exit code to ANY_FAILS if a failure occurred
     cd $PROJECT_ROOT/modules/$MODULE
