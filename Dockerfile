@@ -1,4 +1,4 @@
-FROM quay.io/nyulibraries/primo-explore-devenv:1.0.5
+FROM quay.io/nyulibraries/primo-explore-devenv:1.0.6
 
 ENV VIEW ${VIEW}
 ENV DEVENV_PATH /app/
