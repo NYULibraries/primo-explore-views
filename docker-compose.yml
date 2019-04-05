@@ -55,23 +55,32 @@ services:
   web-dev-modules:
     build:
       context: .
-      dockerfile: Dockerfile.development
+      dockerfile: modules/Dockerfile
+    image: primo-explore-views_modules
     <<: *x-ports
     environment:
       <<: *x-environment
-    # volumes:
-    # - ./custom:/app/primo-explore/custom/
-    # - ./modules:/app/primo-explore/modules/
+    volumes:
+    #  drastically speeds up re-installation processes by mounting node_modules and yarn cache directory
+    # to re-transpile a local dependency without restarting the service, run doker-compose exec sh -c 'cd /app/primo-explore/ && yarn prepare'
+    - yarn_cache:/yarn
+    - node_modules_cache:/app/primo-explore/node_modules
+    - ./custom:/app/primo-explore/custom/
+    - ./modules:/app/primo-explore/modules/
 
   web-test-modules:
     build:
       context: .
-      dockerfile: Dockerfile.development
+      dockerfile: modules/Dockerfile
+    image: primo-explore-views_modules
     <<: *x-ports
     environment:
       <<: *x-environment
       NODE_ENV: test
-    # volumes:
+    volumes:
+    #  drastically speeds up re-installation processes by mounting node_modules and yarn cache directory
+    - yarn_cache:/yarn
+    - node_modules_cache:/app/primo-explore/node_modules
     # - ./custom:/app/primo-explore/custom/
     # - ./modules:/app/primo-explore/modules/
 
@@ -96,7 +105,8 @@ services:
   create-dev-modules-package:
     build:
       context: .
-      dockerfile: Dockerfile.development
+      dockerfile: modules/Dockerfile
+    image: primo-explore-views_modules
     environment:
       <<: *x-environment
       NODE_ENV: ${NODE_ENV-staging}
@@ -140,3 +150,7 @@ services:
     # - ./cypress/:/app/cypress
     # - ./custom:/app/primo-explore/custom/
     # - ./modules:/app/primo-explore/modules/
+
+volumes:
+  yarn_cache:
+  node_modules_cache:

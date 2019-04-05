@@ -22,6 +22,7 @@ With recommended volumes enabled in the `docker-compose.yml`:
 With Docker and docker-compose installed:
 
 1. Configure `docker-compose.yml` to fit your institutional setup in the `x-environment` section. ([docker-compose environment variables](https://docs.docker.com/compose/environment-variables/))
+1. Ensure `volumes` to local directories are configured in `docker-compose.yml`
 1. Use the `up` command to `docker-compose build web`
 1. `NODE_ENV=[stage] VIEW=[view_name] docker-compose up web`
 
@@ -40,10 +41,10 @@ NODE_ENV=[stage] VIEW=CENTRAL_PACKAGE docker-compose run web
 
 `js/main.js` is considered the 'entry' file for compiling JavaScript files. You can use ES6 `import` syntax here to consume dependencies.
 
-`css/sass/main.scss` is the 'entry' file for compiling to CSS. To refer to CSS files in the root `node_modules` directory, you can simply use `~` as an alias.
+`css/sass/main.scss` is the 'entry' file for compiling to CSS. To refer to CSS files in the `node_modules` directory, you can simply use `~` as an alias.
 
 ```scss
-@import '~/primo-explore-clickable-logo-to-any-link/css/custom1.css';
+@import '~primo-explore-clickable-logo-to-any-link/css/custom1.css';
 ```
 
 ## Run Tests
