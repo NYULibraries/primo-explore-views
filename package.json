@@ -44,7 +44,8 @@
     "puppeteer": "^1.13.0",
     "rimraf": "^2.6.3",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3"
+    "webpack-cli": "^3.2.3",
+    "webpack-merge": "^4.2.1"
   },
   "dependencies": {}
 }
