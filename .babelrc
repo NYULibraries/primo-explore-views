@@ -11,8 +11,9 @@
   "env": {
     "test": {
       "plugins": [
-        // not yet impletented:
-        // "istanbul"
+        ["istanbul", {
+          "exclude": ["**/*.spec.js"],
+        }],
       ]
     },
   },

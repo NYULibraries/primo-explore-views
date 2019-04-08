@@ -18,20 +18,15 @@ let app = angular.module('viewCustom', [
 app
   // 1. Inject in the <prm-location-item-after> component of the DOM, which exists after each holding entry WITHIN a specific location.
   .component('prmLocationItemAfter', {
-    template: `/*html*/ `
-      <primo-explore-custom-requests
-        layout="row"
-        layout-align="end center"
-        layout-wrap
-        flex-xs="100"
-      ></primo-explore-custom-requests>`,
-      // 1a. Use this trick to implement the customization as a SIBLING of the item details, as opposed to its CHILD. Otherwise, styling of injected components will not match the styling of the elements it intends to amend.
-    controller: ['$element', function ($element) {
+    template: `<primo-explore-custom-requests></primo-explore-custom-requests>`,
+      // 1a. Use this trick to implement the customization as a SIBLING of the item details, as opposed to its CHILD. Otherwise, styling of injected components will not match the styling of the elements it intends to replace. The CSS that has been included with the module will assume that this has been implemented.
+    controller: ['$element', function($element) {
       const ctrl = this;
       ctrl.$postLink = () => {
         const $target = $element.parent().query('div.md-list-item-text');
-        const $el = $element.query(`primo-explore-custom-requests`).detach();
+        const $el = $element.detach();
         $target.append($el);
+        $element.addClass('layout-row flex-sm-30 flex-xs-100');
       };
     }]
   })
@@ -80,6 +75,7 @@ Keys refer to `buttonIds`.
 Functions take the following named parameters via a POJO:
 * `item`: `$ctrl.item` object from the `<prm-location-items>` controller
 * `config`: The configuration object itself for internal references.
+* `user`: `Object` representation of a PDS user as taken from the `primoExploreCustomLoginService`. `undefined` if when user is not logged in, or the optional peer dependency has not been installed. `null` if a user is logged in, but the PDS API fetch failed.
 
 Functions should be pure and return an `Object` with the following schema:
 
@@ -220,6 +216,20 @@ A dictionary of arbitrary functions and values to be referred to within your fun
 /* Imitates prm-service-button styles */
 button[class*="custom-request-"] {
   padding: .5em .35em !important;
+}
+
+/* Automatically shrinks empties on large view, overriding flex-sm-30  */
+@media not all and (max-width: 599px) {
+  prm-location-item-after {
+    flex: 0 0 auto !important;
+  }
+}
+
+/* On the smaller views, restores flex-grow */
+@media (max-width: 599px) {
+  primo-explore-custom-requests {
+    flex: 1 1 100%;
+  }
 }
 
 /* Useful for the 'attributes' in prmIconBefore/prmIconAfter to make it fit in button appropriately */

@@ -1,5 +1,5 @@
-prmLocationItemAfterController.$inject = ['$window', '$scope', '$injector', 'customRequestsStateService', 'customRequestsConfigService', '$timeout', '$filter'];
-export default function prmLocationItemAfterController($window, $scope, $injector, stateService, config, $timeout, $filter) {
+customRequestsController.$inject = ['$window', '$scope', '$injector', 'primoExploreCustomRequestsStateService', 'primoExploreCustomRequestsConfigService', '$timeout', '$filter'];
+export default function customRequestsController($window, $scope, $injector, stateService, config, $timeout, $filter) {
   const ctrl = this;
 
   ctrl.translate = original => original.replace(/\{(.+?)\}/g, (match, p1) => $filter('translate')(p1));
@@ -44,33 +44,46 @@ export default function prmLocationItemAfterController($window, $scope, $injecto
     $el && $el.css({ display: 'block' });
   };
 
+  ctrl.generateButtons = ({ item, user }) => {
+    const { buttonIds, buttonGenerators } = config;
+
+    const buttons = buttonIds.reduce((arr, id) => {
+      const buttonGenerator = buttonGenerators[id];
+      return [...arr, { id, ...buttonGenerator({ item, user, config }) }];
+    }, []);
+
+    return buttons;
+  };
+
+  // sets in state whether the user is loggedIn,'
+  // then generates the buttons with buttonIds and sets those buttons in the state.
+  // if fetchPDS fails, then console logs error and sets state with userFailure, buttons, and user
   ctrl.setButtonsInState = () => {
-    let loggedIn, promise;
+    let promise;
     if (ctrl.customLoginService) {
-      loggedIn = ctrl.customLoginService.isLoggedIn;
-      promise = loggedIn ? ctrl.customLoginService.fetchPDSUser() : Promise.resolve(undefined);
+      ctrl.loggedIn = ctrl.customLoginService.isLoggedIn;
+      promise = ctrl.loggedIn ? ctrl.customLoginService.fetchPDSUser() : Promise.resolve(undefined);
+      stateService.setState({ loggedIn: ctrl.loggedIn });
     } else {
-      loggedIn = false;
       promise = Promise.resolve(undefined);
     }
 
-    stateService.setState({ loggedIn });
     const { item } = stateService.getState();
     return promise
-      .then(user => {
-        const { buttonIds, buttonGenerators } = config;
-
-        const buttons = buttonIds.reduce((arr, id) => {
-          const buttonGenerator = buttonGenerators[id];
-          return [...arr, { id, ...buttonGenerator({ item, config }) }];
-        }, []);
-
-        stateService.setState({ buttons, user });
-      })
-      .catch(err => {
-        console.error(err);
-        stateService.setState({ userFailure: true, buttons: undefined, user: null });
-      });
+      .then(
+        function(user) {
+          const buttons = ctrl.generateButtons({ item, user });
+          stateService.setState({ buttons, user });
+        },
+        function(err) {
+          console.error(err);
+          stateService.setState({
+            userFailure: true,
+            buttons: undefined,
+            user: null
+          });
+        }
+      );
   };
 
   ctrl.refreshControllerValues = () => {
@@ -120,7 +133,7 @@ export default function prmLocationItemAfterController($window, $scope, $injecto
     });
   };
 
-  ctrl.getCurrLocId = () => `${ctrl.parentCtrl.loc.location.mainLocation}${ctrl.parentCtrl.loc.location.subLocationCode}`;
+  ctrl.getCurrLocId = () => `${ctrl.parentCtrl.currLoc.location.mainLocation}${ctrl.parentCtrl.currLoc.location.subLocationCode}`;
 
   ctrl.$postLink = () => {
     ctrl.hideAllRequests();
@@ -128,8 +141,8 @@ export default function prmLocationItemAfterController($window, $scope, $injecto
 
   ctrl.$onInit = () => {
     ctrl.customLoginService = $injector.has('primoExploreCustomLoginService') && $injector.get('primoExploreCustomLoginService');
-    const { currLoc, item } = ctrl.parentCtrl;
-    const { items } = currLoc;
+    const item = ctrl.parentCtrl.item;
+    const items = ctrl.parentCtrl.currLoc.items;
 
     stateService.setState({ currLocId: ctrl.getCurrLocId() });
     Object.assign(ctrl, {

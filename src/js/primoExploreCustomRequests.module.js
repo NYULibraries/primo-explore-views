@@ -1,7 +1,7 @@
 import 'ng-attr';
 
 import customRequestsController from './controllers/customRequestsController';
-import customRequestsConfigService from './services/customRequestsConfigService';
+import primoExploreCustomRequestsConfigService from './services/customRequestsConfigService';
 import customRequestsStateService from './services/customRequestsStateService';
 
 import customRequestsTemplate from '../html/custom_requests_template.html';
@@ -20,7 +20,7 @@ angular
     //that would prevent CORS from workincustomg
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
   }])
-  .service('customRequestsConfigService', customRequestsConfigService)
+  .service('primoExploreCustomRequestsConfigService', primoExploreCustomRequestsConfigService)
   .component('primoExploreCustomRequests', {
     controller: customRequestsController,
     require: {
@@ -28,4 +28,4 @@ angular
     },
     template: customRequestsTemplate,
   })
-  .service('customRequestsStateService', customRequestsStateService);
+  .service('primoExploreCustomRequestsStateService', customRequestsStateService);
