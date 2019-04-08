@@ -11,10 +11,6 @@ COPY ./modules/docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
-# RUN addgroup -g 1000 -S docker && \
-#   adduser -u 1000 -S -G docker docker
-# USER docker
-
 WORKDIR ${CUSTOMIZATIONS_PATH}
 
 COPY yarn.lock package.json lerna.json ./
