@@ -1,14 +1,13 @@
 {
   "name": "primo-explore-custom-login",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "Customized login service",
   "main": "./dist/index.js",
   "scripts": {
-    "test": "karma start --single-run",
-    "test:chrome-debugger": "karma start --browsers=Chrome --single-run=false --debug",
-    "clean:dist": "rimraf dist",
-    "build": "BABEL_ENV=production yarn babel src --out-dir dist --ignore *.spec.js,coverage",
-    "prepare": "yarn clean:dist && yarn build"
+    "test": "NODE_ENV=test yarn karma start --single-run --browsers=ChromeHeadless",
+    "test:chrome-debugger": "yarn karma start --browsers=ChromeHeadless --single-run=false --debug",
+    "build": "yarn webpack --mode=production",
+    "prepare": "yarn rimraf dist/* && yarn build"
   },
   "repository": {
     "type": "git",
@@ -25,11 +24,27 @@
   "homepage": "https://github.com/NYULibraries/primo-explore-custom-login#readme",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
-    "@babel/preset-env": "^7.2.3",
-    "eslint": "^5.12.0",
-    "rimraf": "^2.6.3"
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.0",
+    "@babel/preset-env": "^7.4.0",
+    "angular": "^1.7.8",
+    "angular-cookies": "1.6.3",
+    "angular-mocks": "^1.7.8",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-istanbul": "^5.1.1",
+    "jasmine-core": "^3.3.0",
+    "karma": "^4.0.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.2",
+    "karma-jasmine": "^2.0.1",
+    "karma-junit-reporter": "^1.2.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-spec-reporter": "^0.0.32",
+    "karma-webpack": "^4.0.0-rc.6",
+    "puppeteer": "^1.13.0",
+    "rimraf": "^2.6.3",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
   },
   "dependencies": {}
 }

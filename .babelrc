@@ -5,14 +5,16 @@
     }]
   ],
   "plugins": [
-    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-proposal-object-rest-spread"
   ],
   "env": {
     "test": {
       "plugins": [
-        // not yet impletented:
-        // "istanbul"
+        ["istanbul", {
+          "exclude": ["**/*.spec.js"],
+        }],
       ]
     },
-  }
+  },
+  "comments": false,
 }
