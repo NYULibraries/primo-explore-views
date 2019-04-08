@@ -1,8 +1,11 @@
 # primo-explore-custom-requests
 Customized item requests in Primo NUI
 
+[![CircleCI](https://circleci.com/gh/NYULibraries/primo-explore-custom-requests.svg?style=svg)](https://circleci.com/gh/NYULibraries/primo-explore-custom-requests)
+[![Coverage Status](https://coveralls.io/repos/github/NYULibraries/primo-explore-custom-requests/badge.svg?branch=master)](https://coveralls.io/github/NYULibraries/primo-explore-custom-requests?branch=master)
+[![npm version](https://badge.fury.io/js/primo-explore-custom-requests.svg)](https://badge.fury.io/js/primo-explore-custom-requests)
+
 ## Usage
-**(Note: currently applies to alpha version; will likely change in v1.0)**
 
 1. Install
 `yarn add primo-explore-custom-requests --dev`
