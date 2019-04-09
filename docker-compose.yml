@@ -77,7 +77,7 @@ services:
     environment:
       <<: *x-environment
       NODE_ENV: test
-    volumes:
+    # volumes:
     #  drastically speeds up re-installation processes by mounting node_modules and yarn cache directory
     # - yarn_cache:/yarn
     # - node_modules_cache:/app/primo-explore/node_modules
