@@ -7,7 +7,7 @@ mkdir -p cypress-results
 
 # Finds modules as modules/primo-explore-custom-module-1|modules/primo-explore-custom-module-2
 MODULES_PATTERN=$(echo $(ls -d modules/primo-explore-*) | tr ' ' '|')
-if [ git diff --name-only origin/master | grep -Eq "$MODULES_PATTERN" ] || [[ $CURRENT_BRANCH == master ]]; then
+if git diff --name-only origin/master | grep -Eq "$MODULES_PATTERN" || [[ $CURRENT_BRANCH == master ]] || [[ $CURRENT_BRANCH == development ]]; then
   echo "Running development module tests on all views."
 
   # gets all "CAPITALIZED" directoriesin custom/*
