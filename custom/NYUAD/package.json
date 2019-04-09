@@ -25,7 +25,7 @@
     "primo-explore-custom-no-search-results": "1.0.4",
     "primo-explore-custom-requests": "~0.0.13",
     "primo-explore-getit-to-link-resolver": "2.0.7",
-    "primo-explore-libraryh3lp-widget": "1.0.9",
+    "primo-explore-libraryh3lp-widget": "https://github.com/NYULibraries/primo-explore-libraryh3lp-widget#feature/js_embed",
     "primo-explore-nyu-eshelf": "3.1.7",
     "primo-explore-search-bar-sub-menu": "1.0.7"
   },

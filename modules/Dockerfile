@@ -1,4 +1,4 @@
-FROM quay.io/nyulibraries/primo-explore-devenv:1.0.6
+FROM quay.io/nyulibraries/primo-explore-devenv:1.0.7
 
 ENV VIEW ${VIEW}
 ENV CUSTOMIZATIONS_PATH /app/primo-explore
