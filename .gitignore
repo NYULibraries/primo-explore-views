@@ -5,3 +5,4 @@ yarn-error.log
 cypress-results
 karma-unit-test-results
 packages
+modules/primo-explore-*
