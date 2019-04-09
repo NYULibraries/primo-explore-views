@@ -68,45 +68,12 @@ services:
     - ./custom:/app/primo-explore/custom/
     - ./modules:/app/primo-explore/modules/
 
-  web-test-modules:
-    build:
-      context: .
-      dockerfile: modules/Dockerfile
-    image: primo-explore-views_modules
-    <<: *x-ports
-    environment:
-      <<: *x-environment
-      NODE_ENV: test
-    # volumes:
-    #  drastically speeds up re-installation processes by mounting node_modules and yarn cache directory
-    # - yarn_cache:/yarn
-    # - node_modules_cache:/app/primo-explore/node_modules
-    # - ./custom:/app/primo-explore/custom/
-    # - ./modules:/app/primo-explore/modules/
-
   # Creates VIEW packages using production version dependencies
   # Builds to /app/packages
   # VIEW=[VIEW-NAME] NODE_ENV=[env] docker-compose create-package
   create-package:
     <<: *x-build
     image: primo-explore-views
-    environment:
-      <<: *x-environment
-      NODE_ENV: ${NODE_ENV-staging}
-      PACK: 'true'
-    command: yarn build
-    # volumes:
-    # - ./packages/:/app/packages
-    # - ./custom:/app/primo-explore/custom/
-
-  # Creates VIEW packages using local dependencies, if package.json version is compatible with local version
-  # Builds to /app/packages
-  # VIEW=[VIEW-NAME] NODE_ENV=[env] docker-compose create-package
-  create-dev-modules-package:
-    build:
-      context: .
-      dockerfile: modules/Dockerfile
-    image: primo-explore-views_modules
     environment:
       <<: *x-environment
       NODE_ENV: ${NODE_ENV-staging}
@@ -132,24 +99,6 @@ services:
     # volumes:
     # - ./cypress/:/app/cypress
     # - ./custom:/app/primo-explore/custom/
-
-  # Runs e2e tests against the web-test-modules service (defined above)
-  # Uses local development version of modules from modules directory
-  # VIEW=[VIEW-NAME] docker-compose run e2e-test-modules
-  e2e-test-modules:
-    image: primo-explore-cypress
-    build: primo-explore-e2e-cypress
-    depends_on:
-      - web-test-modules
-    environment:
-      <<: *x-environment
-      DOMAIN: http://web-test-modules:8004/primo-explore/
-      NODE_ENV: test
-      CYPRESS_BASE_URL: http://web-test-modules:8004/primo-explore/
-    # volumes:
-    # - ./cypress/:/app/cypress
-    # - ./custom:/app/primo-explore/custom/
-    # - ./modules:/app/primo-explore/modules/
 
 volumes:
   yarn_cache:
