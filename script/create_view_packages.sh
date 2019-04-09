@@ -12,7 +12,7 @@ mkdir -p packages
 VIEWS=$(echo $(ls -d custom/*) | tr -d 'a-z/')
 for VIEW in $VIEWS
 do
-  if git diff --name-only origin/master | grep -q "custom/$VIEW/" || [[ $CURRENT_BRANCH == master ]]; then
+  if git diff --name-only origin/master | grep -q "custom/$VIEW/" || [[ $CURRENT_BRANCH == master ]] || [[ $CURRENT_BRANCH == development ]]; then
     NODE_ENV=staging VIEW=$VIEW docker-compose run create-package
     docker cp "$(docker ps -q -a -l -f name=create-package)":/app/packages/. packages
     docker-compose down
