@@ -45,29 +45,6 @@ services:
     # volumes:
     # - ./custom:/app/primo-explore/custom/
 
-  # Dockerfile that relies on local symlink to 'modules' if required version matches current version
-  # Has been separated from "web" so that by default only production-ready versions of packages are delivered
-  # Also, this is a much larger image since entire file tree must be copied over,
-  # and all development dependencies must be installed
-  # In order to actively develop with modules, mount the "modules" folder as a volume
-  # Webpack devserver must be restarted each time for a recompiled module to be rebundled into the package
-  # VIEW=[VIEW-NAME] NODE_ENV=[env] docker-compose up web-dev-modules
-  web-dev-modules:
-    build:
-      context: .
-      dockerfile: modules/Dockerfile
-    image: primo-explore-views_modules
-    <<: *x-ports
-    environment:
-      <<: *x-environment
-    volumes:
-    #  drastically speeds up re-installation processes by mounting node_modules and yarn cache directory
-    # to re-transpile a local dependency without restarting the service, run doker-compose exec sh -c 'cd /app/primo-explore/ && yarn prepare'
-    - yarn_cache:/yarn
-    - node_modules_cache:/app/primo-explore/node_modules
-    - ./custom:/app/primo-explore/custom/
-    - ./modules:/app/primo-explore/modules/
-
   # Creates VIEW packages using production version dependencies
   # Builds to /app/packages
   # VIEW=[VIEW-NAME] NODE_ENV=[env] docker-compose create-package
@@ -99,6 +76,30 @@ services:
     # volumes:
     # - ./cypress/:/app/cypress
     # - ./custom:/app/primo-explore/custom/
+
+
+  # Dockerfile that relies on local symlink to 'modules' if required version matches current version
+  # Has been separated from "web" so that by default only production-ready versions of packages are delivered
+  # Also, this is a much larger image since entire file tree must be copied over,
+  # and all development dependencies must be installed
+  # In order to actively develop with modules, mount the "modules" folder as a volume
+  # Webpack devserver must be restarted each time for a recompiled module to be rebundled into the package
+  # VIEW=[VIEW-NAME] NODE_ENV=[env] docker-compose up web-dev-modules
+  web-dev-modules:
+    build:
+      context: .
+      dockerfile: modules/Dockerfile
+    image: primo-explore-views_modules
+    <<: *x-ports
+    environment:
+      <<: *x-environment
+    volumes:
+    #  drastically speeds up re-installation processes by mounting node_modules and yarn cache directory
+    # to re-transpile a local dependency without restarting the service, run doker-compose exec sh -c 'cd /app/primo-explore/ && yarn prepare'
+    - yarn_cache:/yarn
+    - node_modules_cache:/app/primo-explore/node_modules
+    - ./custom:/app/primo-explore/custom/
+    - ./modules:/app/primo-explore/modules/
 
 volumes:
   yarn_cache:
