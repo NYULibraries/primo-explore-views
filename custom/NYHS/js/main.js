@@ -2,16 +2,15 @@ import '@orbis-cascade/primo-explore-custom-actions';
 import 'primo-explore-custom-search-bookmark-filter';
 import 'primo-explore-search-bar-sub-menu';
 
-import { viewName } from './viewName';
 import { customActionsConfig } from './customActions';
 import { customSearchBookmarkFilterConfig } from './customSearchBookmarkFilter';
 import { searchBarSubMenuItemsConfig } from './searchBarSubMenu';
 
 let app = angular.module('viewCustom', [
-                                        'customActions',
-                                        'customSearchBookmarkFilter',
-                                        'searchBarSubMenu'
-                                      ]);
+  'customActions',
+  'customSearchBookmarkFilter',
+  'searchBarSubMenu',
+]);
 
 app
   .constant(customSearchBookmarkFilterConfig.name, customSearchBookmarkFilterConfig.config)

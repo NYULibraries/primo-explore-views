@@ -2,17 +2,16 @@ import '@orbis-cascade/primo-explore-custom-actions';
 import 'primo-explore-nyu-eshelf';
 import 'primo-explore-search-bar-sub-menu';
 
-import { viewName } from './viewName';
 import { customActionsConfig } from './customActions';
 import { nyuEshelfConfig } from './nyuEshelf';
 import { searchBarSubMenuItemsConfig } from './searchBarSubMenu';
 
 let app = angular.module('viewCustom', [
-                                        'angularLoad',
-                                        'customActions',
-                                        'nyuEshelf',
-                                        'searchBarSubMenu'
-                                      ]);
+  'angularLoad',
+  'customActions',
+  'nyuEshelf',
+  'searchBarSubMenu'
+]);
 
 app
   .constant(nyuEshelfConfig.name, nyuEshelfConfig.config)
