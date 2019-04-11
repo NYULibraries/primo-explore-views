@@ -21,6 +21,7 @@ import customLoginConfig from 'Common/js/customLoginConfig';
 // Common alias does not work for HTML imports
 import customRequestsRequestInformationTemplate from '../../common/html/custom_requests_request_information.html';
 
+const vid = 'NYUSH';
 
 let app = angular.module('viewCustom', [
   'customActions',
@@ -41,7 +42,7 @@ app
   .constant(getitToLinkResolverConfig.name, getitToLinkResolverConfig.config)
   .constant(nyuEshelfConfig.name, nyuEshelfConfig.config)
   .constant(searchBarSubMenuItemsConfig.name, searchBarSubMenuItemsConfig.config)
-  .constant(customRequestsConfig.name, customRequestsConfig.config)
+  .constant(customRequestsConfig.name, customRequestsConfig.config(vid))
   .constant(customLoginConfig.name, customLoginConfig.config)
   .value('customNoSearchResultsTemplateUrl', `custom/${viewName}/html/noSearchResults.html`)
   .filter('encodeURIComponent', ['$window', function($window) {

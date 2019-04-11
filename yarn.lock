@@ -4257,20 +4257,20 @@ primo-explore-custom-library-card-menu@1.1.6:
   resolved "https://registry.yarnpkg.com/primo-explore-custom-library-card-menu/-/primo-explore-custom-library-card-menu-1.1.6.tgz#d8dbda15baa38eaef13339167cc1e9a5d61c8e99"
   integrity sha512-HUq3gLdcqLjOjoytglB0PTumIZ8wbdjinV5Sq/K/VEtDGpxFEJgtB7iua5IdAivKKWI52bewVFZPANyhqJ8Bog==
 
-primo-explore-custom-login@~0.0.5:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/primo-explore-custom-login/-/primo-explore-custom-login-0.0.7.tgz#674f76c05182fcbe410ab8bedddac53faa3fa91b"
-  integrity sha512-9J8t+iUU+U3JqKVTmM0v9gc9DwfYF32m+XIIbI0ptFa9c6YKtjvsJhE928r+Uj78VCV+DD+4OOIS78Pz815aug==
+primo-explore-custom-login@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/primo-explore-custom-login/-/primo-explore-custom-login-1.0.0.tgz#89336edb821797c9ada40b41653447ee15c6ccb9"
+  integrity sha512-SunzyC38GJ/Ou2hbbHxxWB5vS6MUAej3+uaShxrf+IYbHdtxN2QdiE2kAn4J/t+LCedmSfKDch6uvVxBsZ7BgA==
 
 primo-explore-custom-no-search-results@1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/primo-explore-custom-no-search-results/-/primo-explore-custom-no-search-results-1.0.4.tgz#358d17e9cc242ca9949bdfb7e14fe3920e83f493"
   integrity sha512-XNYHylYnU7TOkz8kTXfzS9z2nxP9fp0Ai6lo9OKGsR/y+k5/w8c+1mmxFzcznaCED28ktRlEnG3OwlxiSCWiig==
 
-primo-explore-custom-requests@~0.0.13:
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/primo-explore-custom-requests/-/primo-explore-custom-requests-0.0.15.tgz#309a426184e3c7f99cb643806a5ca635a4ba352a"
-  integrity sha512-+QJYaicl9eOyERY6tXyC1ojLzrnYz4vbgBFmatcYF5O86BKS38nx4bNZLV1XCXpfm5PqjGtFH1+y1raF3a0qTQ==
+primo-explore-custom-requests@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/primo-explore-custom-requests/-/primo-explore-custom-requests-1.0.0.tgz#6a547bf6564a53808cce9c3aefd8b60853b48b01"
+  integrity sha512-frKtJYpx4tepRQ0/gd9UtepVXsSJvz69WT4YNV1UzD9dPx40ftb0/XM+Isxgv2p8QqUBAg4lxyvzQ015HFbc4w==
   dependencies:
     ng-attr "^0.0.1"
 
@@ -4297,9 +4297,10 @@ primo-explore-google-analytics@1.0.0:
     angulartics "^1.6.0"
     angulartics-google-tag-manager "^0.0.1"
 
-"primo-explore-libraryh3lp-widget@https://github.com/NYULibraries/primo-explore-libraryh3lp-widget#feature/js_embed":
+primo-explore-libraryh3lp-widget@1.1.0:
   version "1.1.0"
-  resolved "https://github.com/NYULibraries/primo-explore-libraryh3lp-widget#bda8955f2262bffabf519e588f2ecca20a8a0c34"
+  resolved "https://registry.yarnpkg.com/primo-explore-libraryh3lp-widget/-/primo-explore-libraryh3lp-widget-1.1.0.tgz#2b1059fc507a66fa071cae3434285b63d9c19e53"
+  integrity sha512-AcBZMv7omn/p6qe/IvtPscNzrMx0oMRT5zoaYemtmBe/yrUTt6Piel0qWO7yednsyZSbbFxt+lvunXnXpbFGfA==
 
 primo-explore-nyu-eshelf@3.1.7:
   version "3.1.7"
