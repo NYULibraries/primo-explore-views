@@ -12,7 +12,7 @@ const loginIcon = {
 
 export default {
   name: 'primoExploreCustomRequestsConfig',
-  config: {
+  config: (institutionVid) => ({
     buttonIds: ['login', 'ezborrow', 'ill', 'afc'],
     buttonGenerators: {
       ezborrow: ({ item, config }) => {
@@ -26,11 +26,16 @@ export default {
           prmIconAfter: externalLinkIcon,
         };
       },
-      ill: ({ item, config }) => ({
-        href: `${config.values.baseUrls.ill}?${item.delivery.GetIt2.link.match(/resolve?(.*)/)}`,
-        label: 'Request ILL',
-        prmIconAfter: externalLinkIcon,
-      }),
+      ill: ({ item, config }) => {
+        const getitLink = config.values.functions.getitLink(item);
+        const openURLQuery = getitLink ? getitLink.match(/resolve?(.*)/) : '';
+
+        return {
+          href: `${config.values.baseUrls.ill}?${openURLQuery}`,
+          label: 'Request ILL',
+          prmIconAfter: externalLinkIcon,
+        };
+      },
       login: () => ({
         prmIconBefore: loginIcon,
         label: 'Login to see request options',
@@ -126,8 +131,23 @@ export default {
           const allUnavailable = availabilityStatuses.every(status => status === false);
 
           return availabilityStatuses.map(isAvailable => allUnavailable || (itemsAreUnique && !isAvailable));
-        }
+        },
+        getitLink: (item) => {
+          const getitLinkFields = {
+            NYU: 'lln10',
+            NYUAD: 'lln11',
+            NYUSH: 'lln12',
+            CU: 'lln13',
+          };
+          const getitLinkField = getitLinkFields[institutionVid];
+
+          try {
+            return item.delivery.link.filter(({ displayLabel }) => displayLabel === getitLinkField)[0].linkURL;
+          } catch (e) {
+            return undefined;
+          }
+        },
       }
     },
-  }
+  })
 };

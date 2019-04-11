@@ -22,6 +22,7 @@ import customLoginConfig from 'Common/js/customLoginConfig';
 // Common alias does not work for HTML imports
 import customRequestsRequestInformationTemplate from '../html/custom_requests_request_information.html';
 
+const vid = 'NYU';
 
 let app = angular.module('viewCustom', [
   'angularLoad',
@@ -45,7 +46,7 @@ app
   .constant(nyuEshelfConfig.name, nyuEshelfConfig.config)
   .constant(searchBarSubMenuItemsConfig.name, searchBarSubMenuItemsConfig.config)
   .constant(googleAnalyticsConfig.name, googleAnalyticsConfig.config)
-  .constant(customRequestsConfig.name, customRequestsConfig.config)
+  .constant(customRequestsConfig.name, customRequestsConfig.config(vid))
   .constant(customLoginConfig.name, customLoginConfig.config)
   .component('prmActionListAfter', {
     template: customActionsConfig.template
