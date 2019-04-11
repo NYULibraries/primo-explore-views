@@ -17,7 +17,7 @@ COPY custom/BHS/package.json ./custom/BHS/package.json
 COPY custom/CU/package.json ./custom/CU/package.json
 
 # Installs production version of dependencies from NPM
-RUN yarn install --prod --frozen-lockfile
+RUN yarn install --prod --frozen-lockfile --ignore-optional
 
 # Copies remaining VIEW files
 COPY ./custom/ ./custom/
