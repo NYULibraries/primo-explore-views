@@ -4274,13 +4274,6 @@ primo-explore-custom-requests@1.0.0:
   dependencies:
     ng-attr "^0.0.1"
 
-primo-explore-custom-requests@~0.0.13:
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/primo-explore-custom-requests/-/primo-explore-custom-requests-0.0.15.tgz#309a426184e3c7f99cb643806a5ca635a4ba352a"
-  integrity sha512-+QJYaicl9eOyERY6tXyC1ojLzrnYz4vbgBFmatcYF5O86BKS38nx4bNZLV1XCXpfm5PqjGtFH1+y1raF3a0qTQ==
-  dependencies:
-    ng-attr "^0.0.1"
-
 primo-explore-custom-search-bookmark-filter@1.0.8:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/primo-explore-custom-search-bookmark-filter/-/primo-explore-custom-search-bookmark-filter-1.0.8.tgz#23003487de6461c3704067017c01195a2eda675a"
@@ -4304,9 +4297,10 @@ primo-explore-google-analytics@1.0.0:
     angulartics "^1.6.0"
     angulartics-google-tag-manager "^0.0.1"
 
-"primo-explore-libraryh3lp-widget@https://github.com/NYULibraries/primo-explore-libraryh3lp-widget#feature/js_embed":
+primo-explore-libraryh3lp-widget@1.1.0:
   version "1.1.0"
-  resolved "https://github.com/NYULibraries/primo-explore-libraryh3lp-widget#bda8955f2262bffabf519e588f2ecca20a8a0c34"
+  resolved "https://registry.yarnpkg.com/primo-explore-libraryh3lp-widget/-/primo-explore-libraryh3lp-widget-1.1.0.tgz#2b1059fc507a66fa071cae3434285b63d9c19e53"
+  integrity sha512-AcBZMv7omn/p6qe/IvtPscNzrMx0oMRT5zoaYemtmBe/yrUTt6Piel0qWO7yednsyZSbbFxt+lvunXnXpbFGfA==
 
 primo-explore-nyu-eshelf@3.1.7:
   version "3.1.7"
