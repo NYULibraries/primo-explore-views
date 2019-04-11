@@ -4274,13 +4274,6 @@ primo-explore-custom-requests@1.0.0:
   dependencies:
     ng-attr "^0.0.1"
 
-primo-explore-custom-requests@~0.0.13:
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/primo-explore-custom-requests/-/primo-explore-custom-requests-0.0.15.tgz#309a426184e3c7f99cb643806a5ca635a4ba352a"
-  integrity sha512-+QJYaicl9eOyERY6tXyC1ojLzrnYz4vbgBFmatcYF5O86BKS38nx4bNZLV1XCXpfm5PqjGtFH1+y1raF3a0qTQ==
-  dependencies:
-    ng-attr "^0.0.1"
-
 primo-explore-custom-search-bookmark-filter@1.0.8:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/primo-explore-custom-search-bookmark-filter/-/primo-explore-custom-search-bookmark-filter-1.0.8.tgz#23003487de6461c3704067017c01195a2eda675a"
