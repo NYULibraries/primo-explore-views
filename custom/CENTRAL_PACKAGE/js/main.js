@@ -1,12 +1,11 @@
 import * as Sentry from '@sentry/browser';
 import sentryConfig from './sentryConfig';
 
-import 'primo-explore-custom-no-search-results';
+import noSearchResultsTemplate from '../html/noSearchResults.html';
 
 let app = angular.module('centralCustom', [
-                                        'angularLoad',
-                                        'customNoSearchResults'
-                                      ]);
+  'angularLoad',
+]);
 
 app
   .filter('encodeURIComponent', ['$window', function($window) {
@@ -24,7 +23,19 @@ app
         }
       };
     }]);
-  }]);
+  }])
+  .component('prmNoSearchResultAfter', {
+    bindings: {
+      parentCtrl: '<',
+    },
+    controller: function() {
+      const ctrl = this;
+      ctrl.$onInit = function() {
+        ctrl.vid = new RegExp('[?&]vid(=([^&#]*)|&|#|$)').exec(document.location.search)[2];
+      };
+    },
+    template: noSearchResultsTemplate,
+  });
 
 app.run(runBlock);
 

@@ -15,6 +15,7 @@ describe('primo-explore-custom-no-search-results', function () {
       const links = {
         ['Request a book from E-ZBorrow (NYU only)']: `https://login.library.nyu.edu/ezborrow?query=asf%3Bafsd%3B~2F1!`,
         [`Search WorldCat for items in nearby libraries`]: `http://www.worldcat.org/search?qt=worldcat_org_all&q=asf%3Bafsd%3B~2F1!`,
+        [`Have a full citation? Use the Citation Linker`]: `/primo-explore/citationlinker?vid=NYU`,
         [`Ask a Librarian`]: `http://library.nyu.edu/ask`,
       }
 
