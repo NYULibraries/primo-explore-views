@@ -1,8 +1,7 @@
 /* Search bar */
 prm-search-bar,
 prm-tags-search-bar,
-prm-browse-search-bar,
-prm-atoz-search-bar {
+prm-browse-search-bar {
   background-image: url("../../img/banner-bg.png");
   background-color: $background_light_gray;
   background-position: center center;
@@ -48,19 +47,4 @@ input::-moz-placeholder,
 input:-moz-placeholder,
 input:-ms-input-placeholder  {
   color: $text_black !important;
-}
-
-/* prm-atoz-search-bar */
-prm-atoz-search-bar {
-  .search-scope {
-    background-color: white;
-    border-color: #f5f7fa;
-    font-weight: 600;
-  }
-
-  prm-alphabet-toolbar {
-    a {
-      color: $text_black !important;
-    }
-  }
 }
