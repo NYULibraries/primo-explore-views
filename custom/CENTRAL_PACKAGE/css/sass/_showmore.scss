@@ -1,0 +1,14 @@
+prm-location-items {
+  button.button-link.md-button {
+    width: calc(100% - 1em);
+    background-color: white;
+    margin-left: 1em !important;
+    padding: .75em 2em;
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, .03), 0 5px 5px -3px rgba(0, 0, 0, .07);
+    border: 1px solid rgba(0, 0, 0, .07);
+
+    &:hover {
+      background-color: rgba(2, 123, 194, 0.1) !important;
+    }
+  }
+}
