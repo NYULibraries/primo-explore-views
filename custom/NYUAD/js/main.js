@@ -8,32 +8,30 @@ import 'primo-explore-search-bar-sub-menu';
 import 'primo-explore-custom-requests';
 import 'primo-explore-custom-login';
 
-import { viewName } from './viewName';
-import { customActionsConfig } from './customActions';
-import { customLibraryCardMenuItemsConfig } from './customLibraryCardMenu';
-import { clickableLogoLinkConfig } from './clickableLogoToAnyLink';
-import { libraryh3lpWidgetConfig } from './libraryh3lpWidget';
-import { getitToLinkResolverConfig } from './getitToLinkResolver';
-import { nyuEshelfConfig } from './nyuEshelf';
-import { searchBarSubMenuItemsConfig } from './searchBarSubMenu';
+import viewName from './viewName';
+import customActionsConfig from './customActions';
+import customLibraryCardMenuItemsConfig from './customLibraryCardMenu';
+import clickableLogoLinkConfig from './clickableLogoToAnyLink';
+import libraryh3lpWidgetConfig from './libraryh3lpWidget';
+import getitToLinkResolverConfig from './getitToLinkResolver';
+import nyuEshelfConfig from './nyuEshelf';
+import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
 // Common alias does not work for HTML imports
 import customRequestsRequestInformationTemplate from '../../common/html/custom_requests_request_information.html';
 
-const vid = 'NYUAD';
-
 let app = angular.module('viewCustom', [
-                                        'customActions',
-                                        'customLibraryCardMenu',
-                                        'clickableLogoToAnyLink',
-                                        'libraryh3lpWidget',
-                                        'getitToLinkResolver',
-                                        'nyuEshelf',
-                                        'searchBarSubMenu',
-                                        'primoExploreCustomLogin',
-                                        'primoExploreCustomRequests',
-                                      ]);
+  'customActions',
+  'customLibraryCardMenu',
+  'clickableLogoToAnyLink',
+  'libraryh3lpWidget',
+  'getitToLinkResolver',
+  'nyuEshelf',
+  'searchBarSubMenu',
+  'primoExploreCustomLogin',
+  'primoExploreCustomRequests',
+]);
 
 app
   .constant(customLibraryCardMenuItemsConfig.name, customLibraryCardMenuItemsConfig.config)
@@ -42,9 +40,9 @@ app
   .constant(getitToLinkResolverConfig.name, getitToLinkResolverConfig.config)
   .constant(nyuEshelfConfig.name, nyuEshelfConfig.config)
   .constant(searchBarSubMenuItemsConfig.name, searchBarSubMenuItemsConfig.config)
-  .constant(customRequestsConfig.name, customRequestsConfig.config(vid))
+  .constant(customRequestsConfig.name, customRequestsConfig.config(viewName))
   .constant(customLoginConfig.name, customLoginConfig.config)
-  .value('customNoSearchResultsTemplateUrl', 'custom/'+viewName+'/html/noSearchResults.html')
+  .value('customNoSearchResultsTemplateUrl', `custom/${viewName}/html/no_search_results.html`)
   .filter('encodeURIComponent', ['$window', function($window) {
     return $window.encodeURIComponent;
   }])

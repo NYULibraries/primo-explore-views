@@ -4262,7 +4262,7 @@ primo-explore-custom-login@1.0.0:
   resolved "https://registry.yarnpkg.com/primo-explore-custom-login/-/primo-explore-custom-login-1.0.0.tgz#89336edb821797c9ada40b41653447ee15c6ccb9"
   integrity sha512-SunzyC38GJ/Ou2hbbHxxWB5vS6MUAej3+uaShxrf+IYbHdtxN2QdiE2kAn4J/t+LCedmSfKDch6uvVxBsZ7BgA==
 
-primo-explore-custom-no-search-results@1.0.4:
+primo-explore-custom-no-search-results@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/primo-explore-custom-no-search-results/-/primo-explore-custom-no-search-results-1.0.4.tgz#358d17e9cc242ca9949bdfb7e14fe3920e83f493"
   integrity sha512-XNYHylYnU7TOkz8kTXfzS9z2nxP9fp0Ai6lo9OKGsR/y+k5/w8c+1mmxFzcznaCED28ktRlEnG3OwlxiSCWiig==
