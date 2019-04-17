@@ -1,4 +1,4 @@
-FROM quay.io/nyulibraries/primo-explore-devenv:1.0.7
+FROM quay.io/nyulibraries/primo-explore-devenv:1.0.8
 
 ENV VIEW ${VIEW}
 ENV DEVENV_PATH /app/
@@ -17,7 +17,7 @@ COPY custom/BHS/package.json ./custom/BHS/package.json
 COPY custom/CU/package.json ./custom/CU/package.json
 
 # Installs production version of dependencies from NPM
-RUN yarn install --prod --frozen-lockfile --ignore-optional
+RUN yarn install --prod --frozen-lockfile --ignore-optional && yarn cache clean
 
 # Copies remaining VIEW files
 COPY ./custom/ ./custom/
@@ -27,5 +27,4 @@ WORKDIR ${DEVENV_PATH}
 
 EXPOSE 8004 3001
 
-# Webpacks a functional CENTRAL_PACKAGE in container before running devServer
-CMD VIEW=CENTRAL_PACKAGE NODE_ENV=${NODE_ENV-development} yarn build && VIEW=${VIEW} yarn start
+CMD VIEW=${VIEW} yarn build && yarn start

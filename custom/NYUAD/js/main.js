@@ -133,8 +133,12 @@ app
 
 app.run(runBlock);
 
-runBlock.$inject = ['nyuEshelfService'];
+runBlock.$inject = [
+  'nyuEshelfService',
+  'libraryh3lpInjectionService',
+];
 
-function runBlock(nyuEshelfService) {
+function runBlock(nyuEshelfService, libraryh3lpInjectionService) {
   nyuEshelfService.initEshelf();
+  libraryh3lpInjectionService.injectScript();
 }
