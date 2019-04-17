@@ -26,6 +26,10 @@ do
   fi
 done
 
-if ls -A packages/*; then
-  tar -czvf packages/package-files.zip packages/*
+if ls -A packages/*production*.zip; then
+  tar -czvf packages/package-files-production.zip packages/*production*.zip
+fi
+
+if ls -A packages/*staging*.zip; then
+  tar -czvf packages/package-files-staging.zip packages/*staging*.zip
 fi
