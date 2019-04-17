@@ -1,7 +1,8 @@
 export default {
   name: 'libraryh3lpWidgetConfig',
   config: {
-    url: 'https://libraryh3lp.com/chat/askbobst@chat.libraryh3lp.com?skin=23106&theme=gota&title=Ask+NYU+Libraries&identity=NYU',
+    mode: 'script',
+    url: 'libraryh3lp.com/js/libraryh3lp.js?7516',
     prompt: 'Chat with us',
     icon: {
       set: 'communication',
