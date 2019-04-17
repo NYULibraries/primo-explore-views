@@ -27,5 +27,4 @@ WORKDIR ${DEVENV_PATH}
 
 EXPOSE 8004 3001
 
-# Webpacks a functional CENTRAL_PACKAGE in container before running devServer
-CMD VIEW=CENTRAL_PACKAGE NODE_ENV=${NODE_ENV-development} yarn build && VIEW=${VIEW} yarn start
+CMD VIEW=${VIEW} yarn build && yarn start
