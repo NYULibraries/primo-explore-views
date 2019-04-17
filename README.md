@@ -22,7 +22,7 @@ With recommended volumes enabled in the `docker-compose.yml`:
 With Docker and docker-compose installed:
 
 1. Configure `docker-compose.yml` to fit your institutional setup in the `x-environment` section. ([docker-compose environment variables](https://docs.docker.com/compose/environment-variables/))
-1. Ensure `volumes` to local directories are configured in `docker-compose.yml`
+1. Ensure `volumes` to local directories are configured in `docker-compose.yml`. The `custom/` directory should be mounted to `/app/primo-explore/custom` in the image.
 1. Use the `up` command to `docker-compose build web`
 1. `NODE_ENV=[stage] VIEW=[view_name] docker-compose up web`
 
@@ -30,22 +30,29 @@ On your local machine, the developer server will be accessible at `http://localh
 
 Within the [docker network](https://docs.docker.com/network/), this will be accordingly be accessible at the address `http://web:8004`
 
-The server will automatically refresh pages if `CENTRAL_PACKAGE` or `NYU` files are changed. However, `.css` or `.js` `CENTRAL_PACKAGE` changes will not be reflected without running a recompile process for `CENTRAL_PACKAGE` simultaneously
-
-(Optional)
-```sh
-NODE_ENV=[stage] VIEW=CENTRAL_PACKAGE docker-compose run web
-```
+The server will automatically refresh pages and reflect changes if `CENTRAL_PACKAGE` or your view folder's (e.g. `NYU` for `vid=NYU`) files are changed.
 
 ### Entry files
 
-`js/main.js` is considered the 'entry' file for compiling JavaScript files. You can use ES6 `import` syntax here to consume dependencies.
+* `js/main.js` is considered the 'entry' file for compiling JavaScript files. You can use ES6 `import` syntax here to utilize dependencies.
+    ```js
+    // import from node_modules with side-effects and no assignment
+    import 'primo-explore-clickable-logo-to-any-link';
 
-`css/sass/main.scss` is the 'entry' file for compiling to CSS. To refer to CSS files in the `node_modules` directory, you can simply use `~` as an alias.
+    // impoort from node_modules and assign default export
+    import googleAnalyticsModule from 'primo-explore-google-analytics';
 
-```scss
-@import '~primo-explore-clickable-logo-to-any-link/css/custom1.css';
-```
+    // import from local files and assign named export
+    import { config } from './customConfig'
+    ```
+* `css/sass/main.scss` is the 'entry' file for compiling to CSS. To refer to CSS files in the `node_modules` directory, you can simply use `~` as an alias.
+    ```scss
+    // import local modules (e.g. _searchbar.scss)
+    @import 'searchbar';
+
+    // import from node_module files
+    @import '~primo-explore-clickable-logo-to-any-link/css/custom1.css';
+    ```
 
 ## Run Tests
 
