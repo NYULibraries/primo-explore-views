@@ -8,7 +8,9 @@ import 'primo-explore-search-bar-sub-menu';
 import 'primo-explore-google-analytics';
 import 'primo-explore-custom-requests';
 import 'primo-explore-custom-login';
+import 'primo-explore-custom-no-search-results';
 
+import viewName from './viewName';
 import customActionsConfig from './customActions';
 import customLibraryCardMenuItemsConfig from './customLibraryCardMenu';
 import clickableLogoLinkConfig from './clickableLogoToAnyLink';
@@ -22,7 +24,6 @@ import customLoginConfig from 'Common/js/customLoginConfig';
 // Common alias does not work for HTML imports
 import customRequestsRequestInformationTemplate from '../html/custom_requests_request_information.html';
 
-const vid = 'NYU';
 
 let app = angular.module('viewCustom', [
   'angularLoad',
@@ -46,8 +47,9 @@ app
   .constant(nyuEshelfConfig.name, nyuEshelfConfig.config)
   .constant(searchBarSubMenuItemsConfig.name, searchBarSubMenuItemsConfig.config)
   .constant(googleAnalyticsConfig.name, googleAnalyticsConfig.config)
-  .constant(customRequestsConfig.name, customRequestsConfig.config(vid))
+  .constant(customRequestsConfig.name, customRequestsConfig.config(viewName))
   .constant(customLoginConfig.name, customLoginConfig.config)
+  .value('customNoSearchResultsTemplateUrl', `custom/${viewName}/html/no_search_results.html`)
   .component('prmActionListAfter', {
     template: customActionsConfig.template
   })

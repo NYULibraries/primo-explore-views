@@ -4,15 +4,15 @@ import sentryConfig from './sentryConfig';
 import 'primo-explore-custom-no-search-results';
 
 let app = angular.module('centralCustom', [
-                                        'angularLoad',
-                                        'customNoSearchResults'
-                                      ]);
+  'angularLoad',
+  'customNoSearchResults',
+]);
 
 app
   .filter('encodeURIComponent', ['$window', function($window) {
     return $window.encodeURIComponent;
   }])
-  .value('customNoSearchResultsTemplateUrl', 'custom/CENTRAL_PACKAGE/html/noSearchResults.html')
+  .value('customNoSearchResultsTemplateUrl', 'custom/CENTRAL_PACKAGE/html/no_search_results.html')
   .config(['$httpProvider', function ($httpProvider) {
     // log response errors using $http to Sentry
     $httpProvider.interceptors.push(['$q', function ($q) {
