@@ -27,4 +27,4 @@ WORKDIR ${DEVENV_PATH}
 
 EXPOSE 8004 3001
 
-CMD VIEW=${VIEW} yarn start
+CMD VIEW=${VIEW} yarn build && yarn start
