@@ -70,7 +70,7 @@ services:
       - web-test
     environment:
       <<: *x-environment
-      DOMAIN: http://web-test:8004/primo-explore/
+      DOMAIN: http://web-test:8004/primo-explore/search
       NODE_ENV: test
       CYPRESS_BASE_URL: http://web-test:8004/primo-explore/
     # volumes:
