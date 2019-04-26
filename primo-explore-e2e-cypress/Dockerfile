@@ -1,6 +1,6 @@
-FROM cypress/browsers:chrome69
+FROM cypress/browsers:node8.15.1-chrome73
 
-ENV INSTALL_PATH=/app/
+ENV INSTALL_PATH /app/
 
 COPY package.json yarn.lock /tmp/
 RUN cd /tmp && yarn install --frozen-lockfile --ignore-optional \
@@ -8,6 +8,11 @@ RUN cd /tmp && yarn install --frozen-lockfile --ignore-optional \
   && cd $INSTALL_PATH \
   && cp -R /tmp/node_modules $INSTALL_PATH \
   && rm -r /tmp/* && yarn cache clean
+
+WORKDIR ${INSTALL_PATH}
+
+COPY package.json yarn.lock ./
+
 RUN yarn cypress verify
 
 COPY . .
