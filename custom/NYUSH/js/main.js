@@ -44,7 +44,7 @@ app
   .constant(searchBarSubMenuItemsConfig.name, searchBarSubMenuItemsConfig.config)
   .constant(customRequestsConfig.name, customRequestsConfig.config(vid))
   .constant(customLoginConfig.name, customLoginConfig.config)
-  .value('customNoSearchResultsTemplateUrl', `custom/${viewName}/html/noSearchResults.html`)
+  .value('customNoSearchResultsTemplateUrl', `custom/${viewName}/html/no_search_results.html`)
   .filter('encodeURIComponent', ['$window', function($window) {
     return $window.encodeURIComponent;
   }])
