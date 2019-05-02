@@ -1,2 +1,2 @@
 // vid
-export let viewName = "NYUAD";
+export default "NYUAD";

@@ -5,7 +5,6 @@ import 'primo-explore-getit-to-link-resolver';
 import 'primo-explore-nyu-eshelf';
 import 'primo-explore-search-bar-sub-menu';
 
-import { viewName } from './viewName';
 import { customActionsConfig } from './customActions';
 import { customLibraryCardMenuItemsConfig } from './customLibraryCardMenu';
 import { clickableLogoLinkConfig } from './clickableLogoToAnyLink';
@@ -14,14 +13,14 @@ import { nyuEshelfConfig } from './nyuEshelf';
 import { searchBarSubMenuItemsConfig } from './searchBarSubMenu';
 
 let app = angular.module('viewCustom', [
-                                        'angularLoad',
-                                        'customActions',
-                                        'customLibraryCardMenu',
-                                        'clickableLogoToAnyLink',
-                                        'getitToLinkResolver',
-                                        'nyuEshelf',
-                                        'searchBarSubMenu'
-                                      ]);
+  'angularLoad',
+  'customActions',
+  'customLibraryCardMenu',
+  'clickableLogoToAnyLink',
+  'getitToLinkResolver',
+  'nyuEshelf',
+  'searchBarSubMenu',
+]);
 
 app
   .constant(customLibraryCardMenuItemsConfig.name, customLibraryCardMenuItemsConfig.config)

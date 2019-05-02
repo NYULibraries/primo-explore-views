@@ -1,4 +1,4 @@
-export let libraryh3lpWidgetConfig = {
+export default {
   name: 'libraryh3lpWidgetConfig',
   config: {
     mode: 'script',
