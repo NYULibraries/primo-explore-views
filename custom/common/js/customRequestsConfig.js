@@ -105,7 +105,7 @@ export default {
         checkIsAvailable: item => {
           const unavailablePatterns = [
             /Requested/g,
-            /^\d{2}\/\d{2}\/\d{2}/g, // starts with dd/dd/dd
+            /\d{2}\/\d{2}\/\d{2}/g, // dd/dd/dd appears anywhere in the string
             'Requested',
             'Billed as Lost',
             'Claimed Returned',
