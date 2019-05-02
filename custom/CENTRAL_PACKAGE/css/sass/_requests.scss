@@ -1,3 +1,7 @@
 md-input-container label:not(.md-no-float):not(._md-container-ignore) {
   overflow: visible;
 }
+
+md-content>prm-request>div.form-focus.service-form>div.service-form-dynamic-panel>form>div.layout-align-center-center.layout-row.flex {
+  width: fit-content;
+}
