@@ -1,7 +1,7 @@
 describe('primo-explore-custom-requests', () => {
   describe('if the user is not logged in', () => {
     before(() => {
-      cy.visit('/fulldisplay?docid=nyu_aleph006344819&vid=NYU', {
+      cy.visit('/fulldisplay?docid=nyu_aleph006344819&vid=NYUAD', {
         onBeforeLoad: (contentWindow) => {
           contentWindow.$$mockUserLoggedIn = false
         }

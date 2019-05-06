@@ -26,7 +26,7 @@ describe('primo-explore-libraryh3lp-widget', () => {
       })
 
       it('it opens a visible libraryh3lp iframe', () => {
-        cy.get('.libraryh3lp iframe')
+        cy.get('div.chat-frame-wrap')
           .should('be.visible')
       })
 
@@ -34,7 +34,7 @@ describe('primo-explore-libraryh3lp-widget', () => {
         cy.get('button.chat-close')
           .should('be.visible')
           .click('center')
-          .get('.libraryh3lp iframe')
+          .get('div.chat-frame-wrap')
           .should('not.be.visible')
       })
     })
