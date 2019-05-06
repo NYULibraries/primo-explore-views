@@ -14,10 +14,10 @@ VIEWS=$(echo $(ls -d custom/*) | tr -d 'a-z/')
 for VIEW in $VIEWS
 do
   # If VIEW or common folder changed, run tests
-  if git diff --name-only origin/master | grep -Eq "custom/($VIEW|common)/" || [[ $CURRENT_BRANCH == master ]] || [[ $CURRENT_BRANCH == development ]]; then
+  if git diff --name-only origin/master | grep -Eq "/($VIEW|common)/" || [[ $CURRENT_BRANCH == master ]] || [[ $CURRENT_BRANCH == development ]]; then
     echo "Files changed in $VIEW package. Running tests."
     # will add any non-zero exit code to ANY_FAILS if a failure occurred
-    VIEW=$VIEW docker-compose run e2e bash -c 'script/wait_for.sh http://web-test:8004/primo-explore/search && yarn cypress run --browser=chrome --spec="cypress/integration/$VIEW/**/*.spec.js" --reporter="junit" --reporter-options="mochaFile=test-results/$VIEW/results-[hash].xml"' \
+    VIEW=$VIEW docker-compose run e2e bash -c 'script/wait_for.sh http://web-test:8004/primo-explore/search && yarn cypress run --spec="cypress/integration/$VIEW/**/*.spec.js" --reporter="junit" --reporter-options="mochaFile=test-results/$VIEW/results-[hash].xml"' \
       || ANY_FAILS=$ANY_FAILS$?
     docker cp "$(docker ps -q -a -l -f name=e2e)":/app/cypress/videos cypress-results/ || : # escape failure if video does not exist
     docker cp "$(docker ps -q -a -l -f name=e2e)":/app/cypress/screenshots cypress-results/ || : # screenshots only on failures

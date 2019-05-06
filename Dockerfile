@@ -1,4 +1,4 @@
-FROM quay.io/nyulibraries/primo-explore-devenv:1.0.8
+FROM quay.io/nyulibraries/primo-explore-devenv:1.1.0
 
 ENV VIEW ${VIEW}
 ENV DEVENV_PATH /app/
@@ -27,4 +27,3 @@ WORKDIR ${DEVENV_PATH}
 
 EXPOSE 8004 3001
 
-CMD VIEW=${VIEW} yarn build && yarn start
