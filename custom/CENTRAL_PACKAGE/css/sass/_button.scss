@@ -14,7 +14,7 @@ a.bobcat-custom-button-nyu {
   border-radius: 3px;
   display: inline-block;
 
-  &:hover {
+  &:hover, &:focus {
     background-color: #6c07ae;
     color: #fff;
     text-decoration: underline;
