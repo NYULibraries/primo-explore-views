@@ -16,7 +16,6 @@ describe('primo-explore-custom-requests', () => {
     it(`has a Login to see request options button`, () => {
       cy.get('primo-explore-custom-requests button')
         .contains(`Login to see request options`)
-        .should('exist')
         .should('be.visible')
     })
 
