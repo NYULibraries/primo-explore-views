@@ -131,6 +131,22 @@ app
   })
   .component('prmLocationItemsAfter', {
     template: `${customRequestsRequestInformationTemplate}`
+  })
+  .component('prmCitationLinkerAfter', {
+    template: /* html */`
+      <footer layout="row" id="prm-citation-linker-after-content">
+        <div flex="0" flex-md="15" flex-lg="20" flex-xl="30"></div>
+        <div class="padding-left-medium padding-right-medium margin-bottom-large" layout="column" flex>
+          <h2><strong>We want to make your research easier</strong></h2>
+          <a href="#" class="bobcat-custom-button-nyu" style="">
+            TELL US HOW YOU USE THIS TOOL
+            <prm-icon external-link icon-type="svg" svg-icon-set="primo-ui" icon-definition="open-in-new">
+            </prm-icon>
+          </a>
+        </div>
+        <div flex="0" flex-md="15" flex-lg="20" flex-lg-plus flex-xl="30"></div>
+      </footer>
+    `
   });
 
 app.run(runBlock);
