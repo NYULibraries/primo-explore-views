@@ -19,11 +19,12 @@ import getitToLinkResolverConfig from './getitToLinkResolver';
 import nyuEshelfConfig from './nyuEshelf';
 import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import googleAnalyticsConfig from './googleAnalyticsConfig';
+import getitLegacyNotification from './getitLegacyNotification';
 import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
 // Common alias does not work for HTML imports
 import customRequestsRequestInformationTemplate from '../html/custom_requests_request_information.html';
-import getitLegacyNotification from './getitLegacyNotification';
+import citationLinkerAfterTemplate from '../html/citation_linker_after.html';
 
 
 let app = angular.module('viewCustom', [
@@ -145,6 +146,9 @@ app
   })
   .component('prmLocationItemsAfter', {
     template: `${customRequestsRequestInformationTemplate}`
+  })
+  .component('prmCitationLinkerAfter', {
+    template: citationLinkerAfterTemplate,
   });
 
 app.run(runBlock);

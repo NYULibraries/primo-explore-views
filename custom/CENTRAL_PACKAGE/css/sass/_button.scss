@@ -1,0 +1,26 @@
+a.bobcat-custom-button-nyu {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0 none;
+  box-shadow: none;
+  background: #57068c;
+  color: #fff;
+  font-weight: 400;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  padding: 15px 30px;
+  border-radius: 3px;
+  display: inline-block;
+
+  &:hover, &:focus {
+    background-color: #6c07ae;
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  [external-link] {
+    color: #fff;
+  }
+}
