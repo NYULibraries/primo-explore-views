@@ -24,7 +24,11 @@ import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
 // Common alias does not work for HTML imports
 import customRequestsRequestInformationTemplate from '../html/custom_requests_request_information.html';
+<<<<<<< HEAD
 import citationLinkerAfterTemplate from '../../common/html/citation_linker_after.html';
+=======
+import citationLinkerAfterTemplate from '../html/citation_linker_after.html';
+>>>>>>> Feature/citation linker cta (#82)
 
 
 let app = angular.module('viewCustom', [
