@@ -23,6 +23,7 @@ import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
 // Common alias does not work for HTML imports
 import customRequestsRequestInformationTemplate from '../html/custom_requests_request_information.html';
+import citationLinkerAfterTemplate from '../html/citation_linker_after.html';
 
 
 let app = angular.module('viewCustom', [
@@ -131,6 +132,9 @@ app
   })
   .component('prmLocationItemsAfter', {
     template: `${customRequestsRequestInformationTemplate}`
+  })
+  .component('prmCitationLinkerAfter', {
+    template: citationLinkerAfterTemplate,
   });
 
 app.run(runBlock);
