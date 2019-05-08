@@ -19,10 +19,3 @@ prm-search-bookmark-filter a[aria-label="nui.favorites.goFavorites.tooltip"],
 prm-favorites md-tab-item:first-child {
   display: none !important;
 }
-
-// Hide availability links on brief and full display
-prm-brief-result-container prm-search-result-availability-line > *:not(:last-child),
-prm-full-view prm-search-result-availability-line > *:not(:last-child),
-prm-full-view prm-search-result-availability-line-after a.check-avail-link {
-  display: none;
-}
