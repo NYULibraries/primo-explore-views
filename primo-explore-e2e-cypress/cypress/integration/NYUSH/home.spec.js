@@ -46,6 +46,8 @@ describe('The Home Page', function () {
   describe('Additional Options', () => {
     const links = {
       ["Search WorldCat for items in nearby libraries"]: `http://www.worldcat.org/search?qt=worldcat_org_all`,
+      ["journal"]: `/primo-explore/jsearch?vid=NYUSH`,
+      ["article by citation"]: `/primo-explore/citationlinker?vid=NYUSH`,
     }
 
     Object.entries(links).forEach(([text, href]) => {
@@ -53,7 +55,6 @@ describe('The Home Page', function () {
         cy.get(`[data-cy=home-additional-options]`)
           .contains(text)
           .should('have.attr', 'href', href)
-          .should('have.attr', 'target', '_blank')
       })
     })
   })
