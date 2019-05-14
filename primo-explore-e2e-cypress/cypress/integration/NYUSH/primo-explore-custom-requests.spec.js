@@ -8,20 +8,19 @@ describe('primo-explore-custom-requests', () => {
       })
     })
 
-    it('has visible primo-explore-custom-requests options', () => {
-      cy.get('primo-explore-custom-requests')
-        .should('be.visible')
-    })
-
     it(`has a Login to see request options button`, () => {
-      cy.get('primo-explore-custom-requests button')
+        cy.get(`prm-location-items .md-2-line > :nth-child(1) > .md-list-item-text`)
+          .should('be.visible')
+          .get('primo-explore-custom-requests button')
         .contains(`Login to see request options`)
         .should('be.visible')
     })
 
     it(`no other button is visible`, () => {
       [`Request E-ZBorrow`, `Request ILL`, `Schedule a video loan`].forEach(buttonLabel => {
-        cy.get('primo-explore-custom-requests button')
+        cy.get(`prm-location-items .md-2-line > :nth-child(1) > .md-list-item-text`)
+          .should('be.visible')
+          .get('primo-explore-custom-requests button')
           .contains(buttonLabel)
           .should('not.be.visible')
       })
