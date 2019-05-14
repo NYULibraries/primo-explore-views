@@ -1,0 +1,9 @@
+/* Hides citation-linker radios, which are non-functional */
+prm-citation-linker {
+  form {
+    > div:first-child {
+      display: none;
+      visibility: hidden;
+    }
+  }
+}
