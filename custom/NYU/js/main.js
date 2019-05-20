@@ -53,6 +53,9 @@ app
   .component('prmActionListAfter', {
     template: customActionsConfig.template
   })
+  .component('prmFullViewServiceContainerAfter', {
+      template: /*html*/`<getit-to-link-resolver-full></getit-to-link-resolver-full>`
+  })
   // .component('prmFullViewServiceContainerAfter', {
   //   template: /*html*/`
   //     <getit-to-link-resolver-full></getit-to-link-resolver-full>
