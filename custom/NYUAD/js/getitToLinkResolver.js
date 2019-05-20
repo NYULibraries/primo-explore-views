@@ -1,7 +1,7 @@
 export default {
   name: 'getitToLinkResolverConfig',
   config: {
-    serviceSectionHeader: 'Get It',
+    serviceSectionHeader: 'GetIt (Legacy Feature)',
     linkField: 'lln11',
     linkText: 'Check Availability',
     iconBefore: {

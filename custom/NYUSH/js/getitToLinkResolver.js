@@ -1,7 +1,7 @@
 export default {
   name: 'getitToLinkResolverConfig',
   config: {
-    serviceSectionHeader: '{nui.getit.tab1_check}',
+    serviceSectionHeader: 'GetIt (Legacy Feature)',
     linkField: 'lln12',
     linkText: 'Check Availability',
     iconBefore: {
