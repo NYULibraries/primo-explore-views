@@ -11,7 +11,6 @@ describe('The Home Page', function () {
   describe('Other BHS Catalogs', () => {
     const links = {
       ["Finding Aid Portal"]: `http://dlib.nyu.edu/findingaids/`,
-      ["Emma"]: `http://brooklynhistory.org/library/wp`,
       ["Image Catalog"]: `http://brooklynhistory.pastperfect-online.com/35872cgi/mweb.exe`,
     }
 
