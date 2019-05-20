@@ -20,6 +20,7 @@ import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
 // Common alias does not work for HTML imports
 import customRequestsRequestInformationTemplate from '../../common/html/custom_requests_request_information.html';
+import citationLinkerAfterTemplate from '../../common/html/citation_linker_after.html';
 
 const vid = 'NYUSH';
 
@@ -129,6 +130,9 @@ app
   })
   .component('prmLocationItemsAfter', {
     template: `${customRequestsRequestInformationTemplate}`
+  })
+  .component('prmCitationLinkerAfter', {
+    template: citationLinkerAfterTemplate,
   });
 
 app.run(runBlock);
