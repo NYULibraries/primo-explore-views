@@ -94,7 +94,7 @@ services:
     environment:
       <<: *x-environment
     volumes:
-    #  drastically speeds up re-installation processes by mounting node_modules and yarn cache directory
+    # drastically speeds up re-installation processes by mounting node_modules and yarn cache directory
     # to re-transpile a local dependency without restarting the service, run doker-compose exec sh -c 'cd /app/primo-explore/ && yarn prepare'
     - yarn_cache:/yarn
     - node_modules_cache:/app/primo-explore/node_modules
