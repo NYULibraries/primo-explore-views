@@ -12,7 +12,6 @@ describe('The Home Page', function () {
     [
       'Books & More',
       'Articles & Databases',
-      'Journals',
       'Course Reserves'
     ].forEach(infoText => {
       it(`includes information about: ${infoText}`, () => {
