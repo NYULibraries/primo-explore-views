@@ -11,7 +11,7 @@ import 'primo-explore-search-bar-sub-menu';
 import { customActionsConfig } from './customActions';
 import { customLibraryCardMenuItemsConfig } from './customLibraryCardMenu';
 import { clickableLogoLinkConfig } from './clickableLogoToAnyLink';
-import { getitToLinkResolverConfig } from './getitToLinkResolver';
+import getitToLinkResolverConfig from './getitToLinkResolver';
 import { nyuEshelfConfig } from './nyuEshelf';
 import { searchBarSubMenuItemsConfig } from './searchBarSubMenu';
 
