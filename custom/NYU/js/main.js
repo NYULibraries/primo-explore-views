@@ -50,54 +50,54 @@ app
   .constant(customRequestsConfig.name, customRequestsConfig.config(viewName))
   .constant(customLoginConfig.name, customLoginConfig.config)
   .value('customNoSearchResultsTemplateUrl', `custom/${viewName}/html/no_search_results.html`)
-  .component('prmActionListAfter', {
-    controller: ['$window', function($window) {
-      const ctrl = this;
+  // .component('prmActionListAfter', {
+  //   controller: ['$window', function($window) {
+  //     const ctrl = this;
 
-      ctrl.$onInit= () => {
-        $window.prmActionCtrl = ctrl.prmActionCtrl;
-      };
+  //     ctrl.$onInit= () => {
+  //       $window.prmActionCtrl = ctrl.prmActionCtrl;
+  //     };
 
-      ctrl.onToggleKeys = [];
-      ctrl.amendedActions = {};
-      ctrl.$doCheck = () => {
-        const currentOnToggleKeys = Object.keys(ctrl.prmActionCtrl.actionListService.onToggle);
-        if (currentOnToggleKeys.some(key => !ctrl.onToggleKeys.includes(key))) {
-          ctrl.onToggleKeys = currentOnToggleKeys;
+  //     ctrl.onToggleKeys = [];
+  //     ctrl.amendedActions = {};
+  //     ctrl.$doCheck = () => {
+  //       const currentOnToggleKeys = Object.keys(ctrl.prmActionCtrl.actionListService.onToggle);
+  //       if (currentOnToggleKeys.some(key => !ctrl.onToggleKeys.includes(key))) {
+  //         ctrl.onToggleKeys = currentOnToggleKeys;
 
-          const actionFunctions = Object.freeze(Object.assign({}, ctrl.prmActionCtrl.actionListService.onToggle));
-          const analyzedActionFunctions = Object.entries(actionFunctions)
-                                                .map(ctrl.gaSendAction)
-                                                .reduce((res, [key, value]) => ({ ...res, [key]: value }), {});
+  //         const actionFunctions = Object.freeze(Object.assign({}, ctrl.prmActionCtrl.actionListService.onToggle));
+  //         const analyzedActionFunctions = Object.entries(actionFunctions)
+  //                                               .map(ctrl.gaSendAction)
+  //                                               .reduce((res, [key, value]) => ({ ...res, [key]: value }), {});
 
-          Object.assign(ctrl.prmActionCtrl.actionListService.onToggle, analyzedActionFunctions);
-        }
-      };
+  //         Object.assign(ctrl.prmActionCtrl.actionListService.onToggle, analyzedActionFunctions);
+  //       }
+  //     };
 
-      ctrl.gaSendAction = ([actionKey, actionFunction]) => {
-        if (ctrl.amendedActions[actionKey]) {
-          return [actionKey, actionFunction];
-        } else {
-          ctrl.amendedActions[actionKey] = true;
+  //     ctrl.gaSendAction = ([actionKey, actionFunction]) => {
+  //       if (ctrl.amendedActions[actionKey]) {
+  //         return [actionKey, actionFunction];
+  //       } else {
+  //         ctrl.amendedActions[actionKey] = true;
 
-          return [
-            actionKey,
-            (...args) => {
-              $window.gtag('event', 'send_to', {
-                event_category: actionKey,
-                event_label: ctrl.prmActionCtrl.isFullView ? 'Full view' : 'Brief view',
-              });
-              actionFunction(...args);
-            },
-          ];
-        }
-      };
-    }],
-    template: customActionsConfig.template,
-    require: {
-      prmActionCtrl: '^prmActionList',
-    }
-  })
+  //         return [
+  //           actionKey,
+  //           (...args) => {
+  //             $window.gtag('event', 'send_to', {
+  //               event_category: actionKey,
+  //               event_label: ctrl.prmActionCtrl.isFullView ? 'Full view' : 'Brief view',
+  //             });
+  //             actionFunction(...args);
+  //           },
+  //         ];
+  //       }
+  //     };
+  //   }],
+  //   template: customActionsConfig.template,
+  //   require: {
+  //     prmActionCtrl: '^prmActionList',
+  //   }
+  // })
   .component('prmFullViewServiceContainerAfter', {
       template: /*html*/`<getit-to-link-resolver-full></getit-to-link-resolver-full>`
   })
