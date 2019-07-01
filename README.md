@@ -62,7 +62,7 @@ Simply execute:
 VIEW=[view_name] docker-compose run e2e
 ```
 
-Tests will run in the Cypress Electron Browser[https://docs.cypress.io/guides/core-concepts/launching-browsers.html#Electron-Browser] so that videos and screenshots (on failures) are recorded. The default testing command in Docker runs tests matching the glob pattern `cypress/integration/$VIEW/**/*.spec.js`.
+Tests will run in the [Cypress Electron Browser](https://docs.cypress.io/guides/core-concepts/launching-browsers.html#Electron-Browser) so that videos and screenshots (on failures) are recorded. The default testing command in Docker runs tests matching the glob pattern `cypress/integration/$VIEW/**/*.spec.js`.
 
 Between running tests, ensure that current docker containers are completely stopped with `docker-compose down`, or you may be running tests in a VIEW webserver you do not intend!
 
