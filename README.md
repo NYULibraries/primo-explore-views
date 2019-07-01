@@ -114,9 +114,9 @@ VIEW=[view] NODE_ENV=[stage] yarn start
 
 ## Other notes
 
-This package has a loose 'monorepo' structure. Resolving dependencies in a monorepo can have difficulties in resolving Node dependencies. `yarn` overcomes these problems using [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/). The basic important points are:
+This package has a loose 'monorepo' structure. Monorepos can sometimes have difficulties in resolving Node dependencies. `yarn` overcomes these problems using [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/). The basic important points are:
 
-* You only need to run `yarn install` once inside the root directory of the repository. All `node_modules` are installed once and resolved in the root directory. If different versions of a package are required across repositories, specific versions are installed to the corresponding VIEW subdirectory.
-* Using the `workspaces` parameter in `package.json`, yarn knows to look in `custom` for other `package.json` files to resolve dependencies.
-* To add dependencies to a specific workspace: `yarn workspaces primo-explore-{view-name} add package-name-1 package-name-2 ...`.
-* Only a single `yarn.lock` file is generated in the root. Keep this file checked in when updating and changing dependencies.
+* The user only need to run `yarn install` once inside the root directory of the repository. All `node_modules` are resolved and installed once in the root directory. If different versions of a package are required for submodules, a more specific versions is installed to the corresponding subdirectory to override what's present in the root.
+* Using the `workspaces` parameter in `package.json`,`yarn` knows to look in `custom` for other `package.json` files to resolve dependencies.
+* To add dependencies to a specific workspace, use the following command: `yarn workspaces primo-explore-{view-name} add package-name-1 package-name-2 ...`.
+* Only a single `yarn.lock` file is generated in the root for the entire repository. Keep this file checked in when making updates or changes to dependencies.
