@@ -4437,14 +4437,6 @@ primo-explore-getit-to-link-resolver@2.0.7:
   resolved "https://registry.yarnpkg.com/primo-explore-getit-to-link-resolver/-/primo-explore-getit-to-link-resolver-2.0.7.tgz#3f16a2144a705b64a4ab1f7bb0c17920f095df49"
   integrity sha512-DoGg3RmhKcbeDJD7UjABU3QZbBd25wpsO756WelW9co8dewy98nfW3ngSFwcvPA+V1zVi8pFPpukrgDctREnOQ==
 
-primo-explore-google-analytics@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/primo-explore-google-analytics/-/primo-explore-google-analytics-1.0.0.tgz#2ea1ecacb1e1b4de9857d349819654c62d579a82"
-  integrity sha512-qVXxhLH3505jbieeiqy0QVmtIqB5f5Hk5JCEiFWZxvm01BzP8efi7KuY3FcG01DRaRRIfKY7+H+LfGN3/cco3Q==
-  dependencies:
-    angulartics "^1.6.0"
-    angulartics-google-tag-manager "^0.0.1"
-
 primo-explore-google-analytics@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/primo-explore-google-analytics/-/primo-explore-google-analytics-1.1.0.tgz#411825ac8cb0da80c959bb0d999c09ec64bf6b1a"
@@ -4453,10 +4445,10 @@ primo-explore-google-analytics@1.1.0:
     angulartics "^1.6.0"
     angulartics-google-tag-manager "^0.0.1"
 
-primo-explore-libraryh3lp-widget@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/primo-explore-libraryh3lp-widget/-/primo-explore-libraryh3lp-widget-1.1.0.tgz#2b1059fc507a66fa071cae3434285b63d9c19e53"
-  integrity sha512-AcBZMv7omn/p6qe/IvtPscNzrMx0oMRT5zoaYemtmBe/yrUTt6Piel0qWO7yednsyZSbbFxt+lvunXnXpbFGfA==
+primo-explore-libraryh3lp-widget@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/primo-explore-libraryh3lp-widget/-/primo-explore-libraryh3lp-widget-1.1.1.tgz#cc17f713c8e24afce11f9bd21ba4fef4bfc9a74f"
+  integrity sha512-xXrKb4K2D5vMimJSWyzoEUwc+v0jpBmhr1gVWGxsHUk/d1sE0RMXhBlJ4YEHfEC8p3w2ztj1cxRsR4rKqPIvkw==
 
 primo-explore-nyu-eshelf@3.1.7:
   version "3.1.7"
