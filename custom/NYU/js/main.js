@@ -108,7 +108,7 @@ app
     template: customActionsConfig.template,
     require: {
       prmActionCtrl: '^prmActionList',
-    }
+    },
   })
   .component('prmFullViewServiceContainerAfter', {
       template: /*html*/`<getit-to-link-resolver-full></getit-to-link-resolver-full>`
