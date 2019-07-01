@@ -23,14 +23,13 @@ With Docker and docker-compose installed:
 
 1. Configure `docker-compose.yml` to fit your institutional setup in the `x-environment` section. ([docker-compose environment variables](https://docs.docker.com/compose/environment-variables/))
 1. Ensure `volumes` to local directories are configured in `docker-compose.yml`. The `custom/` directory should be mounted to `/app/primo-explore/custom` in the image.
-1. Use the `up` command to `docker-compose build web`
 1. `NODE_ENV=[stage] VIEW=[view_name] docker-compose up web`
 
 On your local machine, the developer server will be accessible at `http://localhost:8004/primo-explore/search?vid={VIEW}`
 
 Within the [docker network](https://docs.docker.com/network/), this will be accordingly be accessible at the address `http://web:8004`
 
-The server will automatically refresh pages and reflect changes if `CENTRAL_PACKAGE` or your view folder's (e.g. `NYU` for `vid=NYU`) files are changed.
+The server will automatically refresh pages and reflect changes if `CENTRAL_PACKAGE` or your active view folder's (e.g. `NYU` for `vid=NYU`) files are changed.
 
 ### Entry files
 
@@ -39,13 +38,13 @@ The server will automatically refresh pages and reflect changes if `CENTRAL_PACK
     // import from node_modules with side-effects and no assignment
     import 'primo-explore-clickable-logo-to-any-link';
 
-    // impoort from node_modules and assign default export
+    // import from node_modules and assign default export
     import googleAnalyticsModule from 'primo-explore-google-analytics';
 
     // import from local files and assign named export
     import { config } from './customConfig'
     ```
-* `css/sass/main.scss` is the 'entry' file for compiling to CSS. To refer to CSS files in the `node_modules` directory, you can simply use `~` as an alias.
+* `css/sass/main.scss` is the 'entry' file for compiling to CSS. To refer to CSS files that may be included in your `node_modules` packages, you can simply use `~` as an alias for the properly resolved `node_modules` directory.
     ```scss
     // import local modules (e.g. _searchbar.scss)
     @import 'searchbar';
@@ -56,28 +55,18 @@ The server will automatically refresh pages and reflect changes if `CENTRAL_PACK
 
 ## Run Tests
 
-Integration/end-to-end testing has been implemented in cypress. Cypress can run in its own container connected to a running `web-test` service.
+Integration and end-to-end testing has been implemented in [Cypress](http://cypress.io). Cypress can run in its own container connected to a running `web-test` service.
 
 Simply execute:
-
 ```sh
 VIEW=[view_name] docker-compose run e2e
 ```
 
-Tests will run in the Cypress Electron Browser[https://docs.cypress.io/guides/core-concepts/launching-browsers.html#Electron-Browser] so that videos and screenshots (on failures) are recorded. The default testing command in Docker runs tests matching the glob pattern `cypress/integration/$VIEW/**/*.spec.js`. To copy output files from the stopped container, use:
-
-```sh
-  # video recordings of tests
-  docker cp "$(docker ps -q -a -l -f name=e2e)":/app/cypress/videos cypress-results/
-  # screenshots only on failures
-  docker cp "$(docker ps -q -a -l -f name=e2e)":/app/cypress/screenshots cypress-results/
-  # Output xml test results in jUnit with flag: --reporter-options "mochaFile=test-results/${VIEW}/results-[hash].xml"
-  docker cp "$(docker ps -q -a -l -f name=e2e)":/app/test-results cypress-results/
-```
+Tests will run in the Cypress Electron Browser[https://docs.cypress.io/guides/core-concepts/launching-browsers.html#Electron-Browser] so that videos and screenshots (on failures) are recorded. The default testing command in Docker runs tests matching the glob pattern `cypress/integration/$VIEW/**/*.spec.js`.
 
 Between running tests, ensure that current docker containers are completely stopped with `docker-compose down`, or you may be running tests in a VIEW webserver you do not intend!
 
-For convenience, a `script/run_tests.sh` is an `sh` script that will build all packages for files that have been changed in the current `git` branch relative to `origin/master`. This is used during the CI process. If on the `master` branch, all VIEW packages will be created with `production` stage values.
+For convenience, `script/run_view_e2e_tests.sh` will run tests for files that have been changed in the current `git` branch relative to the cannonical state of `origin/development`.  `script/create_view_packages.sh` does the same for building These are run on [CirlcleCI](https://circleci.com/gh/NYULibraries/primo-explore-views/). If on the `master` or `development` branch, all VIEW packages will be tested and built to ensure integrity.
 
 See [cypress command line documentation](https://docs.cypress.io/guides/guides/command-line.html) for more information.
 
