@@ -20,7 +20,6 @@ run-e2e-steps: &run-e2e-steps
   steps:
     - checkout
     - setup_remote_docker
-    - <<: *pull_docker
     - run:
         name: Run View E2E Tests
         command: |
@@ -86,6 +85,14 @@ jobs:
       - store_artifacts:
           path: packages
 
+  push-docker-images:
+    <<: *docker-defaults
+    steps:
+      - checkout
+      - setup_remote_docker
+      - <<: *pull_docker
+      - <<: *push_docker
+
 workflows:
   version: 2
   build-test-and-deliver:
@@ -98,7 +105,7 @@ workflows:
     - run-e2e-NYU
     - run-e2e-NYUAD
     - run-e2e-NYUSH
-    - create-view-packages:
+    - push-docker-images:
         requires:
         - run-e2e-BHS
         - run-e2e-CENTRAL_PACKAGE
@@ -108,3 +115,6 @@ workflows:
         - run-e2e-NYU
         - run-e2e-NYUAD
         - run-e2e-NYUSH
+    - create-view-packages:
+        requires:
+        - push-docker-images
