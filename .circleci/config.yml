@@ -90,7 +90,14 @@ workflows:
   version: 2
   build-test-and-deliver:
     jobs:
-    - run-views-e2e-tests
+    - run-e2e-BHS
+    - run-e2e-CENTRAL_PACKAGE
+    - run-e2e-CU
+    - run-e2e-NYHS
+    - run-e2e-NYSID
+    - run-e2e-NYU
+    - run-e2e-NYUAD
+    - run-e2e-NYUSH
     - create-view-packages:
         requires:
         - run-e2e-BHS
