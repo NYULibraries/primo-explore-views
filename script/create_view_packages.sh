@@ -1,6 +1,6 @@
 #!/bin/sh -ex
 
-# This script creates package files only for a VIEW that has changed since origin/development.
+# This script creates package files only for a VIEW that has changed since origin/master.
 # All resuls will be copied locally to packages
 # All packages are created on the master branch.
 
@@ -12,7 +12,7 @@ mkdir -p packages
 VIEWS=$(echo $(ls -d custom/*) | tr -d 'a-z/')
 for VIEW in $VIEWS
 do
-  if git diff --name-only origin/development | grep -q "custom/$VIEW/" || [[ $CURRENT_BRANCH == master ]] || [[ $CURRENT_BRANCH == development ]]; then
+  if git diff --name-only origin/master | grep -q "custom/$VIEW/" || grep -q "custom/common/" || [[ $CURRENT_BRANCH == master ]]; then
     NODE_ENV=staging VIEW=$VIEW docker-compose run create-package
     docker cp "$(docker ps -q -a -l -f name=create-package)":/app/packages/. packages
     docker-compose down
