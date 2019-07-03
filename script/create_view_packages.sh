@@ -9,10 +9,11 @@ export CURRENT_BRANCH=${CIRCLE_BRANCH-$(git rev-parse --abbrev-ref HEAD)}
 
 mkdir -p packages
 # gets all "CAPITALIZED" directories in custom/*
-VIEWS=$(echo $(ls -d custom/*) | tr -d 'a-z/')
+VIEWS=$(ls -d custom/* | tr -d 'a-z/')
+CHANGED_FILES=$(git diff --name-only origin/master)
 for VIEW in $VIEWS
 do
-  if git diff --name-only origin/master | grep -q "custom/$VIEW/" || grep -q "custom/common/" || [[ $CURRENT_BRANCH == master ]]; then
+  if echo $CHANGED_FILES | grep -q "custom/$VIEW/" || echo $CHANGED_FILES | grep -q "custom/common" || [[ $CURRENT_BRANCH == master ]]; then
     NODE_ENV=staging VIEW=$VIEW docker-compose run create-package
     docker cp "$(docker ps -q -a -l -f name=create-package)":/app/packages/. packages
     docker-compose down
