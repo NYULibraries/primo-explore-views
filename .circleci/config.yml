@@ -20,6 +20,9 @@ run-e2e-steps: &run-e2e-steps
   steps:
     - checkout
     - setup_remote_docker
+    - run:
+        name: Setup custom environment variables
+        command: echo 'export BRANCH_NO_SLASH="${CIRCLE_BRANCH//\//_}"' >> $BASH_ENV
     - <<: *pull_docker
     - run:
         name: Run View E2E Tests
@@ -78,6 +81,9 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+      - run:
+          name: Setup custom environment variables
+          command: echo 'export BRANCH_NO_SLASH="${CIRCLE_BRANCH//\//_}"' >> $BASH_ENV
       - <<: *pull_docker
       - run:
           name: Build asset VIEW package and store
@@ -90,6 +96,9 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+      - run:
+          name: Setup custom environment variables
+          command: echo 'export BRANCH_NO_SLASH="${CIRCLE_BRANCH//\//_}"' >> $BASH_ENV
       - <<: *pull_docker
       - <<: *push_docker
 
