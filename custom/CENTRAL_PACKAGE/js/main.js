@@ -24,8 +24,10 @@ app
         }
       };
     }]);
-  }])
-  .component('prmTopbarAfter', {
+  }]);
+
+if (['staging', 'development'].includes(process.env.NODE_ENV)) {
+  app.component('prmTopbarAfter', {
     template: /*html*/ `
     <primo-explore-top-alert>
       <md-toolbar>
@@ -51,6 +53,7 @@ app
       };
     }],
   });
+}
 
 app.run(runBlock);
 
