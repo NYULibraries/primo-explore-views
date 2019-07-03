@@ -16,23 +16,63 @@ push_docker: &push_docker
       docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
       script/push_docker.sh
 
+run-e2e-steps: &run-e2e-steps
+  steps:
+    - checkout
+    - setup_remote_docker
+    - <<: *pull_docker
+    - run:
+        name: Run View E2E Tests
+        command: |
+          script/run_view_e2e_tests.sh
+    - <<: *push_docker
+    - store_artifacts:
+        path: cypress-results
+    - store_test_results:
+        path: cypress-results/test-results
+
 version: 2
 jobs:
-  run-views-e2e-tests:
+  run-e2e-BHS:
     <<: *docker-defaults
-    steps:
-      - checkout
-      - setup_remote_docker
-      - <<: *pull_docker
-      - run:
-          name: Run View E2E Tests
-          command: |
-            script/run_view_e2e_tests.sh
-      - <<: *push_docker
-      - store_artifacts:
-          path: cypress-results
-      - store_test_results:
-          path: cypress-results/test-results
+    environment:
+      VIEW: BHS
+    <<: *run-e2e-steps
+  run-e2e-CENTRAL_PACKAGE:
+    <<: *docker-defaults
+    environment:
+      VIEW: CENTRAL_PACKAGE
+    <<: *run-e2e-steps
+  run-e2e-CU:
+    <<: *docker-defaults
+    environment:
+      VIEW: CU
+    <<: *run-e2e-steps
+  run-e2e-NYHS:
+    <<: *docker-defaults
+    environment:
+      VIEW: NYHS
+    <<: *run-e2e-steps
+  run-e2e-NYSID:
+    <<: *docker-defaults
+    environment:
+      VIEW: NYSID
+    <<: *run-e2e-steps
+  run-e2e-NYU:
+    <<: *docker-defaults
+    environment:
+      VIEW: NYU
+    <<: *run-e2e-steps
+  run-e2e-NYUAD:
+    <<: *docker-defaults
+    environment:
+      VIEW: NYUAD
+    <<: *run-e2e-steps
+  run-e2e-NYUSH:
+    <<: *docker-defaults
+    environment:
+      VIEW: NYUSH
+    <<: *run-e2e-steps
 
   create-view-packages:
     <<: *docker-defaults
