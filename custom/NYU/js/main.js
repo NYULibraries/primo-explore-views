@@ -152,9 +152,9 @@ app
         <md-toolbar>
           <div class="bar alert-bar" layout="row" layout-align="center center">
             <span class="bar-text">
-              Text about the scheduled BobCat maintenance goes here.
-              <a href="https://nyulibraries.statuspage.io" target="_blank" class="arrow-link md-primoExplore-theme">
-                <span>Update link</span>
+              July 18 - 30: We are doing behind-the-scenes maintenance. No downtime expected.
+              <a href="https://nyulibraries.statuspage.io/incidents/fvf6mc1nprcg" target="_blank" class="arrow-link md-primoExplore-theme">
+                <span>See details and updates</span>
                 <span class="sr-only">(opens in a new window)</span>
                 <prm-icon external-link icon-type="svg" svg-icon-set="primo-ui" icon-definition="open-in-new">
                 </prm-icon>
