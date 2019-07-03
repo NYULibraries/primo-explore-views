@@ -24,7 +24,7 @@ run-e2e-steps: &run-e2e-steps
     - run:
         name: Run View E2E Tests
         command: |
-          script/run_view_e2e_tests.sh
+          script/run_view_e2e_test.sh
     - <<: *push_docker
     - store_artifacts:
         path: cypress-results
