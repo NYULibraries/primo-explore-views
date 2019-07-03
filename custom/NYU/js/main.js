@@ -134,6 +134,32 @@ app
   })
   .component('prmLocationItemsAfter', {
     template: `${customRequestsRequestInformationTemplate}`
+  })
+  .component('prmTopbarAfter', {
+    template: /*html*/`
+    <primo-explore-top-alert>
+      <md-toolbar>
+        <div class="bar alert-bar" layout="row" layout-align="center center">
+          <span class="bar-text">
+            Text about the scheduled BobCat maintenance goes here.
+          </span>
+          <a href="https://nyulibraries.statuspage.io" target="_blank" class="arrow-link md-primoExplore-theme">
+              <span>Update link</span>
+              <span class="sr-only">(opens in a new window)</span>
+              <prm-icon external-link icon-type="svg" svg-icon-set="primo-ui" icon-definition="open-in-new">
+              </prm-icon>
+          </a>
+        </div>
+      </md-toolbar>
+    </primo-explore-top-alert>`,
+    controller: ['$element', function ($element) {
+      const ctrl = this;
+      ctrl.$postLink = function() {
+        const $primoExploreMain = $element.parent().parent().parent();
+        const $el = $element.query(`primo-explore-top-alert`).detach();
+        $primoExploreMain.prepend($el);
+      };
+    }],
   });
 
 app.run(runBlock);
