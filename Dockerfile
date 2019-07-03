@@ -1,7 +1,7 @@
 FROM quay.io/nyulibraries/primo-explore-devenv:1.1.0
 
-ENV VIEW ${VIEW}
-ENV DEVENV_PATH /app/
+ENV VIEW NYU
+ENV DEVENV_PATH /app
 
 WORKDIR /app/primo-explore/
 
@@ -26,4 +26,3 @@ COPY ./custom/ ./custom/
 WORKDIR ${DEVENV_PATH}
 
 EXPOSE 8004 3001
-
