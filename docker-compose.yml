@@ -74,6 +74,10 @@ services:
       DOMAIN: http://web-test:8004/primo-explore/search
       NODE_ENV: test
       CYPRESS_BASE_URL: http://web-test:8004/primo-explore/
+    cache_from:
+      - primo-explore-e2e-cypress
+      - quay.io/nyulibraries/primo-explore-e2e-cypress
+      - quay.io/nyulibraries/primo-explore-e2e-cypress:$BRANCH_NO_SLASH
     # volumes:
     # - ./cypress/:/app/cypress
     # - ./custom:/app/primo-explore/custom/
