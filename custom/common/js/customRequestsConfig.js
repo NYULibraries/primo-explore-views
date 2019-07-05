@@ -28,10 +28,9 @@ export default {
       },
       ill: ({ item, config }) => {
         const getitLink = config.values.functions.getitLink(item);
-        const openURLQuery = getitLink ? getitLink.match(/resolve?(.*)/) : '';
 
         return {
-          href: `${config.values.baseUrls.ill}?${openURLQuery}`,
+          href: /resolve?(.*)/.test(getitLink) ? `${config.values.baseUrls.ill}?${getitLink.match(/resolve?(.*)/)}` : getitLink,
           label: 'Request ILL',
           prmIconAfter: externalLinkIcon,
         };
