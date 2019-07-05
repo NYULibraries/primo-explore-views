@@ -32,7 +32,7 @@ export default {
       },
       user: {
         'id': '1234567',
-        'bor-status': '50',
+        'bor-status': '20',
       },
       delay: 500,
     }
