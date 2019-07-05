@@ -20,8 +20,9 @@ export default {
         const author = item.pnx.addata.au ? item.pnx.addata.au[0] : '';
         const ti = encodeURIComponent(`ti=${title}`);
         const au = encodeURIComponent(`au=${author}`);
+        const queryString = `${title ? ti : ''}${title && author ? '+and+' : ''}${author ? au : ''}`;
         return {
-          href: `${config.values.baseUrls.ezborrow}?query=${ti}+and+${au}`,
+          href: `${config.values.baseUrls.ezborrow}?query=${queryString}`,
           label: 'Request E-ZBorrow',
           prmIconAfter: externalLinkIcon,
         };
