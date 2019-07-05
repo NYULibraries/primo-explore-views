@@ -10,7 +10,8 @@ export CURRENT_BRANCH=${CIRCLE_BRANCH-$(git rev-parse --abbrev-ref HEAD)}
 mkdir -p packages
 # gets all "CAPITALIZED" directories in custom/*
 VIEWS=$(ls -d custom/* | tr -d 'a-z/')
-CHANGED_FILES=$(git diff --name-only origin/master)
+COMPARE_BRANCH=$([[ $CURRENT_BRANCH == development ]] && echo master || echo development)
+CHANGED_FILES=$(git diff --name-only origin/$COMPARE_BRANCH)
 for VIEW in $VIEWS
 do
   if echo $CHANGED_FILES | grep -q "custom/$VIEW/" || echo $CHANGED_FILES | grep -q "custom/common" || [[ $CURRENT_BRANCH == master ]]; then
