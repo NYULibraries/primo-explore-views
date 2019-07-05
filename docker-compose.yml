@@ -65,8 +65,13 @@ services:
   # Uses only production version of modules published on NPM
   # VIEW=[VIEW-NAME] docker-compose run e2e
   e2e:
-    image: primo-explore-cypress
-    build: primo-explore-e2e-cypress
+    image: primo-explore-e2e-cypress
+    build:
+      context: primo-explore-e2e-cypress
+      cache_from:
+      - primo-explore-e2e-cypress
+      - quay.io/nyulibraries/primo-explore-e2e-cypress
+      - quay.io/nyulibraries/primo-explore-e2e-cypress:$BRANCH_NO_SLASH
     depends_on:
       - web-test
     environment:
