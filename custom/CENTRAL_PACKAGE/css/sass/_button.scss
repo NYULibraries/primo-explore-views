@@ -4,8 +4,8 @@ a.bobcat-custom-button-nyu {
   appearance: none;
   border: 0 none;
   box-shadow: none;
-  background: #57068c;
-  color: #fff;
+  background-color: rgba(77, 2, 121, 1);
+  color: rgba(255, 255, 255, 0.85);
   font-weight: 400;
   font-size: 18px;
   text-align: center;
@@ -15,9 +15,8 @@ a.bobcat-custom-button-nyu {
   display: inline-block;
 
   &:hover, &:focus {
-    background-color: #6c07ae;
+    background-color: rgba(69, 2, 109, 1);
     color: #fff;
-    text-decoration: underline;
   }
 
   [external-link] {
