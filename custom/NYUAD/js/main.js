@@ -52,7 +52,7 @@ app
   })
   .component('prmFullViewServiceContainerAfter', {
     template: /*html*/`<getit-to-link-resolver-full></getit-to-link-resolver-full>`
-  })  
+  })
   // .component('prmFullViewServiceContainerAfter', {
   //   template: /*html*/ `
   //     <getit-to-link-resolver-full></getit-to-link-resolver-full>
@@ -111,6 +111,9 @@ app
   })
   .component('prmAuthenticationAfter', {
     template: `<primo-explore-custom-login></primo-explore-custom-login>`
+  })
+  .component('prmAlphabetToolbarAfter', {
+    template: /*html*/ `<search-bar-sub-menu></search-bar-sub-menu>`,
   })
   .component('prmLocationItemAfter', {
     template: /*html*/ `
