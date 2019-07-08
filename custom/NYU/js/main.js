@@ -131,6 +131,9 @@ app
   .component('prmAuthenticationAfter', {
     template: /*html*/ `<primo-explore-custom-login></primo-explore-custom-login>`
   })
+  .component('prmAlphabetToolbarAfter', {
+    template: /*html*/ `<search-bar-sub-menu></search-bar-sub-menu>`,
+  })
   .component('prmLocationItemAfter', {
     template: /*html*/ `
       <primo-explore-custom-requests
