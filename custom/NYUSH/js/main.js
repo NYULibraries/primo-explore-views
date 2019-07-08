@@ -138,6 +138,15 @@ app
     template: `${customRequestsRequestInformationTemplate}`
   })
   .component('prmCitationLinkerAfter', {
+    controller: ['$element', function ($element) {
+      const ctrl = this;
+
+      ctrl.$postLink = () => {
+        const $menu = $element.find('search-bar-sub-menu').parent().detach();
+        const $target = $element.parent().parent().find('header');
+        $target.after($menu);
+      };
+    }],
     template: citationLinkerAfterTemplate,
   });
 

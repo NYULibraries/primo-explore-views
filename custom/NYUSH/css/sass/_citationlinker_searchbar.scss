@@ -1,0 +1,13 @@
+prm-citation-linker {
+  search-bar-sub-menu {
+    > div.search-bar-sub-menu {
+      position: inherit;
+      margin: 0 auto;
+      background-color: inherit;
+    }
+
+    button.md-button {
+      border-radius: 0;
+    }
+  }
+}
