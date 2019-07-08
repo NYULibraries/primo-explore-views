@@ -1,0 +1,26 @@
+prm-alphabet-toolbar {
+
+  /* Fixes padding for all size windows/screens */
+  > div > div {
+    padding: 1em;
+  }
+
+  /* Tweaks for search-bar to match styling on main page */
+  prm-alphabet-toolbar-after {
+    search-bar-sub-menu {
+      button.md-button {
+        color: #333333 !important;
+        height: 36px;
+
+        &:hover {
+          color: #1d1616 !important;
+          background-color: rgba(51, 51, 51, 0.1) !important;
+        }
+
+        span {
+          font-weight: bold !important;
+        }
+      }
+    }
+  }
+}
