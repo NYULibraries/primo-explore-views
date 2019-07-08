@@ -1,0 +1,25 @@
+prm-alphabet-toolbar {
+
+  > div > div {
+    padding: 1em;
+  }
+
+  prm-alphabet-toolbar-after {
+    search-bar-sub-menu {
+      button.md-button {
+        color: #333333 !important;
+        height: 36px;
+        font-style: bold;
+
+        &:hover {
+          color: #1d1616 !important;
+          background-color: rgba(51, 51, 51, 0.1) !important;
+        }
+
+        span {
+          font-weight: bold !important;
+        }
+      }
+    }
+  }
+}
