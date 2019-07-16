@@ -18,11 +18,13 @@ export default {
       ezborrow: ({ item, config }) => {
         const title = item.pnx.addata.btitle ? item.pnx.addata.btitle[0] : '';
         const author = item.pnx.addata.au ? item.pnx.addata.au[0] : '';
-        const ti = encodeURIComponent(`ti=${title}`);
-        const au = encodeURIComponent(`au=${author}`);
-        const queryString = `${title ? ti : ''}${title && author ? '+and+' : ''}${author ? au : ''}`;
+        const ti = title ? encodeURIComponent(`ti=${title}`) : '';
+        const au = author ? encodeURIComponent(`au=${author}`) : '';
+        const and = title && author ? '+and+' : '';
+        const queryString = ti || au ? `query=${ti}${and}${au}` : '';
+
         return {
-          href: `${config.values.baseUrls.ezborrow}?query=${queryString}`,
+          href: `${config.values.baseUrls.ezborrow}?${queryString}`,
           label: 'Request E-ZBorrow',
           prmIconAfter: externalLinkIcon,
         };
