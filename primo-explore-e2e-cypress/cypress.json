@@ -1,5 +1,4 @@
 {
   "baseUrl": "http://localhost:8004/primo-explore/",
-  "defaultCommandTimeout": 8000,
-  "ignoreTestFiles": "*primo-explore-custom-request*"
+  "defaultCommandTimeout": 8000
 }
