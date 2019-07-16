@@ -18,8 +18,8 @@ export default {
       ezborrow: ({ item, config }) => {
         const title = item.pnx.addata.btitle ? item.pnx.addata.btitle[0] : '';
         const author = item.pnx.addata.au ? item.pnx.addata.au[0] : '';
-        const ti = title ? encodeURIComponent(`ti=${title}`) : '';
-        const au = author ? encodeURIComponent(`au=${author}`) : '';
+        const ti = title ? `ti=${encodeURIComponent(title)}` : '';
+        const au = author ? `au=${encodeURIComponent(author)}` : '';
         const and = title && author ? '+and+' : '';
         const queryString = ti || au ? `query=${ti}${and}${au}` : '';
 
