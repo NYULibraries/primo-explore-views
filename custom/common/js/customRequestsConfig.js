@@ -137,15 +137,20 @@ export default {
         },
         getitLink: (item) => {
           const getitLinkFields = {
-            NYU: 'lln10',
-            NYUAD: 'lln11',
-            NYUSH: 'lln40' || 'lln12',
-            CU: 'lln13',
+            NYU: ['lln10'],
+            NYUAD: ['lln11'],
+            NYUSH: ['lln40', 'lln12'],
+            CU: ['lln13'],
           };
-          const getitLinkField = getitLinkFields[institutionVid];
+          const validGetitLinkFields = getitLinkFields[institutionVid];
 
           try {
-            return item.delivery.link.filter(({ displayLabel }) => displayLabel === getitLinkField)[0].linkURL;
+            const urls = validGetitLinkFields.reduce((res, target) => {
+              const label = item.delivery.link.filter(({ displayLabel }) => displayLabel === target)[0];
+              return label ? [...res, label.linkURL] : res;
+            }, []);
+
+            return urls[0];
           } catch (e) {
             return '';
           }
