@@ -32,7 +32,7 @@ export default {
 
         const baseUrl = config.values.baseUrls.ill;
         return {
-          href: /resolve?(.*)/.test(getitLink) ? `${baseUrl}?${getitLink.match(/resolve?(.*)/)}` : baseUrl,
+          href: (/resolve?(.*)/.test(getitLink) ? `${baseUrl}?${getitLink.match(/resolve?(.*)/)}` : getitLink) || baseUrl,
           label: 'Request ILL',
           prmIconAfter: externalLinkIcon,
         };
