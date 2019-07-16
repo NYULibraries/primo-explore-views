@@ -30,8 +30,9 @@ export default {
       ill: ({ item, config }) => {
         const getitLink = config.values.functions.getitLink(item);
 
+        const baseUrl = config.values.baseUrls.ill;
         return {
-          href: /resolve?(.*)/.test(getitLink) ? `${config.values.baseUrls.ill}?${getitLink.match(/resolve?(.*)/)}` : getitLink,
+          href: /resolve?(.*)/.test(getitLink) ? `${baseUrl}?${getitLink.match(/resolve?(.*)/)}` : baseUrl,
           label: 'Request ILL',
           prmIconAfter: externalLinkIcon,
         };
@@ -136,7 +137,7 @@ export default {
           const getitLinkFields = {
             NYU: 'lln10',
             NYUAD: 'lln11',
-            NYUSH: 'lln40',
+            NYUSH: 'lln40' || 'lln12',
             CU: 'lln13',
           };
           const getitLinkField = getitLinkFields[institutionVid];
@@ -144,7 +145,7 @@ export default {
           try {
             return item.delivery.link.filter(({ displayLabel }) => displayLabel === getitLinkField)[0].linkURL;
           } catch (e) {
-            return undefined;
+            return '';
           }
         },
       }
