@@ -18,11 +18,13 @@ export default {
       ezborrow: ({ item, config }) => {
         const title = item.pnx.addata.btitle ? item.pnx.addata.btitle[0] : '';
         const author = item.pnx.addata.au ? item.pnx.addata.au[0] : '';
-        const ti = encodeURIComponent(`ti=${title}`);
-        const au = encodeURIComponent(`au=${author}`);
-        const queryString = `${title ? ti : ''}${title && author ? '+and+' : ''}${author ? au : ''}`;
+        const ti = title ? encodeURIComponent(`ti=${title}`) : '';
+        const au = author ? encodeURIComponent(`au=${author}`) : '';
+        const and = title && author ? '+and+' : '';
+        const queryString = ti || au ? `query=${ti}${and}${au}` : '';
+
         return {
-          href: `${config.values.baseUrls.ezborrow}?query=${queryString}`,
+          href: `${config.values.baseUrls.ezborrow}?${queryString}`,
           label: 'Request E-ZBorrow',
           prmIconAfter: externalLinkIcon,
         };
@@ -30,8 +32,9 @@ export default {
       ill: ({ item, config }) => {
         const getitLink = config.values.functions.getitLink(item);
 
+        const baseUrl = config.values.baseUrls.ill;
         return {
-          href: /resolve?(.*)/.test(getitLink) ? `${config.values.baseUrls.ill}?${getitLink.match(/resolve?(.*)/)}` : getitLink,
+          href: (/resolve?(.*)/.test(getitLink) ? `${baseUrl}?${getitLink.match(/resolve?(.*)/)}` : getitLink) || baseUrl,
           label: 'Request ILL',
           prmIconAfter: externalLinkIcon,
         };
@@ -136,7 +139,7 @@ export default {
           const getitLinkFields = {
             NYU: 'lln10',
             NYUAD: 'lln11',
-            NYUSH: 'lln40',
+            NYUSH: 'lln40' || 'lln12',
             CU: 'lln13',
           };
           const getitLinkField = getitLinkFields[institutionVid];
@@ -144,7 +147,7 @@ export default {
           try {
             return item.delivery.link.filter(({ displayLabel }) => displayLabel === getitLinkField)[0].linkURL;
           } catch (e) {
-            return undefined;
+            return '';
           }
         },
       }
