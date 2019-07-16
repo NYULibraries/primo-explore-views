@@ -146,8 +146,8 @@ export default {
 
           try {
             const urls = validGetitLinkFields.reduce((res, target) => {
-              const label = item.delivery.link.filter(({ displayLabel }) => displayLabel === target)[0];
-              return label ? [...res, label.linkURL] : res;
+              const link = item.delivery.link.filter(({ displayLabel }) => displayLabel === target)[0];
+              return link ? [...res, link.linkURL] : res;
             }, []);
 
             return urls[0];
