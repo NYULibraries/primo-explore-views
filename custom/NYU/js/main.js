@@ -129,6 +129,9 @@ app
   .component('prmAlphabetToolbarAfter', {
     template: /*html*/ `<search-bar-sub-menu></search-bar-sub-menu>`,
   })
+  .component('prmBrowseSearchBarAfter', {
+    template: /*html*/ `<search-bar-sub-menu></search-bar-sub-menu>`,
+  })
   .component('prmLocationItemAfter', {
     template: /*html*/ `
       <primo-explore-custom-requests
