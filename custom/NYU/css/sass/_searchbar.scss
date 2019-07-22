@@ -1,5 +1,26 @@
-prm-alphabet-toolbar {
+/*
+  The reason these are such specific pixels is that they were chosen
+  to space correctly around the existing search bar
+  Of course if the size of the existing search bar is different of if ExL
+  changes it these base values will be meaningless
+*/
 
+prm-search-bar,
+prm-browse-search-bar {
+  padding-bottom: 58.5px;
+}
+
+.__sm prm-search-bar,
+.__sm prm-browse-search-bar {
+  padding-bottom: 49.5px;
+}
+
+.__xs prm-search-bar,
+.__xs prm-browse-search-bar {
+  padding-bottom: 36px;
+}
+
+prm-alphabet-toolbar {
   /* Fixes padding for all size windows/screens */
   > div > div {
     padding: 1em;
@@ -9,30 +30,43 @@ prm-alphabet-toolbar {
   prm-alphabet-toolbar-after {
     search-bar-sub-menu {
       button.md-button {
-        color: #333333 !important;
+        color: #333333;
         height: 36px;
 
         &:hover {
-          color: #1d1616 !important;
-          background-color: rgba(51, 51, 51, 0.1) !important;
+          color: #1d1616;
+          background-color: rgba(51, 51, 51, 0.1);
         }
 
         span {
-          font-weight: bold !important;
+          font-weight: bold;
         }
       }
     }
   }
 }
 
-prm-browse-search-bar {
-  padding-bottom: 58.5px;
+search-bar-sub-menu ul {
+  margin: 0;
 }
 
-.__sm prm-browse-search-bar {
-  padding-bottom: 49.5px;
+search-bar-sub-menu ul li {
+  display: inline;
+  list-style: none;
+  padding: 0;
 }
 
-.__xs prm-browse-search-bar {
-  padding-bottom: 36px;
+search-bar-sub-menu div.search-bar-sub-menu {
+  background-color: #CCD0D5;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 36px;
+}
+
+search-bar-sub-menu .md-button.md-small {
+  font-size: .75em;
+  min-width: 42px;
+  font-weight: bold;
 }
