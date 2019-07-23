@@ -34,8 +34,8 @@ prm-alphabet-toolbar {
         height: 36px;
 
         &:hover {
-          color: #1d1616;
-          background-color: rgba(51, 51, 51, 0.1);
+          color: #1d1616 !important;
+          background-color: rgba(51, 51, 51, 0.1) !important;
         }
 
         span {
