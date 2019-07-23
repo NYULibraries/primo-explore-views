@@ -23,7 +23,7 @@ import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
 // Common alias does not work for HTML imports
 import customRequestsRequestInformationTemplate from '../html/custom_requests_request_information.html';
-import getitLegacyNotification from './getitLegacyNotification';
+import citationLinkerAfterTemplate from '../../common/html/citation_linker_after.html';
 
 
 let app = angular.module('viewCustom', [
@@ -126,6 +126,12 @@ app
   .component('prmAuthenticationAfter', {
     template: /*html*/ `<primo-explore-custom-login></primo-explore-custom-login>`
   })
+  .component('prmAlphabetToolbarAfter', {
+    template: /*html*/ `<search-bar-sub-menu></search-bar-sub-menu>`,
+  })
+  .component('prmBrowseSearchBarAfter', {
+    template: /*html*/ `<search-bar-sub-menu></search-bar-sub-menu>`,
+  })
   .component('prmLocationItemAfter', {
     template: /*html*/ `
       <primo-explore-custom-requests
@@ -145,6 +151,18 @@ app
   })
   .component('prmLocationItemsAfter', {
     template: `${customRequestsRequestInformationTemplate}`
+  })
+  .component('prmCitationLinkerAfter', {
+    controller: ['$element', function($element) {
+      const ctrl = this;
+
+      ctrl.$postLink = () => {
+        const $menu = $element.find('search-bar-sub-menu').parent().detach();
+        const $target = $element.parent().parent().find('header');
+        $target.after($menu);
+      };
+    }],
+    template: citationLinkerAfterTemplate,
   });
 
 app.run(runBlock);

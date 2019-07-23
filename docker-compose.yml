@@ -80,7 +80,7 @@ services:
       NODE_ENV: test
       CYPRESS_BASE_URL: http://web-test:8004/primo-explore/
     # volumes:
-    # - ./cypress/:/app/cypress
+    # - ./primo-explore-e2e-cypress/cypress/:/app/cypress
     # - ./custom:/app/primo-explore/custom/
 
 
