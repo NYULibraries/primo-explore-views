@@ -6,3 +6,5 @@ cypress-results
 karma-unit-test-results
 packages
 modules/primo-explore-*
+primo-explore-e2e-cypress/cypress/screenshots/
+primo-explore-e2e-cypress/cypress/videos/

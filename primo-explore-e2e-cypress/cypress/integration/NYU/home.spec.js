@@ -12,7 +12,6 @@ describe('The Home Page', function () {
     [
       'Books & More',
       'Articles & Databases',
-      'Journals',
       'Course Reserves'
     ].forEach(infoText => {
       it(`includes information about: ${infoText}`, () => {
@@ -47,6 +46,8 @@ describe('The Home Page', function () {
       ["Bobcat Standard (Classic Catalog)"]: `https://aleph.library.nyu.edu`,
       ["Request a book from E-ZBorrow"]: `https://login.library.nyu.edu/ezborrow/nyu`,
       ["Search WorldCat for items in nearby libraries"]: `http://www.worldcat.org/search?qt=worldcat_org_all`,
+      ["journal"]: `/primo-explore/jsearch?vid=NYU`,
+      ["article by citation"]: `/primo-explore/citationlinker?vid=NYU`,
     }
 
     Object.entries(links).forEach(([text, href]) => {
@@ -54,7 +55,6 @@ describe('The Home Page', function () {
         cy.get(`[data-cy=home-additional-options]`)
           .contains(text)
           .should('have.attr', 'href', href)
-          .should('have.attr', 'target', '_blank')
       })
     })
   })

@@ -5,6 +5,8 @@
 @import 'hide';
 @import 'logo';
 @import 'custom_request';
+@import 'searchbar';
+@import 'citationlinker_searchbar';
 
 // Total hack to make the homepage center correctly under the search bar for "large" screens
 // essentially makes MD's lg-10 think it's an lg-20, ugh!
@@ -25,5 +27,4 @@
 @import '~primo-explore-libraryh3lp-widget/css/custom1.css';
 @import '~primo-explore-getit-to-link-resolver/css/custom1.css';
 @import '~primo-explore-nyu-eshelf/css/custom1.css';
-@import '~primo-explore-search-bar-sub-menu/css/custom1.css';
 @import '~primo-explore-custom-requests/css/custom1.css';
