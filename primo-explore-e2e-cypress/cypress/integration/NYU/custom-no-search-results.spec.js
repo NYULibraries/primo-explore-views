@@ -17,8 +17,8 @@ describe('primo-explore-custom-no-search-results', function () {
       const links = {
         ['Request a book from E-ZBorrow (NYU only)']: `https://login.library.nyu.edu/ezborrow?query=${encodeURIComponent(searchTerm)}`,
         [`Search WorldCat for items in nearby libraries`]: `http://www.worldcat.org/search?qt=worldcat_org_all&q=${encodeURIComponent(searchTerm)}`,
-        [`journal`]: `/primo-explore/jsearch?vid=NYU`,
-        [`article by citation`]: `/primo-explore/citationlinker?vid=NYU`,
+        // [`journal`]: `/primo-explore/jsearch?vid=NYU`,
+        // [`article by citation`]: `/primo-explore/citationlinker?vid=NYU`,
         [`Ask a Librarian`]: `http://library.nyu.edu/ask`,
       }
 
