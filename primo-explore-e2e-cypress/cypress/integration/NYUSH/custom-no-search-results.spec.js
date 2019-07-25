@@ -14,8 +14,8 @@ describe('primo-explore-custom-no-search-results', function () {
     describe('its links', () => {
       const links = {
         [`Search WorldCat for items in nearby libraries`]: `http://www.worldcat.org/search?qt=worldcat_org_all&q=${encodeURIComponent(searchTerm)}`,
-        [`journal`]: `/primo-explore/jsearch?vid=NYUSH`,
-        [`article by citation`]: `/primo-explore/citationlinker?vid=NYUSH`,
+        // [`journal`]: `/primo-explore/jsearch?vid=NYUSH`,
+        // [`article by citation`]: `/primo-explore/citationlinker?vid=NYUSH`,
         [`Ask a Librarian`]: `https://shanghai.nyu.edu/academics/library/services/aal`,
       }
 
