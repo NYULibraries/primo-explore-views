@@ -12,4 +12,4 @@ RUN yarn cypress verify
 
 COPY . .
 
-CMD /app/script/wait_for.sh $DOMAIN && yarn cypress run --spec="cypress/integration/$VIEW/**/*.spec.js" --reporter-options="mochaFile=test-results/$VIEW/results-[hash].xml"
+CMD /app/script/wait_for.sh $DOMAIN && yarn cypress run --spec="cypress/integration/$VIEW/**/*.spec.js" --reporter junit --reporter-options="mochaFile=test-results/$VIEW/results-[hash].xml"
