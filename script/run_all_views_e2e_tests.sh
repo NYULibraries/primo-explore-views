@@ -1,4 +1,4 @@
-#!/bin/sh -ex
+#!/bin/bash -ex
 
 for VIEW in NYU NYUAD NYUSH CU NYHS BHS NYSID CENTRAL_PACKAGE
 do
