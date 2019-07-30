@@ -1,7 +1,4 @@
-.sass-cache
+custom.js.map
+custom.js
 custom1.css
-*.css.map
-*.css.map*
-main.css
-custom.js*
-dist/
+custom1.css.map
