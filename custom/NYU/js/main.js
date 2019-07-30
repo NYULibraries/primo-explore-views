@@ -1,3 +1,6 @@
+// import styles
+import '../css/sass/main.scss';
+
 import '@orbis-cascade/primo-explore-custom-actions';
 import 'primo-explore-custom-library-card-menu';
 import 'primo-explore-clickable-logo-to-any-link';
@@ -21,9 +24,10 @@ import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import googleAnalyticsConfig from './googleAnalyticsConfig';
 import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
-// Common alias does not work for HTML imports
+
+// HTML as JS imports
 import customRequestsRequestInformationTemplate from '../html/custom_requests_request_information.html';
-import citationLinkerAfterTemplate from '../../common/html/citation_linker_after.html';
+import citationLinkerAfterTemplate from 'Common/html/citation_linker_after.html';
 
 
 let app = angular.module('viewCustom', [
@@ -178,4 +182,3 @@ function runBlock(gaInjectionService, nyuEshelfService, libraryh3lpInjectionServ
   nyuEshelfService.initEshelf();
   libraryh3lpInjectionService.injectScript();
 }
-
