@@ -1,4 +1,4 @@
-FROM cypress/browsers:node8.15.1-chrome73
+FROM cypress/browsers:node10.11.0-chrome75
 
 ENV INSTALL_PATH /app
 
@@ -12,4 +12,4 @@ RUN yarn cypress verify
 
 COPY . .
 
-CMD /app/script/wait_for.sh $DOMAIN && yarn cypress run --spec="cypress/integration/$VIEW/**/*.spec.js"
+CMD /app/script/wait_for.sh $DOMAIN && yarn cypress run --spec="cypress/integration/$VIEW/**/*.spec.js" --reporter junit --reporter-options="mochaFile=test-results/$VIEW/results-[hash].xml"

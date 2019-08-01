@@ -1,3 +1,6 @@
+// import styles
+import '../css/sass/main.scss';
+
 import '@orbis-cascade/primo-explore-custom-actions';
 import 'primo-explore-custom-search-bookmark-filter';
 import 'primo-explore-search-bar-sub-menu';
