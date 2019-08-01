@@ -1,3 +1,6 @@
+// import styles
+import '../css/sass/main.scss';
+
 import '@orbis-cascade/primo-explore-custom-actions';
 import 'primo-explore-custom-library-card-menu';
 import 'primo-explore-clickable-logo-to-any-link';
@@ -18,9 +21,9 @@ import nyuEshelfConfig from './nyuEshelf';
 import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
-// Common alias does not work for HTML imports
-import customRequestsRequestInformationTemplate from '../../common/html/custom_requests_request_information.html';
-import citationLinkerAfterTemplate from '../../common/html/citation_linker_after.html';
+// HTML to JS imports
+import customRequestsRequestInformationTemplate from 'Common/html/custom_requests_request_information.html';
+import citationLinkerAfterTemplate from 'Common/html/citation_linker_after.html';
 
 const vid = 'NYUSH';
 

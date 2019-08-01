@@ -1,3 +1,6 @@
+// import styles
+import '../css/sass/main.scss';
+
 import * as Sentry from '@sentry/browser';
 import sentryConfig from './sentryConfig';
 

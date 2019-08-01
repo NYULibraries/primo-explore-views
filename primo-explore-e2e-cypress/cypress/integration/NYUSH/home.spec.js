@@ -12,7 +12,6 @@ describe('The Home Page', function () {
     [
       'Books & More',
       'Articles & Databases',
-      'Journals',
       'Course Reserves'
     ].forEach(infoText => {
       it(`includes information about: ${infoText}`, () => {
@@ -46,8 +45,6 @@ describe('The Home Page', function () {
   describe('Additional Options', () => {
     const links = {
       ["Search WorldCat for items in nearby libraries"]: `http://www.worldcat.org/search?qt=worldcat_org_all`,
-      // ["journal"]: `/primo-explore/jsearch?vid=NYUSH`,
-      // ["article by citation"]: `/primo-explore/citationlinker?vid=NYUSH`,
     }
 
     Object.entries(links).forEach(([text, href]) => {
