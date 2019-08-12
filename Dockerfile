@@ -1,5 +1,4 @@
-# FROM quay.io/nyulibraries/primo-explore-devenv:1.2.0
-FROM quay.io/nyulibraries/primo-explore-devenv:feature_allow_arbitrary_html_in_packages-183d9bfe8d037c394a1343f489d2e2b902b555ec
+FROM quay.io/nyulibraries/primo-explore-devenv:1.2.1
 
 ENV VIEW NYU
 ENV DEVENV_PATH /app
