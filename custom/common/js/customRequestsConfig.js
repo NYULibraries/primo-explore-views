@@ -79,14 +79,14 @@ export default {
         return items.map(() => afcEligible && isBAFCMainCollection);
       }
     },
-    hideDefaultRequests: ({ items, config, user }) => {
+    hideDefaultRequests: ({ item, items, config, user }) => {
       // no user, then hide all requests
       if (user === undefined) {
         return items.map(() => true);
       }
-      // NYUSH patrons always see default request options
+      // NYUSH patrons always see default request options if ILL option is not available
       else if (user && config.values.authorizedStatuses.nyush.indexOf(user['bor-status']) > -1) {
-        return items.map(() => false);
+        return config.showCustomRequests.ill({ item, items, config, user }).map(show => !show);
       }
 
       // otherwise, hide only unavailable holdings
