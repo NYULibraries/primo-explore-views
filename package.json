@@ -5,7 +5,8 @@
   "description": "This the NYU Consortium primo-explore view package.",
   "main": "index.js",
   "scripts": {
-    "prepare": "yarn lerna run prepare"
+    "prepare": "yarn lerna run prepare",
+    "test": "JASMINE_CONFIG_PATH=./custom/spec/support/jasmine yarn jasmine"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,8 @@
   },
   "homepage": "https://github.com/NYULibraries/primo-explore-views#readme",
   "devDependencies": {
+    "jasmine": "^3.4.0",
+    "jasmine-spec-reporter": "^4.2.1",
     "lerna": "^3.13.1"
   },
   "optionalDependencies": {
