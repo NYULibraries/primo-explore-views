@@ -24,7 +24,7 @@ export default {
         const queryString = ti || au ? `query=${ti}${and}${au}` : '';
 
         return {
-          href: `${config.values.baseUrls.ezborrow}?${queryString}`,
+          href: `${config.values.baseUrls.ezborrow}${ti || au ? '?' : ''}${queryString}`,
           label: 'Request E-ZBorrow',
           prmIconAfter: externalLinkIcon,
         };
@@ -34,7 +34,7 @@ export default {
 
         const baseUrl = config.values.baseUrls.ill;
         return {
-          href: (/resolve?(.*)/.test(getitLink) ? `${baseUrl}?${getitLink.match(/resolve?(.*)/)}` : getitLink) || baseUrl,
+          href: (/resolve?(.*)/.test(getitLink) ? `${baseUrl}?${getitLink.match(/resolve\?(.*)/)[1]}` : getitLink) || baseUrl,
           label: 'Request ILL',
           prmIconAfter: externalLinkIcon,
         };
@@ -50,16 +50,7 @@ export default {
         prmIconAfter: externalLinkIcon,
       })
     },
-    noButtonsText: '{item.request.blocked}',
     showCustomRequests: {
-      ill: ({ item, items, config, user}) => {
-        if (!user) return items.map(() => false);
-        const showEzborrowArr = config.showCustomRequests.ezborrow({ user, item, items, config });
-        const showIll = config.values.authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
-
-        const requestables = config.values.functions.requestableArray({ items, config });
-        return items.map((_e, idx) => !showEzborrowArr[idx] && requestables[idx] && showIll);
-      },
       ezborrow: ({ item, items, config, user}) => {
         if (!user) return items.map(() => false);
         const isBook = ['BOOK', 'BOOKS'].some(type => item.pnx.addata.ristype.indexOf(type) > -1);
@@ -67,6 +58,14 @@ export default {
 
         const requestables = config.values.functions.requestableArray({ items, config });
         return items.map((_e, idx) => requestables[idx] && showEzborrow);
+      },
+      ill: ({ item, items, config, user}) => {
+        if (!user) return items.map(() => false);
+        const showEzborrowArr = config.showCustomRequests.ezborrow({ user, item, items, config });
+        const showIll = config.values.authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
+
+        const requestables = config.values.functions.requestableArray({ items, config });
+        return items.map((_e, idx) => !showEzborrowArr[idx] && requestables[idx] && showIll);
       },
       login: ({ user, items }) => items.map(() => user === undefined),
       afc: ({ item, items, config, user}) => {
@@ -77,7 +76,7 @@ export default {
         });
 
         return items.map(() => afcEligible && isBAFCMainCollection);
-      }
+      },
     },
     hideDefaultRequests: ({ item, items, config, user }) => {
       // no user, then hide all requests
@@ -92,6 +91,7 @@ export default {
       // otherwise, hide only unavailable holdings
       return config.values.functions.availabilityArray({ items, config }).map(avail => !avail);
     },
+    noButtonsText: '{item.request.blocked}',
     values: {
       baseUrls: {
         ezborrow: `https://${process.env.NODE_ENV !== 'production' ? 'dev.' : ''}login.library.nyu.edu/ezborrow/nyu`,
