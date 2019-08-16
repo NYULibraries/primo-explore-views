@@ -35,6 +35,22 @@ run-e2e-steps: &run-e2e-steps
 
 version: 2
 jobs:
+  run-unit-tests:
+    <<: *docker-defaults
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Runs unit tests in Jasmine
+          command: |
+            mkdir -p junit
+            docker-compose run unit-test
+            docker cp "$(docker ps -q -a -l -f name=unit-test)":/app/custom/spec/junit/. junit
+      - store_test_results:
+          path: junit
+      - store_artifacts:
+          path: junit
+
   run-e2e-BHS:
     <<: *docker-defaults
     environment:
@@ -106,14 +122,31 @@ workflows:
   version: 2
   build-test-and-deliver:
     jobs:
-    - run-e2e-BHS
-    - run-e2e-CENTRAL_PACKAGE
-    - run-e2e-CU
-    - run-e2e-NYHS
-    - run-e2e-NYSID
-    - run-e2e-NYU
-    - run-e2e-NYUAD
-    - run-e2e-NYUSH
+    - run-unit-tests
+    - run-e2e-BHS:
+        requires:
+        - run-unit-tests
+    - run-e2e-CENTRAL_PACKAGE:
+        requires:
+        - run-unit-tests
+    - run-e2e-CU:
+        requires:
+        - run-unit-tests
+    - run-e2e-NYHS:
+        requires:
+        - run-unit-tests
+    - run-e2e-NYSID:
+        requires:
+        - run-unit-tests
+    - run-e2e-NYU:
+        requires:
+        - run-unit-tests
+    - run-e2e-NYUAD:
+        requires:
+        - run-unit-tests
+    - run-e2e-NYUSH:
+        requires:
+        - run-unit-tests
     - push-docker-images:
         requires:
         - run-e2e-BHS
