@@ -1,6 +1,5 @@
 x-environment: &x-environment
   PROXY_SERVER: http://bobcatdev.library.nyu.edu:80
-  # PROXY_SERVER: http://lib-dv-primofe1.bobst.nyu.edu:80
   VIEW: ${VIEW-NYU}
   NODE_ENV: ${NODE_ENV-development}
   VE:
@@ -32,6 +31,12 @@ services:
       <<: *x-environment
     volumes:
     - ./custom:/app/primo-explore/custom/
+
+  unit-test:
+    build:
+      context: .
+      dockerfile: ./custom/spec/Dockerfile
+    image: primo-explore-views-unit-test
 
   # Runs tests using production version dependencies
   # NODE_ENV=test will produce a production-like environment, including minified assets and a devserver without hot module reload
