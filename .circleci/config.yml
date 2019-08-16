@@ -42,7 +42,13 @@ jobs:
       - setup_remote_docker
       - run:
           name: Runs unit tests in Jasmine
-          command: docker-compose run unit-test
+          command: |
+            mkdir -p junit
+            docker-compose run unit-test
+            docker cp "$(docker ps -q -a -l -f name=unit-test)":/app/custom/spec/junit/. junit
+      - store_artifacts:
+          path: junit
+
   run-e2e-BHS:
     <<: *docker-defaults
     environment:
