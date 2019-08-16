@@ -114,31 +114,31 @@ workflows:
   version: 2
   build-test-and-deliver:
     jobs:
-    - unit-test
+    - run-unit-tests
     - run-e2e-BHS:
         requires:
-        - unit-test
+        - run-unit-tests
     - run-e2e-CENTRAL_PACKAGE:
         requires:
-        - unit-test
+        - run-unit-tests
     - run-e2e-CU:
         requires:
-        - unit-test
+        - run-unit-tests
     - run-e2e-NYHS:
         requires:
-        - unit-test
+        - run-unit-tests
     - run-e2e-NYSID:
         requires:
-        - unit-test
+        - run-unit-tests
     - run-e2e-NYU:
         requires:
-        - unit-test
+        - run-unit-tests
     - run-e2e-NYUAD:
         requires:
-        - unit-test
+        - run-unit-tests
     - run-e2e-NYUSH:
         requires:
-        - unit-test
+        - run-unit-tests
     - push-docker-images:
         requires:
         - run-e2e-BHS
