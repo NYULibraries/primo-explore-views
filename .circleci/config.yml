@@ -48,6 +48,8 @@ jobs:
             docker cp "$(docker ps -q -a -l -f name=unit-test)":/app/custom/spec/junit/. junit
       - store_test_results:
           path: junit
+      - store_artifacts:
+          path: junit
 
   run-e2e-BHS:
     <<: *docker-defaults
