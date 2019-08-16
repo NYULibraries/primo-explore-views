@@ -443,33 +443,5 @@ describe('primo-explore-custom-request config object', () => {
 
       expect(result2).toEqual([true, false]);
     });
-
-    describe('when NYUSH user', () => {
-      const nyushUser = {
-        'bor-status': '20',
-      };
-
-      it('hides when ILL available', () => {
-        const result = hideDefaultRequests({
-          item,
-          items: uniqueItems,
-          config: customRequestsConfig,
-          user: nyushUser,
-        });
-
-        expect(result).toEqual([true, false]);
-      });
-
-      it('does not hide when non-ILL eligible book is unavailable', () => {
-        const result = hideDefaultRequests({
-          item,
-          items: nonUniqueItems,
-          config: customRequestsConfig,
-          user: nyushUser,
-        });
-
-        expect(result).toEqual([false, false]);
-      });
-    });
   });
 });
