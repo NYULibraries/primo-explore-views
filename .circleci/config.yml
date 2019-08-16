@@ -46,7 +46,7 @@ jobs:
             mkdir -p junit
             docker-compose run unit-test
             docker cp "$(docker ps -q -a -l -f name=unit-test)":/app/custom/spec/junit/. junit
-      - store_artifacts:
+      - store_test_results:
           path: junit
 
   run-e2e-BHS:
