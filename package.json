@@ -5,7 +5,8 @@
   "description": "This the NYU Consortium primo-explore view package.",
   "main": "index.js",
   "scripts": {
-    "prepare": "yarn lerna run prepare"
+    "prepare": "yarn lerna run prepare",
+    "test": "yarn babel-node --config-file=./custom/spec/.babelrc ./custom/spec/run.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,12 @@
   },
   "homepage": "https://github.com/NYULibraries/primo-explore-views#readme",
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "jasmine": "^3.4.0",
+    "jasmine-reporters": "^2.3.2",
+    "jasmine-spec-reporter": "^4.2.1",
     "lerna": "^3.13.1"
   },
   "optionalDependencies": {
@@ -29,5 +36,8 @@
   },
   "workspaces": [
     "custom/*"
-  ]
+  ],
+  "dependencies": {
+    "@babel/core": "^7.5.5"
+  }
 }
