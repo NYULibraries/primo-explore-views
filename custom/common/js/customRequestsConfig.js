@@ -83,9 +83,9 @@ export default {
       if (user === undefined) {
         return items.map(() => true);
       }
-      // NYUSH patrons always see default request options if ILL option is not available
+      // NYUSH patrons will not see default request options if ILL option is available
       else if (user && config.values.authorizedStatuses.nyush.indexOf(user['bor-status']) > -1) {
-        return config.showCustomRequests.ill({ item, items, config, user }).map(show => !show);
+        return config.showCustomRequests.ill({ item, items, config, user });
       }
 
       // otherwise, hide only unavailable holdings
@@ -104,7 +104,7 @@ export default {
         nyush: ["20", "21", "22", "23"],
       },
       functions: {
-        checkAreItemsUnique: items => items.some((item, _i, items) => item._additionalData.itemdescription !== items[0]._additionalData.itemdescription),
+        checkAreItemsUnique: items => items.some(item => item._additionalData.itemdescription !== items[0]._additionalData.itemdescription),
         checkIsAvailable: item => {
           const unavailablePatterns = [
             /Requested/g,

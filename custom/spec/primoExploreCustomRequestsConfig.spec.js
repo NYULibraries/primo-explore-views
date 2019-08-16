@@ -401,5 +401,75 @@ describe('primo-explore-custom-request config object', () => {
   describe('hideDefaultRequests', () => {
     const hideDefaultRequests = customRequestsConfig.hideDefaultRequests;
 
+    it('hides for unavailable holdings', () => {
+      const result = hideDefaultRequests({
+        item,
+        items: uniqueItems,
+        config: customRequestsConfig,
+        user: {
+          'bor-status': '999'
+        }
+      });
+      expect(result).toEqual([true, false]);
+    });
+
+    it('hides when no user', () => {
+      const result = hideDefaultRequests({
+        item,
+        items: uniqueItems,
+        config: customRequestsConfig,
+        user: undefined
+      });
+
+      expect(result).toEqual([true, true]);
+    });
+
+    it('hides when unavailable, regardless of uniqueness', () => {
+      const result = hideDefaultRequests({
+        item,
+        items: nonUniqueItems,
+        config: customRequestsConfig,
+        user: { 'bor-status': '999' }
+      });
+
+      expect(result).toEqual([true, false]);
+
+      const result2 = hideDefaultRequests({
+        item,
+        items: uniqueItems,
+        config: customRequestsConfig,
+        user: { 'bor-status': '999' }
+      });
+
+      expect(result2).toEqual([true, false]);
+    });
+
+    describe('when NYUSH user', () => {
+      const nyushUser = {
+        'bor-status': '20',
+      };
+
+      it('hides when ILL available', () => {
+        const result = hideDefaultRequests({
+          item,
+          items: uniqueItems,
+          config: customRequestsConfig,
+          user: nyushUser,
+        });
+
+        expect(result).toEqual([true, false]);
+      });
+
+      it('does not hide when non-ILL eligible book is unavailable', () => {
+        const result = hideDefaultRequests({
+          item,
+          items: nonUniqueItems,
+          config: customRequestsConfig,
+          user: nyushUser,
+        });
+
+        expect(result).toEqual([false, false]);
+      });
+    });
   });
 });
