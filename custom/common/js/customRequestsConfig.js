@@ -133,7 +133,7 @@ export default {
         let showIll;
         if (authorizedStatuses.nyush.indexOf(user['bor-status']) > -1) {
           const inNYUSHLibrary = /Shanghai/.test(items[0]._additionalData.mainlocationname);
-          showIll = inNYUSHLibrary;
+          showIll = !inNYUSHLibrary;
         } else {
           showIll = authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
         }

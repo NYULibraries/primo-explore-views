@@ -9,9 +9,9 @@ describe('primo-explore-custom-requests', () => {
     })
 
     it(`has a Login to see request options button`, () => {
-        cy.get(`prm-location-items .md-2-line > :nth-child(1) > .md-list-item-text`)
-          .should('be.visible')
-          .get('primo-explore-custom-requests button')
+      cy.get(`prm-location-items .md-2-line > :nth-child(1) > .md-list-item-text`)
+        .should('be.visible')
+        .get('primo-explore-custom-requests button')
         .contains(`Login to see request options`)
         .should('be.visible')
     })
@@ -60,6 +60,32 @@ describe('primo-explore-custom-requests', () => {
           .contains(buttonLabel)
           .should('not.be.visible')
       })
+    })
+  })
+
+  describe('with an NYUSH user in an NSHNG library', () => {
+    before(() => {
+      cy.visit('/fulldisplay?docid=nyu_aleph007368922&vid=NYU', {
+        onBeforeLoad: (contentWindow) => {
+          contentWindow.$$mockUserLoggedIn = true
+        }
+      })
+    })
+
+    it(`does not have a visible 'Request ILL' button`, () => {
+      [
+        `Request ILL`
+      ].forEach(buttonLabel => {
+        cy.get('primo-explore-custom-requests button')
+          .contains(buttonLabel)
+          .should('not.be.visible')
+      })
+    })
+
+    it(`has the default 'Request' button`, () => {
+      cy.get('#tab-content-3 prm-service-button > button')
+        .contains('Request')
+        .should('be.visible')
     })
   })
 })
