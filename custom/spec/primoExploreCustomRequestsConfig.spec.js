@@ -66,20 +66,20 @@ const uniqueItems = [
 ];
 
 const nyushItems = [
-    {
-      _additionalData: {
-        itemdescription: 'a',
-      },
-      itemFields: ["09/11/19 10:30 PM", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""],
+  {
+    _additionalData: {
+      itemdescription: 'a',
       mainlocationname:  "NYU Shanghai Library (China)",
     },
-    {
-      _additionalData: {
-        itemdescription: 'b',
-      },
-      itemFields: ["On Shelf", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""],
+    itemFields: ["09/11/19 10:30 PM", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""],
+  },
+  {
+    _additionalData: {
+      itemdescription: 'b',
       mainlocationname:  "NYU Shanghai Library (China)",
-    }
+    },
+    itemFields: ["On Shelf", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""],
+  }
 ];
 
 const nonUniqueItems = [
@@ -356,12 +356,12 @@ describe('primo-explore-custom-request config object', () => {
         expect(result).toEqual([false, false]);
       });
 
-      it('does not show when NYUSH user, but not NYUSH item', () => {
+      it('does not show when NYUSH user and an unavailable NYUSH item', () => {
         const result = ill({
           items: nyushItems,
           item,
           config: customRequestsConfig,
-          user: { 'bor-status': '20' },
+          user: nyushUser,
         });
 
         expect(result).toEqual([false, false]);

@@ -1,3 +1,5 @@
+import { request } from "https";
+
 const externalLinkIcon = {
   icon: "ic_open_in_new_24px",
   set: "action",
@@ -128,16 +130,14 @@ export default {
       },
       ill: ({ item, items, user, config }) => {
         if (!user) return items.map(() => false);
+
+        const isNyushUser = () => authorizedStatuses.nyush.indexOf(user['bor-status']) > -1;
+        const inNYUSHLibrary = () => /Shanghai/.test(items[0]._additionalData.mainlocationname);
+        const illEligible = () => authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
+
+        const showIll = isNyushUser() ? !inNYUSHLibrary() : illEligible();
+
         const showEzborrowArr = config.showCustomRequests.ezborrow({ user, item, items, config });
-
-        let showIll;
-        if (authorizedStatuses.nyush.indexOf(user['bor-status']) > -1) {
-          const inNYUSHLibrary = /Shanghai/.test(items[0]._additionalData.mainlocationname);
-          showIll = !inNYUSHLibrary;
-        } else {
-          showIll = authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
-        }
-
         const requestables = requestableArray({ items });
         return items.map((_e, idx) => !showEzborrowArr[idx] && requestables[idx] && showIll);
       },
