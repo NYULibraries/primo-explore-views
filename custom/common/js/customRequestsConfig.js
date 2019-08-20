@@ -10,7 +10,7 @@ const loginIcon = {
   attributes: { 'custom-requests': '' },
 };
 
-const checkAreItemsUnique = items => items.some(item => item._additionalData.itemdescription !== items[0]._additionalData.itemdescription);
+const checkAreItemsUnique = items => items.some(item => item.additionalData.itemdescription !== items[0].additionalData.itemdescription);
 const checkIsAvailable = item => {
   const unavailablePatterns = [
     /Requested/g,
@@ -129,7 +129,14 @@ export default {
       ill: ({ item, items, user, config }) => {
         if (!user) return items.map(() => false);
         const showEzborrowArr = config.showCustomRequests.ezborrow({ user, item, items, config });
-        const showIll = authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
+
+        let showIll;
+        if (authorizedStatuses.nyush.indexOf(user['bor-status']) > -1) {
+          const inNYUSHLibrary = /Shanghai/.test(items[0].additionalData.mainlocationname);
+          showIll = inNYUSHLibrary;
+        } else {
+          showIll = authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
+        }
 
         const requestables = requestableArray({ items });
         return items.map((_e, idx) => !showEzborrowArr[idx] && requestables[idx] && showIll);
@@ -145,12 +152,17 @@ export default {
         return items.map(() => afcEligible && isBAFCMainCollection);
       },
     },
-    hideDefaultRequests: ({ items, user }) => {
-      // no user, then hide all requests
-      return user === undefined ? items.map(() => true)
-      :
+    hideDefaultRequests: ({ item, items, user, config }) => {
+      if (user === undefined) {
+        // if logged out, hide all
+        return items.map(() => true);
+      } else if (authorizedStatuses.nyush.indexOf(user['bor-status']) > -1) {
+        // if NYUSH user, only hide if ILL shows
+        return config.showCustomRequests.ill({ item, items, user, config });
+      }
+
       // otherwise, hide only unavailable holdings
-      availabilityArray({ items }).map(avail => !avail);
+      return availabilityArray({ items }).map(avail => !avail);
     },
     noButtonsText: '{item.request.blocked}',
   })
