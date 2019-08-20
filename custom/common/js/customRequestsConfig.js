@@ -10,7 +10,7 @@ const loginIcon = {
   attributes: { 'custom-requests': '' },
 };
 
-const checkAreItemsUnique = items => items.some(item => item.additionalData.itemdescription !== items[0].additionalData.itemdescription);
+const checkAreItemsUnique = items => items.some(item => item._additionalData.itemdescription !== items[0]._additionalData.itemdescription);
 const checkIsAvailable = item => {
   const unavailablePatterns = [
     /Requested/g,
@@ -132,7 +132,7 @@ export default {
 
         let showIll;
         if (authorizedStatuses.nyush.indexOf(user['bor-status']) > -1) {
-          const inNYUSHLibrary = /Shanghai/.test(items[0].additionalData.mainlocationname);
+          const inNYUSHLibrary = /Shanghai/.test(items[0]._additionalData.mainlocationname);
           showIll = inNYUSHLibrary;
         } else {
           showIll = authorizedStatuses.ill.indexOf(user['bor-status']) > -1;

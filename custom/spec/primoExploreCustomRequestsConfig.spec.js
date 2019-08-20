@@ -52,13 +52,13 @@ const nonBookAFCItem = {
 
 const uniqueItems = [
   {
-    additionalData: {
+    _additionalData: {
       itemdescription: 'a',
     },
     itemFields: ["09/11/19 10:30 PM", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""]
   },
   {
-    additionalData: {
+    _additionalData: {
       itemdescription: 'b',
     },
     itemFields: ["On Shelf", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""],
@@ -67,14 +67,14 @@ const uniqueItems = [
 
 const nyushItems = [
     {
-      additionalData: {
+      _additionalData: {
         itemdescription: 'a',
       },
       itemFields: ["09/11/19 10:30 PM", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""],
       mainlocationname:  "NYU Shanghai Library (China)",
     },
     {
-      additionalData: {
+      _additionalData: {
         itemdescription: 'b',
       },
       itemFields: ["On Shelf", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""],
@@ -84,13 +84,13 @@ const nyushItems = [
 
 const nonUniqueItems = [
   {
-    additionalData: {
+    _additionalData: {
       itemdescription: 'a',
     },
     itemFields: ["09/11/19 10:30 PM", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""]
   },
   {
-    additionalData: {
+    _additionalData: {
       itemdescription: 'a',
     },
     itemFields: ["On Shelf", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""],
