@@ -30,9 +30,11 @@ export default {
       get isLoggedIn() {
         return /^(development|test)$/.test(process.env.NODE_ENV) ? window.$$mockUserLoggedIn : undefined;
       },
-      user: {
-        'id': '1234567',
-        'bor-status': '20',
+      get user() {
+        return (/^(development|test)$/.test(process.env.NODE_ENV) && window.$$mockUser) || {
+          'id': '1234567',
+          'bor-status': '50',
+        };
       },
       delay: 500,
     }

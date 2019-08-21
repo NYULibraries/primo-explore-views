@@ -1,7 +1,7 @@
 describe('primo-explore-custom-requests', () => {
   describe('if the user is not logged in', () => {
     before(() => {
-      cy.visit('/fulldisplay?docid=nyu_aleph007365590&vid=NYU', {
+      cy.visit('/fulldisplay?docid=nyu_aleph007365590&vid=NYUSH', {
         onBeforeLoad: (contentWindow) => {
           contentWindow.$$mockUserLoggedIn = false
         }
@@ -28,9 +28,13 @@ describe('primo-explore-custom-requests', () => {
   })
   describe(`if the user is logged in`, () => {
     before(() => {
-      cy.visit('/fulldisplay?docid=nyu_aleph007365590&vid=NYU', {
+      cy.visit('/fulldisplay?docid=nyu_aleph007365590&vid=NYUSH', {
         onBeforeLoad: (contentWindow) => {
           contentWindow.$$mockUserLoggedIn = true
+          contentWindow.$$mockUser = {
+            'id': '1234567',
+            'bor-status': '50',
+          }
         }
       })
     })
@@ -40,9 +44,9 @@ describe('primo-explore-custom-requests', () => {
         .should('be.visible')
     })
 
-    it(`has visible 'Request ILL' button`, () => {
+    it(`has visible 'Request E-ZBorrow' button`, () => {
       [
-        `Request ILL`
+        `Request E-ZBorrow`,
       ].forEach(buttonLabel => {
         cy.get('primo-explore-custom-requests button')
           .contains(buttonLabel)
@@ -50,11 +54,11 @@ describe('primo-explore-custom-requests', () => {
       })
     })
 
-    it(`does not have a visible 'Login to see request options', 'Schedule a video loan', or 'Request E-ZBorrow' button`, () => {
+    it(`does not have a visible 'Login to see request options', 'Schedule a video loan', or 'Request ILL' button`, () => {
       [
         `Login to see request options`,
         `Schedule a video loan`,
-        `Request E-ZBorrow`,
+        `Request ILL`,
       ].forEach(buttonLabel => {
         cy.get('primo-explore-custom-requests button')
           .contains(buttonLabel)
@@ -65,9 +69,13 @@ describe('primo-explore-custom-requests', () => {
 
   describe('with an NYUSH user in an NSHNG library', () => {
     before(() => {
-      cy.visit('/fulldisplay?docid=nyu_aleph007368922&vid=NYU', {
+      cy.visit('/fulldisplay?docid=nyu_aleph007368922&vid=NYUSH', {
         onBeforeLoad: (contentWindow) => {
           contentWindow.$$mockUserLoggedIn = true
+          contentWindow.$$mockUser = {
+            id: '1234567',
+            'bor-status': '20',
+          }
         }
       })
     })
@@ -82,10 +90,7 @@ describe('primo-explore-custom-requests', () => {
       })
     })
 
-    it(`has the default 'Request' button`, () => {
-      cy.get('#tab-content-3 prm-service-button > button')
-        .contains('Request')
-        .should('be.visible')
-    })
+    // Note: I cannot check if an actual "Request" button will render without an actual user being logged in!'
+    // Be sure to test this with a real user if making tweaks to this behavior.
   })
 })
