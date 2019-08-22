@@ -128,9 +128,22 @@ export default {
       },
       ill: ({ item, items, user, config }) => {
         if (!user) return items.map(() => false);
-        const showEzborrowArr = config.showCustomRequests.ezborrow({ user, item, items, config });
-        const showIll = authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
 
+        const isNyushUser = () => authorizedStatuses.nyush.indexOf(user['bor-status']) > -1;
+        const inNYUSHLibrary = () => /Shanghai/.test(items[0]._additionalData.mainlocationname);
+        const illEligible = () => authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
+
+        const showIll = isNyushUser() ? !inNYUSHLibrary() : illEligible();
+
+
+        console.log(
+          isNyushUser(),
+          inNYUSHLibrary(),
+          illEligible(),
+          showIll,
+        )
+
+        const showEzborrowArr = config.showCustomRequests.ezborrow({ user, item, items, config });
         const requestables = requestableArray({ items });
         return items.map((_e, idx) => !showEzborrowArr[idx] && requestables[idx] && showIll);
       },
@@ -145,12 +158,18 @@ export default {
         return items.map(() => afcEligible && isBAFCMainCollection);
       },
     },
-    hideDefaultRequests: ({ items, user }) => {
-      // no user, then hide all requests
-      return user === undefined ? items.map(() => true)
-      :
+    hideDefaultRequests: ({ item, items, user, config }) => {
+      if (user === undefined) {
+        // if logged out, hide all
+        return items.map(() => true);
+      } else if (authorizedStatuses.nyush.indexOf(user['bor-status']) > -1) {
+        // if NYUSH user, only hide if ILL shows
+        console.log(config.showCustomRequests.ill({ item, items, user, config }));
+        return config.showCustomRequests.ill({ item, items, user, config });
+      }
+
       // otherwise, hide only unavailable holdings
-      availabilityArray({ items }).map(avail => !avail);
+      return availabilityArray({ items }).map(avail => !avail);
     },
     noButtonsText: '{item.request.blocked}',
   })

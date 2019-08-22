@@ -65,6 +65,23 @@ const uniqueItems = [
   },
 ];
 
+const nyushItems = [
+  {
+    _additionalData: {
+      itemdescription: 'a',
+      mainlocationname:  "NYU Shanghai Library (China)",
+    },
+    itemFields: ["09/11/19 10:30 PM", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""],
+  },
+  {
+    _additionalData: {
+      itemdescription: 'b',
+      mainlocationname:  "NYU Shanghai Library (China)",
+    },
+    itemFields: ["On Shelf", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""],
+  }
+];
+
 const nonUniqueItems = [
   {
     _additionalData: {
@@ -79,6 +96,23 @@ const nonUniqueItems = [
     itemFields: ["On Shelf", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""],
   },
 ];
+
+const nyushUser = {
+  'bor-status': "20",
+};
+
+const ezBorrowUser = {
+  'bor-status': "55",
+};
+
+const illExclusiveUser = {
+  'bor-status': "89",
+};
+
+let nonEzBorrowUser;
+const nonIllUser = nonEzBorrowUser = {
+  'bor-status': "999",
+};
 
 describe('primo-explore-custom-request config object', () => {
   describe('buttonIds', () => {
@@ -234,14 +268,6 @@ describe('primo-explore-custom-request config object', () => {
     describe('ezborrow', () => {
       const ezborrow = customRequestsConfig.showCustomRequests.ezborrow;
 
-      const ezBorrowUser = {
-        'bor-status': "53",
-      };
-
-      const nonEzBorrowUser = {
-        'bor-status': "999",
-      };
-
       it('shows under correct conditions with non-unique items', () => {
         const items = nonUniqueItems;
         const result = ezborrow({
@@ -281,18 +307,6 @@ describe('primo-explore-custom-request config object', () => {
 
     describe('ill', () => {
       const ill = customRequestsConfig.showCustomRequests.ill;
-
-      const ezBorrowUser = {
-        'bor-status': "55",
-      };
-
-      const illExclusiveUser = {
-        'bor-status': "20",
-      };
-
-      const nonIllUser = {
-        'bor-status': "999",
-      };
 
       it('does not show when ezborrow shows', () => {
         const items = uniqueItems;
@@ -337,6 +351,17 @@ describe('primo-explore-custom-request config object', () => {
           item,
           config: customRequestsConfig,
           user: nonIllUser,
+        });
+
+        expect(result).toEqual([false, false]);
+      });
+
+      it('does not show when NYUSH user and an unavailable NYUSH item', () => {
+        const result = ill({
+          items: nyushItems,
+          item,
+          config: customRequestsConfig,
+          user: nyushUser,
         });
 
         expect(result).toEqual([false, false]);
@@ -429,7 +454,7 @@ describe('primo-explore-custom-request config object', () => {
         item,
         items: nonUniqueItems,
         config: customRequestsConfig,
-        user: { 'bor-status': '999' }
+        user: nonEzBorrowUser,
       });
 
       expect(result).toEqual([true, false]);
@@ -438,10 +463,21 @@ describe('primo-explore-custom-request config object', () => {
         item,
         items: uniqueItems,
         config: customRequestsConfig,
-        user: { 'bor-status': '999' }
+        user: nonEzBorrowUser,
       });
 
       expect(result2).toEqual([true, false]);
+    });
+
+    it('does not hide when NYUSH item', () => {
+      const result = hideDefaultRequests({
+        items: nyushItems,
+        item,
+        config: customRequestsConfig,
+        user: nyushUser,
+      });
+
+      expect(result).toEqual([false, false]);
     });
   });
 });
