@@ -1,5 +1,4 @@
-FROM quay.io/nyulibraries/primo-explore-devenv:chore_tweak_hmr_settings
-
+FROM quay.io/nyulibraries/primo-explore-devenv:1.2.2
 ENV VIEW ${VIEW}
 ENV CUSTOMIZATIONS_PATH /app/primo-explore
 ENV DEVENV_PATH /app/
