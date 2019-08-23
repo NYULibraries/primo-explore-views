@@ -135,14 +135,6 @@ export default {
 
         const showIll = isNyushUser() ? !inNYUSHLibrary() : illEligible();
 
-
-        console.log(
-          isNyushUser(),
-          inNYUSHLibrary(),
-          illEligible(),
-          showIll,
-        )
-
         const showEzborrowArr = config.showCustomRequests.ezborrow({ user, item, items, config });
         const requestables = requestableArray({ items });
         return items.map((_e, idx) => !showEzborrowArr[idx] && requestables[idx] && showIll);
@@ -164,7 +156,6 @@ export default {
         return items.map(() => true);
       } else if (authorizedStatuses.nyush.indexOf(user['bor-status']) > -1) {
         // if NYUSH user, only hide if ILL shows
-        console.log(config.showCustomRequests.ill({ item, items, user, config }));
         return config.showCustomRequests.ill({ item, items, user, config });
       }
 
