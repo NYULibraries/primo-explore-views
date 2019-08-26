@@ -1,4 +1,4 @@
-FROM quay.io/nyulibraries/primo-explore-devenv:1.2.2
+FROM quay.io/nyulibraries/primo-explore-devenv:1.2.3
 
 ENV VIEW NYU
 ENV DEVENV_PATH /app
