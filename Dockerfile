@@ -1,4 +1,4 @@
-FROM quay.io/nyulibraries/primo-explore-devenv:1.2.2
+FROM quay.io/nyulibraries/primo-explore-devenv:chore_fix_babel_options
 
 ENV VIEW NYU
 ENV DEVENV_PATH /app
