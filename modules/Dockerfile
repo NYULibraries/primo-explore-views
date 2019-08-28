@@ -1,4 +1,4 @@
-FROM quay.io/nyulibraries/primo-explore-devenv:chore_fix_babel_options
+FROM quay.io/nyulibraries/primo-explore-devenv:1.2.3
 ENV VIEW ${VIEW}
 ENV CUSTOMIZATIONS_PATH /app/primo-explore
 ENV DEVENV_PATH /app/
