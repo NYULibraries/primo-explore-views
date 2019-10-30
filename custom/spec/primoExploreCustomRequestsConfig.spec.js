@@ -241,7 +241,7 @@ describe('primo-explore-custom-request config object', () => {
 
       const expected = {
         label: "Schedule a video loan",
-        href: "https://nyu.qualtrics.com/jfe/form/SV_eKBzul896KmAWVL",
+        href: "https://nyu.qualtrics.com/jfe/form/SV_0pIRNh3aESdBl2t",
         prmIconAfter: {
           icon: "ic_open_in_new_24px",
           set: "action",
