@@ -200,7 +200,7 @@ describe('primo-explore-custom-request config object', () => {
         });
 
         expect(result).toEqual({
-          href: 'http://dev.ill.library.nyu.edu/illiad/illiad.dll/OpenURL',
+          href: 'https://ill-proxy-dev.library.nyu.edu/illiad/illiad.dll/OpenURL',
           label: 'Request ILL',
           prmIconAfter: {
             icon: "ic_open_in_new_24px",
