@@ -181,7 +181,7 @@ describe('primo-explore-custom-request config object', () => {
         const result = ill({ item, config: customRequestsConfig });
 
         expect(result).toEqual({
-          href: 'http://dev.ill.library.nyu.edu/illiad/illiad.dll/OpenURL?did=this-work&i=hope-so',
+          href: 'https://ill-proxy-dev.library.nyu.edu/illiad/illiad.dll/OpenURL?did=this-work&i=hope-so',
           label: 'Request ILL',
           prmIconAfter: {
             icon: "ic_open_in_new_24px",
