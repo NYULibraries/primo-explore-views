@@ -5598,11 +5598,6 @@ primo-explore-getit-to-link-resolver@2.0.5:
   resolved "https://registry.yarnpkg.com/primo-explore-getit-to-link-resolver/-/primo-explore-getit-to-link-resolver-2.0.5.tgz#ca13837815558839cc72e18dd481b12a9b40c15e"
   integrity sha512-Pfb//jEPpJsoHqYgVDZKncWZQjuwXRByfgviRrF4kjC6RGp/75RMwBI9we0a4f/UaodiiCpE0PruRzyxJic94Q==
 
-primo-explore-getit-to-link-resolver@2.0.9:
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/primo-explore-getit-to-link-resolver/-/primo-explore-getit-to-link-resolver-2.0.9.tgz#b8a2346701f29a97340bef8755a98ec4ff8d933b"
-  integrity sha512-PZ4CWWBw5VvmaiZHcKs5xipg6L1EZd7Mbxg4ylKYGxb+bNbpRuJVAMA0LcKSR/0nUDUpNtfxPCRwm7+H0p4AeA==
-
 primo-explore-google-analytics@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/primo-explore-google-analytics/-/primo-explore-google-analytics-1.1.1.tgz#66ee4f0f13ee0b5534bee3ed003d0ea987de9369"
