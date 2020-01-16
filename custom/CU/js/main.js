@@ -7,6 +7,7 @@ import 'primo-explore-clickable-logo-to-any-link';
 import 'primo-explore-nyu-eshelf';
 import 'primo-explore-search-bar-sub-menu';
 
+import viewName from './viewName';
 import { customActionsConfig } from './customActions';
 import { customLibraryCardMenuItemsConfig } from './customLibraryCardMenu';
 import { clickableLogoLinkConfig } from './clickableLogoToAnyLink';
@@ -27,6 +28,7 @@ app
   .constant(clickableLogoLinkConfig.name, clickableLogoLinkConfig.config)
   .constant(nyuEshelfConfig.name, nyuEshelfConfig.config)
   .constant(searchBarSubMenuItemsConfig.name, searchBarSubMenuItemsConfig.config)
+  .value('customNoSearchResultsTemplateUrl', `custom/${viewName}/html/no_search_results.html`)
   .component('prmActionListAfter', {
     template: customActionsConfig.template
   })
