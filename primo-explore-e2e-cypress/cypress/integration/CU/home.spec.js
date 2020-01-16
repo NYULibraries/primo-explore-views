@@ -46,18 +46,6 @@ describe('The Home Page', function () {
 
   describe('Need Help?', () => {
     const links = {
-      ["Consortium libraries & participating libraries"]: {
-        href: `http://library.cooper.edu/primo/side_consortium_using.html`,
-        target: '_blank',
-      },
-      ["Limiting results to the Cooper Library"]: {
-        href: `http://library.cooper.edu/primo/side_cooper_using.html`,
-        target: `_blank`,
-      },
-      ["Using Course Reserves"]: {
-        href: `http://library.cooper.edu/primo/side_reserves_using.html`,
-        target: `_blank`,
-      },
       ["Contact Us"]: {
         href: `http://library.cooper.edu/primo/side_contact.html`,
         target: `_blank`,
