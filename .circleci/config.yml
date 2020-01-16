@@ -16,6 +16,12 @@ push_docker: &push_docker
       docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
       script/push_docker.sh
 
+build_docker: &build_docker
+  run:
+    name: Build Docker images
+    command: |
+      docker-compose build e2e web web-test
+
 run-e2e-steps: &run-e2e-steps
   steps:
     - checkout
@@ -44,6 +50,7 @@ jobs:
           name: Runs unit tests in Jasmine
           command: |
             mkdir -p junit
+            docker-compose build unit-test
             docker-compose run unit-test
             docker cp "$(docker ps -q -a -l -f name=unit-test)":/app/custom/spec/junit/. junit
       - store_test_results:
@@ -116,6 +123,7 @@ jobs:
           name: Setup custom environment variables
           command: echo 'export BRANCH_NO_SLASH="${CIRCLE_BRANCH//\//_}"' >> $BASH_ENV
       - <<: *pull_docker
+      - <<: *build_docker
       - <<: *push_docker
 
 workflows:

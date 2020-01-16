@@ -1,2 +1,1 @@
-// vid
-export let viewName = "CU";
+export default 'CU';
