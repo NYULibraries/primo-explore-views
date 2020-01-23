@@ -1,5 +1,5 @@
 x-environment: &x-environment
-  PROXY_SERVER: http://bobcatdev.library.nyu.edu:80
+  PROXY_SERVER: https://bobcatdev.library.nyu.edu:443
   VIEW: ${VIEW-NYU}
   NODE_ENV: ${NODE_ENV-development}
   VE:
