@@ -4,10 +4,14 @@ const customRequestsConfig = Object.freeze(customRequestsConfigFunction.config('
 
 const title = 'The Catcher in the Rye';
 const author = 'J. D. Salinger';
+const phrase_title = 'Catcher in the Rye';
+const phrase_author = 'JD Salinger';
 
 const item = {
   pnx: {
     addata: {
+      lad05: [phrase_title, title],
+      lad06: [phrase_author, author],
       btitle: [title],
       au: [author],
       ristype: ['BOOK']
@@ -146,7 +150,7 @@ describe('primo-explore-custom-request config object', () => {
       it('constructs an appropriate button config', () => {
         const result = ezborrow({ item, config: customRequestsConfig });
         expect(result).toEqual({
-          href: 'https://dev.login.library.nyu.edu/ezborrow/nyu?query=ti=The%20Catcher%20in%20the%20Rye+and+au=J.%20D.%20Salinger',
+          href: 'https://dev.login.library.nyu.edu/ezborrow/nyu?query=ti=Catcher%20in%20the%20Rye+and+au=JD%20Salinger',
           label: 'Request E-ZBorrow',
           prmIconAfter: {
             icon: "ic_open_in_new_24px",
