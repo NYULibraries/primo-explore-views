@@ -83,8 +83,8 @@ export default {
     buttonIds: ['login', 'ezborrow', 'ill', 'afc'],
     buttonGenerators: {
       ezborrow: ({ item }) => {
-        const title = item.pnx.addata.btitle ? item.pnx.addata.btitle[0] : '';
-        const author = item.pnx.addata.au ? item.pnx.addata.au[0] : '';
+        const title = item.pnx.addata.lad05 ? item.pnx.addata.lad05[0] : '';
+        const author = item.pnx.addata.lad06 ? item.pnx.addata.lad06[0] : '';
         const ti = title ? `ti=${encodeURIComponent(title)}` : '';
         const au = author ? `au=${encodeURIComponent(author)}` : '';
         const and = title && author ? '+and+' : '';
