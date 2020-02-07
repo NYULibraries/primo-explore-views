@@ -72,6 +72,14 @@ See [cypress command line documentation](https://docs.cypress.io/guides/guides/c
 
 * [Example execution in Circle CI](https://circleci.com/gh/NYULibraries/primo-explore-views/38)
 
+### Test records
+
+BobCat dev holds a number of test items as relatively stable fixtures for testing. These are not consistent through their `docids` (e.g. `nyu_aleph0000000`) but they are consistent through their titles (e.g. `PRIMOCIRCTEST-NABUD-MEDIA-02-LR`).
+
+**Note:** When an Aleph Staging refresh occurs, the tests need to be reconfigured with new IDs to pass again. You can look up those new IDs by the titles. 
+
+**Note:** There may be a delay between an Aleph Staging refresh and the test records reappearing on stage.
+
 ### Cypress GUI (Running locally)
 
 The Cypress GUI is accessible in a local development environment only, since a GUI is required.
