@@ -72,7 +72,7 @@ describe('primo-explore-custom-requests', () => {
   describe('with an NYUSH user in an NSHNG library', () => {
     before(() => {
       // PRIMOCIRCTEST-NSHNG-PPL-11-ZZ
-      cy.visit('/fulldisplay?docid=nyu_aleph007368922&vid=NYUSH', {
+      cy.visit('/fulldisplay?docid=nyu_aleph007470646&vid=NYUSH', {
         onBeforeLoad: (contentWindow) => {
           contentWindow.$$mockUserLoggedIn = true
           contentWindow.$$mockUser = {
