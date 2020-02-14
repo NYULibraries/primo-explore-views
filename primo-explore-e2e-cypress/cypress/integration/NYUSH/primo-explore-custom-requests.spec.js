@@ -1,7 +1,8 @@
 describe('primo-explore-custom-requests', () => {
   describe('if the user is not logged in', () => {
     before(() => {
-      cy.visit('/fulldisplay?docid=nyu_aleph007365590&vid=NYUSH', {
+      // PRIMOCIRCTEST-BOBST-MAIN-09-ZZ
+      cy.visit('/fulldisplay?docid=nyu_aleph007467436&vid=NYUSH', {
         onBeforeLoad: (contentWindow) => {
           contentWindow.$$mockUserLoggedIn = false
         }
@@ -28,7 +29,8 @@ describe('primo-explore-custom-requests', () => {
   })
   describe(`if the user is logged in`, () => {
     before(() => {
-      cy.visit('/fulldisplay?docid=nyu_aleph007365590&vid=NYUSH', {
+      // PRIMOCIRCTEST-BOBST-MAIN-09-ZZ
+      cy.visit('/fulldisplay?docid=nyu_aleph007467436&vid=NYUSH', {
         onBeforeLoad: (contentWindow) => {
           contentWindow.$$mockUserLoggedIn = true
           contentWindow.$$mockUser = {
@@ -69,7 +71,8 @@ describe('primo-explore-custom-requests', () => {
 
   describe('with an NYUSH user in an NSHNG library', () => {
     before(() => {
-      cy.visit('/fulldisplay?docid=nyu_aleph007368922&vid=NYUSH', {
+      // PRIMOCIRCTEST-NSHNG-PPL-11-ZZ
+      cy.visit('/fulldisplay?docid=nyu_aleph007470646&vid=NYUSH', {
         onBeforeLoad: (contentWindow) => {
           contentWindow.$$mockUserLoggedIn = true
           contentWindow.$$mockUser = {
