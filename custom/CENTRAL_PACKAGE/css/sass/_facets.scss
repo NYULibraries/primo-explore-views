@@ -10,3 +10,9 @@ prm-search md-content.md-primoExplore-theme.main.padded-container {
   webkit-flex: 0 0 25%;
   flex: 0 0 25%;
 }
+
+// Unhide facet checkboxes by default
+.multiselect-facet-group.multiselect-inactive .md-chip md-checkbox {
+  transform: none;
+  transition: none;
+}
