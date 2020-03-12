@@ -464,9 +464,17 @@ md-toolbar.default-toolbar:not(.md-menu-toolbar) {
 .prm-alert, .bar.alert-bar {
   color: black; }
   .prm-alert-bg, .bar.alert-bar {
-    background-color: #F7EDA3; }
+    background-color: #F89763; }
   .prm-alert-border, .bar.alert-bar {
-    border-color: #ede49e; }
+    border-color: #F89763; }
+  /*.prm-alert-border a, .bar.alert-bar a, .prm-alert-border [external-link], .bar.alert-bar [external-link] {*/
+  .bar.alert-bar {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .bar.alert-bar a, .bar.alert-bar [external-link] {
+    color: black;
+  }
 
 .prm-highlight {
   background-color: #FFFCC4; }

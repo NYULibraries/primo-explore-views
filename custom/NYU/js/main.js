@@ -159,6 +159,32 @@ app
       };
     }],
     template: citationLinkerAfterTemplate,
+  })
+  .component('prmTopbarAfter', {
+    template: /*html*/ `
+    <primo-explore-top-alert>
+      <md-toolbar>
+        <div class="bar alert-bar" layout="row" layout-align="center center">
+          <span class="bar-text">
+            As of March 11, physical access to NYU Libraries is restricted to NYU cardholders only.
+            <a href="https://nyulibraries.statuspage.io/incidents/vkd8y3jxr1n6" target="_blank" class="arrow-link md-primoExplore-theme">
+              <span>See more</span>
+              <span class="sr-only">(opens in a new window)</span>
+              <prm-icon external-link icon-type="svg" svg-icon-set="primo-ui" icon-definition="open-in-new">
+              </prm-icon>
+            </a>
+          </span>
+        </div>
+      </md-toolbar>
+    </primo-explore-top-alert>`,
+    controller: ['$element', function ($element) {
+      const ctrl = this;
+      ctrl.$postLink = function () {
+        const $primoExploreMain = $element.parent().parent().parent();
+        const $el = $element.query(`primo-explore-top-alert`).detach();
+        $primoExploreMain.prepend($el);
+      };
+    }],
   });
 
 app.run(runBlock);
