@@ -166,7 +166,7 @@ app
       <md-toolbar>
         <div class="bar alert-bar" layout="row" layout-align="center center">
           <span class="bar-text">
-            Library services have moved online, spaces are closed until further notice as of Saturday, March 14, 2020
+            As of March 14, NYU Libraries services are all online. Library spaces are closed until further notice.
             <a href="https://nyulibraries.statuspage.io/incidents/vkd8y3jxr1n6" target="_blank" class="arrow-link md-primoExplore-theme">
               <span>See more</span>
               <span class="sr-only">(opens in a new window)</span>
