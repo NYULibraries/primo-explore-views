@@ -166,7 +166,7 @@ app
       <md-toolbar>
         <div class="bar alert-bar" layout="row" layout-align="center center">
           <span class="bar-text">
-            As of March 11, physical access to NYU Libraries is restricted to NYU cardholders only.
+            Library services have moved online, spaces are closed until further notice as of Saturday, March 14, 2020
             <a href="https://nyulibraries.statuspage.io/incidents/vkd8y3jxr1n6" target="_blank" class="arrow-link md-primoExplore-theme">
               <span>See more</span>
               <span class="sr-only">(opens in a new window)</span>
