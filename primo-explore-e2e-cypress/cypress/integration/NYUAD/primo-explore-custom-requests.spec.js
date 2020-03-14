@@ -46,7 +46,7 @@ describe('primo-explore-custom-requests', () => {
         .should('be.visible')
     })
 
-    it(`has visible 'Request E-ZBorrow' button`, () => {
+    xit(`has visible 'Request E-ZBorrow' button`, () => {
       [
         `Request E-ZBorrow`,
       ].forEach(buttonLabel => {
@@ -56,7 +56,7 @@ describe('primo-explore-custom-requests', () => {
       })
     })
 
-    it(`does not have a visible 'Login to see request options', 'Schedule a video loan', or 'Request ILL' button`, () => {
+    xit(`does not have a visible 'Login to see request options', 'Schedule a video loan', or 'Request ILL' button`, () => {
       [
         `Login to see request options`,
         `Schedule a video loan`,
@@ -83,7 +83,7 @@ describe('primo-explore-custom-requests', () => {
       })
     })
 
-    it(`does not have a visible 'Request ILL' button`, () => {
+    xit(`does not have a visible 'Request ILL' button`, () => {
       [
         `Request ILL`
       ].forEach(buttonLabel => {
