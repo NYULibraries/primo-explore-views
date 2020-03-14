@@ -528,14 +528,14 @@ md-toolbar.default-toolbar:not(.md-menu-toolbar) {
   color: #c50f3c; }
   .prm-warn-bg, md-input-container.md-input-invalid:after, prm-tags-list .md-chips .md-input-invalid.md-chip-input-container:after, prm-tags-list .md-chips .md-input-invalid._md-chip-input-container:after, prm-tags-list md-chips .md-input-invalid.md-chip-input-container:after, prm-tags-list md-chips .md-input-invalid._md-chip-input-container:after {
     background-color: #c50f3c; }
-/*
+
 .prm-alert, .bar.alert-bar, .classic-input .search-scope {
   color: black; }
   .prm-alert-bg, .bar.alert-bar, .classic-input .search-scope {
     background-color: #F7EDA3; }
   .prm-alert-border, .bar.alert-bar, .classic-input .search-scope {
     border-color: #ede49e; }
-*/
+
 .prm-highlight {
   background-color: #FFFCC4; }
   .prm-highlight.prm-hue1, .list-item-wrapper .item-bookmarked,
