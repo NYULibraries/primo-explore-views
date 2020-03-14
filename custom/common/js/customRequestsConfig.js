@@ -119,25 +119,29 @@ export default {
     },
     showCustomRequests: {
       ezborrow: ({ item, items, user}) => {
-        if (!user) return items.map(() => false);
-        const isBook = ['BOOK', 'BOOKS'].some(type => item.pnx.addata.ristype.indexOf(type) > -1);
-        const showEzborrow = isBook && authorizedStatuses.ezborrow.indexOf(user['bor-status']) > -1;
+        return items.map(() => false);
+        // if (!user) return items.map(() => false);
+        // const isBook = ['BOOK', 'BOOKS'].some(type => item.pnx.addata.ristype.indexOf(type) > -1);
+        // const showEzborrow = isBook && authorizedStatuses.ezborrow.indexOf(user['bor-status']) > -1;
 
-        const requestables = requestableArray({ items });
-        return items.map((_e, idx) => requestables[idx] && showEzborrow);
+        // const requestables = requestableArray({ items });
+        // return items.map((_e, idx) => requestables[idx] && showEzborrow);
       },
       ill: ({ item, items, user, config }) => {
         if (!user) return items.map(() => false);
 
-        const isNyushUser = () => authorizedStatuses.nyush.indexOf(user['bor-status']) > -1;
-        const inNYUSHLibrary = () => /Shanghai/.test(items[0]._additionalData.mainlocationname);
-        const illEligible = () => authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
+        const isBook = ['BOOK', 'BOOKS'].some(type => item.pnx.addata.ristype.indexOf(type) > -1);
+        // const isNyushUser = () => authorizedStatuses.nyush.indexOf(user['bor-status']) > -1;
+        // const inNYUSHLibrary = () => /Shanghai/.test(items[0]._additionalData.mainlocationname);
+        // const illEligible = () => authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
 
-        const showIll = isNyushUser() ? !inNYUSHLibrary() : illEligible();
+        // const showIll = isNyushUser() ? !inNYUSHLibrary() : illEligible();
+        const showIll = isBook;
 
-        const showEzborrowArr = config.showCustomRequests.ezborrow({ user, item, items, config });
+        // const showEzborrowArr = config.showCustomRequests.ezborrow({ user, item, items, config });
         const requestables = requestableArray({ items });
-        return items.map((_e, idx) => !showEzborrowArr[idx] && requestables[idx] && showIll);
+        // return items.map((_e, idx) => !showEzborrowArr[idx] && requestables[idx] && showIll);
+        return items.map((_e, idx) => requestables[idx] && showIll);
       },
       login: ({ user, items }) => items.map(() => user === undefined),
       afc: ({ item, items, user}) => {
