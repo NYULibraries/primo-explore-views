@@ -324,7 +324,7 @@ describe('primo-explore-custom-request config object', () => {
         expect(result).toEqual([false, false]);
       });
 
-      it('shows under correct conditions with non-unique items', () => {
+      xit('shows under correct conditions with non-unique items', () => {
         const items = nonUniqueItems;
         const result = ill({
           items,
