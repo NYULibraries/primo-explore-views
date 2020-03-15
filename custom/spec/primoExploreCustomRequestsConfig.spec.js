@@ -272,7 +272,7 @@ describe('primo-explore-custom-request config object', () => {
     describe('ezborrow', () => {
       const ezborrow = customRequestsConfig.showCustomRequests.ezborrow;
 
-      it('shows under correct conditions with non-unique items', () => {
+      xit('shows under correct conditions with non-unique items', () => {
         const items = nonUniqueItems;
         const result = ezborrow({
           items,
@@ -284,7 +284,7 @@ describe('primo-explore-custom-request config object', () => {
         expect(result).toEqual([false, false]);
       });
 
-      it('shows under correct conditions with unique items', () => {
+      xit('shows under correct conditions with unique items', () => {
         const items = uniqueItems;
         const result = ezborrow({
           items,
@@ -312,7 +312,7 @@ describe('primo-explore-custom-request config object', () => {
     describe('ill', () => {
       const ill = customRequestsConfig.showCustomRequests.ill;
 
-      it('does not show when ezborrow shows', () => {
+      xit('does not show when ezborrow shows', () => {
         const items = uniqueItems;
         const result = ill({
           items,
@@ -324,7 +324,7 @@ describe('primo-explore-custom-request config object', () => {
         expect(result).toEqual([false, false]);
       });
 
-      it('shows under correct conditions with non-unique items', () => {
+      xit('shows under correct conditions with non-unique items', () => {
         const items = nonUniqueItems;
         const result = ill({
           items,
@@ -336,7 +336,7 @@ describe('primo-explore-custom-request config object', () => {
         expect(result).toEqual([false, false]);
       });
 
-      it('shows under correct conditions with unique items', () => {
+      xit('shows under correct conditions with unique items', () => {
         const items = uniqueItems;
         const result = ill({
           items,
@@ -348,7 +348,7 @@ describe('primo-explore-custom-request config object', () => {
         expect(result).toEqual([true, false]);
       });
 
-      it('does not show when non ILL eligible user', () => {
+      xit('does not show when non ILL eligible user', () => {
         const items = uniqueItems;
         const result = ill({
           items,
@@ -360,7 +360,7 @@ describe('primo-explore-custom-request config object', () => {
         expect(result).toEqual([false, false]);
       });
 
-      it('does not show when NYUSH user and an unavailable NYUSH item', () => {
+      xit('does not show when NYUSH user and an unavailable NYUSH item', () => {
         const result = ill({
           items: nyushItems,
           item,
@@ -473,7 +473,7 @@ describe('primo-explore-custom-request config object', () => {
       expect(result2).toEqual([true, false]);
     });
 
-    it('does not hide when NYUSH item', () => {
+    xit('does not hide when NYUSH item', () => {
       const result = hideDefaultRequests({
         items: nyushItems,
         item,
