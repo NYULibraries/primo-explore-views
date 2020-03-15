@@ -119,6 +119,7 @@ export default {
     },
     showCustomRequests: {
       ezborrow: ({ item, items, user}) => {
+        // Hide EZBorrow for all, EZBorrow is not currently a service
         return items.map(() => false);
         // if (!user) return items.map(() => false);
         // const isBook = ['BOOK', 'BOOKS'].some(type => item.pnx.addata.ristype.indexOf(type) > -1);
@@ -131,17 +132,23 @@ export default {
         if (!user) return items.map(() => false);
 
         const isBook = ['BOOK', 'BOOKS'].some(type => item.pnx.addata.ristype.indexOf(type) > -1);
-        // const isNyushUser = () => authorizedStatuses.nyush.indexOf(user['bor-status']) > -1;
-        // const inNYUSHLibrary = () => /Shanghai/.test(items[0]._additionalData.mainlocationname);
-        // const illEligible = () => authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
+        const isNyushUser = () => authorizedStatuses.nyush.indexOf(user['bor-status']) > -1;
+        const inNYUSHLibrary = () => /Shanghai/.test(items[0]._additionalData.mainlocationname);
+        const illEligible = () => authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
 
-        // const showIll = isNyushUser() ? !inNYUSHLibrary() : illEligible();
-        const showIll = isBook;
+        const showIll = isNyushUser() ? !inNYUSHLibrary() : illEligible();
+
+        // Add temporary logic for no physical items offered 
+        const isTempIllSublibrary = item.delivery.holding.some(({libraryCode}) => {
+          return ['BOBST', 'NCOUR', 'NDIBN', 'NREI'].includes(libraryCode);
+        });
+        const showIllTemp = illEligible() && isBook && isTempIllSublibrary;
 
         // const showEzborrowArr = config.showCustomRequests.ezborrow({ user, item, items, config });
         const requestables = requestableArray({ items });
         // return items.map((_e, idx) => !showEzborrowArr[idx] && requestables[idx] && showIll);
-        return items.map((_e, idx) => requestables[idx] && showIll);
+        // Add the following temporary logic
+        return items.map((_e, idx) => (requestables[idx] && showIll) || showIllTemp);
       },
       login: ({ user, items }) => items.map(() => user === undefined),
       afc: ({ item, items, user}) => {
