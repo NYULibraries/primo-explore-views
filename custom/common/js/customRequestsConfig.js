@@ -80,7 +80,11 @@ const authorizedStatuses = {
 export default {
   name: 'primoExploreCustomRequestsConfig',
   config: (institutionVid) => ({
-    buttonIds: ['login', 'ezborrow', 'ill', 'afc'],
+    // Remove ezborrow and regular ILL during COVID-19 telework scenario
+    // buttonIds: ['login', 'ezborrow', 'ill', 'afc'],
+    // Add a temp ill request instead, where every physical item regardless of status
+    // gets requested through ILL, except Offsite items
+    buttonIds: ['login', 'temp_ill_request', 'afc'],
     buttonGenerators: {
       ezborrow: ({ item }) => {
         const title = item.pnx.addata.lad05 ? item.pnx.addata.lad05[0] : '';
@@ -106,6 +110,16 @@ export default {
           prmIconAfter: externalLinkIcon,
         };
       },
+      temp_ill_request: ({ item }) => {
+        const link = getitLink(item, institutionVid);
+
+        const baseUrl = baseUrls.ill;
+        return {
+          href: (/resolve?(.*)/.test(link) ? `${baseUrl}?${link.match(/resolve\?(.*)/)[1]}` : link) || baseUrl,
+          label: 'Request',
+          prmIconAfter: externalLinkIcon,
+        };
+      },
       login: () => ({
         prmIconBefore: loginIcon,
         label: 'Login to see request options',
@@ -119,35 +133,47 @@ export default {
     },
     showCustomRequests: {
       ezborrow: ({ item, items, user}) => {
-        // Hide EZBorrow for all, EZBorrow is not currently a service
-        return items.map(() => false);
-        // if (!user) return items.map(() => false);
-        // const isBook = ['BOOK', 'BOOKS'].some(type => item.pnx.addata.ristype.indexOf(type) > -1);
-        // const showEzborrow = isBook && authorizedStatuses.ezborrow.indexOf(user['bor-status']) > -1;
+        if (!user) return items.map(() => false);
+        const isBook = ['BOOK', 'BOOKS'].some(type => item.pnx.addata.ristype.indexOf(type) > -1);
+        const showEzborrow = isBook && authorizedStatuses.ezborrow.indexOf(user['bor-status']) > -1;
 
-        // const requestables = requestableArray({ items });
-        // return items.map((_e, idx) => requestables[idx] && showEzborrow);
+        const requestables = requestableArray({ items });
+        return items.map((_e, idx) => requestables[idx] && showEzborrow);
       },
       ill: ({ item, items, user, config }) => {
         if (!user) return items.map(() => false);
 
-        const isBook = ['BOOK', 'BOOKS'].some(type => item.pnx.addata.ristype.indexOf(type) > -1);
         const isNyushUser = () => authorizedStatuses.nyush.indexOf(user['bor-status']) > -1;
         const inNYUSHLibrary = () => /Shanghai/.test(items[0]._additionalData.mainlocationname);
         const illEligible = () => authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
 
         const showIll = isNyushUser() ? !inNYUSHLibrary() : illEligible();
 
+        const showEzborrowArr = config.showCustomRequests.ezborrow({ user, item, items, config });
+        const requestables = requestableArray({ items });
+        return items.map((_e, idx) => !showEzborrowArr[idx] && requestables[idx] && showIll);
+      },
+      temp_ill_request: ({ item, items, user, config }) => {
+        if (!user) return items.map(() => false);
+
+        const isBook = ['BOOK', 'BOOKS'].some(type => item.pnx.addata.ristype.indexOf(type) > -1);
+        const isNyushUser = () => authorizedStatuses.nyush.indexOf(user['bor-status']) > -1;
+        const inNYUSHLibrary = () => /Shanghai/.test(items[0]._additionalData.mainlocationname);
+        const illEligible = () => authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
+        const showIll = isNyushUser() ? !inNYUSHLibrary() : illEligible();
+
         // Add temporary logic for no physical items offered 
+        const isOffsite = () => items[0].itemFields.some((field) => { return /Offsite/.test(field) });
         const isTempIllSublibrary = item.delivery.holding.some(({libraryCode}) => {
           return ['BOBST', 'NCOUR', 'NDIBN', 'NREI'].includes(libraryCode);
         });
-        const showIllTemp = illEligible() && isBook && isTempIllSublibrary;
+        // Show link if ILL eligible, item is a book, 
+        // item is in one of the whitelisted sublibraries, and item is NOT offsite
+        const showIllTemp = illEligible() && isBook && isTempIllSublibrary && !isOffsite();
 
-        // const showEzborrowArr = config.showCustomRequests.ezborrow({ user, item, items, config });
         const requestables = requestableArray({ items });
-        // return items.map((_e, idx) => !showEzborrowArr[idx] && requestables[idx] && showIll);
         // Add the following temporary logic
+        // keeps original ILL logic, but also includes ILL link for temp logic
         return items.map((_e, idx) => (requestables[idx] && showIll) || showIllTemp);
       },
       login: ({ user, items }) => items.map(() => user === undefined),
