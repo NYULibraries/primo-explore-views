@@ -44,7 +44,8 @@ const requestableArray = ({ items }) => {
 
 const getitLink = (item, institutionVid) => {
   const getitLinkFields = {
-    NYU: ['lln10'],
+    // NYU: ['lln10'],
+    NYU: ['lln40'],
     NYUAD: ['lln11'],
     NYUSH: ['lln40', 'lln12'],
     CU: ['lln13'],
