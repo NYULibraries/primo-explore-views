@@ -31,6 +31,10 @@ const item = {
         displayLabel: 'lln10',
         linkURL: 'http://getit.nyu.edu/resolve?did=this-work&i=hope-so'
       },
+      {
+        displayLabel: 'lln40',
+        linkURL: 'http://getit.nyu.edu/resolve?did=this-work&i=hope-so'
+      },
     ]
   }
 };
