@@ -194,7 +194,9 @@ export default {
         return items.map(() => true);
       } else if (authorizedStatuses.nyush.indexOf(user['bor-status']) > -1) {
         // if NYUSH user, only hide if ILL shows
-        return config.showCustomRequests.ill({ item, items, user, config });
+        // return config.showCustomRequests.ill({ item, items, user, config });
+        // if NYUSH user, only hide if temp ILL shows
+        return config.showCustomRequests.temp_ill_request({ item, items, user, config });
       }
 
       // otherwise, hide only unavailable holdings
