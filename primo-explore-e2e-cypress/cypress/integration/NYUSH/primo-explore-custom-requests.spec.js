@@ -28,7 +28,7 @@ describe('primo-explore-custom-requests', () => {
     })
   })
   // Temporary logic for logged in users an all physical items through ILL
-  describe(`if the user is logged in`, () =>
+  describe(`if the user is logged in`, () => {
     describe(`when the item is checked out`, () => {
       before(() => {
         // PRIMOCIRCTEST-BOBST-MAIN-09-ZZ
@@ -69,6 +69,7 @@ describe('primo-explore-custom-requests', () => {
             .should('not.be.visible')
         })
       })
+    })
   })
   xdescribe(`if the user is logged in`, () => {
     before(() => {
