@@ -144,11 +144,11 @@ export default {
       ill: ({ item, items, user, config }) => {
         if (!user) return items.map(() => false);
 
-        const isNyushUser = () => authorizedStatuses.nyush.indexOf(user['bor-status']) > -1;
+        const isNYUSHUser = () => authorizedStatuses.nyush.indexOf(user['bor-status']) > -1;
         const inNYUSHLibrary = () => /Shanghai/.test(items[0]._additionalData.mainlocationname);
         const illEligible = () => authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
 
-        const showIll = isNyushUser() ? !inNYUSHLibrary() : illEligible();
+        const showIll = isNYUSHUser() ? !inNYUSHLibrary() : illEligible();
 
         const showEzborrowArr = config.showCustomRequests.ezborrow({ user, item, items, config });
         const requestables = requestableArray({ items });
@@ -158,10 +158,10 @@ export default {
         if (!user) return items.map(() => false);
 
         const isBook = ['BOOK', 'BOOKS'].some(type => item.pnx.addata.ristype.indexOf(type) > -1);
-        const isNyushUser = () => authorizedStatuses.nyush.indexOf(user['bor-status']) > -1;
+        const isNYUSHUser = () => authorizedStatuses.nyush.indexOf(user['bor-status']) > -1;
         const inNYUSHLibrary = () => /Shanghai/.test(items[0]._additionalData.mainlocationname);
         const illEligible = () => authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
-        const showIll = isNyushUser() ? !inNYUSHLibrary() : illEligible();
+        const showIll = isNYUSHUser() ? !inNYUSHLibrary() : illEligible();
 
         // Add temporary logic for no physical items offered 
         const isOffsite = () => items[0].itemFields.some((field) => { return /Offsite/.test(field) });
