@@ -44,11 +44,11 @@ const requestableArray = ({ items }) => {
 
 const getitLink = (item, institutionVid) => {
   const getitLinkFields = {
-    // NYU: ['lln10'],
-    NYU: ['lln40'],
+    NYU: ['lln10'],
     NYUAD: ['lln11'],
     NYUSH: ['lln40', 'lln12'],
     CU: ['lln13'],
+    ALL: ['lln42'],
   };
   const validGetitLinkFields = getitLinkFields[institutionVid];
 
@@ -112,7 +112,7 @@ export default {
         };
       },
       temp_ill_request: ({ item }) => {
-        const link = getitLink(item, institutionVid);
+        const link = getitLink(item, 'ALL');
 
         const baseUrl = baseUrls.ill;
         return {
@@ -144,11 +144,11 @@ export default {
       ill: ({ item, items, user, config }) => {
         if (!user) return items.map(() => false);
 
-        const isNyushUser = () => authorizedStatuses.nyush.indexOf(user['bor-status']) > -1;
+        const isNYUSHUser = () => authorizedStatuses.nyush.indexOf(user['bor-status']) > -1;
         const inNYUSHLibrary = () => /Shanghai/.test(items[0]._additionalData.mainlocationname);
         const illEligible = () => authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
 
-        const showIll = isNyushUser() ? !inNYUSHLibrary() : illEligible();
+        const showIll = isNYUSHUser() ? !inNYUSHLibrary() : illEligible();
 
         const showEzborrowArr = config.showCustomRequests.ezborrow({ user, item, items, config });
         const requestables = requestableArray({ items });
@@ -157,25 +157,12 @@ export default {
       temp_ill_request: ({ item, items, user, config }) => {
         if (!user) return items.map(() => false);
 
-        const isBook = ['BOOK', 'BOOKS'].some(type => item.pnx.addata.ristype.indexOf(type) > -1);
-        const isNyushUser = () => authorizedStatuses.nyush.indexOf(user['bor-status']) > -1;
-        const inNYUSHLibrary = () => /Shanghai/.test(items[0]._additionalData.mainlocationname);
-        const illEligible = () => authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
-        const showIll = isNyushUser() ? !inNYUSHLibrary() : illEligible();
-
-        // Add temporary logic for no physical items offered 
+        // Is in an offsite location (no sublibrary currently tells you this, hence this regex)
         const isOffsite = () => items[0].itemFields.some((field) => { return /Offsite/.test(field) });
-        const isTempIllSublibrary = item.delivery.holding.some(({libraryCode}) => {
-          return ['BOBST', 'NCOUR', 'NDIBN', 'NREI'].includes(libraryCode);
-        });
-        // Show link if ILL eligible, item is a book, 
-        // item is in one of the whitelisted sublibraries, and item is NOT offsite
-        const showIllTemp = illEligible() && isBook && isTempIllSublibrary && !isOffsite();
-
-        const requestables = requestableArray({ items });
-        // Add the following temporary logic
-        // keeps original ILL logic, but also includes ILL link for temp logic
-        return items.map((_e, idx) => (requestables[idx] && showIll) || showIllTemp);
+        
+        // Default show ILL button logic
+        const showIll = !isOffsite();
+        return items.map((_e, idx) => showIll);
       },
       login: ({ user, items }) => items.map(() => user === undefined),
       afc: ({ item, items, user}) => {
@@ -194,7 +181,9 @@ export default {
         return items.map(() => true);
       } else if (authorizedStatuses.nyush.indexOf(user['bor-status']) > -1) {
         // if NYUSH user, only hide if ILL shows
-        return config.showCustomRequests.ill({ item, items, user, config });
+        // return config.showCustomRequests.ill({ item, items, user, config });
+        // if NYUSH user, only hide if temp ILL shows
+        return config.showCustomRequests.temp_ill_request({ item, items, user, config });
       }
 
       // otherwise, hide only unavailable holdings

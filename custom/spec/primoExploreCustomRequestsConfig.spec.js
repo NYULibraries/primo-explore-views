@@ -477,7 +477,7 @@ describe('primo-explore-custom-request config object', () => {
       expect(result2).toEqual([true, false]);
     });
 
-    it('does not hide when NYUSH item', () => {
+    xit('does not hide when NYUSH item', () => {
       const result = hideDefaultRequests({
         items: nyushItems,
         item,
