@@ -44,11 +44,11 @@ const requestableArray = ({ items }) => {
 
 const getitLink = (item, institutionVid) => {
   const getitLinkFields = {
-    // NYU: ['lln10'],
-    NYU: ['lln40'],
+    NYU: ['lln10'],
     NYUAD: ['lln11'],
     NYUSH: ['lln40', 'lln12'],
     CU: ['lln13'],
+    ALL: ['lln42'],
   };
   const validGetitLinkFields = getitLinkFields[institutionVid];
 
@@ -112,7 +112,7 @@ export default {
         };
       },
       temp_ill_request: ({ item }) => {
-        const link = getitLink(item, institutionVid);
+        const link = getitLink(item, 'ALL');
 
         const baseUrl = baseUrls.ill;
         return {
@@ -157,37 +157,12 @@ export default {
       temp_ill_request: ({ item, items, user, config }) => {
         if (!user) return items.map(() => false);
 
-        const isBook = ['BOOK', 'BOOKS'].some(type => item.pnx.addata.ristype.indexOf(type) > -1);
-        // Use is a Shanghai user if they match one of the patron statuses
-        const isNYUSHUser = () => authorizedStatuses.nyush.indexOf(user['bor-status']) > -1;
-        // If location name matches Shanghai, item is in a Shanghai library
-        const inNYUSHLibrary = () => /Shanghai/.test(items[0]._additionalData.mainlocationname);
-        // If status has a status that is a date (i.e. DD/MM/YY) we consider it "checked out"
-        const isCheckedOut = () => /\d{2}\/\d{2}\/\d{2}/g.test(items[0]._additionalData.itemstatusname);
-        // Item is NYUSH ill eligible if it is not in the NYU Library or if it's checked out
-        const illNYUSHEligible = () => !inNYUSHLibrary() || isCheckedOut();
-        // Use is ILL eligible if they have a valid patron status
-        const illEligible = () => authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
-        
         // Is in an offsite location (no sublibrary currently tells you this, hence this regex)
         const isOffsite = () => items[0].itemFields.some((field) => { return /Offsite/.test(field) });
-        // Currently allowable ILL sublibraries
-        const isIllSublibrary = item.delivery.holding.some(({libraryCode}) => {
-          return ['BOBST', 'NCOUR', 'NDIBN', 'NREI'].includes(libraryCode);
-        });
-        // For SH users, show ILL link if:
-        // - item is not in SH library; or
-        // - item is checked out
-        // For non SH users, show ILL link if:
-        // - item is a book
-        // Show link if ILL eligible, item is a book, 
-        // item is in one of the whitelisted sublibraries, and item is NOT offsite
-        const showTempIll = isNYUSHUser() ? illNYUSHEligible() : illEligible() && isBook && isIllSublibrary && !isOffsite();
-
+        
         // Default show ILL button logic
-        const showIll = isNYUSHUser() ? !inNYUSHLibrary() : illEligible();
-        const requestables = requestableArray({ items });
-        return items.map((_e, idx) => (requestables[idx] && showIll) || showTempIll);
+        const showIll = !isOffsite();
+        return items.map((_e, idx) => showIll);
       },
       login: ({ user, items }) => items.map(() => user === undefined),
       afc: ({ item, items, user}) => {
