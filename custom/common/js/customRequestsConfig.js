@@ -44,11 +44,13 @@ const requestableArray = ({ items }) => {
 
 const getitLink = (item, institutionVid) => {
   const getitLinkFields = {
-    NYU: ['lln10'],
-    NYUAD: ['lln11'],
-    NYUSH: ['lln40', 'lln12'],
+    // NYU: ['lln10'],
+    NYU: ['lln42'],
+    // NYUAD: ['lln11'],
+    NYUAD: ['lln42'],
+    // NYUSH: ['lln40', 'lln12'],
+    NYUSH: ['lln42'],
     CU: ['lln13'],
-    ALL: ['lln42'],
   };
   const validGetitLinkFields = getitLinkFields[institutionVid];
 
@@ -112,7 +114,7 @@ export default {
         };
       },
       temp_ill_request: ({ item }) => {
-        const link = getitLink(item, 'ALL');
+        const link = getitLink(item, institutionVid);
 
         const baseUrl = baseUrls.ill;
         return {
