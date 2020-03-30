@@ -21,6 +21,8 @@ import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import googleAnalyticsConfig from './googleAnalyticsConfig';
 import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
+import topAlert from 'Common/js/topAlert';
+import topAlertConfig from 'Common/js/topAlertConfig';
 
 // HTML as JS imports
 import customRequestsRequestInformationTemplate from '../html/custom_requests_request_information.html';
@@ -49,6 +51,7 @@ app
   .constant(googleAnalyticsConfig.name, googleAnalyticsConfig.config)
   .constant(customRequestsConfig.name, customRequestsConfig.config(viewName))
   .constant(customLoginConfig.name, customLoginConfig.config)
+  .constant(topAlertConfig.name, topAlertConfig.config)
   .value('customNoSearchResultsTemplateUrl', `custom/${viewName}/html/no_search_results.html`)
   .component('prmActionListAfter', {
     controller: ['$window', function($window) {
@@ -160,32 +163,8 @@ app
     }],
     template: citationLinkerAfterTemplate,
   })
-  .component('prmTopbarAfter', {
-    template: /*html*/ `
-    <primo-explore-top-alert>
-      <md-toolbar>
-        <div class="bar alert-bar" layout="row" layout-align="center center">
-          <span class="bar-text">
-            As of March 14, NYU Libraries services are all online. Library spaces are closed until further notice.
-            <a href="https://nyulibraries.statuspage.io/incidents/vkd8y3jxr1n6" target="_blank" class="arrow-link md-primoExplore-theme">
-              <span>See more</span>
-              <span class="sr-only">(opens in a new window)</span>
-              <prm-icon external-link icon-type="svg" svg-icon-set="primo-ui" icon-definition="open-in-new">
-              </prm-icon>
-            </a>
-          </span>
-        </div>
-      </md-toolbar>
-    </primo-explore-top-alert>`,
-    controller: ['$element', function ($element) {
-      const ctrl = this;
-      ctrl.$postLink = function () {
-        const $primoExploreMain = $element.parent().parent().parent();
-        const $el = $element.query(`primo-explore-top-alert`).detach();
-        $primoExploreMain.prepend($el);
-      };
-    }],
-  });
+  .component('prmTopbarAfter', topAlert);
+
 
 app.run(runBlock);
 
