@@ -16,9 +16,11 @@
 
 @import '~primo-explore-custom-no-search-results/css/custom1.css';
 
-primo-explore-top-alert .bar.alert-bar {
-  font-size: 18px;
-  font-weight: 700;
-  border-color: #F89763;
-  background-color: #F89763 !important;
+primo-explore-top-alert {
+  .bar.alert-bar {
+    font-size: 18px;
+    font-weight: 700;
+    border-color: #F89763;
+    background-color: #F89763 !important;
+  }
 }
