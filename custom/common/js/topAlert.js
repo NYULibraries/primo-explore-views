@@ -1,7 +1,7 @@
 // utilize with prm-top-bar-after
 export default {
   template: /*html*/ `
-    <primo-explore-top-alert ng-hide="isHidden" ng-show="showAlert()">
+    <primo-explore-top-alert ng-hide="isHidden">
       <div class="bar alert-bar" layout="row" layout-align="center center">
         <span class="bar-text">
           <span ng-bind-html="translate(config.alert_text)"></span>
@@ -14,9 +14,11 @@ export default {
         </span>
       </div>
     </primo-explore-top-alert>`,
-  controller: ['customTopAlertConfig', '$scope', '$element', '$filter', function(customTopAlertConfig, $scope, $element, $filter) {
+  controller: ['customTopAlertConfig', '$scope', '$element', '$filter', '$timeout', function(customTopAlertConfig, $scope, $element, $filter, $timeout) {
     const ctrl = this;
-    
+    // Show alert after a second if there is an alert value
+    $timeout( function(){ $scope.showAlert(); }, 1000);
+
     ctrl.$onInit = () => {
       $scope.isHidden = true;
       $scope.config = customTopAlertConfig;
