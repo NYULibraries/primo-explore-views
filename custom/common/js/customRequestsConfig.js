@@ -161,10 +161,11 @@ export default {
 
         // Is in an offsite location (no sublibrary currently tells you this, hence this regex)
         const isOffsite = () => items[0].itemFields.some((field) => { return /Offsite/.test(field) });
+        // Is this a valid sublibrary location, whitelisted sublibrary codes below
         const isValidSublibrary = item.delivery.holding.some(({ mainLocation }) => {
-          return !["NIFA", "NIFAC", "NISAW", "BARCH", "BFALE", "BTAM"].includes(mainLocation);
+          return !["NIFA", "NIFAC", "NISAW", "BARCH", "BFALE", "BTAM", "OSTAM", "OSFAL", "OSARC"].includes(mainLocation);
         });
-
+        
         // Default show ILL button logic
         const showIll = !isOffsite() && isValidSublibrary;
         return items.map((_e, idx) => showIll);
