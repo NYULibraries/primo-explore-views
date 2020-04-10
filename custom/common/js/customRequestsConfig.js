@@ -159,16 +159,28 @@ export default {
       temp_ill_request: ({ item, items, user, config }) => {
         if (!user) return items.map(() => false);
 
+        // We have to match the given item[idx] to the same item in items.delivery.holding
+        // so that we have access to all the item information including sublibrary, etc.
+        // item.delivery.holding has an ilsApiId which is in the format {ADM}{HOLDING_ID}{ITEM_ID}
+        // we need to extract the {HOLDING_ID} out of that to match against the thisItem.item field
+        // so in this case "NYU01000012340001" = "NYU5000001234" because the "00001234" matches on each
+        const moreItemInfo = (thisItem) => {
+          const matchingItem = item.delivery.holding.filter(({ ilsApiId }) => thisItem.item.substring(5).match(new RegExp("^"+ilsApiId.substring(5))))[0];
+          return matchingItem;
+        }
         // Is in an offsite location (no sublibrary currently tells you this, hence this regex)
-        const isOffsite = () => items[0].itemFields.some((field) => { return /Offsite/.test(field) });
+        const isOffsite = (thisItem) => {
+          return thisItem.itemFields.some((field) => { return /Offsite/.test(field) })
+        };
         // Is this a valid sublibrary location, whitelisted sublibrary codes below
-        const isValidSublibrary = item.delivery.holding.some(({ mainLocation }) => {
-          return !["NIFA", "NIFAC", "NISAW", "BARCH", "BFALE", "BTAM", "OSTAM", "OSFAL", "OSARC"].includes(mainLocation);
-        });
-        
+        const isValidSublibrary = (thisItem) => {
+          return !["NIFA", "NIFAC", "NISAW", "BARCH", "BFALE", "BTAM", "OSTAM", "OSFAL", "OSARC"].includes(moreItemInfo(thisItem).mainLocation);
+        };
+
         // Default show ILL button logic
-        const showIll = !isOffsite() && isValidSublibrary;
-        return items.map((_e, idx) => showIll);
+        return items.map((thisItem) => {
+          return !isOffsite(thisItem) && isValidSublibrary(thisItem);
+        });
       },
       login: ({ user, items }) => items.map(() => user === undefined),
       afc: ({ item, items, user}) => {
