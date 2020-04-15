@@ -30,6 +30,29 @@ const checkIsAvailable = item => {
   return !hasPattern(unavailablePatterns, circulationStatus);
 };
 
+// Is the holding sublibrary valid for showing request button
+const checkIsValidSublibrary = item => {
+  // Valid sublibraries from using the Request ILL link 
+  // are not Offsite or Special Collections and match the
+  // following strings for mainlocationname
+  const invalidSublibraryPatterns = [
+    /Avery/,
+    /Archives/,
+    /BAFC/,
+    /Spec/,
+    /Computer/,
+    /6th/,
+    /Tamiment/,
+    /Inst/,
+    /IFA/,
+    /ISAW/,
+  ];
+
+  const hasPattern = (patterns, target) => patterns.some(str => target.match(new RegExp(str)));
+  const sublibraryValue = item._additionalData.mainlocationname;
+  return !hasPattern(invalidSublibraryPatterns, sublibraryValue);
+};
+
 const availabilityArray = ({ items }) => {
   return items.map(checkIsAvailable);
 };
@@ -159,28 +182,14 @@ export default {
       temp_ill_request: ({ item, items, user, config }) => {
         if (!user) return items.map(() => false);
 
-        // We have to match the given item[idx] to the same item in items.delivery.holding
-        // so that we have access to all the item information including sublibrary, etc.
-        // item.delivery.holding has an ilsApiId which is in the format {ADM}{HOLDING_ID}{ITEM_ID}
-        // we need to extract the {HOLDING_ID} out of that to match against the thisItem.item field
-        // so in this case "NYU01000012340001" = "NYU5000001234" because the "00001234" matches on each
-        const moreItemInfo = (thisItem) => {
-          const matchingItem = item.delivery.holding.filter(({ ilsApiId }) => thisItem.item.substring(5).match(new RegExp("^"+ilsApiId.substring(5))))[0];
-          return matchingItem;
-        }
         // Is in an offsite location (no sublibrary currently tells you this, hence this regex)
-        const isOffsite = (thisItem) => {
-          return thisItem.itemFields.some((field) => { return /Offsite/.test(field) })
-        };
-        // Is this a valid sublibrary location, whitelisted sublibrary codes below
-        const isValidSublibrary = (thisItem) => {
-          return !["NIFA", "NIFAC", "NISAW", "BARCH", "BFALE", "BTAM", "OSTAM", "OSFAL", "OSARC"].includes(moreItemInfo(thisItem).mainLocation);
+        const isOffsite = (item) => {
+          return item.itemFields.some((field) => { return /Offsite/.test(field) })
         };
 
+
         // Default show ILL button logic
-        return items.map((thisItem) => {
-          return !isOffsite(thisItem) && isValidSublibrary(thisItem);
-        });
+        return items.map((item) => !isOffsite(item) && checkIsValidSublibrary(item));
       },
       login: ({ user, items }) => items.map(() => user === undefined),
       afc: ({ item, items, user}) => {
@@ -197,15 +206,16 @@ export default {
       if (user === undefined) {
         // if logged out, hide all
         return items.map(() => true);
-      } else if (authorizedStatuses.nyush.indexOf(user['bor-status']) > -1) {
-        // if NYUSH user, only hide if ILL shows
-        // return config.showCustomRequests.ill({ item, items, user, config });
-        // if NYUSH user, only hide if temp ILL shows
-        return config.showCustomRequests.temp_ill_request({ item, items, user, config });
-      }
+      } 
+      // else if (authorizedStatuses.nyush.indexOf(user['bor-status']) > -1) {
+      //   // if NYUSH user, only hide if ILL shows
+      //   return config.showCustomRequests.ill({ item, items, user, config });
+      // }
 
+      // otherwise, hide only Request buttons when we're showing the temp request ill button
+      return config.showCustomRequests.temp_ill_request({ item, items, user, config });
       // otherwise, hide only unavailable holdings
-      return availabilityArray({ items }).map(avail => !avail);
+      // return availabilityArray({ items }).map(avail => !avail);
     },
     noButtonsText: '{item.request.blocked}',
   })
