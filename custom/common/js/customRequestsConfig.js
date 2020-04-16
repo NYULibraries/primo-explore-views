@@ -36,16 +36,16 @@ const checkIsValidSublibrary = item => {
   // are not Offsite or Special Collections and match the
   // following strings for mainlocationname
   const invalidSublibraryPatterns = [
-    /Avery/,
-    /Archives/,
-    /BAFC/,
-    /Spec/,
-    /Computer/,
-    /6th/,
-    /Tamiment/,
-    /Inst/,
-    /IFA/,
-    /ISAW/,
+    /Avery/g,
+    /Archives/g,
+    /BAFC/g,
+    /Spec/g,
+    /Computer/g,
+    /6th/g,
+    /Tamiment/g,
+    /Inst/g,
+    /IFA/g,
+    /ISAW/g,
   ];
 
   const hasPattern = (patterns, target) => patterns.some(str => target.match(new RegExp(str)));
@@ -186,7 +186,6 @@ export default {
         const isOffsite = (item) => {
           return item.itemFields.some((field) => { return /Offsite/.test(field) })
         };
-
 
         // Default show ILL button logic
         return items.map((item) => !isOffsite(item) && checkIsValidSublibrary(item));
