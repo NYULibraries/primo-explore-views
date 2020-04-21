@@ -30,6 +30,29 @@ const checkIsAvailable = item => {
   return !hasPattern(unavailablePatterns, circulationStatus);
 };
 
+// Is the holding sublibrary valid for showing request button
+const checkIsValidSublibrary = item => {
+  // Valid sublibraries from using the Request ILL link 
+  // are not Offsite or Special Collections and match the
+  // following strings for mainlocationname
+  const invalidSublibraryPatterns = [
+    /Avery/g,
+    /Archives/g,
+    /BAFC/g,
+    /Spec/g,
+    /Computer/g,
+    /6th/g,
+    /Tamiment/g,
+    /Inst/g,
+    /IFA/g,
+    /ISAW/g,
+  ];
+
+  const hasPattern = (patterns, target) => patterns.some(str => target.match(new RegExp(str)));
+  const sublibraryValue = item._additionalData.mainlocationname;
+  return !hasPattern(invalidSublibraryPatterns, sublibraryValue);
+};
+
 const availabilityArray = ({ items }) => {
   return items.map(checkIsAvailable);
 };
@@ -160,14 +183,12 @@ export default {
         if (!user) return items.map(() => false);
 
         // Is in an offsite location (no sublibrary currently tells you this, hence this regex)
-        const isOffsite = () => items[0].itemFields.some((field) => { return /Offsite/.test(field) });
-        const isValidSublibrary = item.delivery.holding.some(({ mainLocation }) => {
-          return !["NIFA", "NIFAC", "NISAW", "BARCH", "BFALE", "BTAM"].includes(mainLocation);
-        });
+        const isOffsite = (item) => {
+          return item.itemFields.some((field) => { return /Offsite/.test(field) })
+        };
 
         // Default show ILL button logic
-        const showIll = !isOffsite() && isValidSublibrary;
-        return items.map((_e, idx) => showIll);
+        return items.map((item) => !isOffsite(item) && checkIsValidSublibrary(item));
       },
       login: ({ user, items }) => items.map(() => user === undefined),
       afc: ({ item, items, user}) => {
@@ -184,15 +205,16 @@ export default {
       if (user === undefined) {
         // if logged out, hide all
         return items.map(() => true);
-      } else if (authorizedStatuses.nyush.indexOf(user['bor-status']) > -1) {
-        // if NYUSH user, only hide if ILL shows
-        // return config.showCustomRequests.ill({ item, items, user, config });
-        // if NYUSH user, only hide if temp ILL shows
-        return config.showCustomRequests.temp_ill_request({ item, items, user, config });
-      }
+      } 
+      // else if (authorizedStatuses.nyush.indexOf(user['bor-status']) > -1) {
+      //   // if NYUSH user, only hide if ILL shows
+      //   return config.showCustomRequests.ill({ item, items, user, config });
+      // }
 
+      // otherwise, hide only Request buttons when we're showing the temp request ill button
+      return config.showCustomRequests.temp_ill_request({ item, items, user, config });
       // otherwise, hide only unavailable holdings
-      return availabilityArray({ items }).map(avail => !avail);
+      // return availabilityArray({ items }).map(avail => !avail);
     },
     noButtonsText: '{item.request.blocked}',
   })
