@@ -9,12 +9,12 @@ describe('when searching', () => {
 
   it('allows for a basic search', () => {
     cy.get('#searchBar')
-      .type('monk{enter}')
-    cy.url().should('include', 'monk')
+      .type('PRIMOTEST{enter}')
+    cy.url().should('include', 'PRIMOTEST')
     cy.get(`[id^='SEARCH_RESULT_RECORDID_']`)
       .first()
       .then($el => {
-        // current bug with partial string matches with .should('contain.text', 'Monk')
+        // current bug with partial string matches with .should('contain.text', 'PRIMOTEST')
         expect($el.text().length).to.be.at.least(1)
       })
   })
