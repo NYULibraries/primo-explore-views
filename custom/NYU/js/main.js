@@ -23,6 +23,7 @@ import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
 import topAlert from 'Common/js/topAlert';
 import topAlertConfig from 'Common/js/topAlertConfig';
+import physicalItemsAlert from 'Common/js/physicalItemsAlert';
 
 // HTML as JS imports
 import customRequestsRequestInformationTemplate from '../html/custom_requests_request_information.html';
@@ -163,8 +164,8 @@ app
     }],
     template: citationLinkerAfterTemplate,
   })
-  .component('prmTopbarAfter', topAlert);
-
+  .component('prmTopbarAfter', topAlert)
+  .component('prmRequestServicesAfter', physicalItemsAlert);
 
 app.run(runBlock);
 
