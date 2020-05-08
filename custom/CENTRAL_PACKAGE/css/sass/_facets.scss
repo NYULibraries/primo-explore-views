@@ -1,16 +1,3 @@
-// Facets on the left
-prm-search md-content.md-primoExplore-theme.main.padded-container {
-  display: -webkit-flex;
-  -webkit-flex-flow: row-reverse wrap;
-  display: flex;
-  flex-flow: row-reverse wrap;
-}
-
-#facets {
-  webkit-flex: 0 0 25%;
-  flex: 0 0 25%;
-}
-
 // Unhide facet checkboxes by default
 .multiselect-facet-group.multiselect-inactive .md-chip md-checkbox {
   transform: none;
