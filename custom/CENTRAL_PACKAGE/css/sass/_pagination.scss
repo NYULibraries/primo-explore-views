@@ -1,0 +1,14 @@
+
+@media (min-width: 960px) {
+  .__gt-md prm-page-nav-menu,
+  prm-page-nav-menu {
+    bottom: 5em !important;
+  }
+}
+
+@media (max-width: 960px) {
+  .__gt-md prm-page-nav-menu,
+  prm-page-nav-menu {
+    bottom: 8em !important;
+  }
+}

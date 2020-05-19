@@ -1,0 +1,31 @@
+
+
+.chat-tab, .chat-close {
+  &:focus {
+    -webkit-box-shadow: inset 0 0 0 2px $border_focus;
+    box-shadow: inset 0 0 0 2px $border_focus;
+    overflow: -moz-hidden-unscrollable;
+  }
+}
+
+.chat-tab, .chat-close {
+  &:focus {
+    -webkit-box-shadow: inset 0 0 0 2px $border_focus;
+    box-shadow: inset 0 0 0 2px $border_focus;
+    overflow: -moz-hidden-unscrollable;
+  }
+}
+
+@media (min-width: 600px) {
+  .chat-tab,
+  .chat-frame-wrap {
+    right: 100px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .chat-tab,
+  .chat-frame-wrap {
+    right: 10px !important;
+  }
+}
