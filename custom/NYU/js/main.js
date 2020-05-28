@@ -114,8 +114,29 @@ app
     },
   })
   // .component('prmFullViewServiceContainerAfter', getitLegacyNotification)
+  .component('sendToCourseReserves', {
+    template: `
+      <div layout="row" layout-align="start start" class="layout-align-start-start layout-row">
+        <div layout="flex" class="layout-row">
+          <prm-icon icon-set="primo-ui" icon-type="svg" icon-definition="book-open">
+          </prm-icon>
+          <button class="neutralized-button arrow-link-button md-button md-primoExplore-theme md-ink-ripple" type="button"
+            aria-label="Available"
+            title="Available">Available
+            <prm-icon icon-type="svg" icon-definition="chevron-right"></prm-icon>
+          </button>
+        </div>
+      </div>
+    `,
+    controller: [function() {
+
+    }]
+  })
   .component('prmSearchResultAvailabilityLineAfter', {
-    template: /*html*/`<nyu-eshelf></nyu-eshelf>`
+    template: /*html*/`
+      <send-to-course-reserves></send-to-course-reserves>
+      <nyu-eshelf></nyu-eshelf>
+    `,
   })
   .component('prmSearchBookmarkFilterAfter', {
     template: /*html*/ `<nyu-eshelf-toolbar></nyu-eshelf-toolbar>`
