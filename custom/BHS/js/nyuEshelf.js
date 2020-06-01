@@ -6,7 +6,8 @@ export let nyuEshelfConfig = {
     inGuestEshelf: 'In temporary e-Shelf',
     loginToSave: '',
     defaultUrls: {
-      institution: "BHS"
+      institution: "BHS",
+      eshelfBaseUrl: 'https://eshelf-dev.library.nyu.edu',
     },
     "bobcat.library.nyu.edu": {
       institution: "BHS"
