@@ -3,7 +3,7 @@ angular
   // Name our module
   .module('sendToCourseReserves', [])
   .constant('sendToCourseReservesConfig', {
-    displayText: 'Add to Course Reserves (New Feature)',
+    displayText: '{custom.push_to_ares1}',
     actionLinkDisplayLabel: 'lln41',
     showLinkTab: "crp",
     icon: {
