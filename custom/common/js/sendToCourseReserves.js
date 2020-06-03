@@ -14,10 +14,10 @@ angular
   // Template for send to course reserves link
   .component('sendToCourseReserves', {
     template: /*html*/ `
-      <div ng-if="showLink()" layout="row" layout-align="start start" class="layout-align-start-start layout-row">
+      <div ng-if="showLink()" layout="row" layout-align="start start" class="layout-align-start-start layout-row send-to-course-reserves" id="send-to-course-reserves">
         <div layout="flex" class="layout-row">
           <prm-icon availability-type="" icon-type="svg" svg-icon-set="{{config.icon.set}}" icon-definition="{{config.icon.icon}}"></prm-icon>
-          <button data-href="" ng-click="goToUrl(courseReservesLink())" class="neutralized-button arrow-link-button md-button md-primoExplore-theme md-ink-ripple">
+          <button data-href="{{courseReservesLink()}}" ng-click="goToUrl(courseReservesLink())" class="neutralized-button arrow-link-button md-button md-primoExplore-theme md-ink-ripple">
             <span class="button-content">{{translate(config.displayText)}}</span>
             <prm-icon external-link="" icon-type="svg" svg-icon-set="primo-ui" icon-definition="open-in-new"></prm-icon>
             <prm-icon link-arrow="" icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-right"></prm-icon>
