@@ -1,7 +1,7 @@
 describe('send-to-course-reserves', () => {
   describe('if the user is not logged in', () => {
     before(() => {
-      cy.visit('/search?query=any,contains,work&tab=crp&search_scope=cre&vid=NYU', {
+      cy.visit('/search?query=any,contains,work&tab=crp&search_scope=cre&vid=NYUAD', {
         onBeforeLoad: (contentWindow) => {
           contentWindow.$$mockUserLoggedIn = false
         }
@@ -19,7 +19,7 @@ describe('send-to-course-reserves', () => {
 
   describe('if the user is logged in', () => {
     before(() => {
-      cy.visit('/search?query=any,contains,work&tab=crp&search_scope=cre&vid=NYU', {
+      cy.visit('/search?query=any,contains,work&tab=crp&search_scope=cre&vid=NYUAD', {
         onBeforeLoad: (contentWindow) => {
           contentWindow.$$mockUserLoggedIn = true
         }
