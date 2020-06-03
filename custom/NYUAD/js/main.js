@@ -19,6 +19,8 @@ import nyuEshelfConfig from './nyuEshelf';
 import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
+import 'Common/js/sendToCourseReserves';
+
 // HTML to JS imports
 import customRequestsRequestInformationTemplate from 'Common/html/custom_requests_request_information.html';
 import citationLinkerAfterTemplate from 'Common/html/citation_linker_after.html';
@@ -32,6 +34,7 @@ let app = angular.module('viewCustom', [
   'searchBarSubMenu',
   'primoExploreCustomLogin',
   'primoExploreCustomRequests',
+  'sendToCourseReserves',
 ]);
 
 app
@@ -50,7 +53,10 @@ app
     template: customActionsConfig.template
   })
   .component('prmSearchResultAvailabilityLineAfter', {
-    template: '<nyu-eshelf></nyu-eshelf>'
+    template: /*html*/`
+      <send-to-course-reserves></send-to-course-reserves>
+      <nyu-eshelf></nyu-eshelf>
+    `
   })
   .component('prmSearchBookmarkFilterAfter', {
     template: '<nyu-eshelf-toolbar></nyu-eshelf-toolbar>'

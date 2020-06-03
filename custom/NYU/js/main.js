@@ -24,6 +24,7 @@ import customLoginConfig from 'Common/js/customLoginConfig';
 import topAlert from 'Common/js/topAlert';
 import topAlertConfig from 'Common/js/topAlertConfig';
 import physicalItemsAlert from 'Common/js/physicalItemsAlert';
+import 'Common/js/sendToCourseReserves';
 
 // HTML as JS imports
 import customRequestsRequestInformationTemplate from '../html/custom_requests_request_information.html';
@@ -41,6 +42,7 @@ let app = angular.module('viewCustom', [
   'googleAnalytics',
   'primoExploreCustomLogin',
   'primoExploreCustomRequests',
+  'sendToCourseReserves',
 ]);
 
 app
@@ -114,49 +116,11 @@ app
     },
   })
   // .component('prmFullViewServiceContainerAfter', getitLegacyNotification)
-  .component('sendToCourseReserves', {
-    template: `
-    <div ng-if="showLink()" layout="row" layout-align="start start" class="layout-align-start-start layout-row">
-      <div layout="flex" class="layout-row">
-        <prm-icon availability-type="" icon-type="svg" svg-icon-set="content" icon-definition="ic_add_box_24px"></prm-icon>
-        <button data-href="" ng-click="goToUrl(courseReservesLink())" class="neutralized-button arrow-link-button md-button md-primoExplore-theme md-ink-ripple">
-          <span class="button-content">Add to Course Reserves (New Feature)</span>
-          <prm-icon external-link="" icon-type="svg" svg-icon-set="primo-ui" icon-definition="open-in-new"></prm-icon>
-          <prm-icon link-arrow="" icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-right"></prm-icon>
-        </button>
-      </div>
-    </div>
-    `,
-    controller: ['$scope', '$location', '$filter', function($scope, $location, $filter) {
-      const ctrl = this;
-      this.$onInit = () => {
-      };
-      $scope.translate = (original) => {
-        return original.replace(/\{(.+?)\}/g, (match, p1) => $filter('translate')(p1));
-      };
-      $scope.showLink = () => $location.search().tab === "crp";
-      $scope.courseReservesLink = () => {
-        try {
-          return ctrl.prmBriefResultContainer.item.delivery.link.filter(link =>
-            link["displayLabel"] === "lln43"
-          )[0]["linkURL"];
-        } catch (e) {
-          return '#';
-        }
-      };
-      $scope.goToUrl = (url) => {
-        window.open(url, '_blank');
-      };
-    }],
-    require: {
-      prmBriefResultContainer: '^prmBriefResultContainer'
-    },
-  })
   .component('prmSearchResultAvailabilityLineAfter', {
     template: /*html*/`
       <send-to-course-reserves></send-to-course-reserves>
       <nyu-eshelf></nyu-eshelf>
-    `,
+    `
   })
   .component('prmSearchBookmarkFilterAfter', {
     template: /*html*/ `<nyu-eshelf-toolbar></nyu-eshelf-toolbar>`
