@@ -103,6 +103,14 @@ const authorizedStatuses = {
   nyush: ["20", "21", "22", "23"],
 };
 
+// Boolean for mapping whether or not current record has a temporary HathiTrust link
+const hasTempHathiTrustAccess = ({ item, items, user, config }) => {
+  // Regex indicating temporaary HathiTrust link
+  const hathiTrustUrl = item.delivery.link.filter(({displayLabel}) => displayLabel.match(/Log in to HathiTrust for temporary full-text access/))[0]
+
+  return (hathiTrustUrl != undefined);
+};
+
 export default {
   name: 'primoExploreCustomRequestsConfig',
   config: (institutionVid) => ({
@@ -211,6 +219,9 @@ export default {
       //   return config.showCustomRequests.ill({ item, items, user, config });
       // }
 
+      // hide if has temporary HathiTrust link
+      return items.map(() => hasTempHathiTrustAccess({ item, items, user, config }));
+      
       // otherwise, hide only Request buttons when we're showing the temp request ill button
       return config.showCustomRequests.temp_ill_request({ item, items, user, config });
       // otherwise, hide only unavailable holdings
@@ -219,3 +230,4 @@ export default {
     noButtonsText: '{item.request.blocked}',
   })
 };
+
