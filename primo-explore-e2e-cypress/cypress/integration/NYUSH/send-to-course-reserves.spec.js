@@ -10,7 +10,7 @@ describe('send-to-course-reserves', () => {
 
     it('has a send to course reserves button', () => {
       cy.get('#send-to-course-reserves')
-        .contains('Add to Course Reserves (New Feature)')
+        .contains('Add to Course Reserves (Instructors Only)')
         .should('be.visible')
         .should('have.attr', 'data-href')
         .and('match', /ares\.library\.nyu\.edu/)
@@ -28,7 +28,7 @@ describe('send-to-course-reserves', () => {
 
     it('has a send to course reserves button', () => {
       cy.get('#send-to-course-reserves')
-        .contains('Add to Course Reserves (New Feature)')
+        .contains('Add to Course Reserves (Instructors Only)')
         .should('be.visible')
         .should('have.attr', 'data-href')
         .and('match', /ares\.library\.nyu\.edu/)
