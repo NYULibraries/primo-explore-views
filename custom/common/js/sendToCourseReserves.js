@@ -4,7 +4,7 @@ angular
   .module('sendToCourseReserves', [])
   .constant('sendToCourseReservesConfig', {
     displayText: '{custom.push_to_ares1}',
-    actionLinkDisplayLabel: 'lln41',
+    actionLinkDisplayLabel: 'lln45',
     showLinkTab: "crp",
     icon: {
       set: 'content',
