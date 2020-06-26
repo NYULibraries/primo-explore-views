@@ -30,6 +30,29 @@ const checkIsAvailable = item => {
   return !hasPattern(unavailablePatterns, circulationStatus);
 };
 
+// Is the holding sublibrary valid for showing request button
+const checkIsValidSublibrary = item => {
+  // Valid sublibraries from using the Request ILL link 
+  // are not Offsite or Special Collections and match the
+  // following strings for mainlocationname
+  const invalidSublibraryPatterns = [
+    /Avery/g,
+    /Archives/g,
+    /BAFC/g,
+    /Spec/g,
+    /Computer/g,
+    /6th/g,
+    /Tamiment/g,
+    /Inst/g,
+    /IFA/g,
+    /ISAW/g,
+  ];
+
+  const hasPattern = (patterns, target) => patterns.some(str => target.match(new RegExp(str)));
+  const sublibraryValue = item._additionalData.mainlocationname;
+  return !hasPattern(invalidSublibraryPatterns, sublibraryValue);
+};
+
 const availabilityArray = ({ items }) => {
   return items.map(checkIsAvailable);
 };
@@ -44,9 +67,12 @@ const requestableArray = ({ items }) => {
 
 const getitLink = (item, institutionVid) => {
   const getitLinkFields = {
-    NYU: ['lln10'],
-    NYUAD: ['lln11'],
-    NYUSH: ['lln40', 'lln12'],
+    // NYU: ['lln10'],
+    NYU: ['lln42'],
+    // NYUAD: ['lln11'],
+    NYUAD: ['lln42'],
+    // NYUSH: ['lln40', 'lln12'],
+    NYUSH: ['lln42'],
     CU: ['lln13'],
   };
   const validGetitLinkFields = getitLinkFields[institutionVid];
@@ -73,18 +99,22 @@ const baseUrls = {
 const authorizedStatuses = {
   ezborrow: ["50", "51", "52", "53", "54", "55", "56", "57", "58", "60", "61", "62", "63", "65", "66", "80", "81", "82", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41"],
   ill: ["20", "21", "22", "23", "30", "31", "32", "34", "35", "37", "50", "51", "52", "53", "54", "55", "56", "57", "58", "60", "61", "62", "63", "65", "66", "80", "81", "82", "89"],
-  afc: ["03", "05", "10", "12", "20", "21", "30", "32", "50", "52", "53", "54", "61", "62", "70", "80", "89", "90"],
+  afc: ["03", "05", "10", "12", "20", "30", "32", "50", "52", "53", "54", "61", "62", "70", "80", "89", "90"],
   nyush: ["20", "21", "22", "23"],
 };
 
 export default {
   name: 'primoExploreCustomRequestsConfig',
   config: (institutionVid) => ({
-    buttonIds: ['login', 'ezborrow', 'ill', 'afc'],
+    // Remove ezborrow and regular ILL during COVID-19 telework scenario
+    // buttonIds: ['login', 'ezborrow', 'ill', 'afc'],
+    // Add a temp ill request instead, where every physical item regardless of status
+    // gets requested through ILL, except Offsite items
+    buttonIds: ['login', 'temp_ill_request', 'afc'],
     buttonGenerators: {
       ezborrow: ({ item }) => {
-        const title = item.pnx.addata.btitle ? item.pnx.addata.btitle[0] : '';
-        const author = item.pnx.addata.au ? item.pnx.addata.au[0] : '';
+        const title = item.pnx.addata.lad05 ? item.pnx.addata.lad05[0] : '';
+        const author = item.pnx.addata.lad06 ? item.pnx.addata.lad06[0] : '';
         const ti = title ? `ti=${encodeURIComponent(title)}` : '';
         const au = author ? `au=${encodeURIComponent(author)}` : '';
         const and = title && author ? '+and+' : '';
@@ -103,6 +133,16 @@ export default {
         return {
           href: (/resolve?(.*)/.test(link) ? `${baseUrl}?${link.match(/resolve\?(.*)/)[1]}` : link) || baseUrl,
           label: 'Request ILL',
+          prmIconAfter: externalLinkIcon,
+        };
+      },
+      temp_ill_request: ({ item }) => {
+        const link = getitLink(item, institutionVid);
+
+        const baseUrl = baseUrls.ill;
+        return {
+          href: (/resolve?(.*)/.test(link) ? `${baseUrl}?${link.match(/resolve\?(.*)/)[1]}` : link) || baseUrl,
+          label: 'Request',
           prmIconAfter: externalLinkIcon,
         };
       },
@@ -129,15 +169,26 @@ export default {
       ill: ({ item, items, user, config }) => {
         if (!user) return items.map(() => false);
 
-        const isNyushUser = () => authorizedStatuses.nyush.indexOf(user['bor-status']) > -1;
+        const isNYUSHUser = () => authorizedStatuses.nyush.indexOf(user['bor-status']) > -1;
         const inNYUSHLibrary = () => /Shanghai/.test(items[0]._additionalData.mainlocationname);
         const illEligible = () => authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
 
-        const showIll = isNyushUser() ? !inNYUSHLibrary() : illEligible();
+        const showIll = isNYUSHUser() ? !inNYUSHLibrary() : illEligible();
 
         const showEzborrowArr = config.showCustomRequests.ezborrow({ user, item, items, config });
         const requestables = requestableArray({ items });
         return items.map((_e, idx) => !showEzborrowArr[idx] && requestables[idx] && showIll);
+      },
+      temp_ill_request: ({ item, items, user, config }) => {
+        if (!user) return items.map(() => false);
+
+        // Is in an offsite location (no sublibrary currently tells you this, hence this regex)
+        const isOffsite = (item) => {
+          return item.itemFields.some((field) => { return /Offsite/.test(field) })
+        };
+
+        // Default show ILL button logic
+        return items.map((item) => !isOffsite(item) && checkIsValidSublibrary(item));
       },
       login: ({ user, items }) => items.map(() => user === undefined),
       afc: ({ item, items, user}) => {
@@ -154,13 +205,16 @@ export default {
       if (user === undefined) {
         // if logged out, hide all
         return items.map(() => true);
-      } else if (authorizedStatuses.nyush.indexOf(user['bor-status']) > -1) {
-        // if NYUSH user, only hide if ILL shows
-        return config.showCustomRequests.ill({ item, items, user, config });
-      }
+      } 
+      // else if (authorizedStatuses.nyush.indexOf(user['bor-status']) > -1) {
+      //   // if NYUSH user, only hide if ILL shows
+      //   return config.showCustomRequests.ill({ item, items, user, config });
+      // }
 
+      // otherwise, hide only Request buttons when we're showing the temp request ill button
+      return config.showCustomRequests.temp_ill_request({ item, items, user, config });
       // otherwise, hide only unavailable holdings
-      return availabilityArray({ items }).map(avail => !avail);
+      // return availabilityArray({ items }).map(avail => !avail);
     },
     noButtonsText: '{item.request.blocked}',
   })

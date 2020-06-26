@@ -4,10 +4,14 @@ const customRequestsConfig = Object.freeze(customRequestsConfigFunction.config('
 
 const title = 'The Catcher in the Rye';
 const author = 'J. D. Salinger';
+const phrase_title = 'Catcher in the Rye';
+const phrase_author = 'JD Salinger';
 
 const item = {
   pnx: {
     addata: {
+      lad05: [phrase_title, title],
+      lad06: [phrase_author, author],
       btitle: [title],
       au: [author],
       ristype: ['BOOK']
@@ -25,6 +29,10 @@ const item = {
       },
       {
         displayLabel: 'lln10',
+        linkURL: 'http://getit.nyu.edu/resolve?did=this-work&i=hope-so'
+      },
+      {
+        displayLabel: 'lln42',
         linkURL: 'http://getit.nyu.edu/resolve?did=this-work&i=hope-so'
       },
     ]
@@ -54,12 +62,14 @@ const uniqueItems = [
   {
     _additionalData: {
       itemdescription: 'a',
+      mainlocationname: 'Avery Fisher',
     },
     itemFields: ["09/11/19 10:30 PM", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""]
   },
   {
     _additionalData: {
       itemdescription: 'b',
+      mainlocationname: 'Spec Coll',
     },
     itemFields: ["On Shelf", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""],
   },
@@ -86,14 +96,60 @@ const nonUniqueItems = [
   {
     _additionalData: {
       itemdescription: 'a',
+      mainlocationname: 'ISAW',
     },
     itemFields: ["09/11/19 10:30 PM", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""]
   },
   {
     _additionalData: {
       itemdescription: 'a',
+      mainlocationname: 'IFA',
     },
     itemFields: ["On Shelf", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""],
+  },
+];
+
+const validSublibraryItems = [
+  {
+    _additionalData: {
+      itemdescription: 'a',
+      mainlocationname: 'Bobst',
+    },
+    itemFields: ["09/11/19 10:30 PM", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""]
+  },
+];
+
+const invalidSublibraryItems = [
+  {
+    _additionalData: {
+      itemdescription: 'a',
+      mainlocationname: 'ISAW',
+    },
+    itemFields: ["09/11/19 10:30 PM", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""]
+  },
+  {
+    _additionalData: {
+      itemdescription: 'a',
+      mainlocationname: 'IFA',
+    },
+    itemFields: ["On Shelf", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""],
+  },
+];
+
+const offsiteItems = [
+  {
+    _additionalData: {
+      itemdescription: 'a',
+      mainlocationname: 'ISAW',
+    },
+    itemFields: ["09/11/19 10:30 PM", "Offsite HD6054.3 .S265 2013", "Regular loan", ""]
+  },
+  {
+    _additionalData: {
+      itemdescription: 'a',
+      mainlocationname: 'IFA',
+    },
+    itemFields: ["Offsite", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""],
   },
 ];
 
@@ -146,7 +202,7 @@ describe('primo-explore-custom-request config object', () => {
       it('constructs an appropriate button config', () => {
         const result = ezborrow({ item, config: customRequestsConfig });
         expect(result).toEqual({
-          href: 'https://dev.login.library.nyu.edu/ezborrow/nyu?query=ti=The%20Catcher%20in%20the%20Rye+and+au=J.%20D.%20Salinger',
+          href: 'https://dev.login.library.nyu.edu/ezborrow/nyu?query=ti=Catcher%20in%20the%20Rye+and+au=JD%20Salinger',
           label: 'Request E-ZBorrow',
           prmIconAfter: {
             icon: "ic_open_in_new_24px",
@@ -265,7 +321,7 @@ describe('primo-explore-custom-request config object', () => {
   });
 
   describe('showCustomRequests', () => {
-    describe('ezborrow', () => {
+    xdescribe('ezborrow', () => {
       const ezborrow = customRequestsConfig.showCustomRequests.ezborrow;
 
       it('shows under correct conditions with non-unique items', () => {
@@ -305,7 +361,59 @@ describe('primo-explore-custom-request config object', () => {
       });
     });
 
-    describe('ill', () => {
+    describe('temp_ill_request', () => {
+      const temp_ill_request = customRequestsConfig.showCustomRequests.temp_ill_request;
+
+      it('shows when the item is in a calid sublibrary', () => {
+        const items = validSublibraryItems;
+        const result = temp_ill_request({
+          items,
+          item,
+          config: customRequestsConfig,
+          user: illExclusiveUser,
+        });
+
+        expect(result).toEqual([true]);
+      });
+
+      it('does not shows when the item is in an invalid sublibrary', () => {
+        const items = invalidSublibraryItems;
+        const result = temp_ill_request({
+          items,
+          item,
+          config: customRequestsConfig,
+          user: illExclusiveUser,
+        });
+
+        expect(result).toEqual([false, false]);
+      });
+
+      it('does not show when the item is an offsite item', () => {
+        const items = offsiteItems;
+        const result = temp_ill_request({
+          items,
+          item,
+          config: customRequestsConfig,
+          user: illExclusiveUser,
+        });
+
+        expect(result).toEqual([false, false]);
+      });
+
+      it('does not show when non ILL eligible user', () => {
+        const items = invalidSublibraryItems;
+        const result = temp_ill_request({
+          items,
+          item,
+          config: customRequestsConfig,
+          user: nonIllUser,
+        });
+
+        expect(result).toEqual([false, false]);
+      });
+    });
+
+    xdescribe('ill', () => {
       const ill = customRequestsConfig.showCustomRequests.ill;
 
       it('does not show when ezborrow shows', () => {
@@ -426,7 +534,7 @@ describe('primo-explore-custom-request config object', () => {
   describe('hideDefaultRequests', () => {
     const hideDefaultRequests = customRequestsConfig.hideDefaultRequests;
 
-    it('hides for unavailable holdings', () => {
+    xit('hides for unavailable holdings', () => {
       const result = hideDefaultRequests({
         item,
         items: uniqueItems,
@@ -449,7 +557,7 @@ describe('primo-explore-custom-request config object', () => {
       expect(result).toEqual([true, true]);
     });
 
-    it('hides when unavailable, regardless of uniqueness', () => {
+    xit('hides when unavailable, regardless of uniqueness', () => {
       const result = hideDefaultRequests({
         item,
         items: nonUniqueItems,
@@ -469,7 +577,7 @@ describe('primo-explore-custom-request config object', () => {
       expect(result2).toEqual([true, false]);
     });
 
-    it('does not hide when NYUSH item', () => {
+    xit('does not hide when NYUSH item', () => {
       const result = hideDefaultRequests({
         items: nyushItems,
         item,

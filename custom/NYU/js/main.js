@@ -10,7 +10,6 @@ import 'primo-explore-search-bar-sub-menu';
 import 'primo-explore-google-analytics';
 import 'primo-explore-custom-requests';
 import 'primo-explore-custom-login';
-import 'primo-explore-custom-no-search-results';
 
 import viewName from './viewName';
 import customActionsConfig from './customActions';
@@ -22,6 +21,9 @@ import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import googleAnalyticsConfig from './googleAnalyticsConfig';
 import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
+import topAlert from 'Common/js/topAlert';
+import topAlertConfig from 'Common/js/topAlertConfig';
+import physicalItemsAlert from 'Common/js/physicalItemsAlert';
 
 // HTML as JS imports
 import customRequestsRequestInformationTemplate from '../html/custom_requests_request_information.html';
@@ -50,6 +52,7 @@ app
   .constant(googleAnalyticsConfig.name, googleAnalyticsConfig.config)
   .constant(customRequestsConfig.name, customRequestsConfig.config(viewName))
   .constant(customLoginConfig.name, customLoginConfig.config)
+  .constant(topAlertConfig.name, topAlertConfig.config)
   .value('customNoSearchResultsTemplateUrl', `custom/${viewName}/html/no_search_results.html`)
   .component('prmActionListAfter', {
     controller: ['$window', function($window) {
@@ -160,7 +163,9 @@ app
       };
     }],
     template: citationLinkerAfterTemplate,
-  });
+  })
+  .component('prmTopbarAfter', topAlert)
+  .component('prmRequestServicesAfter', physicalItemsAlert);
 
 app.run(runBlock);
 

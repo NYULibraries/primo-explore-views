@@ -3,7 +3,7 @@ describe('primo-explore-custom-no-search-results', function () {
     const searchTerm = `asdfhello;worldgoodbye;worldasdf`
 
     before(() => {
-      cy.visit(`?query=any,contains,${searchTerm}&tab=all&search_scope=all&vid=BHS&offset=0`)
+      cy.visit(`?query=any,contains,${searchTerm}&tab=all&search_scope=all&vid=CU&offset=0`)
     })
 
 
@@ -15,14 +15,18 @@ describe('primo-explore-custom-no-search-results', function () {
 
     describe('its links', () => {
       const links = {
-        ['Request a book from E-ZBorrow (NYU only)']: `https://login.library.nyu.edu/ezborrow?query=${encodeURIComponent(searchTerm)}`,
         [`Search WorldCat for items in nearby libraries`]: `http://www.worldcat.org/search?qt=worldcat_org_all&q=${encodeURIComponent(searchTerm)}`,
-        [`Ask a Librarian`]: `http://library.nyu.edu/ask`,
+        [`Contact the Cooper Union Library`]: `http://library.cooper.edu/primo/side_contact.html`,
       }
 
-      Object.entries(links).forEach(([text, href]) => {
-        it(`includes information about: ${text}`, () => {
-          cy.get(`[data-cy=no-results-more-info]`)
+      it(`includes the expected number of links`, () => {
+        cy.get(`[data-cy=no-results-more-info] a`)
+          .should('have.lengthOf', Object.keys(links).length)
+      })
+
+      Object.entries(links).forEach(([text, href], idx) => {
+        it(`${idx} anchor includes information about: ${text}`, () => {
+          cy.get(`[data-cy=no-results-more-info] a`)
             .contains(text)
             .should('have.attr', 'href', href)
         })
