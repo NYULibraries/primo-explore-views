@@ -34,4 +34,15 @@ describe('send-to-course-reserves', () => {
         .and('match', /ares\.library\.nyu\.edu/)
     });
   });
+
+  describe('always-available-online', () => {
+    before(() => {
+      cy.visit('/search?tab=crp&search_scope=cre&vid=NYU')
+    });
+
+    it('should have Always Available Online already selected', () => {
+      cy.get('#select_value_label_2 ')
+        .should('have.text', 'Always Available Online (Ideal for Course Use)')
+    })
+  });
 });
