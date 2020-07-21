@@ -8,7 +8,7 @@
         </md-card-title-text>
       </md-card-title>
       <md-card-content>
-        <h3 class="md-subhead">Books & More</h3>
+        <h3 class="md-subhead">Books &amp; More</h3>
         <ul>
           <li>books / e-books </li>
           <li>journals / e-journals</li>
@@ -20,17 +20,19 @@
         <h4>We also have tools to</h4>
         <ul>
           <li>
-            <a href="jsearch?vid=NYU">
+            <a href="jsearch?vid=NYU" class="md-primoExplore-theme">
               browse journals by title
             </a>
           </li>
           <li>
-            <a href="citationlinker?vid=NYU">
+            <a href="citationlinker?vid=NYU" class="md-primoExplore-theme">
               find an article by citation
             </a>
           </li>
+          <li>Find ebook, video, and music resources that are ideal for courses. Use the "Always Available Online" filter tool when you search Books &amp; More.
+    </li>
         </ul>
-        <h3 class="md-subhead">Articles & Databases</h3>
+        <h3 class="md-subhead">Articles &amp; Databases</h3>
         <ul>
           <li>article searches in multidisciplinary databases</li>
           <li>databases by title</li>
@@ -42,15 +44,15 @@
           Find materials your instructor put on reserve in the library for your course.
         </p>
         <p>
-          Reserve information is also in your <a href="https://newclasses.nyu.edu/" target="_blank"
-            class="md-primoExplore-theme">
+          Reserve information is also in your <a href="https://newclasses.nyu.edu/" target="_blank" class="md-primoExplore-theme">
             NYU Classes
             <span class="sr-only">(opens in a new window)</span>
-            <prm-icon external-link icon-type="svg" svg-icon-set="primo-ui" icon-definition="open-in-new">
-            </prm-icon>
+            <prm-icon external-link="" icon-type="svg" svg-icon-set="primo-ui" icon-definition="open-in-new"><!----><md-icon ng-if="!$ctrl.isCustom" md-svg-icon="primo-ui:open-in-new" alt="" class="md-primoExplore-theme" aria-hidden="true"><svg id="open-in-new_cache3" width="100%" height="100%" viewBox="0 0 24 24" y="504" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
+        <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"></path>
+    </svg></md-icon><!----><!----><prm-icon-after parent-ctrl="$ctrl"></prm-icon-after></prm-icon>
           </a> course site under "Course Reserves"
         </p>
-      </md-card-content>
+      </md-card-content> 
     </md-card>
   </div>
   <div flex-xs="100" flex="40" layout="column">
@@ -118,12 +120,19 @@
         </md-card-title-text>
       </md-card-title>
       <md-card-content>
-        <h3 class="md-subhead">Updates Spring 2020</h3>
+        <h3 class="md-subhead">New Books &amp; More Features Summer 2020</h3>
+          <h4 class="md-subhead">"Always Available Online" filter tool</h4>
+        <p>Helps you find ebook, video, and music resources ideal for your course.</p>
         <ul>
-          <li>Accessibility improvements</li>
-          <li>Permalinks are now in a shortened form to make them easier to share</li>
-        </ul>
-      </md-card-content>
+          <li>Searches more than 2.8 million multi-user ebooks, videos, and music from over 100 publishers and databases.</li>
+          <li>Multi-user resources allow all your students to use the resource at the same time!</li>
+       </ul>
+       <h4 class="md-subhead">Instructors: Add “Always Available Online” resources to your course with one click from the catalog.</h4>
+       <ul>
+         <li>Eligible items now have an “Add to Course Reserves (Instructors Only)” link.</li>
+          <li>Library staff will add a stable link to the item to your course.</li>
+       </ul>    
+     </md-card-content>      
     </md-card>
   </div>
 </md-content>

@@ -24,6 +24,7 @@ import customLoginConfig from 'Common/js/customLoginConfig';
 import topAlert from 'Common/js/topAlert';
 import topAlertConfig from 'Common/js/topAlertConfig';
 import physicalItemsAlert from 'Common/js/physicalItemsAlert';
+import 'Common/js/sendToCourseReserves';
 
 // HTML as JS imports
 import customRequestsRequestInformationTemplate from '../html/custom_requests_request_information.html';
@@ -41,6 +42,7 @@ let app = angular.module('viewCustom', [
   'googleAnalytics',
   'primoExploreCustomLogin',
   'primoExploreCustomRequests',
+  'sendToCourseReserves',
 ]);
 
 app
@@ -115,7 +117,10 @@ app
   })
   // .component('prmFullViewServiceContainerAfter', getitLegacyNotification)
   .component('prmSearchResultAvailabilityLineAfter', {
-    template: /*html*/`<nyu-eshelf></nyu-eshelf>`
+    template: /*html*/`
+      <send-to-course-reserves></send-to-course-reserves>
+      <nyu-eshelf></nyu-eshelf>
+    `
   })
   .component('prmSearchBookmarkFilterAfter', {
     template: /*html*/ `<nyu-eshelf-toolbar></nyu-eshelf-toolbar>`
