@@ -30,29 +30,6 @@ const checkIsAvailable = item => {
   return !hasPattern(unavailablePatterns, circulationStatus);
 };
 
-// Is the holding sublibrary valid for showing request button
-const checkIsValidSublibrary = item => {
-  // Valid sublibraries from using the Request ILL link 
-  // are not Offsite or Special Collections and match the
-  // following strings for mainlocationname
-  const invalidSublibraryPatterns = [
-    /Avery/g,
-    /Archives/g,
-    /BAFC/g,
-    /Spec/g,
-    /Computer/g,
-    /6th/g,
-    /Tamiment/g,
-    /Inst/g,
-    /IFA/g,
-    /ISAW/g,
-  ];
-
-  const hasPattern = (patterns, target) => patterns.some(str => target.match(new RegExp(str)));
-  const sublibraryValue = item._additionalData.mainlocationname;
-  return !hasPattern(invalidSublibraryPatterns, sublibraryValue);
-};
-
 const availabilityArray = ({ items }) => {
   return items.map(checkIsAvailable);
 };
@@ -104,7 +81,7 @@ const authorizedStatuses = {
 };
 
 // Boolean for mapping whether or not current record has a temporary HathiTrust link
-const hasTempHathiTrustAccess = ({ item, items, user, config }) => {
+const hasOnlineAccess = ({ item, items, user, config }) => {
   // Regex indicating temporaary HathiTrust link
   const hathiTrustUrl = item.delivery.link.filter(({displayLabel}) => displayLabel.match(/Log in to HathiTrust for temporary full-text access/))[0]
 
@@ -189,14 +166,9 @@ export default {
       },
       temp_ill_request: ({ item, items, user, config }) => {
         if (!user) return items.map(() => false);
+        const noOnlineAccess = !hasOnlineAccess({ item, items, user, config });
 
-        // Is in an offsite location (no sublibrary currently tells you this, hence this regex)
-        const isOffsite = (item) => {
-          return item.itemFields.some((field) => { return /Offsite/.test(field) })
-        };
-
-        // Default show ILL button logic
-        return items.map((item) => !isOffsite(item) && checkIsValidSublibrary(item));
+        return items.map((item) => !checkIsAvailable(item) && noOnlineAccess);
       },
       login: ({ user, items }) => items.map(() => user === undefined),
       afc: ({ item, items, user}) => {
@@ -220,12 +192,7 @@ export default {
       // }
 
       // hide if has temporary HathiTrust link
-      return items.map(() => hasTempHathiTrustAccess({ item, items, user, config }));
-      
-      // otherwise, hide only Request buttons when we're showing the temp request ill button
-      return config.showCustomRequests.temp_ill_request({ item, items, user, config });
-      // otherwise, hide only unavailable holdings
-      // return availabilityArray({ items }).map(avail => !avail);
+      return items.map(() => hasOnlineAccess({ item, items, user, config }));
     },
     noButtonsText: '{item.request.blocked}',
   })
