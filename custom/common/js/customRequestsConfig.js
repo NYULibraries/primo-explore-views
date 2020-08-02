@@ -81,11 +81,8 @@ const authorizedStatuses = {
 };
 
 // Boolean for mapping whether or not current record has a temporary HathiTrust link
-const hasOnlineAccess = ({ item, items, user, config }) => {
-  // Regex indicating temporaary HathiTrust link
-  const hathiTrustUrl = item.delivery.link.filter(({displayLabel}) => displayLabel.match(/Log in to HathiTrust for temporary full-text access/))[0]
-
-  return (hathiTrustUrl != undefined);
+const hasOnlineAccess = (item) => { 
+  return (item.delivery.availabilityLinksUrl.filter(Boolean).length > 0) ;
 };
 
 export default {
@@ -95,7 +92,7 @@ export default {
     // buttonIds: ['login', 'ezborrow', 'ill', 'afc'],
     // Add a temp ill request instead, where every physical item regardless of status
     // gets requested through ILL, except Offsite items
-    buttonIds: ['login', 'temp_ill_request', 'afc'],
+    buttonIds: ['login', 'temp_ill_request', 'available_online', 'afc'],
     buttonGenerators: {
       ezborrow: ({ item }) => {
         const title = item.pnx.addata.lad05 ? item.pnx.addata.lad05[0] : '';
@@ -140,6 +137,11 @@ export default {
         label: "Schedule a video loan",
         href: "https://nyu.qualtrics.com/jfe/form/SV_0pIRNh3aESdBl2t",
         prmIconAfter: externalLinkIcon,
+      }),
+      available_online: () => ({
+        label: "Available Online",
+        action: ($injector) => console.log($injector.get('primoExploreService')),//$injector.get('$rootScope').$ctrl.scrollToElementIdWithBeacon(service.scrollId),
+        // $ctrl.scrollToElementIdWithBeacon(service.scrollId);$ctrl.sendNavigateToTabBeacon(service.scrollId);
       })
     },
     showCustomRequests: {
@@ -166,9 +168,13 @@ export default {
       },
       temp_ill_request: ({ item, items, user, config }) => {
         if (!user) return items.map(() => false);
-        const noOnlineAccess = !hasOnlineAccess({ item, items, user, config });
+        const availableOnline = () => hasOnlineAccess(item)
 
-        return items.map((item) => !checkIsAvailable(item) && noOnlineAccess);
+        return items.map((item) => !checkIsAvailable(item) && !availableOnline());
+      },
+      available_online: ({ item, items, user, config }) => {
+        const availableOnline = () => hasOnlineAccess(item)
+        return items.map(() => availableOnline() );
       },
       login: ({ user, items }) => items.map(() => user === undefined),
       afc: ({ item, items, user}) => {
@@ -190,9 +196,10 @@ export default {
       //   // if NYUSH user, only hide if ILL shows
       //   return config.showCustomRequests.ill({ item, items, user, config });
       // }
-
-      // hide if has temporary HathiTrust link
-      return items.map(() => hasOnlineAccess({ item, items, user, config }));
+      // return items.map(() => true);
+      const available_online_arr = config.showCustomRequests.available_online({ item, items, user, config });
+      const temp_ill_request_arr = config.showCustomRequests.temp_ill_request({ item, items, user, config });
+      return items.map( (item, i) => available_online_arr[i] || temp_ill_request_arr[i] );
     },
     noButtonsText: '{item.request.blocked}',
   })
