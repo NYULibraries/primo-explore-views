@@ -88,10 +88,7 @@ const hasOnlineAccess = (item) => {
 export default {
   name: 'primoExploreCustomRequestsConfig',
   config: (institutionVid) => ({
-    // Remove ezborrow and regular ILL during COVID-19 telework scenario
-    // buttonIds: ['login', 'ezborrow', 'ill', 'afc'],
-    // Add a temp ill request instead, where every physical item regardless of status
-    // gets requested through ILL, except Offsite items
+    // Buttons to show, updated for COVID
     buttonIds: ['login', 'temp_ill_request', 'available_online', 'afc'],
     buttonGenerators: {
       ezborrow: ({ item }) => {
@@ -140,7 +137,8 @@ export default {
       }),
       available_online: () => ({
         label: "Available Online",
-        action: ($injector) => console.log($injector.get('primoExploreService')),//$injector.get('$rootScope').$ctrl.scrollToElementIdWithBeacon(service.scrollId),
+        // action: ($injector) => console.log($injector.get('$rootScope').scope()),//$injector.get('$rootScope').$ctrl.scrollToElementIdWithBeacon(service.scrollId),
+        action: () => console.log(this::$ctrl),
         // $ctrl.scrollToElementIdWithBeacon(service.scrollId);$ctrl.sendNavigateToTabBeacon(service.scrollId);
       })
     },
@@ -173,8 +171,9 @@ export default {
         return items.map((item) => !checkIsAvailable(item) && !availableOnline());
       },
       available_online: ({ item, items, user, config }) => {
+        if (!user) return items.map(() => false);
         const availableOnline = () => hasOnlineAccess(item)
-        return items.map(() => availableOnline() );
+        return items.map( () => availableOnline() );
       },
       login: ({ user, items }) => items.map(() => user === undefined),
       afc: ({ item, items, user}) => {
@@ -190,16 +189,19 @@ export default {
     hideDefaultRequests: ({ item, items, user, config }) => {
       if (user === undefined) {
         // if logged out, hide all
-        return items.map(() => true);
+        // return items.map(() => true);
       } 
       // else if (authorizedStatuses.nyush.indexOf(user['bor-status']) > -1) {
       //   // if NYUSH user, only hide if ILL shows
       //   return config.showCustomRequests.ill({ item, items, user, config });
       // }
-      // return items.map(() => true);
+
+      // If either of the conditions for "available online" or "request ill" are met
+      // hide default aleph requests
+      // return items.map(() => false);
       const available_online_arr = config.showCustomRequests.available_online({ item, items, user, config });
       const temp_ill_request_arr = config.showCustomRequests.temp_ill_request({ item, items, user, config });
-      return items.map( (item, i) => available_online_arr[i] || temp_ill_request_arr[i] );
+      return items.map( (_, i) => available_online_arr[i] || temp_ill_request_arr[i] );
     },
     noButtonsText: '{item.request.blocked}',
   })

@@ -5,3 +5,7 @@ md-input-container label:not(.md-no-float):not(._md-container-ignore) {
 md-content>prm-request>div.form-focus.service-form>div.service-form-dynamic-panel>form>div.layout-align-center-center.layout-row.flex {
   width: fit-content;
 }
+
+.custom-request-available_online > span {
+  color: $button_link_color !important;
+}
