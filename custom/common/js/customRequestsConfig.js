@@ -136,10 +136,7 @@ export default {
         prmIconAfter: externalLinkIcon,
       }),
       available_online: () => ({
-        label: "Available Online",
-        // action: ($injector) => console.log($injector.get('$rootScope').scope()),//$injector.get('$rootScope').$ctrl.scrollToElementIdWithBeacon(service.scrollId),
-        action: () => console.log(this::$ctrl),
-        // $ctrl.scrollToElementIdWithBeacon(service.scrollId);$ctrl.sendNavigateToTabBeacon(service.scrollId);
+        label: "Available Online (See View Online section)",
       })
     },
     showCustomRequests: {
