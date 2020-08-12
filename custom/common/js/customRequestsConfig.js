@@ -82,7 +82,7 @@ const authorizedStatuses = {
 
 // Boolean for mapping whether or not current record has a temporary HathiTrust link
 const hasOnlineAccess = (item) => { 
-  return (item.delivery.availabilityLinksUrl.filter(Boolean).length > 0) ;
+  return (item.delivery.availabilityLinksUrl && item.delivery.availabilityLinksUrl.filter(Boolean).length > 0) ;
 };
 
 export default {
@@ -186,7 +186,7 @@ export default {
     hideDefaultRequests: ({ item, items, user, config }) => {
       if (user === undefined) {
         // if logged out, hide all
-        // return items.map(() => true);
+        return items.map(() => true);
       } 
       // else if (authorizedStatuses.nyush.indexOf(user['bor-status']) > -1) {
       //   // if NYUSH user, only hide if ILL shows

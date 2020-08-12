@@ -364,7 +364,7 @@ describe('primo-explore-custom-request config object', () => {
     describe('temp_ill_request', () => {
       const temp_ill_request = customRequestsConfig.showCustomRequests.temp_ill_request;
 
-      it('shows when the item is in a calid sublibrary', () => {
+      it('shows when the item is in a valid sublibrary', () => {
         const items = validSublibraryItems;
         const result = temp_ill_request({
           items,
