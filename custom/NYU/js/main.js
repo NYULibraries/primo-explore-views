@@ -9,7 +9,7 @@ import 'primo-explore-nyu-eshelf';
 import 'primo-explore-search-bar-sub-menu';
 import 'primo-explore-google-analytics';
 import 'primo-explore-custom-requests';
-import 'primo-explore-custom-login';
+// import 'primo-explore-custom-login';
 
 import viewName from './viewName';
 import customActionsConfig from './customActions';
@@ -21,6 +21,7 @@ import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import googleAnalyticsConfig from './googleAnalyticsConfig';
 import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
+import primoExploreCustomLogin from 'Common/js/primoExploreCustomLogin';
 import topAlert from 'Common/js/topAlert';
 import topAlertConfig from 'Common/js/topAlertConfig';
 import physicalItemsAlert from 'Common/js/physicalItemsAlert';
@@ -127,8 +128,8 @@ app
   })
   .component('prmSearchBarAfter', {
     template: /*html*/ `<search-bar-sub-menu></search-bar-sub-menu>`
-  })
-  .component('prmAuthenticationAfter', {
+  })  
+  .component('prmUserAreaExpandableAfter', {
     template: /*html*/ `<primo-explore-custom-login></primo-explore-custom-login>`
   })
   .component('prmAlphabetToolbarAfter', {
