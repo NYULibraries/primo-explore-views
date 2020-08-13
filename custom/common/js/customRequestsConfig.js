@@ -190,10 +190,7 @@ export default {
         // Default show ILL button logic
         return items.map((item) => !isOffsite(item) && checkIsValidSublibrary(item));
       },
-      login: ({ user, items }) => {
-        console.log(user);
-        return items.map(() => user === undefined)
-      },
+      login: ({ user, items }) => items.map(() => user === undefined),
       afc: ({ item, items, user}) => {
         if (!user) return items.map(() => false);
         const afcEligible = authorizedStatuses.afc.indexOf(user['bor-status']) > -1;
