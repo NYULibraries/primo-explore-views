@@ -109,49 +109,38 @@ const nonUniqueItems = [
   },
 ];
 
-const validSublibraryItems = [
+const itemAvailableOnline = [
   {
-    _additionalData: {
-      itemdescription: 'a',
-      mainlocationname: 'Bobst',
-    },
-    itemFields: ["09/11/19 10:30 PM", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""]
+    delivery: {
+      availabilityLinksUrl: [
+        "",
+        "http://digital-link.to.item",
+      ]
+    }
   },
 ];
 
-const invalidSublibraryItems = [
+const availableItems = [
   {
     _additionalData: {
       itemdescription: 'a',
       mainlocationname: 'ISAW',
     },
-    itemFields: ["09/11/19 10:30 PM", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""]
-  },
-  {
-    _additionalData: {
-      itemdescription: 'a',
-      mainlocationname: 'IFA',
-    },
-    itemFields: ["On Shelf", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""],
+    itemFields: ["Available", "Main Collection HD6054.3 .S265 2013", "Regular Loan", ""]
   },
 ];
 
-const offsiteItems = [
+const unavailableItems = [
   {
     _additionalData: {
       itemdescription: 'a',
       mainlocationname: 'ISAW',
     },
-    itemFields: ["09/11/19 10:30 PM", "Offsite HD6054.3 .S265 2013", "Regular loan", ""]
-  },
-  {
-    _additionalData: {
-      itemdescription: 'a',
-      mainlocationname: 'IFA',
-    },
-    itemFields: ["Offsite", "Main Collection HD6054.3 .S265 2013", "Regular loan", ""],
+    itemFields: ["09/11/19 10:30 PM", "Main Collection HD6054.3 .S265 2013", "In Processing", ""]
   },
 ];
+
+
 
 const nyushUser = {
   'bor-status': "20",
@@ -364,8 +353,8 @@ describe('primo-explore-custom-request config object', () => {
     describe('temp_ill_request', () => {
       const temp_ill_request = customRequestsConfig.showCustomRequests.temp_ill_request;
 
-      it('shows when the item is in a valid sublibrary', () => {
-        const items = validSublibraryItems;
+      it('shows when the item is an unavailable status and not available online', () => {
+        const items = unavailableItems;
         const result = temp_ill_request({
           items,
           item,
@@ -376,8 +365,8 @@ describe('primo-explore-custom-request config object', () => {
         expect(result).toEqual([true]);
       });
 
-      it('does not shows when the item is in an invalid sublibrary', () => {
-        const items = invalidSublibraryItems;
+      it('does not show when the item is available', () => {
+        const items = availableItems;
         const result = temp_ill_request({
           items,
           item,
@@ -385,32 +374,21 @@ describe('primo-explore-custom-request config object', () => {
           user: illExclusiveUser,
         });
 
-        expect(result).toEqual([false, false]);
+        expect(result).toEqual([false]);
       });
 
-      it('does not show when the item is an offsite item', () => {
-        const items = offsiteItems;
+      it('does not show when the item is available online', () => {
+        const items = availableItems;
         const result = temp_ill_request({
           items,
-          item,
+          itemAvailableOnline,
           config: customRequestsConfig,
           user: illExclusiveUser,
         });
 
-        expect(result).toEqual([false, false]);
+        expect(result).toEqual([false]);
       });
 
-      it('does not show when non ILL eligible user', () => {
-        const items = invalidSublibraryItems;
-        const result = temp_ill_request({
-          items,
-          item,
-          config: customRequestsConfig,
-          user: nonIllUser,
-        });
-
-        expect(result).toEqual([false, false]);
-      });
     });
 
     xdescribe('ill', () => {

@@ -195,7 +195,6 @@ export default {
 
       // If either of the conditions for "available online" or "request ill" are met
       // hide default aleph requests
-      // return items.map(() => false);
       const available_online_arr = config.showCustomRequests.available_online({ item, items, user, config });
       const temp_ill_request_arr = config.showCustomRequests.temp_ill_request({ item, items, user, config });
       return items.map( (_, i) => available_online_arr[i] || temp_ill_request_arr[i] );
