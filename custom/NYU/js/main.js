@@ -9,8 +9,7 @@ import 'primo-explore-nyu-eshelf';
 import 'primo-explore-search-bar-sub-menu';
 import 'primo-explore-google-analytics';
 import 'primo-explore-custom-requests';
-// import 'primo-explore-custom-login';
-import 'Common/js/primoExploreCustomLogin';
+import 'primo-explore-custom-login';
 
 import viewName from './viewName';
 import customActionsConfig from './customActions';
