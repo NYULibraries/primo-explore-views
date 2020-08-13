@@ -64,7 +64,7 @@ app
   .component('prmSearchBarAfter', {
     template: '<search-bar-sub-menu></search-bar-sub-menu>'
   })
-  .component('prmAuthenticationAfter', {
+  .component('prmUserAreaExpandableAfter', {
     template: `<primo-explore-custom-login></primo-explore-custom-login>`
   })
   .component('prmAlphabetToolbarAfter', {

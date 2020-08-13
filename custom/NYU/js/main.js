@@ -127,8 +127,8 @@ app
   })
   .component('prmSearchBarAfter', {
     template: /*html*/ `<search-bar-sub-menu></search-bar-sub-menu>`
-  })
-  .component('prmAuthenticationAfter', {
+  })  
+  .component('prmUserAreaExpandableAfter', {
     template: /*html*/ `<primo-explore-custom-login></primo-explore-custom-login>`
   })
   .component('prmAlphabetToolbarAfter', {

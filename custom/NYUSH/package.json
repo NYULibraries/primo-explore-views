@@ -22,7 +22,7 @@
     "@sentry/browser": "^4.6.4",
     "primo-explore-clickable-logo-to-any-link": "1.1.2",
     "primo-explore-custom-library-card-menu": "1.1.7",
-    "primo-explore-custom-login": "1.0.2",
+    "primo-explore-custom-login": "2.0.0",
     "primo-explore-custom-requests": "1.0.1",
     "primo-explore-libraryh3lp-widget": "1.1.2",
     "primo-explore-google-analytics": "1.1.1",
