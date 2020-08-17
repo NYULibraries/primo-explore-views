@@ -1,7 +1,10 @@
-[![Github commits (since latest release)](https://img.shields.io/github/commits-since/NYULibraries/primo-explore-views/latest.svg)](https://github.com/NYULibraries/primo-explore-views/releases/latest)
+[![Web Services](https://img.shields.io/badge/NYU%20Libraries-Web%20Services-Black.svg)](https://shields.io/) 
 
 [![CircleCI](https://circleci.com/gh/NYULibraries/primo-explore-views.svg?style=svg)](https://circleci.com/gh/NYULibraries/primo-explore-views)
+[![Github commits (since latest release)](https://img.shields.io/github/commits-since/NYULibraries/primo-explore-views/latest.svg)](https://github.com/NYULibraries/primo-explore-views/releases/latest)
 [![Docker Repository on Quay](https://quay.io/repository/nyulibraries/primo-explore-views/status "Docker Repository on Quay")](https://quay.io/repository/nyulibraries/primo-explore-views)
+
+
 
 # NYU Consortium Primo Explore packages
 
