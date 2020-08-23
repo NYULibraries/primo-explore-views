@@ -80,9 +80,10 @@ const authorizedStatuses = {
   nyush: ["20", "21", "22", "23"],
 };
 
-// Boolean for mapping whether or not current record has a temporary HathiTrust link
+// Boolean for mapping whether or not current record has any 'view online' links
 const hasOnlineAccess = (item) => { 
-  return (item.delivery.availabilityLinksUrl && item.delivery.availabilityLinksUrl.filter(Boolean).length > 0) ;
+  const linktosrc = item.delivery.link.filter(link => link.linkType === "http://purl.org/pnx/linkType/linktorsrc");
+  return (linktosrc && linktosrc.filter(Boolean).length > 0);
 };
 
 export default {
@@ -164,12 +165,12 @@ export default {
       temp_ill_request: ({ item, items, user, config }) => {
         if (!user) return items.map(() => false);
         const availableOnline = () => hasOnlineAccess(item)
-
         return items.map((item) => !checkIsAvailable(item) && !availableOnline());
       },
       available_online: ({ item, items, user, config }) => {
         if (!user) return items.map(() => false);
-        const availableOnline = () => hasOnlineAccess(item)
+
+        const availableOnline = () => hasOnlineAccess(item);
         return items.map( () => availableOnline() );
       },
       login: ({ user, items }) => items.map(() => user === undefined),
