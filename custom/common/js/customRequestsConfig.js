@@ -30,29 +30,6 @@ const checkIsAvailable = item => {
   return !hasPattern(unavailablePatterns, circulationStatus);
 };
 
-// Is the holding sublibrary valid for showing request button
-const checkIsValidSublibrary = item => {
-  // Valid sublibraries from using the Request ILL link 
-  // are not Offsite or Special Collections and match the
-  // following strings for mainlocationname
-  const invalidSublibraryPatterns = [
-    /Avery/g,
-    /Archives/g,
-    /BAFC/g,
-    /Spec/g,
-    /Computer/g,
-    /6th/g,
-    /Tamiment/g,
-    /Inst/g,
-    /IFA/g,
-    /ISAW/g,
-  ];
-
-  const hasPattern = (patterns, target) => patterns.some(str => target.match(new RegExp(str)));
-  const sublibraryValue = item._additionalData.mainlocationname;
-  return !hasPattern(invalidSublibraryPatterns, sublibraryValue);
-};
-
 const availabilityArray = ({ items }) => {
   return items.map(checkIsAvailable);
 };
@@ -103,14 +80,17 @@ const authorizedStatuses = {
   nyush: ["20", "21", "22", "23"],
 };
 
+// Boolean for mapping whether or not current record has any 'view online' links
+const hasOnlineAccess = (item) => { 
+  const linktosrc = item.delivery.link.filter(link => link.linkType === "http://purl.org/pnx/linkType/linktorsrc");
+  return (linktosrc && linktosrc.filter(Boolean).length > 0);
+};
+
 export default {
   name: 'primoExploreCustomRequestsConfig',
   config: (institutionVid) => ({
-    // Remove ezborrow and regular ILL during COVID-19 telework scenario
-    // buttonIds: ['login', 'ezborrow', 'ill', 'afc'],
-    // Add a temp ill request instead, where every physical item regardless of status
-    // gets requested through ILL, except Offsite items
-    buttonIds: ['login', 'temp_ill_request', 'afc'],
+    // Buttons to show, updated for COVID
+    buttonIds: ['login', 'temp_ill_request', 'available_online', 'afc'],
     buttonGenerators: {
       ezborrow: ({ item }) => {
         const title = item.pnx.addata.lad05 ? item.pnx.addata.lad05[0] : '';
@@ -155,6 +135,9 @@ export default {
         label: "Schedule a video loan",
         href: "https://nyu.qualtrics.com/jfe/form/SV_0pIRNh3aESdBl2t",
         prmIconAfter: externalLinkIcon,
+      }),
+      available_online: () => ({
+        label: "Available Online (See View Online section)",
       })
     },
     showCustomRequests: {
@@ -181,14 +164,14 @@ export default {
       },
       temp_ill_request: ({ item, items, user, config }) => {
         if (!user) return items.map(() => false);
+        const availableOnline = () => hasOnlineAccess(item)
+        return items.map((item) => !checkIsAvailable(item) && !availableOnline());
+      },
+      available_online: ({ item, items, user, config }) => {
+        if (!user) return items.map(() => false);
 
-        // Is in an offsite location (no sublibrary currently tells you this, hence this regex)
-        const isOffsite = (item) => {
-          return item.itemFields.some((field) => { return /Offsite/.test(field) })
-        };
-
-        // Default show ILL button logic
-        return items.map((item) => !isOffsite(item) && checkIsValidSublibrary(item));
+        const availableOnline = () => hasOnlineAccess(item);
+        return items.map( () => availableOnline() );
       },
       login: ({ user, items }) => items.map(() => user === undefined),
       afc: ({ item, items, user}) => {
@@ -211,11 +194,13 @@ export default {
       //   return config.showCustomRequests.ill({ item, items, user, config });
       // }
 
-      // otherwise, hide only Request buttons when we're showing the temp request ill button
-      return config.showCustomRequests.temp_ill_request({ item, items, user, config });
-      // otherwise, hide only unavailable holdings
-      // return availabilityArray({ items }).map(avail => !avail);
+      // If either of the conditions for "available online" or "request ill" are met
+      // hide default aleph requests
+      const available_online_arr = config.showCustomRequests.available_online({ item, items, user, config });
+      const temp_ill_request_arr = config.showCustomRequests.temp_ill_request({ item, items, user, config });
+      return items.map( (_, i) => available_online_arr[i] || temp_ill_request_arr[i] );
     },
     noButtonsText: '{item.request.blocked}',
   })
 };
+
