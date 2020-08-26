@@ -28,7 +28,7 @@ import physicalItemsAlert from 'Common/js/physicalItemsAlert';
 import 'Common/js/sendToCourseReserves';
 
 // HTML as JS imports
-import customRequestsRequestInformationTemplate from '../html/custom_requests_request_information.html';
+import customRequestsRequestInformationTemplate from 'Common/html/custom_requests_request_information.html';
 import citationLinkerAfterTemplate from 'Common/html/citation_linker_after.html';
 
 
