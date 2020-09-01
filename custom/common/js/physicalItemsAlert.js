@@ -6,19 +6,15 @@ export default {
       <div class="bar large-bar layout-fill layout-padding layout-align-center-center layout-row error-bar">
         <span class="bar-text">
           <div>
-          Due to COVID-19, all NYU Libraries locations are closed. For more information visit our <a href="https://nyulibraries.statuspage.io/" target="_blank">Status Page.
-            <span class="sr-only">(opens in a new window)</span>
-            <prm-icon external-link icon-type="svg" svg-icon-set="primo-ui" icon-definition="open-in-new">
-            </prm-icon>
-          </a>
+          For Fall 2020, physical materials are only available via scan, contact-less pick-up, or home/office delivery. See the explanation of request options below. There is no in-person access to NYU Libraries collections.
           </div>
           <div>
-          Access to physical materials will resume when our locations reopen. At present requests can only be filled digitally. We are exploring 
-          <a href="https://library.nyu.edu/services/remote/" target="_blank">all sourcing options
+          For the latest information about using the libraries this Fall, visit our 
+          <a href="https://library.nyu.edu/nyu-returns/" target="_blank">Libraries NYU Returns
             <span class="sr-only">(opens in a new window)</span>
             <prm-icon external-link icon-type="svg" svg-icon-set="primo-ui" icon-definition="open-in-new">
             </prm-icon>
-          </a> as they become available in a rapidly changing landscape. 
+          </a> page.
           </div>
         </span>
       </div>
