@@ -17,12 +17,8 @@ describe('The Home Page', function () {
       ["Browse user tags"]: {
         href: `/primo-explore/tags?vid=CU`,
       },
-      ["Online Renewal"]: {
+      ["My Library Account"]: {
         href: `https://eshelf.library.nyu.edu/account?institution=CU`,
-        target: `_blank`,
-      },
-      ["Other Library Catalogs"]: {
-        href: `http://library.cooper.edu/other_library_catalogs_page.html`,
         target: `_blank`,
       },
     }
@@ -47,11 +43,11 @@ describe('The Home Page', function () {
   describe('Need Help?', () => {
     const links = {
       ["Contact Us"]: {
-        href: `http://library.cooper.edu/primo/side_contact.html`,
+        href: `https://library.cooper.edu/contactus/`,
         target: `_blank`,
       },
       ["Cooper Library Access & Hours"]: {
-        href: `http://library.cooper.edu/library_info_page.html#A`,
+        href: `https://library.cooper.edu/visit/`,
         target: `_blank`,
       },
       ["Cooper Library Home Page"]: {
