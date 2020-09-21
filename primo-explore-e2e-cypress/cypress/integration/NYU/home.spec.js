@@ -25,7 +25,7 @@ describe('The Home Page', function () {
 
   describe('Need Help?', () => {
     const links = {
-      ["Ask a librarian"]: `https://library.nyu.edu/ask`,
+      ["Ask A Librarian"]: `https://library.nyu.edu/ask/`,
       ["Interlibrary Loan"]: `https://library.nyu.edu/services/borrowing/from-non-nyu-libraries/interlibrary-loan/`,
       ["expert curated research guides"]: `http://guides.nyu.edu`,
       ["our social media"]: `https://www.instagram.com/nyulibraries/`,
