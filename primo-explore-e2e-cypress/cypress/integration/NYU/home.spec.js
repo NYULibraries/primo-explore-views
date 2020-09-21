@@ -10,9 +10,9 @@ describe('The Home Page', function () {
 
   describe('Using BobCat', () => {
     [
-      'Books & More',
-      'Articles & Databases',
-      'Course Reserves'
+      'What is in Books & More?',
+      'Tools to help with your search:',
+      'Looking for Articles or Databases?'
     ].forEach(infoText => {
       it(`includes information about: ${infoText}`, () => {
         cy.get('[data-cy=home-using-bobcat]').then($card => {
@@ -25,32 +25,16 @@ describe('The Home Page', function () {
 
   describe('Need Help?', () => {
     const links = {
-      ["Ask a librarian"]: `https://library.nyu.edu/ask`,
-      ["Facebook"]: `https://www.facebook.com/NYULibraries/`,
-      ["Twitter"]: `https://twitter.com/nyulibraries`,
-      ["Explore our services"]: `https://library.nyu.edu/services/`,
-      ["BobCat FAQs"]: `http://library.answers.nyu.edu/friendly.php?slug=website/search&q=bobcat&t=0`,
+      ["Ask A Librarian"]: `https://library.nyu.edu/ask/`,
+      ["Interlibrary Loan"]: `https://library.nyu.edu/services/borrowing/from-non-nyu-libraries/interlibrary-loan/`,
+      ["expert curated research guides"]: `http://guides.nyu.edu`,
+      ["our social media"]: `https://www.instagram.com/nyulibraries/`,
+      ["WorldCat"]: `https://www.worldcat.org/search?qt=worldcat_org_all`,
     }
 
     Object.entries(links).forEach(([text, href]) => {
       it(`includes information about: ${text}`, () => {
         cy.get(`[data-cy=home-need-help]`)
-          .contains(text)
-          .should('have.attr', 'href', href)
-      })
-    })
-  })
-
-  describe('Additional Options', () => {
-    const links = {
-      ["Bobcat Standard (Classic Catalog)"]: `https://aleph.library.nyu.edu`,
-      ["Request a book from E-ZBorrow"]: `https://login.library.nyu.edu/ezborrow/nyu`,
-      ["Search WorldCat for items in nearby libraries"]: `http://www.worldcat.org/search?qt=worldcat_org_all`,
-    }
-
-    Object.entries(links).forEach(([text, href]) => {
-      it(`includes information about: ${text}`, () => {
-        cy.get(`[data-cy=home-additional-options]`)
           .contains(text)
           .should('have.attr', 'href', href)
       })
