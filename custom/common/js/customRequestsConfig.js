@@ -80,17 +80,10 @@ const authorizedStatuses = {
   nyush: ["20", "21", "22", "23"],
 };
 
-// Boolean for mapping whether or not current record has any 'view online' links
-const hasOnlineAccess = (item) => { 
-  const linktosrc = item.delivery.link.filter(link => link.linkType === "http://purl.org/pnx/linkType/linktorsrc");
-  return (linktosrc && linktosrc.filter(Boolean).length > 0);
-};
-
 export default {
   name: 'primoExploreCustomRequestsConfig',
   config: (institutionVid) => ({
-    // Buttons to show, updated for COVID
-    buttonIds: ['login', 'temp_ill_request', 'available_online', 'afc'],
+    buttonIds: ['login', 'ill', 'afc'],
     buttonGenerators: {
       ezborrow: ({ item }) => {
         const title = item.pnx.addata.lad05 ? item.pnx.addata.lad05[0] : '';
@@ -116,16 +109,6 @@ export default {
           prmIconAfter: externalLinkIcon,
         };
       },
-      temp_ill_request: ({ item }) => {
-        const link = getitLink(item, institutionVid);
-
-        const baseUrl = baseUrls.ill;
-        return {
-          href: (/resolve?(.*)/.test(link) ? `${baseUrl}?${link.match(/resolve\?(.*)/)[1]}` : link) || baseUrl,
-          label: 'Request',
-          prmIconAfter: externalLinkIcon,
-        };
-      },
       login: () => ({
         prmIconBefore: loginIcon,
         label: 'Login to see request options',
@@ -135,9 +118,6 @@ export default {
         label: "Schedule a video loan",
         href: "https://nyu.qualtrics.com/jfe/form/SV_0pIRNh3aESdBl2t",
         prmIconAfter: externalLinkIcon,
-      }),
-      available_online: () => ({
-        label: "Available Online (See View Online section)",
       })
     },
     showCustomRequests: {
@@ -149,31 +129,25 @@ export default {
         const requestables = requestableArray({ items });
         return items.map((_e, idx) => requestables[idx] && showEzborrow);
       },
-      ill: ({ item, items, user, config }) => {
-        if (!user) return items.map(() => false);
+      // ill: ({ item, items, user, config }) => {
+      //   if (!user) return items.map(() => false);
 
-        const isNYUSHUser = () => authorizedStatuses.nyush.indexOf(user['bor-status']) > -1;
-        const inNYUSHLibrary = () => /Shanghai/.test(items[0]._additionalData.mainlocationname);
-        const illEligible = () => authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
+      //   const isNYUSHUser = () => authorizedStatuses.nyush.indexOf(user['bor-status']) > -1;
+      //   const inNYUSHLibrary = () => /Shanghai/.test(items[0]._additionalData.mainlocationname);
+      //   const illEligible = () => authorizedStatuses.ill.indexOf(user['bor-status']) > -1;
 
-        const showIll = isNYUSHUser() ? !inNYUSHLibrary() : illEligible();
+      //   const showIll = isNYUSHUser() ? !inNYUSHLibrary() : illEligible();
 
-        const showEzborrowArr = config.showCustomRequests.ezborrow({ user, item, items, config });
-        const requestables = requestableArray({ items });
-        return items.map((_e, idx) => !showEzborrowArr[idx] && requestables[idx] && showIll);
+      //   const showEzborrowArr = config.showCustomRequests.ezborrow({ user, item, items, config });
+      //   const requestables = requestableArray({ items });
+      //   return items.map((_e, idx) => !showEzborrowArr[idx] && requestables[idx] && showIll);
+      // },
+      ill: ({ items, user }) => {
+        // if (!user) return items.map(() => false);
+        return items.map((item) => !checkIsAvailable(item));
       },
-      temp_ill_request: ({ item, items, user, config }) => {
-        if (!user) return items.map(() => false);
-        const availableOnline = () => hasOnlineAccess(item)
-        return items.map((item) => !checkIsAvailable(item) && !availableOnline());
-      },
-      available_online: ({ item, items, user, config }) => {
-        if (!user) return items.map(() => false);
-
-        const availableOnline = () => hasOnlineAccess(item);
-        return items.map( () => availableOnline() );
-      },
-      login: ({ user, items }) => items.map(() => user === undefined),
+      login: ({ user, items }) => items.map(() => false),
+      // login: ({ user, items }) => items.map(() => user === undefined),
       afc: ({ item, items, user}) => {
         if (!user) return items.map(() => false);
         const afcEligible = authorizedStatuses.afc.indexOf(user['bor-status']) > -1;
@@ -185,6 +159,7 @@ export default {
       },
     },
     hideDefaultRequests: ({ item, items, user, config }) => {
+      return items.map(() => false);
       if (user === undefined) {
         // if logged out, hide all
         return items.map(() => true);
@@ -194,11 +169,9 @@ export default {
       //   return config.showCustomRequests.ill({ item, items, user, config });
       // }
 
-      // If either of the conditions for "available online" or "request ill" are met
-      // hide default aleph requests
-      const available_online_arr = config.showCustomRequests.available_online({ item, items, user, config });
-      const temp_ill_request_arr = config.showCustomRequests.temp_ill_request({ item, items, user, config });
-      return items.map( (_, i) => available_online_arr[i] || temp_ill_request_arr[i] );
+      // If "request ill" shows hide default aleph requests
+      const ill_arr = config.showCustomRequests.ill({ items, user });
+      return items.map( (_, i) => ill_arr[i] );
     },
     noButtonsText: '{item.request.blocked}',
   })
