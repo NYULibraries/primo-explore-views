@@ -57,11 +57,10 @@ describe('primo-explore-custom-requests', () => {
       })
     })
 
-    it(`does not have a visible 'Login to see request options', 'Schedule a video loan', or 'Request ILL' button`, () => {
+    it(`does not have a visible 'Login to see request options', or 'Schedule a video loan' button`, () => {
       [
         `Login to see request options`,
         `Schedule a video loan`,
-        `Request ILL`,
       ].forEach(buttonLabel => {
         cy.get('primo-explore-custom-requests button')
           .contains(buttonLabel)
