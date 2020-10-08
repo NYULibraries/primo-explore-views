@@ -27,51 +27,7 @@ describe('primo-explore-custom-requests', () => {
       })
     })
   })
-  // Temporary logic for logged in users an all physical items through ILL
   describe(`if the user is logged in`, () => {
-    describe(`when the item is checked out`, () => {
-      before(() => {
-        // PRIMOCIRCTEST-BOBST-MAIN-09-ZZ
-        cy.visit('/fulldisplay?docid=nyu_aleph007467436&vid=NYUSH', {
-          onBeforeLoad: (contentWindow) => {
-            contentWindow.$$mockUserLoggedIn = true
-            contentWindow.$$mockUser = {
-              'id': '1234567',
-              'bor-status': '23',
-            }
-          }
-        })
-      })
-
-      it('has visible primo-explore-custom-requests options', () => {
-        cy.get('primo-explore-custom-requests')
-          .should('be.visible')
-      })
-
-      it(`has visible 'Request' button`, () => {
-        [
-          `Request`,
-        ].forEach(buttonLabel => {
-          cy.get('primo-explore-custom-requests button')
-            .contains(buttonLabel)
-            .should('be.visible')
-        })
-      })
-
-      it(`does not have a visible 'Login to see request options', 'Schedule a video loan', or 'Request ILL' button`, () => {
-        [
-          `Login to see request options`,
-          `Schedule a video loan`,
-          `Request ILL`,
-        ].forEach(buttonLabel => {
-          cy.get('primo-explore-custom-requests button')
-            .contains(buttonLabel)
-            .should('not.be.visible')
-        })
-      })
-    })
-  })
-  xdescribe(`if the user is logged in`, () => {
     before(() => {
       // PRIMOCIRCTEST-BOBST-MAIN-09-ZZ
       cy.visit('/fulldisplay?docid=nyu_aleph007467436&vid=NYUSH', {
@@ -90,7 +46,7 @@ describe('primo-explore-custom-requests', () => {
         .should('be.visible')
     })
 
-    it(`has visible 'Request E-ZBorrow' button`, () => {
+    xit(`has visible 'Request E-ZBorrow' button`, () => {
       [
         `Request E-ZBorrow`,
       ].forEach(buttonLabel => {
@@ -100,11 +56,20 @@ describe('primo-explore-custom-requests', () => {
       })
     })
 
-    it(`does not have a visible 'Login to see request options', 'Schedule a video loan', or 'Request ILL' button`, () => {
+    it(`has visible 'Request ILL' button`, () => {
+      [
+        `Request ILL`,
+      ].forEach(buttonLabel => {
+        cy.get('primo-explore-custom-requests button')
+          .contains(buttonLabel)
+          .should('be.visible')
+      })
+    })
+
+    it(`does not have a visible 'Login to see request options', or 'Schedule a video loan' button`, () => {
       [
         `Login to see request options`,
-        `Schedule a video loan`,
-        `Request ILL`,
+        `Schedule a video loan`
       ].forEach(buttonLabel => {
         cy.get('primo-explore-custom-requests button')
           .contains(buttonLabel)
