@@ -143,11 +143,10 @@ export default {
       //   return items.map((_e, idx) => !showEzborrowArr[idx] && requestables[idx] && showIll);
       // },
       ill: ({ items, user }) => {
-        // if (!user) return items.map(() => false);
+        if (!user) return items.map(() => false);
         return items.map((item) => !checkIsAvailable(item));
       },
-      login: ({ user, items }) => items.map(() => false),
-      // login: ({ user, items }) => items.map(() => user === undefined),
+      login: ({ user, items }) => items.map(() => user === undefined),
       afc: ({ item, items, user}) => {
         if (!user) return items.map(() => false);
         const afcEligible = authorizedStatuses.afc.indexOf(user['bor-status']) > -1;
@@ -159,7 +158,6 @@ export default {
       },
     },
     hideDefaultRequests: ({ item, items, user, config }) => {
-      return items.map(() => false);
       if (user === undefined) {
         // if logged out, hide all
         return items.map(() => true);
