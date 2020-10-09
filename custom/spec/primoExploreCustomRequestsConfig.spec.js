@@ -350,12 +350,12 @@ describe('primo-explore-custom-request config object', () => {
       });
     });
 
-    describe('temp_ill_request', () => {
-      const temp_ill_request = customRequestsConfig.showCustomRequests.temp_ill_request;
+    describe('ill', () => {
+      const ill = customRequestsConfig.showCustomRequests.ill;
 
       it('shows when the item is an unavailable status and not available online', () => {
         const items = unavailableItems;
-        const result = temp_ill_request({
+        const result = ill({
           items,
           item,
           config: customRequestsConfig,
@@ -367,7 +367,7 @@ describe('primo-explore-custom-request config object', () => {
 
       it('does not show when the item is available', () => {
         const items = availableItems;
-        const result = temp_ill_request({
+        const result = ill({
           items,
           item,
           config: customRequestsConfig,
@@ -379,7 +379,7 @@ describe('primo-explore-custom-request config object', () => {
 
       it('does not show when the item is available online', () => {
         const items = availableItems;
-        const result = temp_ill_request({
+        const result = ill({
           items,
           itemAvailableOnline,
           config: customRequestsConfig,

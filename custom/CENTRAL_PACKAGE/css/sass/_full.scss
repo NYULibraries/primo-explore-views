@@ -7,3 +7,20 @@
 .custom-request-user-failure {
   padding: 0 10px;
 }
+
+// Make view online links more prominent
+#getit_link1_0 prm-view-online {
+  font-size: 1.15em;
+  & > div {
+    background-color: white;
+    padding: .75em 2em;
+    border-bottom: 1px solid #ccdc;
+    margin-bottom: 1px;
+    prm-icon {
+      margin-left: 5px;
+    }
+  }
+  & > div:last-of-type {
+    box-shadow: 0 1px 0 0 rgba(0,0,0,.03),0 5px 5px -3px rgba(0,0,0,.07);
+  }
+}
