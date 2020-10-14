@@ -19,6 +19,7 @@ import nyuEshelfConfig from './nyuEshelf';
 import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
+import customRequests from 'Common/js/customRequestComponent';
 import 'Common/js/sendToCourseReserves';
 
 // HTML to JS imports
@@ -73,23 +74,7 @@ app
   .component('prmBrowseSearchBarAfter', {
     template: /*html*/ `<search-bar-sub-menu></search-bar-sub-menu>`,
   })
-  .component('prmLocationItemAfter', {
-    template: /*html*/ `
-      <primo-explore-custom-requests
-        layout="row"
-        layout-align="end center"
-        layout-wrap
-        flex-xs="100"
-      ></primo-explore-custom-requests>`,
-    controller: ['$element', function ($element) {
-      const ctrl = this;
-      ctrl.$postLink = () => {
-        const $target = $element.parent().query('div.md-list-item-text');
-        const $el = $element.query(`primo-explore-custom-requests`).detach();
-        $target.append($el);
-      };
-    }]
-  })
+  .component('prmLocationItemAfter', customRequests)
   .component('prmLocationItemsAfter', {
     template: `${customRequestsRequestInformationTemplate}`
   })

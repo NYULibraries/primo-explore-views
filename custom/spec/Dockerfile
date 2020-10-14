@@ -1,3 +1,5 @@
+# May have to hardcode this where the docker engine version fails in Circle on specific versions of docker and node:
+# https://discuss.circleci.com/t/docker-build-fails-with-nonsensical-eperm-operation-not-permitted-copyfile/37364/19
 FROM node:12-alpine
 
 WORKDIR /app/
