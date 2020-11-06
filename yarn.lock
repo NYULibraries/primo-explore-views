@@ -5569,10 +5569,10 @@ primo-explore-clickable-logo-to-any-link@1.1.2:
   resolved "https://registry.yarnpkg.com/primo-explore-clickable-logo-to-any-link/-/primo-explore-clickable-logo-to-any-link-1.1.2.tgz#9f560b4328d23ae046b4c8f75a00dfbf1822aa9d"
   integrity sha512-hEPP6z7NMQ+D6Fu775Z2p5GZODODCibJTjdqf15wnbaSsvfkizDyRXj92/FmIa/YOem6KnpSVnrhEVp3suTr5Q==
 
-primo-explore-custom-library-card-menu@1.1.7:
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/primo-explore-custom-library-card-menu/-/primo-explore-custom-library-card-menu-1.1.7.tgz#f86d0848d162a5c0617b614941fd972a86bdd69f"
-  integrity sha512-gkH6L74lTljd4mFO6EVRXedicoWPFw+v21B5AkiCeKV9K7xHiAf83Cfc6LRPUztA+SWE1BUUQlR7SXSiRNo7WA==
+primo-explore-custom-library-card-menu@1.1.8:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/primo-explore-custom-library-card-menu/-/primo-explore-custom-library-card-menu-1.1.8.tgz#e0e1ef70c0c31dab8dfa117bc177cf61a4d57c15"
+  integrity sha512-iIDs0u6hxVq89lFhtvoqXr7F106JgKCo4gnPUrTogN9njOjQ+or3Yn6uX8BCPM6qshdUascbh8CD9bLlSV+GmA==
 
 primo-explore-custom-login@2.0.2:
   version "2.0.2"
