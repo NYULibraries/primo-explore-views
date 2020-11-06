@@ -112,6 +112,13 @@ services:
     - ./custom:/app/primo-explore/custom/
     - ./modules:/app/primo-explore/modules/
 
+  yarn:
+    image: node:10.16.3
+    working_dir: /app
+    entrypoint: ["yarn"]
+    volumes:
+      - ./:/app
+
 volumes:
   yarn_cache:
   node_modules_cache:

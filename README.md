@@ -109,6 +109,14 @@ For convenience, `script/create_package.sh` is a `sh` script that will build all
 
 * [Example execution in Circle CI](https://circleci.com/gh/NYULibraries/primo-explore-views/38)
 
+## Yarn updates
+
+Run yarn commands with the yarn service:
+
+```
+docker-compose run yarn install
+```
+
 ## Running locally
 
 You can run the development environment locally using [our fork of primo-explore-devenv](https://github.com/nyulibraries/primo-explore-devenv) as well, and symlinking this `custom` directory to that repostory's `primo-explore/custom/` directory. However, because this monorepo is designed to work with [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/), this means that `node_modules` shared across packages will be installed (i.e. hoisted and deduped) to a parent directory. This means the monorepo's hoisted `node_modules` folder should also be symlinked to `primo-explore/node_modules` so they can be properly resolved.
