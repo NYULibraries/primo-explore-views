@@ -11,7 +11,7 @@ describe('The Home Page', function () {
   describe('Other BHS Catalogs', () => {
     const links = {
       ["Finding Aid Portal"]: `http://dlib.nyu.edu/findingaids/`,
-      ["Image Catalog"]: `http://brooklynhistory.pastperfect-online.com/35872cgi/mweb.exe`,
+      ["Image Catalog"]: `https://brooklynhistory.pastperfectonline.com/`,
     }
 
     Object.entries(links).forEach(([text, href]) => {
@@ -45,7 +45,7 @@ describe('The Home Page', function () {
 
   describe('Additional Options', () => {
     const links = {
-      ["BHS blog"]: `http://brooklynhistory.org/blog`,
+      ["CBH blog"]: `http://brooklynhistory.org/blog`,
       ["BobCat Standard"]: `http://aleph.library.nyu.edu`,
     }
 
