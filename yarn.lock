@@ -5568,10 +5568,10 @@ primo-explore-custom-search-bookmark-filter@1.0.9:
   resolved "https://registry.yarnpkg.com/primo-explore-custom-search-bookmark-filter/-/primo-explore-custom-search-bookmark-filter-1.0.9.tgz#26af2a4d01f723f1ffd541c78793de3d752dad2b"
   integrity sha512-gBtN65lTkWDHSgX7xn4omQExTsur1PF71Vc5F6OCfbfrhnDLVLIUy96ZphC/xuVBnBzzLj5gTTTEVuvf7SkFIQ==
 
-primo-explore-google-analytics@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/primo-explore-google-analytics/-/primo-explore-google-analytics-1.1.1.tgz#66ee4f0f13ee0b5534bee3ed003d0ea987de9369"
-  integrity sha512-/hozbKkpWszzYkZ/KPFgDdaqSXVq8tNJSCIygb3gvdyH5/6Sb5FXSgc3uaSMJZKiv+3c/L87vln3OJl5oUYM4g==
+primo-explore-google-analytics@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/primo-explore-google-analytics/-/primo-explore-google-analytics-1.2.0.tgz#2b649dd66e07b57438e7cbafbb81572e1626ca3c"
+  integrity sha512-pwa1o4xMMRRhSGQWtKOKIYelACuMDZkuEZxwS5XzgEzWLYiCrLLeAVvvhGPLnnAOax0r/PJJZv1vCLH84CyMgA==
   dependencies:
     angulartics "^1.6.0"
     angulartics-google-tag-manager "^0.0.1"
