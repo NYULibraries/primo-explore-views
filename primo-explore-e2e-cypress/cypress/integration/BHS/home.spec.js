@@ -26,11 +26,11 @@ describe('The Home Page', function () {
 
   describe('Need Help?', () => {
     const links = {
-      ["Reference Question?"]: `http://www.brooklynhistory.org/library/ask.html`,
-      ["Visit the Library"]: `http://www.brooklynhistory.org/library/visit.html`,
-      ["Family Research"]: `http://www.brooklynhistory.org/library/genealogy.html`,
-      ["House Research"]: `http://www.brooklynhistory.org/library/house.html`,
-      ["Rights & Reproductions"]: `http://www.brooklynhistory.org/library/reproduction.html`,
+      ["Reference Question?"]: `https://www.brooklynhistory.org/visit/visit-the-library/`,
+      ["Visit the Library"]: `https://www.brooklynhistory.org/visit/visit-the-library/`,
+      ["Family Research"]: `https://www.brooklynhistory.org/research-guides/family-history/`,
+      ["House Research"]: `https://www.brooklynhistory.org/research-guides/house-building/`,
+      ["Rights & Reproductions"]: `https://www.brooklynhistory.org/research-collections/rights-reproductions/`,
     }
 
     Object.entries(links).forEach(([text, href]) => {
