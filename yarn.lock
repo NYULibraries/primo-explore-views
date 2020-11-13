@@ -5564,20 +5564,20 @@ prelude-ls@~1.1.2:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
   integrity sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=
 
-primo-explore-clickable-logo-to-any-link@1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/primo-explore-clickable-logo-to-any-link/-/primo-explore-clickable-logo-to-any-link-1.1.2.tgz#9f560b4328d23ae046b4c8f75a00dfbf1822aa9d"
-  integrity sha512-hEPP6z7NMQ+D6Fu775Z2p5GZODODCibJTjdqf15wnbaSsvfkizDyRXj92/FmIa/YOem6KnpSVnrhEVp3suTr5Q==
+primo-explore-clickable-logo-to-any-link@1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/primo-explore-clickable-logo-to-any-link/-/primo-explore-clickable-logo-to-any-link-1.1.3.tgz#b6bac8c04244ee99c6952ffa8d22e0cfcedb86a1"
+  integrity sha512-+FyiQ2iI0deu8ubhkiOfmYtwpsi2vRP0b52vkCS137fFsQcK+qL0TOjDvA7Qc2Twpu7TreckwWl7UaYCBBMGPQ==
 
-primo-explore-custom-library-card-menu@1.1.7:
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/primo-explore-custom-library-card-menu/-/primo-explore-custom-library-card-menu-1.1.7.tgz#f86d0848d162a5c0617b614941fd972a86bdd69f"
-  integrity sha512-gkH6L74lTljd4mFO6EVRXedicoWPFw+v21B5AkiCeKV9K7xHiAf83Cfc6LRPUztA+SWE1BUUQlR7SXSiRNo7WA==
+primo-explore-custom-library-card-menu@1.1.8:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/primo-explore-custom-library-card-menu/-/primo-explore-custom-library-card-menu-1.1.8.tgz#e0e1ef70c0c31dab8dfa117bc177cf61a4d57c15"
+  integrity sha512-iIDs0u6hxVq89lFhtvoqXr7F106JgKCo4gnPUrTogN9njOjQ+or3Yn6uX8BCPM6qshdUascbh8CD9bLlSV+GmA==
 
-primo-explore-custom-login@2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/primo-explore-custom-login/-/primo-explore-custom-login-2.0.2.tgz#bb3f78d2bf944a5fa1f0045b45bbe5561f416aa6"
-  integrity sha512-nkJt0Pzg96uwOqwQeJ/NMd5dIGESDbvRsr/8pMV+Kal8h3gwyW4Isameh41DM2F+rgebsMOqtvCNDnG7a86kmw==
+primo-explore-custom-login@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/primo-explore-custom-login/-/primo-explore-custom-login-2.0.3.tgz#8bd9d3621c89bdb52883edfb39ca3d9ce1517d75"
+  integrity sha512-1ppv8aYWedwAfRIEIJVvsrEeYCIQiTTNV8h1Cjxxy3JS5EAIR526D+IcZXT8Mz2eO619zyQaPh9tKU8Bv5gr/g==
   dependencies:
     angular-cookies "1.6.3"
 
@@ -5606,10 +5606,10 @@ primo-explore-google-analytics@1.1.1:
     angulartics "^1.6.0"
     angulartics-google-tag-manager "^0.0.1"
 
-primo-explore-libraryh3lp-widget@1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/primo-explore-libraryh3lp-widget/-/primo-explore-libraryh3lp-widget-1.1.2.tgz#da0de7c64dbf86cab783e4e1a25a5fbf64d73b18"
-  integrity sha512-1HLb++iOwKL2L2gNMae2zHg9XWSQvpQPJxDUW5wJ1jwVuGRrrK0JdTOr06KHXv+jrm2h7AJlZ0ULZbplDcQj/A==
+primo-explore-libraryh3lp-widget@1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/primo-explore-libraryh3lp-widget/-/primo-explore-libraryh3lp-widget-1.1.4.tgz#49add04ea450e6c339c1fd6f7432c2563413faa0"
+  integrity sha512-m9hmi6dT5w8UvB600U3Lz6dclAab58ThJQYWa7DUsUnq54WeHSVmH6xlsMUhRCGjaqcqhe+Syt8T/jvo0doeMA==
 
 primo-explore-nyu-eshelf@3.1.10:
   version "3.1.10"
