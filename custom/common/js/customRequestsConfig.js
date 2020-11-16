@@ -76,14 +76,13 @@ const baseUrls = {
 const authorizedStatuses = {
   ezborrow: ["50", "51", "52", "53", "54", "55", "56", "57", "58", "60", "61", "62", "63", "65", "66", "80", "81", "82", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41"],
   ill: ["20", "21", "22", "23", "30", "31", "32", "34", "35", "37", "50", "51", "52", "53", "54", "55", "56", "57", "58", "60", "61", "62", "63", "65", "66", "80", "81", "82", "89"],
-  afc: ["03", "05", "10", "12", "20", "30", "32", "50", "52", "53", "54", "61", "62", "70", "80", "89", "90"],
   nyush: ["20", "21", "22", "23"],
 };
 
 export default {
   name: 'primoExploreCustomRequestsConfig',
   config: (institutionVid) => ({
-    buttonIds: ['login', 'ill', 'afc'],
+    buttonIds: ['login', 'ill'],
     buttonGenerators: {
       ezborrow: ({ item }) => {
         const title = item.pnx.addata.lad05 ? item.pnx.addata.lad05[0] : '';
@@ -113,11 +112,6 @@ export default {
         prmIconBefore: loginIcon,
         label: 'Login to see request options',
         action: ($injector) => $injector.get('primoExploreCustomLoginService').login(),
-      }),
-      afc: () => ({
-        label: "Schedule a video loan",
-        href: "https://nyu.qualtrics.com/jfe/form/SV_0pIRNh3aESdBl2t",
-        prmIconAfter: externalLinkIcon,
       })
     },
     showCustomRequests: {
@@ -147,15 +141,6 @@ export default {
         return items.map((item) => !checkIsAvailable(item));
       },
       login: ({ user, items }) => items.map(() => user === undefined),
-      afc: ({ item, items, user}) => {
-        if (!user) return items.map(() => false);
-        const afcEligible = authorizedStatuses.afc.indexOf(user['bor-status']) > -1;
-        const isBAFCMainCollection = item.delivery.holding.some(({ subLocation, libraryCode}) => {
-          return libraryCode === "BAFC" && subLocation === "Main Collection";
-        });
-
-        return items.map(() => afcEligible && isBAFCMainCollection);
-      },
     },
     hideDefaultRequests: ({ item, items, user, config }) => {
       if (user === undefined) {
