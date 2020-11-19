@@ -39,25 +39,6 @@ const item = {
   }
 };
 
-const nonBookAFCItem = {
-  ...item,
-  pnx: {
-    addata:  {
-      btitle: [title],
-      au: [author],
-      ristype: ['VIDEO']
-    }
-  },
-  delivery: {
-    holding: [
-      {
-        subLocation: "Main Collection",
-        libraryCode: "BAFC",
-      }
-    ]
-  }
-};
-
 const uniqueItems = [
   {
     _additionalData: {
@@ -281,26 +262,6 @@ describe('primo-explore-custom-request config object', () => {
       });
     });
 
-    describe('afc', () => {
-      let afc = buttonGenerators.afc;
-
-      const expected = {
-        label: "Schedule a video loan",
-        href: "https://nyu.qualtrics.com/jfe/form/SV_0pIRNh3aESdBl2t",
-        prmIconAfter: {
-          icon: "ic_open_in_new_24px",
-          set: "action",
-          attributes: {
-            'custom-requests': ''
-          },
-        },
-      };
-
-      it('has proper attributes', () => {
-        const result = afc();
-        expect(result).toEqual(expected);
-      });
-    });
   });
 
   describe('noButtonsText', () => {
@@ -468,45 +429,6 @@ describe('primo-explore-custom-request config object', () => {
       });
     });
 
-    describe('afc', () => {
-      const afc = customRequestsConfig.showCustomRequests.afc;
-
-      it('does not show when not logged in', () => {
-        const result = afc({
-          items: nonUniqueItems,
-          item: nonBookAFCItem,
-          user: undefined
-        });
-
-        expect(result).toEqual([false, false]);
-      });
-
-      it('shows when logged in and afc user', () => {
-        const result = afc({
-          items: nonUniqueItems,
-          item: nonBookAFCItem,
-          user: {
-            'bor-status': "03"
-          },
-          config: customRequestsConfig
-        });
-
-        expect(result).toEqual([true, true]);
-      });
-
-      it('does not show when non-afc user', () => {
-        const result = afc({
-          items: nonUniqueItems,
-          item: nonBookAFCItem,
-          user: {
-            'bor-status': "999"
-          },
-          config: customRequestsConfig
-        });
-
-        expect(result).toEqual([false, false]);
-      });
-    });
   });
 
   describe('hideDefaultRequests', () => {
