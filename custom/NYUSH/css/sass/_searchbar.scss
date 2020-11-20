@@ -81,5 +81,5 @@ search-bar-sub-menu .md-button.md-small {
 }
 
 .switch-to-simple:hover, .switch-to-advanced:hover {
-  background-color: $purple !important;
+  background-color: darken($purple, 5%) !important;
 }
