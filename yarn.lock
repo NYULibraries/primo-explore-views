@@ -1661,10 +1661,10 @@ angular-cookies@1.6.3:
   resolved "https://registry.yarnpkg.com/angular-cookies/-/angular-cookies-1.6.3.tgz#1336af49684348538c329ac07b99e961db99858f"
   integrity sha1-EzavSWhDSFOMMprAe5npYduZhY8=
 
-angular-sanitize@1.6.3:
-  version "1.6.3"
-  resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.6.3.tgz#f8d93cc7e7a983ad19cc96a84a88e1d65a89873b"
-  integrity sha1-+Nk8x+epg60ZzJaoSojh1lqJhzs=
+angular-sanitize@1.8.2:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.8.2.tgz#ae78040f00c5e2ce1c63780bcc47fa14a1698296"
+  integrity sha512-OB6Goa+QN3byf5asQ7XRl7DKZejm/F/ZOqa9z1skqYVOWA2hoBxoCmt9E7+i7T/TbxZP5zYzKxNZVVJNu860Hg==
 
 angulartics-google-tag-manager@^0.0.1:
   version "0.0.1"
@@ -5611,12 +5611,12 @@ primo-explore-libraryh3lp-widget@1.1.4:
   resolved "https://registry.yarnpkg.com/primo-explore-libraryh3lp-widget/-/primo-explore-libraryh3lp-widget-1.1.4.tgz#49add04ea450e6c339c1fd6f7432c2563413faa0"
   integrity sha512-m9hmi6dT5w8UvB600U3Lz6dclAab58ThJQYWa7DUsUnq54WeHSVmH6xlsMUhRCGjaqcqhe+Syt8T/jvo0doeMA==
 
-primo-explore-nyu-eshelf@3.1.10:
-  version "3.1.10"
-  resolved "https://registry.yarnpkg.com/primo-explore-nyu-eshelf/-/primo-explore-nyu-eshelf-3.1.10.tgz#9b2118ad85b29dcce619ed7524dbf695caae12e0"
-  integrity sha512-Fb6Lh6vuAwfMzr4m29OxsC7f95am6Tl6xCmfToHs3rNSqOD6SRf3005It3kORBj0iyL+RvduhWQwaUygP8pKCw==
+primo-explore-nyu-eshelf@3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/primo-explore-nyu-eshelf/-/primo-explore-nyu-eshelf-3.2.0.tgz#10a3068a50f5e24373b2630496923af91aeb23e7"
+  integrity sha512-CO7+9Zg+dTKueyEOjLfPZHeYrILyw8maapNFKeOtaG96vGvS9xOqE+ydomUR91NpobszlMYHw+oCkLxfBm6mYg==
   dependencies:
-    angular-sanitize "1.6.3"
+    angular-sanitize "1.8.2"
 
 primo-explore-search-bar-sub-menu@1.0.8:
   version "1.0.8"
