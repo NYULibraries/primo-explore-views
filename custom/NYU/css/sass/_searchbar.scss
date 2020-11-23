@@ -70,3 +70,15 @@ search-bar-sub-menu .md-button.md-small {
   min-width: 42px;
   font-weight: bold;
 }
+
+// Advanced and simple search buttons
+.switch-to-simple, .switch-to-advanced {
+  background-color: $purple;
+  color: #fff !important;
+  font-weight: bold;
+  padding: 0 20px;
+}
+
+.switch-to-simple:hover, .switch-to-advanced:hover {
+  background-color: darken($purple, 5%) !important;
+}
