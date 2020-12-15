@@ -41,8 +41,8 @@ describe('send-to-course-reserves', () => {
     });
 
     it('should have Always Available Online already selected', () => {
-      cy.get('#select_value_label_2 ')
-        .should('have.text', 'Always Available Online (Ideal for Course Use)')
+      cy.get('span[translate="tabbedmenu.crp.label"]')
+        .should('contain.text', 'Always Available Online (Ideal for Course Use)')
     })
   });
 });
