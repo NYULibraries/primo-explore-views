@@ -19,7 +19,7 @@
   "homepage": "https://github.com/NYULibraries/primo-explore-nysid#readme",
   "dependencies": {
     "@orbis-cascade/primo-explore-custom-actions": "3.1.1",
-    "primo-explore-clickable-logo-to-any-link": "1.1.3",
+    "primo-explore-clickable-logo-to-any-link": "1.1.4",
     "primo-explore-custom-library-card-menu": "1.1.8",
     "primo-explore-libraryh3lp-widget": "1.1.4",
     "primo-explore-nyu-eshelf": "3.2.1",
