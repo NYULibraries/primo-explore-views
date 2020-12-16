@@ -1668,10 +1668,10 @@ angular-cookies@1.6.3:
   resolved "https://registry.yarnpkg.com/angular-cookies/-/angular-cookies-1.6.3.tgz#1336af49684348538c329ac07b99e961db99858f"
   integrity sha1-EzavSWhDSFOMMprAe5npYduZhY8=
 
-angular-sanitize@1.8.2:
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.8.2.tgz#ae78040f00c5e2ce1c63780bcc47fa14a1698296"
-  integrity sha512-OB6Goa+QN3byf5asQ7XRl7DKZejm/F/ZOqa9z1skqYVOWA2hoBxoCmt9E7+i7T/TbxZP5zYzKxNZVVJNu860Hg==
+angular-sanitize@1.6.10:
+  version "1.6.10"
+  resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.6.10.tgz#635a362afb2dd040179f17d3a5455962b2c1918f"
+  integrity sha512-01i1Xoq9ykUrsoYQMSB6dWZmPp9Df5hfCqMAGGzJBWZ7L2WY0OtUphdI0YvR8ZF9lAsWtGNtsEFilObjq5nTgQ==
 
 angulartics-google-tag-manager@^0.0.1:
   version "0.0.1"
@@ -5544,10 +5544,10 @@ primo-explore-custom-library-card-menu@1.1.8:
   resolved "https://registry.yarnpkg.com/primo-explore-custom-library-card-menu/-/primo-explore-custom-library-card-menu-1.1.8.tgz#e0e1ef70c0c31dab8dfa117bc177cf61a4d57c15"
   integrity sha512-iIDs0u6hxVq89lFhtvoqXr7F106JgKCo4gnPUrTogN9njOjQ+or3Yn6uX8BCPM6qshdUascbh8CD9bLlSV+GmA==
 
-primo-explore-custom-login@2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/primo-explore-custom-login/-/primo-explore-custom-login-2.0.3.tgz#8bd9d3621c89bdb52883edfb39ca3d9ce1517d75"
-  integrity sha512-1ppv8aYWedwAfRIEIJVvsrEeYCIQiTTNV8h1Cjxxy3JS5EAIR526D+IcZXT8Mz2eO619zyQaPh9tKU8Bv5gr/g==
+primo-explore-custom-login@2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/primo-explore-custom-login/-/primo-explore-custom-login-2.0.4.tgz#c1ea2fbb08a7d0870ec48826ef58620846bf323e"
+  integrity sha512-DBkurK+3BUlkvoOrrcrZX3Q9u9plC9bW3MIE07nrjmHm2gTTUBBkB1VMsC9JlWs5ofn9Ib3UP+z2/Fe92Ey3kg==
   dependencies:
     angular-cookies "1.6.3"
 
@@ -5581,12 +5581,12 @@ primo-explore-libraryh3lp-widget@1.1.4:
   resolved "https://registry.yarnpkg.com/primo-explore-libraryh3lp-widget/-/primo-explore-libraryh3lp-widget-1.1.4.tgz#49add04ea450e6c339c1fd6f7432c2563413faa0"
   integrity sha512-m9hmi6dT5w8UvB600U3Lz6dclAab58ThJQYWa7DUsUnq54WeHSVmH6xlsMUhRCGjaqcqhe+Syt8T/jvo0doeMA==
 
-primo-explore-nyu-eshelf@3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/primo-explore-nyu-eshelf/-/primo-explore-nyu-eshelf-3.2.0.tgz#10a3068a50f5e24373b2630496923af91aeb23e7"
-  integrity sha512-CO7+9Zg+dTKueyEOjLfPZHeYrILyw8maapNFKeOtaG96vGvS9xOqE+ydomUR91NpobszlMYHw+oCkLxfBm6mYg==
+primo-explore-nyu-eshelf@3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/primo-explore-nyu-eshelf/-/primo-explore-nyu-eshelf-3.2.1.tgz#e4b38898d4aa8b2f40901fa69493a82c404f0fbc"
+  integrity sha512-DmAoFt8prUTWuVGjNF4zxwpyXLxsa/pEf61aLqF2+E6F+wYxzZxRX1J5L+7a9Pv6ULxJek0C9ez6KTIO6qtEeQ==
   dependencies:
-    angular-sanitize "1.8.2"
+    angular-sanitize "1.6.10"
 
 primo-explore-search-bar-sub-menu@1.0.8:
   version "1.0.8"
