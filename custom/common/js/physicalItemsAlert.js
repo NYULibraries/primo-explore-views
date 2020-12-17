@@ -6,15 +6,12 @@ export default {
       <div class="bar large-bar layout-fill layout-padding layout-align-center-center layout-row error-bar">
         <span class="bar-text">
           <div>
-          For Fall 2020, physical materials are only available via scan, contact-less pick-up, or home/office delivery. See the explanation of request options below. There is no in-person access to NYU Libraries collections.
-          </div>
-          <div>
-          For the latest information about using the libraries this Fall, visit our 
-          <a href="https://library.nyu.edu/nyu-returns/" target="_blank">Libraries NYU Returns
+          Request Services will be paused during Winter Break starting the afternoon of December 21, 2020. Services and processing will resume the week of January 4th. For more information, visit 
+          <a href="https://nyulibraries.statuspage.io/incidents/ylqhtv3tm028" target="_blank">our status page
             <span class="sr-only">(opens in a new window)</span>
             <prm-icon external-link icon-type="svg" svg-icon-set="primo-ui" icon-definition="open-in-new">
             </prm-icon>
-          </a> page.
+          </a>.
           </div>
         </span>
       </div>
