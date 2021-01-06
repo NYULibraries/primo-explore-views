@@ -6066,10 +6066,10 @@ primo-explore-custom-library-card-menu@1.1.8:
   resolved "https://registry.yarnpkg.com/primo-explore-custom-library-card-menu/-/primo-explore-custom-library-card-menu-1.1.8.tgz#e0e1ef70c0c31dab8dfa117bc177cf61a4d57c15"
   integrity sha512-iIDs0u6hxVq89lFhtvoqXr7F106JgKCo4gnPUrTogN9njOjQ+or3Yn6uX8BCPM6qshdUascbh8CD9bLlSV+GmA==
 
-primo-explore-custom-login@2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/primo-explore-custom-login/-/primo-explore-custom-login-2.0.3.tgz#8bd9d3621c89bdb52883edfb39ca3d9ce1517d75"
-  integrity sha512-1ppv8aYWedwAfRIEIJVvsrEeYCIQiTTNV8h1Cjxxy3JS5EAIR526D+IcZXT8Mz2eO619zyQaPh9tKU8Bv5gr/g==
+primo-explore-custom-login@2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/primo-explore-custom-login/-/primo-explore-custom-login-2.0.4.tgz#c1ea2fbb08a7d0870ec48826ef58620846bf323e"
+  integrity sha512-DBkurK+3BUlkvoOrrcrZX3Q9u9plC9bW3MIE07nrjmHm2gTTUBBkB1VMsC9JlWs5ofn9Ib3UP+z2/Fe92Ey3kg==
   dependencies:
     angular-cookies "1.6.3"
 
@@ -6110,10 +6110,10 @@ primo-explore-nyu-eshelf@3.2.1:
   dependencies:
     angular-sanitize "1.6.10"
 
-primo-explore-search-bar-sub-menu@1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/primo-explore-search-bar-sub-menu/-/primo-explore-search-bar-sub-menu-1.0.8.tgz#c7ff308099bf4885ae2a448563e8ce9c04b5b880"
-  integrity sha512-C+cTz82lQBL2blHNKtpNUPeftPUtCOVGzeB+gU01lMQnd9xwHtPyLsIjSQU7ZU1XtRJuRaiIlc4dyHQ5mavEHQ==
+primo-explore-search-bar-sub-menu@1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/primo-explore-search-bar-sub-menu/-/primo-explore-search-bar-sub-menu-1.0.9.tgz#a99ab33b7b2daf5011e0ca3084bd87f33ddca615"
+  integrity sha512-2gMpNhJi14ylBHdbaifCj5l7bRcFEyn7l/cEadzv53SEuSGyY2cIbWQkOMWQ3UWeT44KR3+tgetNXkE+/xXjPg==
   optionalDependencies:
     eslint "^6.1.0"
     eslint-plugin-angular "^4.0.1"
