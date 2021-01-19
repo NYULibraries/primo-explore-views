@@ -1,3 +1,8 @@
 prm-topbar {
   height: 80px;
 }
+
+// Make menu links black on hover for accessibility contrast
+prm-topbar .md-button:not(.disable-hover):hover:not([disabled]):hover:not([disabled]){
+  color: $text_black !important;
+}
