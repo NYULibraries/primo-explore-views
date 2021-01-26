@@ -32,7 +32,7 @@ const item = {
         linkURL: 'http://getit.nyu.edu/resolve?did=this-work&i=hope-so'
       },
       {
-        displayLabel: 'lln42',
+        displayLabel: 'lln40',
         linkURL: 'http://getit.nyu.edu/resolve?did=this-work&i=hope-so'
       },
     ]
