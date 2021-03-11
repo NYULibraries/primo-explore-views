@@ -25,6 +25,7 @@ import customLoginConfig from 'Common/js/customLoginConfig';
 import physicalItemsAlert from 'Common/js/physicalItemsAlert';
 import customRequests from 'Common/js/customRequestComponent';
 import 'Common/js/sendToCourseReserves';
+import appendStatusEmbed from 'Common/js/statusPageEmbed';
 
 // HTML as JS imports
 import customRequestsRequestInformationTemplate from 'Common/html/custom_requests_request_information.html';
@@ -166,4 +167,5 @@ function runBlock(gaInjectionService, nyuEshelfService, libraryh3lpInjectionServ
   gaInjectionService.injectGACode();
   nyuEshelfService.initEshelf();
   libraryh3lpInjectionService.injectScript();
+  appendStatusEmbed();
 }
