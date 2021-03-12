@@ -22,11 +22,10 @@ import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import googleAnalyticsConfig from './googleAnalyticsConfig';
 import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
-import topAlert from 'Common/js/topAlert';
-import topAlertConfig from 'Common/js/topAlertConfig';
 import physicalItemsAlert from 'Common/js/physicalItemsAlert';
 import customRequests from 'Common/js/customRequestComponent';
 import 'Common/js/sendToCourseReserves';
+import appendStatusEmbed from 'Common/js/statusPageEmbed';
 
 // HTML as JS imports
 import customRequestsRequestInformationTemplate from 'Common/html/custom_requests_request_information.html';
@@ -56,7 +55,6 @@ app
   .constant(googleAnalyticsConfig.name, googleAnalyticsConfig.config)
   .constant(customRequestsConfig.name, customRequestsConfig.config(viewName))
   .constant(customLoginConfig.name, customLoginConfig.config)
-  .constant(topAlertConfig.name, topAlertConfig.config)
   .value('customNoSearchResultsTemplateUrl', `custom/${viewName}/html/no_search_results.html`)
   .component('prmActionListAfter', {
     controller: ['$window', function($window) {
@@ -155,7 +153,6 @@ app
     }],
     template: citationLinkerAfterTemplate,
   })
-  .component('prmTopbarAfter', topAlert)
   .component('prmRequestServicesAfter', physicalItemsAlert);
 
 app.run(runBlock);
@@ -170,4 +167,5 @@ function runBlock(gaInjectionService, nyuEshelfService, libraryh3lpInjectionServ
   gaInjectionService.injectGACode();
   nyuEshelfService.initEshelf();
   libraryh3lpInjectionService.injectScript();
+  appendStatusEmbed();
 }
