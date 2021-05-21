@@ -79,7 +79,13 @@ BobCat dev holds a number of test items as relatively stable fixtures for testin
 
 **Note:** When an Aleph Staging refresh occurs, the tests need to be reconfigured with new IDs to pass again. You can look up those new IDs by the titles. 
 
-**Note:** There may be a delay between an Aleph Staging refresh and the test records reappearing on stage.
+**Note:** There may be a delay between an Aleph Staging refresh and the test records reappearing on stage (due to required re-indexing and re-norming in Primo, a manual process for KARMS)
+
+The test items we require on BobCatDev/AlephStage for our integration tests to run are as follows: 
+
+1. Some record whose title includes "PRIMOTEST", for each of the supported views that we manage: BHS, CU, NYHS, NYSID, NYU, NYUAD, NYUSH.
+1. Some record whose title include "Work" and is available for course reserves ("always available online") for each of NYU, NYUAD, and NYUSH. Currently, this item is "Work" (`nyu_aleph006297799`)
+1. For custom requests tests: "PRIMOCIRCTEST-BOBST-MAIN-09-ZZ" (`nyu_aleph008073830`), "PRIMOCIRCTEST-NSHNG-PPL-11-ZZ" (`nyu_aleph008076836`).
 
 ### Cypress GUI (Running locally)
 
