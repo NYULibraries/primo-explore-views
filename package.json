@@ -26,7 +26,7 @@
     "jasmine": "^3.4.0",
     "jasmine-reporters": "^2.3.2",
     "jasmine-spec-reporter": "^4.2.1",
-    "lerna": "^3.22.1"
+    "lerna": "^4.0.0"
   },
   "optionalDependencies": {
     "eslint": "^5.14.1",
