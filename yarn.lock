@@ -5136,12 +5136,7 @@ lodash.templatesettings@^4.0.0:
   dependencies:
     lodash._reinterpolate "^3.0.0"
 
-lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.4:
-  version "4.17.20"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
-  integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
-
-lodash@^4.17.12, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.7.0:
+lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.4, lodash@^4.7.0:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -6393,10 +6388,10 @@ primo-explore-nyu-eshelf@3.2.1:
   dependencies:
     angular-sanitize "1.6.10"
 
-primo-explore-search-bar-sub-menu@1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/primo-explore-search-bar-sub-menu/-/primo-explore-search-bar-sub-menu-1.0.9.tgz#a99ab33b7b2daf5011e0ca3084bd87f33ddca615"
-  integrity sha512-2gMpNhJi14ylBHdbaifCj5l7bRcFEyn7l/cEadzv53SEuSGyY2cIbWQkOMWQ3UWeT44KR3+tgetNXkE+/xXjPg==
+primo-explore-search-bar-sub-menu@1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/primo-explore-search-bar-sub-menu/-/primo-explore-search-bar-sub-menu-1.0.11.tgz#c2dde19aad48695c0fc4fb9caea2e0e8d7bcc4c3"
+  integrity sha512-cIdRqd1Nu0AHklX3U1FG93EtWP+9n9aCQM3dvTr3UCHwxKZzl9EPnb6wpi0LrdnSXdaywd97yGdPu/WIkcMMfw==
   optionalDependencies:
     eslint "^6.1.0"
     eslint-plugin-angular "^4.0.1"
