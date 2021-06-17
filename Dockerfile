@@ -1,4 +1,4 @@
-FROM quay.io/nyulibraries/primo-explore-devenv:chore_merge_upstream
+FROM quay.io/nyulibraries/primo-explore-devenv:2.0.0
 
 ENV VIEW NYU
 ENV DEVENV_PATH /app
