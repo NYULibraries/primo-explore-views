@@ -20,11 +20,11 @@
   },
   "homepage": "https://github.com/NYULibraries/primo-explore-views#readme",
   "devDependencies": {
-    "@babel/cli": "^7.5.5",
+    "@babel/cli": "^7.14.5",
     "@babel/node": "^7.5.5",
     "@babel/preset-env": "^7.14.5",
     "jasmine": "^3.4.0",
-    "jasmine-reporters": "^2.3.2",
+    "jasmine-reporters": "^2.4.0",
     "jasmine-spec-reporter": "^4.2.1",
     "lerna": "^4.0.0"
   },
