@@ -26,8 +26,7 @@ describe('primo-explore-custom-no-search-results', function () {
 
       Object.entries(links).forEach(([text, href], idx) => {
         it(`${idx} anchor includes information about: ${text}`, () => {
-          cy.get(`[data-cy=no-results-more-info] a`)
-            .contains(text)
+          cy.contains('[data-cy=no-results-more-info] a', text)
             .should('have.attr', 'href', href)
         })
       })
