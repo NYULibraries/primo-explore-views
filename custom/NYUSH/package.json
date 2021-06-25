@@ -20,7 +20,7 @@
   "dependencies": {
     "@orbis-cascade/primo-explore-custom-actions": "3.1.1",
     "@sentry/browser": "^4.6.4",
-    "primo-explore-clickable-logo-to-any-link": "1.1.5",
+    "primo-explore-clickable-logo-to-any-link": "1.1.6",
     "primo-explore-custom-library-card-menu": "1.1.9",
     "primo-explore-custom-login": "2.0.5",
     "primo-explore-custom-requests": "1.0.5",
