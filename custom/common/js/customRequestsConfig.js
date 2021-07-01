@@ -67,7 +67,7 @@ const getitLink = (item, institutionVid) => {
 
 const baseUrls = {
   ezborrow: `https://${process.env.NODE_ENV !== 'production' ? 'dev.' : ''}login.library.nyu.edu/ezborrow/nyu`,
-  ill: `https://ill-proxy${process.env.NODE_ENV !== 'production' ? '-dev' : ''}.library.nyu.edu/illiad/illiad.dll/OpenURL`,
+  ill: `http://proxy${process.env.NODE_ENV !== 'production' ? 'dev' : ''}.library.nyu.edu/login?url=https://${process.env.NODE_ENV !== 'production' ? 'dev.' : ''}ill.library.nyu.edu/illiad/illiad.dll/OpenURL`,
 };
 
 const authorizedStatuses = {
