@@ -6326,10 +6326,10 @@ prelude-ls@~1.1.2:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
   integrity sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=
 
-primo-explore-clickable-logo-to-any-link@1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/primo-explore-clickable-logo-to-any-link/-/primo-explore-clickable-logo-to-any-link-1.1.5.tgz#18726c87161dfdb913378891052c31d57be20d7d"
-  integrity sha512-U4XZQYj3imYQxDJC2rq3AHzApqpHZyV4c/lgSwMYvx9qhXL+83ZEEGtphTKc5n5uO8QHJPKv9VGiNk1W2Gk6nQ==
+primo-explore-clickable-logo-to-any-link@1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/primo-explore-clickable-logo-to-any-link/-/primo-explore-clickable-logo-to-any-link-1.1.6.tgz#8a7da1b9f64fcb8430a73797d5d0de984631695b"
+  integrity sha512-+iB2sRDmS/olwK4p6g5OOOCOPIaHTJcBBPMVr72YCaMU4TGOp9yx6bwadIpeajYjodeOKR+N9Pqeop+hv32kQA==
 
 primo-explore-custom-library-card-menu@1.1.8:
   version "1.1.8"
