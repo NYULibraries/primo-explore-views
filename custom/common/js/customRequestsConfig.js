@@ -140,6 +140,7 @@ export default {
       login: ({ user, items }) => items.map(() => user === undefined),
     },
     hideDefaultRequests: ({ item, items, user, config }) => {
+      // return items.map(() => true);
       if (user === undefined) {
         // if logged out, hide all
         return items.map(() => true);

@@ -8,7 +8,7 @@ import 'primo-explore-libraryh3lp-widget';
 import 'primo-explore-nyu-eshelf';
 import 'primo-explore-search-bar-sub-menu';
 import 'primo-explore-google-analytics';
-import 'primo-explore-custom-requests';
+// import 'primo-explore-custom-requests';
 import 'primo-explore-custom-login';
 // import 'Common/js/primoExploreCustomLogin';
 
@@ -20,17 +20,17 @@ import libraryh3lpWidgetConfig from './libraryh3lpWidget';
 import nyuEshelfConfig from './nyuEshelf';
 import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import googleAnalyticsConfig from './googleAnalyticsConfig';
-import customRequestsConfig from 'Common/js/customRequestsConfig';
+// import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
 import physicalItemsAlert from 'Common/js/physicalItemsAlert';
-import customRequests from 'Common/js/customRequestComponent';
+// import customRequests from 'Common/js/customRequestComponent';
 import 'Common/js/sendToCourseReserves';
 import appendStatusEmbed from 'Common/js/statusPageEmbed';
 
 // HTML as JS imports
 import customRequestsRequestInformationTemplate from 'Common/html/custom_requests_request_information.html';
 import citationLinkerAfterTemplate from 'Common/html/citation_linker_after.html';
-
+import customRequestsTemplate from 'Common/html/custom_requests_template.html';
 
 let app = angular.module('viewCustom', [
   'angularLoad',
@@ -41,8 +41,8 @@ let app = angular.module('viewCustom', [
   'nyuEshelf',
   'searchBarSubMenu',
   'googleAnalytics',
-  'primoExploreCustomLogin',
-  'primoExploreCustomRequests',
+  // 'primoExploreCustomLogin',
+  // 'primoExploreCustomRequests',
   'sendToCourseReserves',
 ]);
 
@@ -53,7 +53,7 @@ app
   .constant(nyuEshelfConfig.name, nyuEshelfConfig.config)
   .constant(searchBarSubMenuItemsConfig.name, searchBarSubMenuItemsConfig.config)
   .constant(googleAnalyticsConfig.name, googleAnalyticsConfig.config)
-  .constant(customRequestsConfig.name, customRequestsConfig.config(viewName))
+  // .constant(customRequestsConfig.name, customRequestsConfig.config(viewName))
   .constant(customLoginConfig.name, customLoginConfig.config)
   .value('customNoSearchResultsTemplateUrl', `custom/${viewName}/html/no_search_results.html`)
   .component('prmActionListAfter', {
@@ -137,7 +137,134 @@ app
   .component('prmBrowseSearchBarAfter', {
     template: /*html*/ `<search-bar-sub-menu></search-bar-sub-menu>`,
   })
-  .component('prmLocationItemAfter', customRequests)
+  .service('primoExploreCustomRequestsConfigService', function() {
+    const svc = this;
+    svc.state = {};
+    return ({
+      setState: newState => {
+        svc.state = angular.merge({}, svc.state, newState);
+        return svc.state;
+      },
+      getState: () => svc.state,
+    });
+  })
+  .component('prmServiceButtonAfter', {
+    template: /*html*/ `<custom-service></custom-service>`,
+    require: {
+      parentCtl: '^prmServiceButton',
+    },
+    controller: ['$rootScope', '$scope','$element', 'primoExploreCustomRequestsConfigService', function ($rootScope, $scope, $element, stateService) {
+      const ctrl = this;
+      ctrl.$onInit = () => {
+        // stateService.setState({ currRequestParams: $scope.$parent.$ctrl.requestParameters });
+        // $rootScope.$broadcast("MyEvent",{ currRequestParams: $scope.$parent.$ctrl.requestParameters }); 
+        const itemStatus = $scope.$parent.$ctrl.requestParameters.itemstatusname;
+        $element.parent().parent().parent().parent().parent().parent().attr("item-status-name",itemStatus);
+      };
+      ctrl.$postLink = () => {
+        const itemsCtl = $scope.$parent.$parent.$ctrl;
+        
+        // console.log(stateService.getState());
+      };
+    }]
+  })
+  .component('prmLocationItemAfter', {
+    template: /*html*/ `
+      <primo-explore-custom-requests
+        layout="row"
+        layout-align="end center"
+        layout-wrap
+        flex-xs="100"
+      >
+        <primo-explore-custom-request-login></primo-explore-custom-request-login>
+        <primo-explore-custom-request-ill></primo-explore-custom-request-ill>
+      </primo-explore-custom-requests>`,
+    require: {
+      parentCtrl: '^prmLocationItems'
+    },
+    // template: customRequestsTemplate,
+    controller: ['$scope','$element', 'primoExploreCustomRequestsConfigService', function ($scope, $element, stateService) {
+      const ctrl = this;
+      ctrl.$onInit = () => {
+        const $target = $element.parent().children('div.md-list-item-text');
+        if (ctrl.hasOnlineLinks()) {
+          $target.children().eq(0).addClass("custom-requests-hide-request-scan");
+        }
+        if (ctrl.isUnavailableItem()) {
+          $target.children().eq(0).addClass("custom-requests-hide-request");
+        }
+      };
+
+      ctrl.$postLink = () => {
+        // $scope.$on("MyEvent", function(evt,data) { 
+          // console.log(data);
+        // });
+        const $target = $element.parent().query('div.md-list-item-text');
+        const $el = $element.query(`primo-explore-custom-requests`).detach();
+        $target.append($el);
+
+        
+      };
+      
+      ctrl.hideAllRequests = (item) => {
+        const $els = item.query('prm-location-items .md-list-item-text');
+
+        Array.from($els).forEach(($el) => {
+          $el.children().eq(2).css({ display: 'none' });
+        });
+      };
+  
+      ctrl.showILLButton = () => {
+  
+      };
+  
+      ctrl.showRequestButton = () => {
+
+      };
+  
+      ctrl.showRequestScanButton = () => {
+  
+      };
+  
+      ctrl.showLoginButton = () => {
+  
+      };
+
+      ctrl.hasOnlineLinks = () => {
+        const availableOnlineField = ctrl.parentCtrl.item.pnx.display["lds31"];
+        const isAvailableOnline = availableOnlineField && availableOnlineField.some(type => type === "NYU_AVAILONLINE");
+        return isAvailableOnline;
+        // return true;
+      };
+
+      ctrl.isUnavailableItem = () => {
+        // console.log(ctrl);
+        // console.log($scope.$parent.$ctrl);
+        console.log($element.parent()[0]);
+        // console.log($element.parent()[0].attr("item-status-name"));
+        return false;
+      };
+
+      const checkIsAvailable = item => {
+        const unavailablePatterns = [
+          /Requested/g,
+          /\d{2}\/\d{2}\/\d{2}/g, // dd/dd/dd appears anywhere in the string
+          'Requested',
+          'Billed as Lost',
+          'Claimed Returned',
+          'In Processing',
+          'In Transit',
+          'On Hold',
+          'Request ILL',
+          'On Order',
+        ];
+      
+        const hasPattern = (patterns, target) => patterns.some(str => target.match(new RegExp(str)));
+        const circulationStatus = item.itemFields[0];
+        return !hasPattern(unavailablePatterns, circulationStatus);
+      };
+    }]
+  })
   .component('prmLocationItemsAfter', {
     template: `${customRequestsRequestInformationTemplate}`
   })

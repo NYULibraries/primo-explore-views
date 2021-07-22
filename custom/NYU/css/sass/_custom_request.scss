@@ -13,3 +13,32 @@
     position: relative;
   }
 }
+
+.custom-requests-hide-request-scan { 
+  *[aria-label="Request Scan"] {
+    display: none !important;
+  }
+  .skewed-divider {
+    display: none !important;
+  }
+}
+
+.custom-requests-hide-request { 
+  *[aria-label="Request"] {
+    display: none !important;
+  }
+  .skewed-divider {
+    display: none !important;
+  }
+}
+
+// prm-location-items {
+//   .md-list-item-text button {
+//     background-color: #57068c !important;
+//     color: #fff !important;
+//     font-weight: bold;
+//   }
+//   .skewed-divider {
+//     display: none !important;
+//   }
+// }
