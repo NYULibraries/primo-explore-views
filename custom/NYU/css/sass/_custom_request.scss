@@ -14,8 +14,23 @@
   }
 }
 
+/* Imitates prm-service-button styles */
+button[class*="custom-request-"] {
+  padding: .5em .35em !important;
+}
+
+/* Useful for the 'attributes' in prmIconBefore/prmIconAfter to make it fit in button appropriately */
+[custom-requests] md-icon {
+  height: 15px;
+  width: 15px;
+  min-height: 15px;
+  min-width: 15px;
+  top: -1px;
+  position: relative;
+}
+
 .custom-requests-hide-request-scan { 
-  *[aria-label="Request Scan"] {
+  prm-service-button > button[aria-label="Request Scan"] {
     display: none !important;
   }
   .skewed-divider {
@@ -23,8 +38,9 @@
   }
 }
 
-.custom-requests-hide-request { 
-  *[aria-label="Request"] {
+.custom-requests-hide-request prm-service-button,
+prm-service-button.custom-requests-hide-request { 
+  & > button[aria-label="Request"],  {
     display: none !important;
   }
   .skewed-divider {

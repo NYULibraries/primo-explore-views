@@ -138,173 +138,57 @@ app
     template: /*html*/ `<search-bar-sub-menu></search-bar-sub-menu>`,
   })
   .component('primoExploreCustomRequestLogin', {
-    template: /*html*/ `
-    <div layout="row" layout-align="center center" ng-repeat="button in $ctrl.buttons" style="display:none;">
-      <button class="button-as-link md-button md-primoExplore-theme md-ink-ripple custom-request-{{ button.id }}" type="button"
-        ng-click="$ctrl.handleClick($event, button)" aria-label="Type">
-        <prm-icon ng-if="button.prmIconBefore" ng-attr="{{ button.prmIconBefore.attributes }}" icon-type="svg" svg-icon-set="{{ button.prmIconBefore.set }}"
-          icon-definition="{{ button.prmIconBefore.icon }}">
-        </prm-icon>
-        <span>{{ button.label }}</span>
-        <prm-icon ng-if="button.prmIconAfter" ng-attr="{{ button.prmIconAfter.attributes }}" icon-type="svg" svg-icon-set="{{ button.prmIconAfter.set }}"
-          icon-definition="{{ button.prmIconAfter.icon }}">
-      </button>
-      <div class="skewed-divider" ng-if="!$last" style="display:none;"></div>
-      </div>
-    <div>
-      <span class="custom-request-user-loading"
-        ng-if="$ctrl.customLoginService && $ctrl.loggedIn && !$ctrl.user && !$ctrl.userFailure"
-      >{{ $ctrl.translate($ctrl.userLoadingText) }}</span>
-      <span class="custom-request-user-failure"
-        ng-if="$ctrl.customLoginService && $ctrl.userFailure"
-      >{{ $ctrl.translate($ctrl.userFailureText) }}</span>
-      <span class="custom-requests-empty"
-        style="display:none"
-        ng-if="!$ctrl.userFailure"
-      >{{ $ctrl.translate($ctrl.noButtonsText) }}</span>
-    </div>
-    `,
+    template: customRequestsTemplate,
   })
   .component('primoExploreCustomRequestIll', {
-    template: /*html*/ `
-    <div layout="row" layout-align="center center" ng-repeat="button in $ctrl.buttons" style="display:none;">
-      <button class="button-as-link md-button md-primoExplore-theme md-ink-ripple custom-request-{{ button.id }}" type="button"
-        ng-click="$ctrl.handleClick($event, button)" aria-label="Type">
-        <prm-icon ng-if="button.prmIconBefore" ng-attr="{{ button.prmIconBefore.attributes }}" icon-type="svg" svg-icon-set="{{ button.prmIconBefore.set }}"
-          icon-definition="{{ button.prmIconBefore.icon }}">
-        </prm-icon>
-        <span>{{ button.label }}</span>
-        <prm-icon ng-if="button.prmIconAfter" ng-attr="{{ button.prmIconAfter.attributes }}" icon-type="svg" svg-icon-set="{{ button.prmIconAfter.set }}"
-          icon-definition="{{ button.prmIconAfter.icon }}">
-      </button>
-      <div class="skewed-divider" ng-if="!$last" style="display:none;"></div>
-      </div>
-    <div>
-      <span class="custom-request-user-loading"
-        ng-if="$ctrl.customLoginService && $ctrl.loggedIn && !$ctrl.user && !$ctrl.userFailure"
-      >{{ $ctrl.translate($ctrl.userLoadingText) }}</span>
-      <span class="custom-request-user-failure"
-        ng-if="$ctrl.customLoginService && $ctrl.userFailure"
-      >{{ $ctrl.translate($ctrl.userFailureText) }}</span>
-      <span class="custom-requests-empty"
-        style="display:none"
-        ng-if="!$ctrl.userFailure"
-      >{{ $ctrl.translate($ctrl.noButtonsText) }}</span>
-    </div>
-    `,
-  })
-  .service('primoExploreCustomRequestsConfigService', function() {
-    const svc = this;
-    svc.state = {};
-    return ({
-      setState: newState => {
-        svc.state = angular.merge({}, svc.state, newState);
-        return svc.state;
-      },
-      getState: () => svc.state,
-    });
+    template: customRequestsTemplate,
+    controller: ['$scope', function($scope) { 
+      const ctrl = this;
+      ctrl.$onInit = () => {
+        $scope.button = {
+          label: 'Request ILL',
+          prmIconAfter: externalLinkIcon,
+        };
+      };
+      const externalLinkIcon = {
+        icon: "ic_open_in_new_24px",
+        set: "action",
+      };
+      
+      const loginIcon = {
+        set: "primo-ui",
+        icon: "sign-in",
+      };
+      
+    }]
   })
   .component('prmServiceButtonAfter', {
-    template: /*html*/ `<custom-service></custom-service>`,
+    // Show custom "Request ILL" link if item is unavailable
+    template: /*html*/ `<primo-explore-custom-request-ill ng-show="isUnavailableItem()"></primo-explore-custom-request-ill>`,
     require: {
       parentCtl: '^prmServiceButton',
     },
-    controller: ['$rootScope', '$scope','$element', 'primoExploreCustomRequestsConfigService', function ($rootScope, $scope, $element, stateService) {
+    controller: ['$scope','$element', function ($scope, $element) {
       const ctrl = this;
       ctrl.$onInit = () => {
-        // stateService.setState({ currRequestParams: $scope.$parent.$ctrl.requestParameters });
-        // $rootScope.$broadcast("MyEvent",{ currRequestParams: $scope.$parent.$ctrl.requestParameters }); 
-        const itemStatus = $scope.$parent.$ctrl.requestParameters.itemstatusname;
-        // console.log($element.parent().parent().parent().parent().parent().parent());
-        // console.log($element.parents('md-list-item'));
-        // $element.parent().parent().parent().parent().parent().parent().attr("item-status-name", itemStatus);
-      };
-      ctrl.$postLink = () => {
-        const itemsCtl = $scope.$parent.$parent.$ctrl;
+        $scope.isUnavailableItem = () => ctrl.isUnavailableItem();
         
-        // console.log(stateService.getState());
       };
-    }]
-  })
-  .component('prmLocationItemAfter', {
-    template: /*html*/ `
-      <primo-explore-custom-requests
-        layout="row"
-        layout-align="end center"
-        layout-wrap
-        flex-xs="100"
-      >
-        <primo-explore-custom-request-login></primo-explore-custom-request-login>
-        <primo-explore-custom-request-ill></primo-explore-custom-request-ill>
-      </primo-explore-custom-requests>`,
-    require: {
-      parentCtrl: '^prmLocationItems'
-    },
-    // template: customRequestsTemplate,
-    controller: ['$scope','$element', 'primoExploreCustomRequestsConfigService', function ($scope, $element, stateService) {
-      const ctrl = this;
-      ctrl.$onInit = () => {
-        console.log($element);
-        const $target = $element.parent().children('div.md-list-item-text');
-        if (ctrl.hasOnlineLinks()) {
-          $target.children().eq(0).addClass("custom-requests-hide-request-scan");
-        }
-        if (ctrl.isUnavailableItem()) {
-          $target.children().eq(0).addClass("custom-requests-hide-request");
-        }
-      };
-
       ctrl.$postLink = () => {
-        // $scope.$on("MyEvent", function(evt,data) { 
-          // console.log(data);
-        // });
-        const $target = $element.parent().query('div.md-list-item-text');
-        const $el = $element.query(`primo-explore-custom-requests`).detach();
-        $target.append($el);
-        console.log($element.$ctrl);
-      };
-      
-      ctrl.hideAllRequests = (item) => {
-        const $els = item.query('prm-location-items .md-list-item-text');
-
-        Array.from($els).forEach(($el) => {
-          $el.children().eq(2).css({ display: 'none' });
-        });
-      };
-  
-      ctrl.showILLButton = () => {
-  
-      };
-  
-      ctrl.showRequestButton = () => {
-
-      };
-  
-      ctrl.showRequestScanButton = () => {
-  
-      };
-  
-      ctrl.showLoginButton = () => {
-  
-      };
-
-      ctrl.hasOnlineLinks = () => {
-        const availableOnlineField = ctrl.parentCtrl.item.pnx.display["lds31"];
-        const isAvailableOnline = availableOnlineField && availableOnlineField.some(type => type === "NYU_AVAILONLINE");
-        return isAvailableOnline;
-        // return true;
+        // const itemsCtl = $scope.$parent.$parent.$ctrl;
+        ctrl.itemStatus = ctrl.parentCtl.requestParameters.itemstatusname;
+        // Hide existing "Request" link if item is unavailable
+        if (ctrl.isUnavailableItem()) {
+          $element.parent().addClass("custom-requests-hide-request");
+        }
       };
 
       ctrl.isUnavailableItem = () => {
-        // console.log(ctrl);
-        // console.log($scope.$parent.$ctrl);
-        // console.log($element.$parent.attr("item-status-name"));
-        // console.log(angular.element($element.parent()[0]).attr("item-status-name"));
-        // console.log($element.parent()[0].attr("item-status-name"));
-        return false;
+        const isUnavailable = !checkIsAvailable(ctrl.itemStatus);
+        return isUnavailable;
       };
 
-      const checkIsAvailable = item => {
+      const checkIsAvailable = circulationStatus => {
         const unavailablePatterns = [
           /Requested/g,
           /\d{2}\/\d{2}\/\d{2}/g, // dd/dd/dd appears anywhere in the string
@@ -317,11 +201,48 @@ app
           'Request ILL',
           'On Order',
         ];
-      
+        
         const hasPattern = (patterns, target) => patterns.some(str => target.match(new RegExp(str)));
-        const circulationStatus = item.itemFields[0];
-        return !hasPattern(unavailablePatterns, circulationStatus);
+        return !hasPattern(unavailablePatterns, circulationStatus || "");
       };
+    }]
+  })
+  .component('prmLocationItemAfter', {
+    // Show a custom "Login..." link when user is logged out
+    template: /*html*/ `
+      <primo-explore-custom-requests
+        layout="row"
+        layout-align="end center"
+        layout-wrap
+        flex-xs="100"
+      >
+        <primo-explore-custom-request-login>Login to see request options</primo-explore-custom-request-login>
+      </primo-explore-custom-requests>`,
+    require: {
+      parentCtrl: '^prmLocationItems'
+    },
+    controller: ['$scope','$element', function ($scope, $element) {
+      const ctrl = this;
+      ctrl.$onInit = () => {
+        const $target = $element.parent().children('div.md-list-item-text');
+        // Hide "Request Scan" link when this item has any online links
+        if (ctrl.hasOnlineLinks()) {
+          $target.children().eq(0).addClass("custom-requests-hide-request-scan");
+        }
+      };
+
+      ctrl.$postLink = () => {
+        const $target = $element.parent().query('div.md-list-item-text');
+        const $el = $element.query(`primo-explore-custom-requests`).detach();
+        $target.append($el);
+      };
+
+      ctrl.hasOnlineLinks = () => {
+        const availableOnlineField = ctrl.parentCtrl.item.pnx.display["lds31"];
+        const isAvailableOnline = availableOnlineField && availableOnlineField.some(type => type === "NYU_AVAILONLINE");
+        return isAvailableOnline;
+      };
+
     }]
   })
   .component('prmLocationItemsAfter', {

@@ -1,16 +1,16 @@
-<div layout="row" layout-align="center center" ng-repeat="button in $ctrl.buttons" style="display:none;">
+<div layout="row" layout-align="center center">
   <button class="button-as-link md-button md-primoExplore-theme md-ink-ripple custom-request-{{ button.id }}" type="button"
     ng-click="$ctrl.handleClick($event, button)" aria-label="Type">
-    <prm-icon ng-if="button.prmIconBefore" ng-attr="{{ button.prmIconBefore.attributes }}" icon-type="svg" svg-icon-set="{{ button.prmIconBefore.set }}"
+    <prm-icon ng-if="button.prmIconBefore" custom-requests icon-type="svg" svg-icon-set="{{ button.prmIconBefore.set }}"
       icon-definition="{{ button.prmIconBefore.icon }}">
     </prm-icon>
     <span>{{ button.label }}</span>
-    <prm-icon ng-if="button.prmIconAfter" ng-attr="{{ button.prmIconAfter.attributes }}" icon-type="svg" svg-icon-set="{{ button.prmIconAfter.set }}"
+    <prm-icon ng-if="button.prmIconAfter" custom-requests icon-type="svg" svg-icon-set="{{ button.prmIconAfter.set }}"
       icon-definition="{{ button.prmIconAfter.icon }}">
   </button>
-  <div class="skewed-divider" ng-if="!$last" style="display:none;"></div>
-  </div>
-<div>
+  <!-- <div class="skewed-divider" style="display:none;"></div> -->
+</div>
+<!-- <div>
   <span class="custom-request-user-loading"
     ng-if="$ctrl.customLoginService && $ctrl.loggedIn && !$ctrl.user && !$ctrl.userFailure"
   >{{ $ctrl.translate($ctrl.userLoadingText) }}</span>
@@ -21,4 +21,4 @@
     style="display:none"
     ng-if="!$ctrl.userFailure"
   >{{ $ctrl.translate($ctrl.noButtonsText) }}</span>
-</div>
+</div> -->
