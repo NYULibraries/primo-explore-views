@@ -139,53 +139,118 @@ app
   })
   .component('primoExploreCustomRequestLogin', {
     template: customRequestsTemplate,
-  })
-  .component('primoExploreCustomRequestIll', {
-    template: customRequestsTemplate,
-    controller: ['$scope', function($scope) { 
+    controller: ['$scope', '$window', '$injector', function($scope, $window, $injector) {
       const ctrl = this;
       ctrl.$onInit = () => {
         $scope.button = {
-          label: 'Request ILL',
-          prmIconAfter: externalLinkIcon,
+          label: 'Login to see request options',
+          // action: $scope.$parent.$ctrl.userSessionManagerService.login(),
+          prmIconBefore: loginIcon,
         };
       };
-      const externalLinkIcon = {
-        icon: "ic_open_in_new_24px",
-        set: "action",
+
+      ctrl.translate = original => original.replace(/\{(.+?)\}/g, (match, p1) => $filter('translate')(p1));
+
+      ctrl.handleClick = (event, { action, href, label }) => {
+        event.stopPropagation();
+        href && $window.open(href);
+        action;
+        !(href || action) && console.warn(`primo-explore-custom-requests: Button "${label}" has not been assigned either an 'action' or 'href' property`);
       };
-      
+
       const loginIcon = {
         set: "primo-ui",
         icon: "sign-in",
+      };
+    }]
+  })
+  .component('primoExploreCustomRequestIll', {
+    template: customRequestsTemplate,
+    controller: ['$scope', '$filter', '$injector', '$window', function($scope, $filter, $injector, $window) { 
+      const ctrl = this;
+      ctrl.$onInit = () => {
+        const locationsCtrl = $scope.$parent.$parent.$parent.$ctrl;
+        const vid = locationsCtrl.configurationUtil.vid;
+
+        $scope.button = {
+          label: 'Request ILL',
+          prmIconAfter: externalLinkIcon,
+          href: ctrl.getitLink(locationsCtrl.item, vid)
+        };
+      };
+
+      ctrl.getitLink = (item, institutionVid) => {
+        const getitLinkFields = {
+          NYU: ['lln40'],
+          NYUAD: ['lln40'],
+          NYUSH: ['lln40'],
+          CU: ['lln13'],
+        };
+        const validGetitLinkFields = getitLinkFields[institutionVid];
+      
+        // This reduce allows multiple valid links per institution
+        // and just chooses the first one - could be simplified to expect only one link per institution
+        try {
+          const urls = validGetitLinkFields.reduce((res, target) => {
+            const link = item.delivery.link.filter(({
+              displayLabel
+            }) => displayLabel === target)[0];
+            return link ? [...res, link.linkURL] : res;
+          }, []);
+      
+          return urls[0];
+        } catch (e) {
+          return '';
+        }
+      };
+
+      ctrl.translate = original => original.replace(/\{(.+?)\}/g, (match, p1) => $filter('translate')(p1));
+
+      ctrl.handleClick = (event, { action, href, label }) => {
+        event.stopPropagation();
+        href && $window.open(href);
+        action && action($injector);
+        !(href || action) && console.warn(`primo-explore-custom-requests: Button "${label}" has not been assigned either an 'action' or 'href' property`);
+      };
+
+      const externalLinkIcon = {
+        icon: "ic_open_in_new_24px",
+        set: "action",
       };
       
     }]
   })
   .component('prmServiceButtonAfter', {
     // Show custom "Request ILL" link if item is unavailable
-    template: /*html*/ `<primo-explore-custom-request-ill ng-show="isUnavailableItem()"></primo-explore-custom-request-ill>`,
+    template: /*html*/ `<primo-explore-custom-request-ill ng-show="showRequestILL()"></primo-explore-custom-request-ill>`,
     require: {
-      parentCtl: '^prmServiceButton',
+      parentCtrl: '^prmServiceButton',
     },
     controller: ['$scope','$element', function ($scope, $element) {
       const ctrl = this;
       ctrl.$onInit = () => {
-        $scope.isUnavailableItem = () => ctrl.isUnavailableItem();
-        
+
       };
       ctrl.$postLink = () => {
-        // const itemsCtl = $scope.$parent.$parent.$ctrl;
-        ctrl.itemStatus = ctrl.parentCtl.requestParameters.itemstatusname;
+        ctrl.itemStatus = ctrl.parentCtrl.requestParameters.itemstatusname;
         // Hide existing "Request" link if item is unavailable
         if (ctrl.isUnavailableItem()) {
           $element.parent().addClass("custom-requests-hide-request");
         }
       };
 
+      $scope.showRequestILL = () => {
+        return ctrl.isUnavailableItem() && ctrl.isRequestLink();
+      };
+
       ctrl.isUnavailableItem = () => {
         const isUnavailable = !checkIsAvailable(ctrl.itemStatus);
         return isUnavailable;
+      };
+
+      ctrl.isRequestLink = () => {
+        const requestType = ctrl.parentCtrl.service.type;
+        return requestType === "HoldRequest";
       };
 
       const checkIsAvailable = circulationStatus => {
@@ -216,7 +281,7 @@ app
         layout-wrap
         flex-xs="100"
       >
-        <primo-explore-custom-request-login>Login to see request options</primo-explore-custom-request-login>
+        <primo-explore-custom-request-login ng-hide="isLoggedIn()"></primo-explore-custom-request-login>
       </primo-explore-custom-requests>`,
     require: {
       parentCtrl: '^prmLocationItems'
@@ -227,16 +292,20 @@ app
         const $target = $element.parent().children('div.md-list-item-text');
         // Hide "Request Scan" link when this item has any online links
         if (ctrl.hasOnlineLinks()) {
+          // Hide via CSS
           $target.children().eq(0).addClass("custom-requests-hide-request-scan");
         }
+        $scope.isLoggedIn = () => ctrl.parentCtrl.isLoggedIn();
       };
 
+      // Move custom element into prm-location element to match styles/spacing/etc
       ctrl.$postLink = () => {
         const $target = $element.parent().query('div.md-list-item-text');
         const $el = $element.query(`primo-explore-custom-requests`).detach();
         $target.append($el);
       };
 
+      // Determine if this item has any online links
       ctrl.hasOnlineLinks = () => {
         const availableOnlineField = ctrl.parentCtrl.item.pnx.display["lds31"];
         const isAvailableOnline = availableOnlineField && availableOnlineField.some(type => type === "NYU_AVAILONLINE");
