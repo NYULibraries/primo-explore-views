@@ -8,7 +8,6 @@ import 'primo-explore-libraryh3lp-widget';
 import 'primo-explore-nyu-eshelf';
 import 'primo-explore-search-bar-sub-menu';
 import 'primo-explore-google-analytics';
-// import 'primo-explore-custom-requests';
 import 'primo-explore-custom-login';
 // import 'Common/js/primoExploreCustomLogin';
 
@@ -20,7 +19,6 @@ import libraryh3lpWidgetConfig from './libraryh3lpWidget';
 import nyuEshelfConfig from './nyuEshelf';
 import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import googleAnalyticsConfig from './googleAnalyticsConfig';
-// import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
 import physicalItemsAlert from 'Common/js/physicalItemsAlert';
 // import customRequests from 'Common/js/customRequestComponent';
@@ -41,8 +39,7 @@ let app = angular.module('viewCustom', [
   'nyuEshelf',
   'searchBarSubMenu',
   'googleAnalytics',
-  // 'primoExploreCustomLogin',
-  // 'primoExploreCustomRequests',
+  'primoExploreCustomLogin',
   'sendToCourseReserves',
 ]);
 
@@ -53,7 +50,6 @@ app
   .constant(nyuEshelfConfig.name, nyuEshelfConfig.config)
   .constant(searchBarSubMenuItemsConfig.name, searchBarSubMenuItemsConfig.config)
   .constant(googleAnalyticsConfig.name, googleAnalyticsConfig.config)
-  // .constant(customRequestsConfig.name, customRequestsConfig.config(viewName))
   .constant(customLoginConfig.name, customLoginConfig.config)
   .value('customNoSearchResultsTemplateUrl', `custom/${viewName}/html/no_search_results.html`)
   .component('prmActionListAfter', {
@@ -139,23 +135,21 @@ app
   })
   .component('primoExploreCustomRequestLogin', {
     template: customRequestsTemplate,
-    controller: ['$scope', '$window', '$injector', function($scope, $window, $injector) {
+    controller: ['$scope', '$injector', function($scope, $injector) {
       const ctrl = this;
       ctrl.$onInit = () => {
         $scope.button = {
           label: 'Login to see request options',
-          // action: $scope.$parent.$ctrl.userSessionManagerService.login(),
+          action: ($injector) => $injector.get('primoExploreCustomLoginService').login(),
           prmIconBefore: loginIcon,
         };
       };
 
       ctrl.translate = original => original.replace(/\{(.+?)\}/g, (match, p1) => $filter('translate')(p1));
 
-      ctrl.handleClick = (event, { action, href, label }) => {
+      ctrl.handleClick = (event, { action }) => {
         event.stopPropagation();
-        href && $window.open(href);
-        action;
-        !(href || action) && console.warn(`primo-explore-custom-requests: Button "${label}" has not been assigned either an 'action' or 'href' property`);
+        action && action($injector);
       };
 
       const loginIcon = {
@@ -166,16 +160,18 @@ app
   })
   .component('primoExploreCustomRequestIll', {
     template: customRequestsTemplate,
-    controller: ['$scope', '$filter', '$injector', '$window', function($scope, $filter, $injector, $window) { 
+    controller: ['$scope', '$filter', '$window', function($scope, $filter, $window) { 
       const ctrl = this;
       ctrl.$onInit = () => {
         const locationsCtrl = $scope.$parent.$parent.$parent.$ctrl;
         const vid = locationsCtrl.configurationUtil.vid;
+        const baseIllUrl = baseUrls.ill;
+        const illLink = ctrl.getitLink(locationsCtrl.item, vid);
 
         $scope.button = {
           label: 'Request ILL',
           prmIconAfter: externalLinkIcon,
-          href: ctrl.getitLink(locationsCtrl.item, vid)
+          href: (/resolve?(.*)/.test(illLink) ? `${baseIllUrl}?${illLink.match(/resolve\?(.*)/)[1]}` : illLink) || baseIllUrl,
         };
       };
 
@@ -206,11 +202,13 @@ app
 
       ctrl.translate = original => original.replace(/\{(.+?)\}/g, (match, p1) => $filter('translate')(p1));
 
-      ctrl.handleClick = (event, { action, href, label }) => {
+      ctrl.handleClick = (event, { href }) => {
         event.stopPropagation();
         href && $window.open(href);
-        action && action($injector);
-        !(href || action) && console.warn(`primo-explore-custom-requests: Button "${label}" has not been assigned either an 'action' or 'href' property`);
+      };
+
+      const baseUrls = {
+        ill: `http://proxy${process.env.NODE_ENV !== 'production' ? 'dev' : ''}.library.nyu.edu/login?url=https://${process.env.NODE_ENV !== 'production' ? 'dev.' : ''}ill.library.nyu.edu/illiad/illiad.dll/OpenURL`,
       };
 
       const externalLinkIcon = {
@@ -275,14 +273,15 @@ app
   .component('prmLocationItemAfter', {
     // Show a custom "Login..." link when user is logged out
     template: /*html*/ `
-      <primo-explore-custom-requests
+      <primo-explore-custom-request-login-wrapper
         layout="row"
         layout-align="end center"
         layout-wrap
         flex-xs="100"
       >
         <primo-explore-custom-request-login ng-hide="isLoggedIn()"></primo-explore-custom-request-login>
-      </primo-explore-custom-requests>`,
+      </primo-explore-custom-request-login-wrapper>
+      <primo-explore-custom-request-electronic-copy-available ng-show="hasOnlineLinks()" class="weak-text flex-xs-100 flex" flex-xs="100"><div><p>Item Available Electronically</p></primo-explore-custom-request-electronic-copy-available>`,
     require: {
       parentCtrl: '^prmLocationItems'
     },
@@ -290,6 +289,7 @@ app
       const ctrl = this;
       ctrl.$onInit = () => {
         const $target = $element.parent().children('div.md-list-item-text');
+        $scope.hasOnlineLinks = () => ctrl.hasOnlineLinks();
         // Hide "Request Scan" link when this item has any online links
         if (ctrl.hasOnlineLinks()) {
           // Hide via CSS
@@ -301,8 +301,11 @@ app
       // Move custom element into prm-location element to match styles/spacing/etc
       ctrl.$postLink = () => {
         const $target = $element.parent().query('div.md-list-item-text');
-        const $el = $element.query(`primo-explore-custom-requests`).detach();
-        $target.append($el);
+        const $loginLink = $element.query(`primo-explore-custom-request-login-wrapper`).detach();
+        const $electronicCopyText = $element.query(`primo-explore-custom-request-electronic-copy-available`).detach();
+        $target.append($loginLink);
+        // Insert "Item available electronically" in place
+        $target.children().eq(1).after($electronicCopyText);
       };
 
       // Determine if this item has any online links
