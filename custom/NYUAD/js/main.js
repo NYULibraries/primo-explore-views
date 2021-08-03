@@ -77,7 +77,7 @@ app
     require: {
       parentCtrl: '^prmServiceButton',
     },
-    controller: 'customRequestsILLController',
+    controller: 'customRequestsUnavailableItemController',
   })
   .component('prmLocationItemAfter', {
     // Show a custom "Login..." link when user is logged out
