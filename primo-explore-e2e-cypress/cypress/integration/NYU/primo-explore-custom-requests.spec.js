@@ -1,4 +1,4 @@
-describe('primo-explore-custom-requests', () => {
+describe('primo-explore-custom-request-login-wrapper', () => {
   describe('if the user is not logged in', () => {
     before(() => {
       // PRIMOCIRCTEST-BOBST-MAIN-09-ZZ
@@ -12,97 +12,85 @@ describe('primo-explore-custom-requests', () => {
     it(`has a Login to see request options button`, () => {
       cy.get(`prm-location-items .md-2-line > :nth-child(1) > .md-list-item-text`)
         .should('be.visible')
-        .get('primo-explore-custom-requests button')
+        .get('primo-explore-custom-request-login-wrapper button')
         .contains(`Login to see request options`)
         .should('be.visible')
     })
 
     it(`no other button is visible`, () => {
-      [`Request E-ZBorrow`, `Request ILL`, `Schedule a video loan`].forEach(buttonLabel => {
-        cy.get(`prm-location-items .md-2-line > :nth-child(1) > .md-list-item-text`)
-          .should('be.visible')
-          .get('primo-explore-custom-requests button')
-          .contains(buttonLabel)
-          .should('not.be.visible')
-      })
+      cy.get(`prm-location-items .md-2-line > :nth-child(1) > .md-list-item-text`)
+        .should('be.visible')
+        .get('primo-explore-custom-request-ill button')
+        .should('not.exist')
     })
   })
   describe(`if the user is logged in`, () => {
-    before(() => {
-      // PRIMOCIRCTEST-BOBST-MAIN-09-ZZ
-      cy.visit('/fulldisplay?docid=nyu_aleph008073830&vid=NYU', {
-        onBeforeLoad: (contentWindow) => {
-          contentWindow.$$mockUserLoggedIn = true
-          contentWindow.$$mockUser = {
-            'id': '1234567',
-            'bor-status': '50',
+
+    describe('and the item has electronic copies', () => {
+      before(() => {
+        // nyu_aleph002934513 - requires more permanent record
+        cy.visit('/fulldisplay?docid=nyu_aleph002934513&vid=NYU', {
+          onBeforeLoad: (contentWindow) => {
+            contentWindow.$$mockUserLoggedIn = true
+            contentWindow.$$mockUser = {
+              'id': '1234567',
+              'bor-status': '50',
+            }
           }
-        }
+        })
       })
-    })
 
-    it('has visible primo-explore-custom-requests options', () => {
-      cy.get('primo-explore-custom-requests')
-        .should('be.visible')
-    })
-
-    xit(`has visible 'Request E-ZBorrow' button`, () => {
-      [
-        `Request E-ZBorrow`,
-      ].forEach(buttonLabel => {
-        cy.get('primo-explore-custom-requests button')
-          .contains(buttonLabel)
-          .should('be.visible')
+      it('has does not have a visible "Request Scan" option', () => {
+        cy.get('button > span[translate="PhotocopyRequest"]').should('not.exist')
       })
+
+
     })
 
-    it(`has visible 'Request ILL' button`, () => {
-      [
-        `Request ILL`,
-      ].forEach(buttonLabel => {
-        cy.get('primo-explore-custom-requests button')
-          .contains(buttonLabel)
-          .should('be.visible')
+    describe('and the item is unavailable', () => {
+      before(() => {
+        // PRIMOCIRCTEST-BOBST-MAIN-09-ZZ
+        // cy.visit('/fulldisplay?docid=nyu_aleph008073830&vid=NYU', {
+        // Need a new record that is unavailable
+        cy.visit('/fulldisplay?docid=nyu_aleph002682046&vid=NYU', {
+          onBeforeLoad: (contentWindow) => {
+            contentWindow.$$mockUserLoggedIn = true
+            contentWindow.$$mockUser = {
+              'id': '1234567',
+              'bor-status': '50',
+            }
+          }
+        })
       })
-    })
 
-    it(`does not have a visible 'Login to see request options', or 'Schedule a video loan' button`, () => {
-      [
-        `Login to see request options`,
-        `Schedule a video loan`,
-      ].forEach(buttonLabel => {
-        cy.get('primo-explore-custom-requests button')
-          .contains(buttonLabel)
+      it('does not have visible primo-explore-custom-request-login-wrapper options', () => {
+        cy.get('primo-explore-custom-request-login-wrapper')
           .should('not.be.visible')
+      })
+
+      xit(`has visible 'Request ILL' button`, () => {
+        [
+          `Request ILL`,
+        ].forEach(buttonLabel => {
+          cy.get('primo-explore-custom-request-ill button')
+            .contains(buttonLabel)
+            .should('be.visible')
+        })
+      })
+
+      it(`does not have a visible 'Login to see request options' button`, () => {
+        [
+          `Login to see request options`,
+        ].forEach(buttonLabel => {
+          cy.get('primo-explore-custom-request-login-wrapper button')
+            .contains(buttonLabel)
+            .should('not.be.visible')
+        })
       })
     })
   })
-
-  describe('with an NYUSH user in an NSHNG library', () => {
-    before(() => {
-      // PRIMOCIRCTEST-NSHNG-PPL-11-ZZ
-      cy.visit('/fulldisplay?docid=nyu_aleph008076836&vid=NYU', {
-        onBeforeLoad: (contentWindow) => {
-          contentWindow.$$mockUserLoggedIn = true
-          contentWindow.$$mockUser = {
-            id: '1234567',
-            'bor-status': '20',
-          }
-        }
-      })
-    })
-
-    it(`does not have a visible 'Request ILL' button`, () => {
-      [
-        `Request ILL`
-      ].forEach(buttonLabel => {
-        cy.get('primo-explore-custom-requests button')
-          .contains(buttonLabel)
-          .should('not.be.visible')
-      })
-    })
 
     // Note: I cannot check if an actual "Request" button will render without an actual user being logged in!'
     // Be sure to test this with a real user if making tweaks to this behavior.
-  })
+
 })
