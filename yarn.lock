@@ -3556,7 +3556,7 @@ eslint@^5.14.1:
     table "^5.2.3"
     text-table "^0.2.0"
 
-eslint@^6.1.0:
+eslint@^6.1.0, eslint@^6.2.1:
   version "6.8.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-6.8.0.tgz#62262d6729739f9275723824302fb227c8c93ffb"
   integrity sha512-K+Iayyo2LtyYhDSYwz5D5QdWw0hCacNzyq1Y821Xna2xSJj7cijoLLYmLxTQgcgZ9mC61nryMy9S7GRbYpI5Ig==
@@ -6331,10 +6331,10 @@ primo-explore-clickable-logo-to-any-link@1.1.6:
   resolved "https://registry.yarnpkg.com/primo-explore-clickable-logo-to-any-link/-/primo-explore-clickable-logo-to-any-link-1.1.6.tgz#8a7da1b9f64fcb8430a73797d5d0de984631695b"
   integrity sha512-+iB2sRDmS/olwK4p6g5OOOCOPIaHTJcBBPMVr72YCaMU4TGOp9yx6bwadIpeajYjodeOKR+N9Pqeop+hv32kQA==
 
-primo-explore-custom-library-card-menu@1.1.8:
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/primo-explore-custom-library-card-menu/-/primo-explore-custom-library-card-menu-1.1.8.tgz#e0e1ef70c0c31dab8dfa117bc177cf61a4d57c15"
-  integrity sha512-iIDs0u6hxVq89lFhtvoqXr7F106JgKCo4gnPUrTogN9njOjQ+or3Yn6uX8BCPM6qshdUascbh8CD9bLlSV+GmA==
+primo-explore-custom-library-card-menu@1.1.9:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/primo-explore-custom-library-card-menu/-/primo-explore-custom-library-card-menu-1.1.9.tgz#2c98b5af854b5832e733522a9393e3137948595a"
+  integrity sha512-lGzYyOD8+q4s5dWA9AVzbM0X5bsJV+Yazmm+wZMwAyoi1EHdiTavNx9savB+Sm4izZUDRwCsv8Iwi5Ta+7tvzA==
 
 primo-explore-custom-login@2.0.5:
   version "2.0.5"
@@ -6349,12 +6349,16 @@ primo-explore-custom-no-search-results@1.0.6:
   resolved "https://registry.yarnpkg.com/primo-explore-custom-no-search-results/-/primo-explore-custom-no-search-results-1.0.6.tgz#c0b61bfac71fab2633f469c0f0ef326e7cc5ffd0"
   integrity sha512-hb3FhQhpKLcKpYa/0mBUOshh0U6/zHybNSgXYkyct8SwFfw/QrjA/hPvy7I3RvRCsXWiTUYr+AFDWbIx8lusgQ==
 
-primo-explore-custom-requests@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/primo-explore-custom-requests/-/primo-explore-custom-requests-1.0.1.tgz#453652710737dd10f13312d8212557611c50f7ec"
-  integrity sha512-CIDGteBwOir3KQieNfgu0qeLaOJuq3ayyEdHUj5ea7NrnKrcRNaZJG0cDhvqKG4iYI9f0fEXM4fBIs2PWDarUw==
+primo-explore-custom-requests@1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/primo-explore-custom-requests/-/primo-explore-custom-requests-1.0.5.tgz#d14d6616c23c479cdaa138de5522bb1126080806"
+  integrity sha512-V+vWz5klzx8OvGANGAiys+AdOvpNqKv+2VD6hxOLx1upMETQeQsFi+8COdHL7ny5LDsZn714PQcG4rr1JnNzsg==
   dependencies:
+    glob-parent "^5.1.2"
     ng-attr "^0.0.1"
+    xmlhttprequest-ssl "^1.6.2"
+  optionalDependencies:
+    eslint "^6.2.1"
 
 primo-explore-custom-search-bookmark-filter@1.0.9:
   version "1.0.9"
@@ -6381,10 +6385,10 @@ primo-explore-nyu-eshelf@3.2.1:
   dependencies:
     angular-sanitize "1.6.10"
 
-primo-explore-search-bar-sub-menu@1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/primo-explore-search-bar-sub-menu/-/primo-explore-search-bar-sub-menu-1.0.11.tgz#c2dde19aad48695c0fc4fb9caea2e0e8d7bcc4c3"
-  integrity sha512-cIdRqd1Nu0AHklX3U1FG93EtWP+9n9aCQM3dvTr3UCHwxKZzl9EPnb6wpi0LrdnSXdaywd97yGdPu/WIkcMMfw==
+primo-explore-search-bar-sub-menu@1.0.13:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/primo-explore-search-bar-sub-menu/-/primo-explore-search-bar-sub-menu-1.0.13.tgz#55d166eb1a2a8b671f0b3e2b8aab268f7e46ac56"
+  integrity sha512-1hQx2OjO7g3Q7OqYJ5rQa8J/Kw8bIBZQsgcrYaE/xbf9wc6dSCsuEhVHdN8Zs+ph7e3dGOy3kIslc5LABH6ADw==
   optionalDependencies:
     eslint "^6.1.0"
     eslint-plugin-angular "^4.0.1"
@@ -7556,9 +7560,9 @@ tapable@^0.1.8:
   integrity sha1-KcNXB8K3DlDQdIK10gLo7URtr9Q=
 
 tar@^4.4.12:
-  version "4.4.13"
-  resolved "https://registry.yarnpkg.com/tar/-/tar-4.4.13.tgz#43b364bc52888d555298637b10d60790254ab525"
-  integrity sha512-w2VwSrBoHa5BsSyH+KxEqeQBAllHhccyMFVHtGtdMpF4W7IRWfZjFiQceJPChOeTsSDVUpER2T8FA93pr0L+QA==
+  version "4.4.15"
+  resolved "https://registry.yarnpkg.com/tar/-/tar-4.4.15.tgz#3caced4f39ebd46ddda4d6203d48493a919697f8"
+  integrity sha512-ItbufpujXkry7bHH9NpQyTXPbJ72iTlXgkBAYsAjDXk3Ds8t/3NfO5P4xZGy7u+sYuQUbimgzswX4uQIEeNVOA==
   dependencies:
     chownr "^1.1.1"
     fs-minipass "^1.2.5"
@@ -8136,7 +8140,7 @@ xmldom@^0.5.0:
   resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.5.0.tgz#193cb96b84aa3486127ea6272c4596354cb4962e"
   integrity sha512-Foaj5FXVzgn7xFzsKeNIde9g6aFBxTPi37iwsno8QvApmtg7KYrr+OPyRHcJF7dud2a5nGRBXK3n0dL62Gf7PA==
 
-xmlhttprequest-ssl@~1.6.2:
+xmlhttprequest-ssl@^1.6.2, xmlhttprequest-ssl@~1.6.2:
   version "1.6.3"
   resolved "https://registry.yarnpkg.com/xmlhttprequest-ssl/-/xmlhttprequest-ssl-1.6.3.tgz#03b713873b01659dfa2c1c5d056065b27ddc2de6"
   integrity sha512-3XfeQE/wNkvrIktn2Kf0869fC0BN6UpydVasGIeSm2B1Llihf7/0UfZM+eCkOw3P7bP4+qPgqhm7ZoxuJtFU0Q==
