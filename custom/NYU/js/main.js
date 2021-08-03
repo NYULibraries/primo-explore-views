@@ -22,7 +22,6 @@ import googleAnalyticsConfig from './googleAnalyticsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
 import physicalItemsAlert from 'Common/js/physicalItemsAlert';
 import 'Common/js/customRequests';
-// import customRequestsController from 'Common/js/customRequests';
 import 'Common/js/sendToCourseReserves';
 import appendStatusEmbed from 'Common/js/statusPageEmbed';
 
