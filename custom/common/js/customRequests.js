@@ -93,7 +93,7 @@ angular
   //  - hides "Request Scan" when there are online links
   //  - show "Item available electronically" when there are online links
   //  - shows "Login for options" component when logged out
-  .controller('customRequestsController', ['$scope','$element', function ($scope, $element) {
+  .controller('customRequestsController', ['$scope', '$element', 'primoExploreCustomLoginService', function ($scope, $element, primoExploreCustomLoginService) {
     const ctrl = this;
     ctrl.$onInit = () => {
       const $target = $element.parent().children('div.md-list-item-text');
@@ -103,7 +103,9 @@ angular
         // Hide via CSS
         $target.children().eq(0).addClass("custom-requests-hide-request-scan");
       }
-      $scope.isLoggedIn = () => ctrl.parentCtrl.isLoggedIn();
+      // $scope.isLoggedIn = () => ctrl.parentCtrl.isLoggedIn();
+      // Use custom login module so we can mock the value out in testing
+      $scope.isLoggedIn = () => primoExploreCustomLoginService.isLoggedIn;
     };
 
     // Move custom element into prm-location element to match styles/spacing/etc
