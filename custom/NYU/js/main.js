@@ -21,14 +21,14 @@ import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import googleAnalyticsConfig from './googleAnalyticsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
 import physicalItemsAlert from 'Common/js/physicalItemsAlert';
-// import customRequests from 'Common/js/customRequestComponent';
+import 'Common/js/customRequests';
+// import customRequestsController from 'Common/js/customRequests';
 import 'Common/js/sendToCourseReserves';
 import appendStatusEmbed from 'Common/js/statusPageEmbed';
 
 // HTML as JS imports
 import customRequestsRequestInformationTemplate from 'Common/html/custom_requests_request_information.html';
 import citationLinkerAfterTemplate from 'Common/html/citation_linker_after.html';
-import customRequestsTemplate from 'Common/html/custom_requests_template.html';
 
 let app = angular.module('viewCustom', [
   'angularLoad',
@@ -41,6 +41,7 @@ let app = angular.module('viewCustom', [
   'googleAnalytics',
   'primoExploreCustomLogin',
   'sendToCourseReserves',
+  'customRequests',
 ]);
 
 app
@@ -133,142 +134,13 @@ app
   .component('prmBrowseSearchBarAfter', {
     template: /*html*/ `<search-bar-sub-menu></search-bar-sub-menu>`,
   })
-  .component('primoExploreCustomRequestLogin', {
-    template: customRequestsTemplate,
-    controller: ['$scope', '$injector', function($scope, $injector) {
-      const ctrl = this;
-      ctrl.$onInit = () => {
-        $scope.button = {
-          label: 'Login to see request options',
-          action: ($injector) => $injector.get('primoExploreCustomLoginService').login(),
-          prmIconBefore: loginIcon,
-        };
-      };
-
-      ctrl.translate = original => original.replace(/\{(.+?)\}/g, (match, p1) => $filter('translate')(p1));
-
-      ctrl.handleClick = (event, { action }) => {
-        event.stopPropagation();
-        action && action($injector);
-      };
-
-      const loginIcon = {
-        set: "primo-ui",
-        icon: "sign-in",
-      };
-    }]
-  })
-  .component('primoExploreCustomRequestIll', {
-    template: customRequestsTemplate,
-    controller: ['$scope', '$filter', '$window', function($scope, $filter, $window) { 
-      const ctrl = this;
-      ctrl.$onInit = () => {
-        const locationsCtrl = $scope.$parent.$parent.$parent.$ctrl;
-        const vid = locationsCtrl.configurationUtil.vid;
-        const baseIllUrl = baseUrls.ill;
-        const illLink = ctrl.getitLink(locationsCtrl.item, vid);
-
-        $scope.button = {
-          label: 'Request ILL',
-          prmIconAfter: externalLinkIcon,
-          href: (/resolve?(.*)/.test(illLink) ? `${baseIllUrl}?${illLink.match(/resolve\?(.*)/)[1]}` : illLink) || baseIllUrl,
-        };
-      };
-
-      ctrl.getitLink = (item, institutionVid) => {
-        const getitLinkFields = {
-          NYU: ['lln40'],
-          NYUAD: ['lln40'],
-          NYUSH: ['lln40'],
-          CU: ['lln13'],
-        };
-        const validGetitLinkFields = getitLinkFields[institutionVid];
-      
-        // This reduce allows multiple valid links per institution
-        // and just chooses the first one - could be simplified to expect only one link per institution
-        try {
-          const urls = validGetitLinkFields.reduce((res, target) => {
-            const link = item.delivery.link.filter(({
-              displayLabel
-            }) => displayLabel === target)[0];
-            return link ? [...res, link.linkURL] : res;
-          }, []);
-      
-          return urls[0];
-        } catch (e) {
-          return '';
-        }
-      };
-
-      ctrl.translate = original => original.replace(/\{(.+?)\}/g, (match, p1) => $filter('translate')(p1));
-
-      ctrl.handleClick = (event, { href }) => {
-        event.stopPropagation();
-        href && $window.open(href);
-      };
-
-      const baseUrls = {
-        ill: `http://proxy${process.env.NODE_ENV !== 'production' ? 'dev' : ''}.library.nyu.edu/login?url=https://${process.env.NODE_ENV !== 'production' ? 'dev.' : ''}ill.library.nyu.edu/illiad/illiad.dll/OpenURL`,
-      };
-
-      const externalLinkIcon = {
-        icon: "ic_open_in_new_24px",
-        set: "action",
-      };
-      
-    }]
-  })
   .component('prmServiceButtonAfter', {
     // Show custom "Request ILL" link if item is unavailable
     template: /*html*/ `<primo-explore-custom-request-ill ng-show="showRequestILL()"></primo-explore-custom-request-ill>`,
     require: {
       parentCtrl: '^prmServiceButton',
     },
-    controller: ['$scope','$element', function ($scope, $element) {
-      const ctrl = this;
-      ctrl.$onInit = () => {
-
-      };
-      ctrl.$postLink = () => {
-        ctrl.itemStatus = ctrl.parentCtrl.requestParameters.itemstatusname;
-        // Hide existing "Request" link if item is unavailable
-        if (ctrl.isUnavailableItem()) {
-          $element.parent().addClass("custom-requests-hide-request");
-        }
-      };
-
-      $scope.showRequestILL = () => {
-        return ctrl.isUnavailableItem() && ctrl.isRequestLink();
-      };
-
-      ctrl.isUnavailableItem = () => {
-        const isUnavailable = !checkIsAvailable(ctrl.itemStatus);
-        return isUnavailable;
-      };
-
-      ctrl.isRequestLink = () => {
-        const requestType = ctrl.parentCtrl.service.type;
-        return requestType === "HoldRequest";
-      };
-
-      const checkIsAvailable = circulationStatus => {
-        const unavailablePatterns = [
-          /Requested/g,
-          /\d{2}\/\d{2}\/\d{2}/g, // dd/dd/dd appears anywhere in the string
-          'Requested',
-          'Billed as Lost',
-          'Claimed Returned',
-          'In Processing',
-          'In Transit',
-          'On Hold',
-          'Request ILL',
-          'On Order',
-        ];
-        
-        const hasPattern = (patterns, target) => patterns.some(str => target.match(new RegExp(str)));
-        return !hasPattern(unavailablePatterns, circulationStatus || "");
-      };
-    }]
+    controller: 'customRequestsILLController',
   })
   .component('prmLocationItemAfter', {
     // Show a custom "Login..." link when user is logged out
@@ -285,37 +157,7 @@ app
     require: {
       parentCtrl: '^prmLocationItems'
     },
-    controller: ['$scope','$element', function ($scope, $element) {
-      const ctrl = this;
-      ctrl.$onInit = () => {
-        const $target = $element.parent().children('div.md-list-item-text');
-        $scope.hasOnlineLinks = () => ctrl.hasOnlineLinks();
-        // Hide "Request Scan" link when this item has any online links
-        if (ctrl.hasOnlineLinks()) {
-          // Hide via CSS
-          $target.children().eq(0).addClass("custom-requests-hide-request-scan");
-        }
-        $scope.isLoggedIn = () => ctrl.parentCtrl.isLoggedIn();
-      };
-
-      // Move custom element into prm-location element to match styles/spacing/etc
-      ctrl.$postLink = () => {
-        const $target = $element.parent().query('div.md-list-item-text');
-        const $loginLink = $element.query(`primo-explore-custom-request-login-wrapper`).detach();
-        const $electronicCopyText = $element.query(`primo-explore-custom-request-electronic-copy-available`).detach();
-        $target.append($loginLink);
-        // Insert "Item available electronically" in place
-        $target.children().eq(1).after($electronicCopyText);
-      };
-
-      // Determine if this item has any online links
-      ctrl.hasOnlineLinks = () => {
-        const availableOnlineField = ctrl.parentCtrl.item.pnx.display["lds31"];
-        const isAvailableOnline = availableOnlineField && availableOnlineField.some(type => type === "NYU_AVAILONLINE");
-        return isAvailableOnline;
-      };
-
-    }]
+    controller: 'customRequestsController',
   })
   .component('prmLocationItemsAfter', {
     template: `${customRequestsRequestInformationTemplate}`
