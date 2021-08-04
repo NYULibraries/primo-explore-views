@@ -1,3 +1,9 @@
+describe('custom-requests', () => {
+  it('should be true', () => {
+    expect(true).toBe(true);
+  });
+});
+
 // import customRequestsConfigFunction from '../common/js/customRequestsConfig';
 
 // const customRequestsConfig = Object.freeze(customRequestsConfigFunction.config('NYU'));
