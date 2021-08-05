@@ -133,9 +133,8 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
   // Determine if this item has any online links
   ctrl.hasOnlineLinks = () => {
     // Item has online links if pnx/search/lsr08 exists and contains the code Z_9CSC_0A09_0NYU_0
-    // Use Z_9CSC_0A09_0BWEB_0 as a test, which works for most online records (only the free online resources would be missing it)
     const availableOnlineField = ctrl.parentCtrl.item.pnx.search["lsr08"];
-    const isAvailableOnline = availableOnlineField && availableOnlineField.some(type => type === "Z_9CSC_0A09_0BWEB_0");
+    const isAvailableOnline = availableOnlineField && availableOnlineField.some(type => type === "Z_9CSC_0A09_0NYU_0");
     // Cast undefined as a bool
     return !!isAvailableOnline;
   };
