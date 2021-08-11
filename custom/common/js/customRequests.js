@@ -18,13 +18,14 @@ angular
   //  - hides "Request Scan" when there are online links
   //  - show "Item available electronically" when there are online links
   //  - shows "Login for options" component when logged out
-  .controller('customRequestsController', customRequestsController)
+  .controller('customRequestsController', customRequestsController);
   // Implement with prmServiceButtonAfter
   // This controller
   //  - hides "Request" button when item is unavailable
   //  - shows "Request ILL" component that links to ILLiad
-  .controller('customRequestsUnavailableItemController', customRequestsUnavailableItemController);
+  // .controller('customRequestsUnavailableItemController', customRequestsUnavailableItemController);
 
+// Controllers
 customRequestIllComponentController.$inject = ['$scope', '$window'];
 function customRequestIllComponentController($scope, $window) { 
   const ctrl = this;
@@ -41,28 +42,9 @@ function customRequestIllComponentController($scope, $window) {
     };
   };
 
-  ctrl.getitLink = (item, institutionVid) => {
-    const getitLinkFields = {
-      NYU: ['lln40'],
-      NYUAD: ['lln40'],
-      NYUSH: ['lln40'],
-    };
-    const validGetitLinkFields = getitLinkFields[institutionVid];
-  
-    // This reduce allows multiple valid links per institution
-    // and just chooses the first one - could be simplified to expect only one link per institution
-    try {
-      const urls = validGetitLinkFields.reduce((res, target) => {
-        const link = item.delivery.link.filter(({
-          displayLabel
-        }) => displayLabel === target)[0];
-        return link ? [...res, link.linkURL] : res;
-      }, []);
-  
-      return urls[0];
-    } catch (e) {
-      return '';
-    }
+  ctrl.getitLink = (item) => {
+    console.log(item.delivery.link.filter(({ displayLabel }) => displayLabel === "lln40" ));
+    return item.delivery.link.filter(({ displayLabel }) => displayLabel === "lln40" );
   };
 
   ctrl.handleClick = (event, { href }) => {
@@ -89,8 +71,7 @@ function customRequestLoginComponentController($scope, $injector, $filter) {
     };
   };
 
-  // Not currently in use
-  ctrl.translate = original => original.replace(/\{(.+?)\}/g, (match, p1) => $filter('translate')(p1));
+  // ctrl.translate = original => original.replace(/\{(.+?)\}/g, (match, p1) => $filter('translate')(p1));
 
   ctrl.handleClick = (event, { action }) => {
     event.stopPropagation();
@@ -115,6 +96,10 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
       // Hide via CSS
       $target.children().eq(0).addClass("custom-requests-hide-request-scan");
     }
+    if (ctrl.isUnavailableItem()) {
+      $target.children().eq(0).addClass("custom-requests-hide-request");
+      // $element.parent().addClass("custom-requests-hide-request");
+    }
     // $scope.isLoggedIn = () => ctrl.parentCtrl.isLoggedIn();
     // Use custom login module so we can mock the value out in testing
     $scope.isLoggedIn = () => primoExploreCustomLoginService.isLoggedIn;
@@ -128,6 +113,9 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
     $target.append($loginLink);
     // Insert "Item available electronically" in place
     $target.children().eq(1).after($electronicCopyText);
+    // Fetch the item status text from the parent
+    ctrl.itemStatus = $scope.$parent.item._additionalData.itemstatusname;
+    $scope.showRequestILL = () => ctrl.showRequestILL();
   };
 
   // Determine if this item has any online links
@@ -138,29 +126,9 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
     // Cast undefined as a bool
     return !!isAvailableOnline;
   };
-  
-}
-
-customRequestsUnavailableItemController.$inject = ['$scope', '$element', 'primoExploreCustomLoginService'];
-function customRequestsUnavailableItemController($scope, $element, primoExploreCustomLoginService) {
-  const ctrl = this;
-
-  ctrl.$postLink = () => {
-    ctrl.itemStatus = ctrl.parentCtrl.requestParameters.itemstatusname;
-    // Hide existing "Request" link if item is unavailable
-    if (ctrl.isUnavailableItem()) {
-      $element.parent().addClass("custom-requests-hide-request");
-    }
-    $scope.showRequestILL = () => ctrl.showRequestILL();
-    ctrl.user = primoExploreCustomLoginService.fetchPDSUser();
-  };
 
   ctrl.showRequestILL = () => {
-    return ctrl.isUnavailableItem() && ctrl.isRequestLink();// && ctrl.isILLEligible();
-  };
-
-  ctrl.isILLEligible = () => {
-    return authorizedStatuses.ill.indexOf(ctrl.user['bor-status']) > -1;
+    return primoExploreCustomLoginService.isLoggedI && ctrl.isUnavailableItem();
   };
 
   ctrl.isUnavailableItem = () => {
@@ -171,10 +139,6 @@ function customRequestsUnavailableItemController($scope, $element, primoExploreC
   ctrl.isRequestLink = () => {
     const requestType = ctrl.parentCtrl.service.type;
     return requestType === "HoldRequest";
-  };
-
-  const authorizedStatuses = {
-    ill: ["20", "21", "22", "23", "30", "31", "32", "34", "35", "37", "50", "51", "52", "53", "54", "55", "56", "57", "58", "60", "61", "62", "63", "65", "66", "80", "81", "82", "89"],
   };
 
   const checkIsAvailable = circulationStatus => {
@@ -194,4 +158,63 @@ function customRequestsUnavailableItemController($scope, $element, primoExploreC
     const hasPattern = (patterns, target) => patterns.some(str => target.match(new RegExp(str)));
     return !hasPattern(unavailablePatterns, circulationStatus || "");
   };
+
+  
+  
 }
+
+// customRequestsUnavailableItemController.$inject = ['$scope', '$element', 'primoExploreCustomLoginService'];
+// customRequestsUnavailableItemController.$inject = ['$scope', '$element', 'primoExploreCustomLoginService'];
+// function customRequestsUnavailableItemController($scope, $element, primoExploreCustomLoginService) {
+//   const ctrl = this;
+
+//   ctrl.$postLink = () => {
+//     ctrl.itemStatus = ctrl.parentCtrl.requestParameters.itemstatusname;
+//     // Hide existing "Request" link if item is unavailable
+//     if (ctrl.isUnavailableItem()) {
+//       $element.parent().addClass("custom-requests-hide-request");
+//     }
+//     $scope.showRequestILL = () => ctrl.showRequestILL();
+//     // ctrl.user = primoExploreCustomLoginService.fetchPDSUser();
+//   };
+
+//   ctrl.showRequestILL = () => {
+//     return ctrl.isUnavailableItem(); //&& ctrl.isRequestLink();// && ctrl.isILLEligible();
+//   };
+
+//   ctrl.isUnavailableItem = () => {
+//     const isUnavailable = !checkIsAvailable(ctrl.itemStatus);
+//     return isUnavailable;
+//   };
+
+//   // ctrl.isRequestLink = () => {
+//   //   const requestType = ctrl.parentCtrl.service.type;
+//   //   return requestType === "HoldRequest";
+//   // };
+
+//   // ctrl.isILLEligible = () => {
+//   //   return authorizedStatuses.ill.indexOf(ctrl.user['bor-status']) > -1;
+//   // };
+
+//   // const authorizedStatuses = {
+//   //   ill: ["20", "21", "22", "23", "30", "31", "32", "34", "35", "37", "50", "51", "52", "53", "54", "55", "56", "57", "58", "60", "61", "62", "63", "65", "66", "80", "81", "82", "89"],
+//   // };
+
+//   const checkIsAvailable = circulationStatus => {
+//     const unavailablePatterns = [
+//       /Requested/g,
+//       /\d{2}\/\d{2}\/\d{2}/g, // dd/dd/dd appears anywhere in the string
+//       'Requested',
+//       'Billed as Lost',
+//       'Claimed Returned',
+//       'In Processing',
+//       'In Transit',
+//       'On Hold',
+//       'Request ILL',
+//       'On Order',
+//     ];
+    
+//     const hasPattern = (patterns, target) => patterns.some(str => target.match(new RegExp(str)));
+//     return !hasPattern(unavailablePatterns, circulationStatus || "");
+//   };
+// }
