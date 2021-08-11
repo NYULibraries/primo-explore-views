@@ -1,4 +1,4 @@
-describe('primo-explore-custom-request-login-wrapper', () => {
+describe('primo-explore-custom-request-wrapper', () => {
   describe('if the user is not logged in', () => {
     before(() => {
       // PRIMOCIRCTEST-BOBST-MAIN-09-ZZ
@@ -12,7 +12,7 @@ describe('primo-explore-custom-request-login-wrapper', () => {
     it(`has a Login to see request options button`, () => {
       cy.get(`prm-location-items .md-2-line > :nth-child(1) > .md-list-item-text`)
         .should('be.visible')
-        .get('primo-explore-custom-request-login-wrapper button')
+        .get('primo-explore-custom-request-wrapper button')
         .contains(`Login to see request options`)
         .should('be.visible')
     })
@@ -63,8 +63,8 @@ describe('primo-explore-custom-request-login-wrapper', () => {
         })
       })
 
-      it('does not have visible primo-explore-custom-request-login-wrapper options', () => {
-        cy.get('primo-explore-custom-request-login-wrapper')
+      it('does not have visible primo-explore-custom-request-wrapper options', () => {
+        cy.get('primo-explore-custom-request-wrapper')
           .should('not.be.visible')
       })
 
@@ -82,7 +82,7 @@ describe('primo-explore-custom-request-login-wrapper', () => {
         [
           `Login to see request options`,
         ].forEach(buttonLabel => {
-          cy.get('primo-explore-custom-request-login-wrapper button')
+          cy.get('primo-explore-custom-request-wrapper button')
             .contains(buttonLabel)
             .should('not.be.visible')
         })
