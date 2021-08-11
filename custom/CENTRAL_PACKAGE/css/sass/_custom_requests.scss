@@ -29,21 +29,21 @@ button[class*="custom-request-"] {
   position: relative;
 }
 
-.custom-requests-hide-request-scan { 
-  prm-service-button > button[aria-label="Request Scan"] {
-    display: none !important;
-  }
+.custom-requests-hide-request-scan,
+.custom-requests-hide-request {
   .skewed-divider {
     display: none !important;
   }
 }
 
-.custom-requests-hide-request prm-service-button,
-prm-service-button.custom-requests-hide-request { 
-  & > button[aria-label="Request"],  {
+.custom-requests-hide-request-scan { 
+  prm-service-button > button[aria-label="Request Scan"] {
     display: none !important;
   }
-  .skewed-divider {
+}
+
+.custom-requests-hide-request  { 
+  prm-service-button > button[aria-label="Request"] {
     display: none !important;
   }
 }

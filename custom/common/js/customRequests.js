@@ -16,14 +16,11 @@ angular
   // Implement with prmLocationItemAfter
   // This controller 
   //  - hides "Request Scan" when there are online links
+  //  - hides "Request" and "Request Scan" buttons when item is unavailable
   //  - show "Item available electronically" when there are online links
+  //  - shows "Request ILL" component that links to ILLiad
   //  - shows "Login for options" component when logged out
   .controller('customRequestsController', customRequestsController);
-  // Implement with prmServiceButtonAfter
-  // This controller
-  //  - hides "Request" button when item is unavailable
-  //  - shows "Request ILL" component that links to ILLiad
-  // .controller('customRequestsUnavailableItemController', customRequestsUnavailableItemController);
 
 // Controllers
 customRequestIllComponentController.$inject = ['$scope', '$window'];
@@ -43,8 +40,12 @@ function customRequestIllComponentController($scope, $window) {
   };
 
   ctrl.getitLink = (item) => {
-    console.log(item.delivery.link.filter(({ displayLabel }) => displayLabel === "lln40" ));
-    return item.delivery.link.filter(({ displayLabel }) => displayLabel === "lln40" );
+    try {
+      const getitLink = item.delivery.link.filter(({ displayLabel }) => displayLabel === "lln40" );
+      return getitLink[0].linkURL;
+    } catch (error) {
+      return '';
+    }
   };
 
   ctrl.handleClick = (event, { href }) => {
@@ -59,8 +60,8 @@ function customRequestIllComponentController($scope, $window) {
   
 }
 
-customRequestLoginComponentController.$inject = ['$scope', '$injector', '$filter'];
-function customRequestLoginComponentController($scope, $injector, $filter) {
+customRequestLoginComponentController.$inject = ['$scope', '$injector'];
+function customRequestLoginComponentController($scope, $injector) {
   const ctrl = this;
 
   ctrl.$onInit = () => {
@@ -70,8 +71,6 @@ function customRequestLoginComponentController($scope, $injector, $filter) {
       prmIconBefore: loginIcon,
     };
   };
-
-  // ctrl.translate = original => original.replace(/\{(.+?)\}/g, (match, p1) => $filter('translate')(p1));
 
   ctrl.handleClick = (event, { action }) => {
     event.stopPropagation();
@@ -90,32 +89,34 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
 
   ctrl.$onInit = () => {
     const $target = $element.parent().children('div.md-list-item-text');
+    // Fetch the item status text from the parent
+    ctrl.itemStatus = $scope.$parent.item._additionalData.itemstatusname;
     $scope.hasOnlineLinks = () => ctrl.hasOnlineLinks();
+    // $scope.isLoggedIn = () => ctrl.parentCtrl.isLoggedIn();
+    // Use custom login module so we can mock the value out in testing
+    $scope.isLoggedIn = () => primoExploreCustomLoginService.isLoggedIn;
+    $scope.showRequestILL = () => ctrl.showRequestILL();
+
     // Hide "Request Scan" link when this item has any online links
     if (ctrl.hasOnlineLinks()) {
       // Hide via CSS
       $target.children().eq(0).addClass("custom-requests-hide-request-scan");
     }
+    // Hide "Request Scan" and "Request" links when this item is unavailable
     if (ctrl.isUnavailableItem()) {
-      $target.children().eq(0).addClass("custom-requests-hide-request");
-      // $element.parent().addClass("custom-requests-hide-request");
+      $target.children().eq(0).addClass("custom-requests-hide-request").addClass("custom-requests-hide-request-scan");
     }
-    // $scope.isLoggedIn = () => ctrl.parentCtrl.isLoggedIn();
-    // Use custom login module so we can mock the value out in testing
-    $scope.isLoggedIn = () => primoExploreCustomLoginService.isLoggedIn;
+  
   };
 
   // Move custom element into prm-location element to match styles/spacing/etc
   ctrl.$postLink = () => {
     const $target = $element.parent().query('div.md-list-item-text');
-    const $loginLink = $element.query(`primo-explore-custom-request-login-wrapper`).detach();
+    const $loginLink = $element.query(`primo-explore-custom-request-wrapper`).detach();
     const $electronicCopyText = $element.query(`primo-explore-custom-request-electronic-copy-available`).detach();
     $target.append($loginLink);
     // Insert "Item available electronically" in place
     $target.children().eq(1).after($electronicCopyText);
-    // Fetch the item status text from the parent
-    ctrl.itemStatus = $scope.$parent.item._additionalData.itemstatusname;
-    $scope.showRequestILL = () => ctrl.showRequestILL();
   };
 
   // Determine if this item has any online links
@@ -128,7 +129,7 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
   };
 
   ctrl.showRequestILL = () => {
-    return primoExploreCustomLoginService.isLoggedI && ctrl.isUnavailableItem();
+    return primoExploreCustomLoginService.isLoggedIn && ctrl.isUnavailableItem();
   };
 
   ctrl.isUnavailableItem = () => {
@@ -162,59 +163,3 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
   
   
 }
-
-// customRequestsUnavailableItemController.$inject = ['$scope', '$element', 'primoExploreCustomLoginService'];
-// customRequestsUnavailableItemController.$inject = ['$scope', '$element', 'primoExploreCustomLoginService'];
-// function customRequestsUnavailableItemController($scope, $element, primoExploreCustomLoginService) {
-//   const ctrl = this;
-
-//   ctrl.$postLink = () => {
-//     ctrl.itemStatus = ctrl.parentCtrl.requestParameters.itemstatusname;
-//     // Hide existing "Request" link if item is unavailable
-//     if (ctrl.isUnavailableItem()) {
-//       $element.parent().addClass("custom-requests-hide-request");
-//     }
-//     $scope.showRequestILL = () => ctrl.showRequestILL();
-//     // ctrl.user = primoExploreCustomLoginService.fetchPDSUser();
-//   };
-
-//   ctrl.showRequestILL = () => {
-//     return ctrl.isUnavailableItem(); //&& ctrl.isRequestLink();// && ctrl.isILLEligible();
-//   };
-
-//   ctrl.isUnavailableItem = () => {
-//     const isUnavailable = !checkIsAvailable(ctrl.itemStatus);
-//     return isUnavailable;
-//   };
-
-//   // ctrl.isRequestLink = () => {
-//   //   const requestType = ctrl.parentCtrl.service.type;
-//   //   return requestType === "HoldRequest";
-//   // };
-
-//   // ctrl.isILLEligible = () => {
-//   //   return authorizedStatuses.ill.indexOf(ctrl.user['bor-status']) > -1;
-//   // };
-
-//   // const authorizedStatuses = {
-//   //   ill: ["20", "21", "22", "23", "30", "31", "32", "34", "35", "37", "50", "51", "52", "53", "54", "55", "56", "57", "58", "60", "61", "62", "63", "65", "66", "80", "81", "82", "89"],
-//   // };
-
-//   const checkIsAvailable = circulationStatus => {
-//     const unavailablePatterns = [
-//       /Requested/g,
-//       /\d{2}\/\d{2}\/\d{2}/g, // dd/dd/dd appears anywhere in the string
-//       'Requested',
-//       'Billed as Lost',
-//       'Claimed Returned',
-//       'In Processing',
-//       'In Transit',
-//       'On Hold',
-//       'Request ILL',
-//       'On Order',
-//     ];
-    
-//     const hasPattern = (patterns, target) => patterns.some(str => target.match(new RegExp(str)));
-//     return !hasPattern(unavailablePatterns, circulationStatus || "");
-//   };
-// }
