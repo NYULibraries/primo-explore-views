@@ -71,25 +71,18 @@ app
   .component('prmBrowseSearchBarAfter', {
     template: /*html*/ `<search-bar-sub-menu></search-bar-sub-menu>`,
   })
-  .component('prmServiceButtonAfter', {
-    // Show custom "Request ILL" link if item is unavailable
-    template: /*html*/ `<primo-explore-custom-request-ill ng-show="showRequestILL()"></primo-explore-custom-request-ill>`,
-    require: {
-      parentCtrl: '^prmServiceButton',
-    },
-    controller: 'customRequestsUnavailableItemController',
-  })
   .component('prmLocationItemAfter', {
     // Show a custom "Login..." link when user is logged out
     template: /*html*/ `
-      <primo-explore-custom-request-login-wrapper
+      <primo-explore-custom-request-wrapper
         layout="row"
         layout-align="end center"
         layout-wrap
         flex-xs="100"
       >
+        <primo-explore-custom-request-ill ng-show="showRequestILL()"></primo-explore-custom-request-ill>
         <primo-explore-custom-request-login ng-hide="isLoggedIn()"></primo-explore-custom-request-login>
-      </primo-explore-custom-request-login-wrapper>
+      </primo-explore-custom-request-wrapper>
       <primo-explore-custom-request-electronic-copy-available ng-show="hasOnlineLinks()" class="weak-text flex-xs-100 flex" flex-xs="100"><div><p>Item Available Electronically</p></primo-explore-custom-request-electronic-copy-available>`,
     require: {
       parentCtrl: '^prmLocationItems'
