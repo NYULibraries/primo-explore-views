@@ -137,11 +137,6 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
     return isUnavailable;
   };
 
-  ctrl.isRequestLink = () => {
-    const requestType = ctrl.parentCtrl.service.type;
-    return requestType === "HoldRequest";
-  };
-
   const checkIsAvailable = circulationStatus => {
     const unavailablePatterns = [
       /Requested/g,
