@@ -21,7 +21,7 @@ describe('primo-explore-custom-request-wrapper', () => {
       cy.get(`prm-location-items .md-2-line > :nth-child(1) > .md-list-item-text`)
         .should('be.visible')
         .get('primo-explore-custom-request-ill button')
-        .should('not.exist')
+        .should('not.be.visible')
     })
   })
   describe(`if the user is logged in`, () => {
