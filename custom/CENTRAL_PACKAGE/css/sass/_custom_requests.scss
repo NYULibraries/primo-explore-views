@@ -1,0 +1,60 @@
+.custom-requests {
+
+  .request-information {
+    padding-top: 10px;
+  }
+
+  md-icon {
+    height: 18px;
+    width: 18px;
+    min-height: 18px;
+    min-width: 18px;
+    top: -1px;
+    position: relative;
+  }
+}
+
+/* Imitates prm-service-button styles */
+button[class*="custom-request-"] {
+  padding: .5em .35em !important;
+}
+
+/* Useful for the 'attributes' in prmIconBefore/prmIconAfter to make it fit in button appropriately */
+[custom-requests] md-icon {
+  height: 15px;
+  width: 15px;
+  min-height: 15px;
+  min-width: 15px;
+  top: -1px;
+  position: relative;
+}
+
+.custom-requests-hide-request-scan,
+.custom-requests-hide-request {
+  .skewed-divider {
+    display: none !important;
+  }
+}
+
+.custom-requests-hide-request-scan { 
+  prm-service-button > button[aria-label="Request Scan"] {
+    display: none !important;
+  }
+}
+
+.custom-requests-hide-request  { 
+  prm-service-button > button[aria-label="Request"] {
+    display: none !important;
+  }
+}
+
+// prm-location-items {
+//   .md-list-item-text button {
+//     background-color: #57068c !important;
+//     color: #fff !important;
+//     font-weight: bold;
+//   }
+//   .skewed-divider {
+//     display: none !important;
+//   }
+// }

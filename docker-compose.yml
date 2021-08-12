@@ -12,8 +12,8 @@ x-build: &x-build
     context: .
     cache_from:
       - primo-explore-views
-      - quay.io/nyulibraries/primo-explore-views
-      - quay.io/nyulibraries/primo-explore-views:$BRANCH_NO_SLASH
+      - "quay.io/nyulibraries/primo-explore-views"
+      - "quay.io/nyulibraries/primo-explore-views:${BRANCH_NO_SLASH}"
 x-ports: &x-ports
   ports:
     - 8004:8004
@@ -75,8 +75,8 @@ services:
       context: primo-explore-e2e-cypress
       cache_from:
       - primo-explore-e2e-cypress
-      - quay.io/nyulibraries/primo-explore-e2e-cypress
-      - quay.io/nyulibraries/primo-explore-e2e-cypress:$BRANCH_NO_SLASH
+      - "quay.io/nyulibraries/primo-explore-e2e-cypress"
+      - "quay.io/nyulibraries/primo-explore-e2e-cypress:${BRANCH_NO_SLASH}"
     depends_on:
       - web-test
     environment:

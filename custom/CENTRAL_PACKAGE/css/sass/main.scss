@@ -14,6 +14,7 @@
 @import 'button';
 @import 'pagination';
 @import 'chat_widget';
+@import 'custom_requests';
 @import 'hide';
 
 @import '~primo-explore-custom-no-search-results/css/custom1.css';
@@ -27,7 +28,7 @@ primo-explore-top-alert {
   }
 }
 
-primo-explore-physical-items-alert {
+primo-explore-physical-items-alert, prm-opac {
   .bar.error-bar {
     color: black;
     font-weight: bold;
