@@ -1,0 +1,11 @@
+<div layout="row" layout-align="center center">
+  <button class="button-as-link md-button md-primoExplore-theme md-ink-ripple custom-request-{{ button.id }}" type="button"
+    ng-click="$ctrl.handleClick($event, button)" aria-label="Type">
+    <prm-icon ng-if="button.prmIconBefore" custom-requests icon-type="svg" svg-icon-set="{{ button.prmIconBefore.set }}"
+      icon-definition="{{ button.prmIconBefore.icon }}">
+    </prm-icon>
+    <span>{{ button.label }}</span>
+    <prm-icon ng-if="button.prmIconAfter" custom-requests icon-type="svg" svg-icon-set="{{ button.prmIconAfter.set }}"
+      icon-definition="{{ button.prmIconAfter.icon }}">
+  </button>
+</div>

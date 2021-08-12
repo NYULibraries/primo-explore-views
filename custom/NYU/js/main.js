@@ -8,7 +8,6 @@ import 'primo-explore-libraryh3lp-widget';
 import 'primo-explore-nyu-eshelf';
 import 'primo-explore-search-bar-sub-menu';
 import 'primo-explore-google-analytics';
-import 'primo-explore-custom-requests';
 import 'primo-explore-custom-login';
 // import 'Common/js/primoExploreCustomLogin';
 
@@ -20,17 +19,15 @@ import libraryh3lpWidgetConfig from './libraryh3lpWidget';
 import nyuEshelfConfig from './nyuEshelf';
 import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import googleAnalyticsConfig from './googleAnalyticsConfig';
-import customRequestsConfig from 'Common/js/customRequestsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
 import physicalItemsAlert from 'Common/js/physicalItemsAlert';
-import customRequests from 'Common/js/customRequestComponent';
+import 'Common/js/customRequests';
 import 'Common/js/sendToCourseReserves';
 import appendStatusEmbed from 'Common/js/statusPageEmbed';
 
 // HTML as JS imports
 import customRequestsRequestInformationTemplate from 'Common/html/custom_requests_request_information.html';
 import citationLinkerAfterTemplate from 'Common/html/citation_linker_after.html';
-
 
 let app = angular.module('viewCustom', [
   'angularLoad',
@@ -42,8 +39,8 @@ let app = angular.module('viewCustom', [
   'searchBarSubMenu',
   'googleAnalytics',
   'primoExploreCustomLogin',
-  'primoExploreCustomRequests',
   'sendToCourseReserves',
+  'customRequests',
 ]);
 
 app
@@ -53,7 +50,6 @@ app
   .constant(nyuEshelfConfig.name, nyuEshelfConfig.config)
   .constant(searchBarSubMenuItemsConfig.name, searchBarSubMenuItemsConfig.config)
   .constant(googleAnalyticsConfig.name, googleAnalyticsConfig.config)
-  .constant(customRequestsConfig.name, customRequestsConfig.config(viewName))
   .constant(customLoginConfig.name, customLoginConfig.config)
   .value('customNoSearchResultsTemplateUrl', `custom/${viewName}/html/no_search_results.html`)
   .component('prmActionListAfter', {
@@ -137,7 +133,24 @@ app
   .component('prmBrowseSearchBarAfter', {
     template: /*html*/ `<search-bar-sub-menu></search-bar-sub-menu>`,
   })
-  .component('prmLocationItemAfter', customRequests)
+  .component('prmLocationItemAfter', {
+    // Show a custom "Login..." link when user is logged out
+    template: /*html*/ `
+      <primo-explore-custom-request-wrapper
+        layout="row"
+        layout-align="end center"
+        layout-wrap
+        flex-xs="100"
+      >
+        <primo-explore-custom-request-ill ng-show="showRequestILL()"></primo-explore-custom-request-ill>
+        <primo-explore-custom-request-login ng-hide="isLoggedIn()"></primo-explore-custom-request-login>
+      </primo-explore-custom-request-wrapper>
+      <primo-explore-custom-request-electronic-copy-available ng-show="hasOnlineLinks()" class="weak-text flex-xs-100 flex" flex-xs="100"><div><p>Item Available Electronically</p></primo-explore-custom-request-electronic-copy-available>`,
+    require: {
+      parentCtrl: '^prmLocationItems'
+    },
+    controller: 'customRequestsController',
+  })
   .component('prmLocationItemsAfter', {
     template: `${customRequestsRequestInformationTemplate}`
   })

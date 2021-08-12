@@ -5558,11 +5558,6 @@ neo-async@^2.6.0:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-ng-attr@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/ng-attr/-/ng-attr-0.0.1.tgz#12fabe7a3cdc9e0561da49847e3b2d192cd81315"
-  integrity sha1-Evq+ejzcngVh2kmEfjstGSzYExU=
-
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
@@ -6331,10 +6326,10 @@ primo-explore-clickable-logo-to-any-link@1.1.6:
   resolved "https://registry.yarnpkg.com/primo-explore-clickable-logo-to-any-link/-/primo-explore-clickable-logo-to-any-link-1.1.6.tgz#8a7da1b9f64fcb8430a73797d5d0de984631695b"
   integrity sha512-+iB2sRDmS/olwK4p6g5OOOCOPIaHTJcBBPMVr72YCaMU4TGOp9yx6bwadIpeajYjodeOKR+N9Pqeop+hv32kQA==
 
-primo-explore-custom-library-card-menu@1.1.8:
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/primo-explore-custom-library-card-menu/-/primo-explore-custom-library-card-menu-1.1.8.tgz#e0e1ef70c0c31dab8dfa117bc177cf61a4d57c15"
-  integrity sha512-iIDs0u6hxVq89lFhtvoqXr7F106JgKCo4gnPUrTogN9njOjQ+or3Yn6uX8BCPM6qshdUascbh8CD9bLlSV+GmA==
+primo-explore-custom-library-card-menu@1.1.9:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/primo-explore-custom-library-card-menu/-/primo-explore-custom-library-card-menu-1.1.9.tgz#2c98b5af854b5832e733522a9393e3137948595a"
+  integrity sha512-lGzYyOD8+q4s5dWA9AVzbM0X5bsJV+Yazmm+wZMwAyoi1EHdiTavNx9savB+Sm4izZUDRwCsv8Iwi5Ta+7tvzA==
 
 primo-explore-custom-login@2.0.5:
   version "2.0.5"
@@ -6348,13 +6343,6 @@ primo-explore-custom-no-search-results@1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/primo-explore-custom-no-search-results/-/primo-explore-custom-no-search-results-1.0.6.tgz#c0b61bfac71fab2633f469c0f0ef326e7cc5ffd0"
   integrity sha512-hb3FhQhpKLcKpYa/0mBUOshh0U6/zHybNSgXYkyct8SwFfw/QrjA/hPvy7I3RvRCsXWiTUYr+AFDWbIx8lusgQ==
-
-primo-explore-custom-requests@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/primo-explore-custom-requests/-/primo-explore-custom-requests-1.0.1.tgz#453652710737dd10f13312d8212557611c50f7ec"
-  integrity sha512-CIDGteBwOir3KQieNfgu0qeLaOJuq3ayyEdHUj5ea7NrnKrcRNaZJG0cDhvqKG4iYI9f0fEXM4fBIs2PWDarUw==
-  dependencies:
-    ng-attr "^0.0.1"
 
 primo-explore-custom-search-bookmark-filter@1.0.9:
   version "1.0.9"
@@ -6381,10 +6369,10 @@ primo-explore-nyu-eshelf@3.2.1:
   dependencies:
     angular-sanitize "1.6.10"
 
-primo-explore-search-bar-sub-menu@1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/primo-explore-search-bar-sub-menu/-/primo-explore-search-bar-sub-menu-1.0.11.tgz#c2dde19aad48695c0fc4fb9caea2e0e8d7bcc4c3"
-  integrity sha512-cIdRqd1Nu0AHklX3U1FG93EtWP+9n9aCQM3dvTr3UCHwxKZzl9EPnb6wpi0LrdnSXdaywd97yGdPu/WIkcMMfw==
+primo-explore-search-bar-sub-menu@1.0.13:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/primo-explore-search-bar-sub-menu/-/primo-explore-search-bar-sub-menu-1.0.13.tgz#55d166eb1a2a8b671f0b3e2b8aab268f7e46ac56"
+  integrity sha512-1hQx2OjO7g3Q7OqYJ5rQa8J/Kw8bIBZQsgcrYaE/xbf9wc6dSCsuEhVHdN8Zs+ph7e3dGOy3kIslc5LABH6ADw==
   optionalDependencies:
     eslint "^6.1.0"
     eslint-plugin-angular "^4.0.1"
