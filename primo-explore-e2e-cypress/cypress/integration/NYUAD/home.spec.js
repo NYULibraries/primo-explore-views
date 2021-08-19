@@ -44,7 +44,7 @@ describe('The Home Page', function () {
   describe('Additional Options', () => {
     const links = {
       ["Search WorldCat for items in nearby libraries"]: `http://www.worldcat.org/search?qt=worldcat_org_all`,
-      ["Request a book from E-ZBorrow"]: `https://login.library.nyu.edu/ezborrow/nyuad`,
+      ["Request a book from E-ZBorrow"]: `https://ezborrow.reshare.indexdata.com/`,
     }
 
     Object.entries(links).forEach(([text, href]) => {
