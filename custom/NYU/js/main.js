@@ -154,6 +154,9 @@ app
   .component('prmLocationItemsAfter', {
     template: `${customRequestsRequestInformationTemplate}`
   })
+  .component('prmRequestAfter', {
+    template: `${customRequestsRequestInformationTemplate}`
+  })
   .component('prmCitationLinkerAfter', {
     controller: ['$element', function($element) {
       const ctrl = this;
