@@ -15,6 +15,7 @@ describe('primo-explore-custom-no-search-results', function () {
 
     describe('its links', () => {
       const links = {
+        [`Request a book from E-ZBorrow (NYU only)`]: `https://ezborrow.reshare.indexdata.com/Search/Results?lookfor=${encodeURIComponent(searchTerm)}`,
         [`Search WorldCat for items in nearby libraries`]: `http://www.worldcat.org/search?qt=worldcat_org_all&q=${encodeURIComponent(searchTerm)}`,
         [`journal`]: `/primo-explore/jsearch?vid=NYU`,
         [`article by citation`]: `/primo-explore/citationlinker?vid=NYU`,

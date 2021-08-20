@@ -28,9 +28,8 @@ function customRequestIllComponentController($scope, $window) {
   const ctrl = this;
 
   ctrl.$onInit = () => {
-    const locationsCtrl = $scope.$parent.$parent.$parent.$ctrl;
-    const vid = locationsCtrl.configurationUtil.vid;
-    const illLink = ctrl.getitLink(locationsCtrl.item, vid);
+    const locationsCtrl = $scope.$parent.$ctrl.parentCtrl;
+    const illLink = ctrl.getitLink(locationsCtrl.item);
 
     $scope.button = {
       label: 'Request ILL',
@@ -40,10 +39,12 @@ function customRequestIllComponentController($scope, $window) {
   };
 
   ctrl.getitLink = (item) => {
+    // We do a try/catch in case the structure of this data changes
     try {
       const getitLink = item.delivery.link.filter(({ displayLabel }) => displayLabel === "lln40" );
       return getitLink[0].linkURL;
     } catch (error) {
+      console.warn("primo-explore-custom-requests: Cannot find getitLink in pnx link lln40.");
       return '';
     }
   };
@@ -99,10 +100,8 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
 
     // Hide "Request Scan" link when this item has any online links
     if (ctrl.hasOnlineLinks()) {
-      // Temporary logic: hide all requests when record has any online links
-      $target.children().eq(0).addClass("custom-requests-hide-request").addClass("custom-requests-hide-request-scan");
       // Hide via CSS
-      // $target.children().eq(0).addClass("custom-requests-hide-request-scan");
+      $target.children().eq(0).addClass("custom-requests-hide-request-scan");
     }
     // Hide "Request Scan" and "Request" links when this item is unavailable
     if (ctrl.isUnavailableItem()) {
@@ -131,9 +130,7 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
   };
 
   ctrl.showRequestILL = () => {
-    // Temporary logic: hide all requests when record has any online links
-    return primoExploreCustomLoginService.isLoggedIn && ctrl.isUnavailableItem() && !ctrl.hasOnlineLinks();
-    // return primoExploreCustomLoginService.isLoggedIn && ctrl.isUnavailableItem();
+    return primoExploreCustomLoginService.isLoggedIn && ctrl.isUnavailableItem();
   };
 
   ctrl.isUnavailableItem = () => {
