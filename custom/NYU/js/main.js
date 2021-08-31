@@ -20,7 +20,8 @@ import nyuEshelfConfig from './nyuEshelf';
 import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import googleAnalyticsConfig from './googleAnalyticsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
-import physicalItemsAlert from 'Common/js/physicalItemsAlert';
+// Comment out alert that goes above items on details page
+// import physicalItemsAlert from 'Common/js/physicalItemsAlert';
 import 'Common/js/customRequests';
 import 'Common/js/sendToCourseReserves';
 import appendStatusEmbed from 'Common/js/statusPageEmbed';
@@ -168,8 +169,8 @@ app
       };
     }],
     template: citationLinkerAfterTemplate,
-  })
-  .component('prmRequestServicesAfter', physicalItemsAlert);
+  });
+  // .component('prmRequestServicesAfter', physicalItemsAlert);
 
 app.run(runBlock);
 
