@@ -17,7 +17,6 @@ angular
   // This controller 
   //  - hides "Request Scan" when there are online links
   //  - hides "Request" and "Request Scan" buttons when item is unavailable
-  //  - show "Item available electronically" when there are online links
   //  - shows "Request ILL" component that links to ILLiad
   //  - shows "Login for options" component when logged out
   .controller('customRequestsController', customRequestsController);
@@ -114,10 +113,7 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
   ctrl.$postLink = () => {
     const $target = $element.parent().query('div.md-list-item-text');
     const $loginLink = $element.query(`primo-explore-custom-request-wrapper`).detach();
-    const $electronicCopyText = $element.query(`primo-explore-custom-request-electronic-copy-available`).detach();
     $target.append($loginLink);
-    // Insert "Item available electronically" in place
-    $target.children().eq(1).after($electronicCopyText);
   };
 
   // Determine if this item has any online links

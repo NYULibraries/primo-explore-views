@@ -91,7 +91,7 @@ app
       <primo-explore-custom-request-ill ng-show="showRequestILL()"></primo-explore-custom-request-ill>
         <primo-explore-custom-request-login ng-hide="isLoggedIn()"></primo-explore-custom-request-login>
       </primo-explore-custom-request-wrapper>
-      <primo-explore-custom-request-electronic-copy-available ng-show="hasOnlineLinks()" class="weak-text flex-xs-100 flex" flex-xs="100"><div><p>Item Available Electronically</p></primo-explore-custom-request-electronic-copy-available>`,
+    `,
     require: {
       parentCtrl: '^prmLocationItems'
     },
