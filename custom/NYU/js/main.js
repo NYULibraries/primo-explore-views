@@ -20,7 +20,8 @@ import nyuEshelfConfig from './nyuEshelf';
 import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import googleAnalyticsConfig from './googleAnalyticsConfig';
 import customLoginConfig from 'Common/js/customLoginConfig';
-import physicalItemsAlert from 'Common/js/physicalItemsAlert';
+// Comment out alert that goes above items on details page
+// import physicalItemsAlert from 'Common/js/physicalItemsAlert';
 import 'Common/js/customRequests';
 import 'Common/js/sendToCourseReserves';
 import appendStatusEmbed from 'Common/js/statusPageEmbed';
@@ -145,7 +146,7 @@ app
         <primo-explore-custom-request-ill ng-show="showRequestILL()"></primo-explore-custom-request-ill>
         <primo-explore-custom-request-login ng-hide="isLoggedIn()"></primo-explore-custom-request-login>
       </primo-explore-custom-request-wrapper>
-      <primo-explore-custom-request-electronic-copy-available ng-show="hasOnlineLinks()" class="weak-text flex-xs-100 flex" flex-xs="100"><div><p>Item Available Electronically</p></primo-explore-custom-request-electronic-copy-available>`,
+    `,
     require: {
       parentCtrl: '^prmLocationItems'
     },
@@ -168,8 +169,8 @@ app
       };
     }],
     template: citationLinkerAfterTemplate,
-  })
-  .component('prmRequestServicesAfter', physicalItemsAlert);
+  });
+  // .component('prmRequestServicesAfter', physicalItemsAlert);
 
 app.run(runBlock);
 
