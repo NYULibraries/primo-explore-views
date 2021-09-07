@@ -43,7 +43,7 @@ button[class*="custom-request-"] {
 }
 
 .custom-requests-hide-request  { 
-  prm-service-button > button[aria-label="Request"] {
+  prm-service-button > button[aria-label="Request Physical Copy"] {
     display: none !important;
   }
 }
