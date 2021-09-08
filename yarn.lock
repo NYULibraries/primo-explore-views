@@ -1894,6 +1894,11 @@
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
   integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
 
+"@xmldom/xmldom@^0.7.3":
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/@xmldom/xmldom/-/xmldom-0.7.4.tgz#93b2f9486c88b6464e97f76c9ab49b0a548fbe57"
+  integrity sha512-wdxC79cvO7PjSM34jATd/RYZuYWQ8y/R7MidZl1NYYlbpFn1+spfjkiR3ZsJfcaTs2IyslBN7VwBBJwrYKM+zw==
+
 JSONStream@^1.0.4:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/JSONStream/-/JSONStream-1.3.5.tgz#3208c1f08d3a4d99261ab64f92302bc15e111ca0"
@@ -4826,13 +4831,13 @@ jasmine-core@~3.6.0:
   resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-3.6.0.tgz#491f3bb23941799c353ceb7a45b38a950ebc5a20"
   integrity sha512-8uQYa7zJN8hq9z+g8z1bqCfdC8eoDAeVnM5sfqs7KHv9/ifoJ500m018fpFc7RDaO6SWCLCXwo/wPSNcdYTgcw==
 
-jasmine-reporters@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/jasmine-reporters/-/jasmine-reporters-2.4.0.tgz#708c17ae70ba6671e3a930bb1b202aab80a31409"
-  integrity sha512-jxONSrBLN1vz/8zCx5YNWQSS8iyDAlXQ5yk1LuqITe4C6iXCDx5u6Q0jfNtkKhL4qLZPe69fL+AWvXFt9/x38w==
+jasmine-reporters@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/jasmine-reporters/-/jasmine-reporters-2.5.0.tgz#f9e2e0f82aaa2e07e8d553be56457efe0fd8b39e"
+  integrity sha512-J69peyTR8j6SzvIPP6aO1Y00wwCqXuIvhwTYvE/di14roCf6X3wDZ4/cKGZ2fGgufjhP2FKjpgrUIKjwau4e/Q==
   dependencies:
-    mkdirp "^0.5.1"
-    xmldom "^0.5.0"
+    "@xmldom/xmldom" "^0.7.3"
+    mkdirp "^1.0.4"
 
 jasmine-spec-reporter@^4.2.1:
   version "4.2.1"
@@ -6321,10 +6326,10 @@ prelude-ls@~1.1.2:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
   integrity sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=
 
-primo-explore-clickable-logo-to-any-link@1.1.6:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/primo-explore-clickable-logo-to-any-link/-/primo-explore-clickable-logo-to-any-link-1.1.6.tgz#8a7da1b9f64fcb8430a73797d5d0de984631695b"
-  integrity sha512-+iB2sRDmS/olwK4p6g5OOOCOPIaHTJcBBPMVr72YCaMU4TGOp9yx6bwadIpeajYjodeOKR+N9Pqeop+hv32kQA==
+primo-explore-clickable-logo-to-any-link@1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/primo-explore-clickable-logo-to-any-link/-/primo-explore-clickable-logo-to-any-link-1.1.7.tgz#5008aa9c470b5f22908e7dc0a236d0e42abbfad4"
+  integrity sha512-UVRQuRfjqSQYP7ITASbO+jUgpRiedwudnRQp9+22fsR+xZbakZe6mJ5tqaxAPjHWnqE8Jn6Ndw3IXRN+qiLWEw==
 
 primo-explore-custom-library-card-menu@1.1.9:
   version "1.1.9"
@@ -6349,10 +6354,10 @@ primo-explore-custom-search-bookmark-filter@1.0.9:
   resolved "https://registry.yarnpkg.com/primo-explore-custom-search-bookmark-filter/-/primo-explore-custom-search-bookmark-filter-1.0.9.tgz#26af2a4d01f723f1ffd541c78793de3d752dad2b"
   integrity sha512-gBtN65lTkWDHSgX7xn4omQExTsur1PF71Vc5F6OCfbfrhnDLVLIUy96ZphC/xuVBnBzzLj5gTTTEVuvf7SkFIQ==
 
-primo-explore-google-analytics@1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/primo-explore-google-analytics/-/primo-explore-google-analytics-1.2.2.tgz#128a7b6923456516b6b897e3ba1ff09ce9fdb672"
-  integrity sha512-5NP2qoh8YTRa6V2Kg+4IpAIMngRwp6rsbQJByVk+vWzA+XrIeyutzn1xGqY9DTr0XA7SOS/l8u9fDjN/g+iB6g==
+primo-explore-google-analytics@1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/primo-explore-google-analytics/-/primo-explore-google-analytics-1.2.3.tgz#aeed065cbc2f8148d5fddaed18863a01a3d10173"
+  integrity sha512-rexf5Eqjkdtos0Joc38LLXMczuXlC4wUDY6wDScI0TeLMIia+dJZwD5jZNia5K5X1VPn/kUP4QnbznkIUK+2Ng==
   dependencies:
     angulartics "^1.6.0"
     angulartics-google-tag-manager "^0.0.1"
@@ -8118,11 +8123,6 @@ ws@~7.4.2:
   version "7.4.6"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.6.tgz#5654ca8ecdeee47c33a9a4bf6d28e2be2980377c"
   integrity sha512-YmhHDO4MzaDLB+M9ym/mDA5z0naX8j7SIlT8f8z+I0VtzsRbekxEutHSme7NPS2qE8StCYQNUnfWdXta/Yu85A==
-
-xmldom@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.5.0.tgz#193cb96b84aa3486127ea6272c4596354cb4962e"
-  integrity sha512-Foaj5FXVzgn7xFzsKeNIde9g6aFBxTPi37iwsno8QvApmtg7KYrr+OPyRHcJF7dud2a5nGRBXK3n0dL62Gf7PA==
 
 xmlhttprequest-ssl@~1.6.2:
   version "1.6.3"
