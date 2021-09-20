@@ -48,20 +48,3 @@ button[class*="custom-request-"] {
   }
 }
 
-// Turn the request links into styled buttons
-prm-location-items {
-  .md-button.button-as-link {
-    background-color: #05568a;
-    color: #fff;
-    font-weight: bold;
-  }
-  .skewed-divider {
-    display: none;
-  }
-}
-
-// Disable that horrible green on the "Submit request" button
-// wherever it's coming from
-.service-form-static-panel button.button-confirm prm-icon + span:hover:not([disabled]) {
-  background-color: inherit;
-}
