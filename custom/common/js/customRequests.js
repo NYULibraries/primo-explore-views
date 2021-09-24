@@ -28,24 +28,32 @@ function customRequestIllComponentController($scope, $window) {
 
   ctrl.$onInit = () => {
     const locationsCtrl = $scope.$parent.$ctrl.parentCtrl;
-    const illLink = ctrl.getitLink(locationsCtrl.item);
+    const illLink = ctrl.getitLink(locationsCtrl.item, 'lln40');
+    const ezborrowLink = ctrl.ezborrowLink(locationsCtrl.item, 'lln42');
 
     $scope.button = {
       label: 'Request ILL',
       prmIconAfter: externalLinkIcon,
       href: illLink,
     };
+
+    $scope.button = {
+      label: 'Request E-ZBorrow',
+      prmIconAfter: externalLinkIcon,
+      href: ezborrowLink,
+    };
   };
 
-  ctrl.getitLink = (item) => {
+  ctrl.getitLink = (item, lln) => {
     // We do a try/catch in case the structure of this data changes
+    let getitLink;
     try {
-      const getitLink = item.delivery.link.filter(({ displayLabel }) => displayLabel === "lln40" );
-      return getitLink[0].linkURL;
+      const localLink = item.delivery.link.filter(({ displayLabel }) => displayLabel === lln );
+      getitLink = localLink[0].linkURL;
     } catch (error) {
-      console.warn("primo-explore-custom-requests: Cannot find getitLink in pnx link lln40.");
-      return '';
+      error("primo-explore-custom-requests: Cannot find getitLink in pnx link lln40.");
     }
+    return getitLink;
   };
 
   ctrl.handleClick = (event, { href }) => {
