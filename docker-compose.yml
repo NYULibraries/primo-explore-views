@@ -113,7 +113,7 @@ services:
     - ./modules:/app/primo-explore/modules/
 
   yarn:
-    image: node:10
+    image: node:12
     working_dir: /app
     entrypoint: ["yarn"]
     volumes:
