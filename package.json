@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "prepare": "yarn lerna run prepare",
-    "test": "yarn babel-node --config-file=./custom/spec/.babelrc ./custom/spec/run.js"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
