@@ -28,20 +28,45 @@ function customRequestIllComponentController($scope, $window) {
 
   ctrl.$onInit = () => {
     const locationsCtrl = $scope.$parent.$ctrl.parentCtrl;
-    const illLink = ctrl.getitLink(locationsCtrl.item, 'lln40');
-    const ezborrowLink = ctrl.ezborrowLink(locationsCtrl.item, 'lln42');
+    const ezborrowLink = ctrl.getitLink(locationsCtrl.item, 'lln30');
+    const illLinkNyu = ctrl.getitLink(locationsCtrl.item, 'lln31');
+    const illLinkNyush = ctrl.getitLink(locationsCtrl.item, 'lln32');
 
-    $scope.button = {
+    const illButtonNyu = {
       label: 'Request ILL',
       prmIconAfter: externalLinkIcon,
-      href: illLink,
+      href: illLinkNyu,
     };
 
-    $scope.button = {
+    const illButtonNyush = {
+      label: 'Request ILL',
+      prmIconAfter: externalLinkIcon,
+      href: illLinkNyush,
+    };
+
+    const ezborrowButton = {
       label: 'Request E-ZBorrow',
       prmIconAfter: externalLinkIcon,
       href: ezborrowLink,
     };
+
+    const emptyButton = {
+      label: 'Blank button',
+      prmIconAfter: null,
+      href: null,
+      id: 'blank-button'
+    };
+
+    if (ezborrowLink) { 
+      $scope.button = ezborrowButton;
+    } else if (illLinkNyush) {
+      $scope.button = illButtonNyush;
+    } else if (illLinkNyu) {
+      $scope.button = illButtonNyu;
+    } else {
+      $scope.button = emptyButton;
+    }
+    
   };
 
   ctrl.getitLink = (item, lln) => {
@@ -51,7 +76,7 @@ function customRequestIllComponentController($scope, $window) {
       const localLink = item.delivery.link.filter(({ displayLabel }) => displayLabel === lln );
       getitLink = localLink[0].linkURL;
     } catch (error) {
-      error("primo-explore-custom-requests: Cannot find getitLink in pnx link lln40.");
+      console.warn("primo-explore-custom-requests: Cannot find getitLink in pnx link " + lln);
     }
     return getitLink;
   };
