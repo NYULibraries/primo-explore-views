@@ -28,52 +28,53 @@ function customRequestButtonComponentController($scope, $window) {
 
   ctrl.$onInit = () => {
     const locationsCtrl = $scope.$parent.$ctrl.parentCtrl;
-    const ezborrowLink = ctrl.getitLink(locationsCtrl.item, 'lln30');
-    const illLinkNyu = ctrl.getitLink(locationsCtrl.item, 'lln31');
-    const illLinkNyush = ctrl.getitLink(locationsCtrl.item, 'lln32');
+
+    $scope.button = ctrl.selectRequestButton(locationsCtrl);
+  };
+
+  ctrl.selectRequestButton = (locationsCtrl) => {
     const vid = locationsCtrl.configurationUtil.vid;
-    const isNyush = () => vid === "NYUSH";
+    const ezborrowLink = ctrl.getitLink(locationsCtrl.item, 'lln30');
+    const illLinkNyush = ctrl.getitLink(locationsCtrl.item, 'lln32');
+    const illLinkNyu = ctrl.getitLink(locationsCtrl.item, 'lln31');
+    let requestButton;
 
-    const illButtonNyu = {
-      label: 'Request ILL',
+    // If ezborrow link exists, use it
+    if (ezborrowLink) { 
+      requestButton = ctrl.requestButton('Request E-ZBorrow', ezborrowLink);
+    // If ill link for nyush exists and vid is nyush, use it
+    } else if (illLinkNyush && ctrl.isNyush(vid)) {
+      requestButton = ctrl.requestButton('Request ILL', illLinkNyush);
+    // If ill link exists and vid is not nyush, use it
+    } else if (illLinkNyu) {
+      requestButton = ctrl.requestButton('Request ILL', illLinkNyu);
+    // Use the empty button if there are no recognized links
+    // hidden by CSS
+    } else {
+      requestButton = ctrl.emptyButton();
+    }
+    return requestButton;
+  };
+
+  ctrl.isNyush = (vid) => {
+    return (vid === "NYUSH");
+  };
+
+  ctrl.requestButton = (text, lln) => {
+    return {
+      label: text,
       prmIconAfter: externalLinkIcon,
-      href: illLinkNyu,
-    };
+      href: lln
+    }
+  };
 
-    const illButtonNyush = {
-      label: 'Request ILL',
-      prmIconAfter: externalLinkIcon,
-      href: illLinkNyush,
-    };
-
-    const ezborrowButton = {
-      label: 'Request E-ZBorrow',
-      prmIconAfter: externalLinkIcon,
-      href: ezborrowLink,
-    };
-
-    const emptyButton = {
+  ctrl.emptyButton = (text, lln) => {
+    return {
       label: 'Blank button',
       prmIconAfter: null,
       href: null,
       id: 'blank-button'
-    };
-
-    // If ezborrow link exists, use it
-    if (ezborrowLink) { 
-      $scope.button = ezborrowButton;
-    // If ill link for nyush exists and vid is nyush, use it
-    } else if (illLinkNyush && isNyush()) {
-      $scope.button = illButtonNyush;
-    // If ill link exists and vid is not nyush, use it
-    } else if (illLinkNyu) {
-      $scope.button = illButtonNyu;
-    // Use the empty button if there are no recognized links
-    // hidden by CSS
-    } else {
-      $scope.button = emptyButton;
     }
-    
   };
 
   ctrl.getitLink = (item, lln) => {
@@ -193,4 +194,10 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
     return !hasPattern(unavailablePatterns, circulationStatus || "");
   };
 
+}
+
+module.exports = {
+  customRequestButtonComponentController: customRequestButtonComponentController,
+  customRequestLoginComponentController: customRequestLoginComponentController,
+  customRequestsController: customRequestsController,
 }
