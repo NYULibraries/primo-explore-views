@@ -8,10 +8,10 @@ angular
     template: customRequestsTemplate,
     controller: customRequestLoginComponentController,
   })
-  // "Request ILL" button component
-  .component('primoExploreCustomRequestIll', {
+  // "Request E-ZBorrow" and "Request ILL" button component
+  .component('primoExploreCustomRequestButton', {
     template: customRequestsTemplate,
-    controller: customRequestIllComponentController,
+    controller: customRequestButtonComponentController,
   })
   // Implement with prmLocationItemAfter
   // This controller 
@@ -22,8 +22,8 @@ angular
   .controller('customRequestsController', customRequestsController);
 
 // Controllers
-customRequestIllComponentController.$inject = ['$scope', '$window'];
-function customRequestIllComponentController($scope, $window) { 
+customRequestButtonComponentController.$inject = ['$scope', '$window'];
+function customRequestButtonComponentController($scope, $window) { 
   const ctrl = this;
 
   ctrl.$onInit = () => {
@@ -31,6 +31,8 @@ function customRequestIllComponentController($scope, $window) {
     const ezborrowLink = ctrl.getitLink(locationsCtrl.item, 'lln30');
     const illLinkNyu = ctrl.getitLink(locationsCtrl.item, 'lln31');
     const illLinkNyush = ctrl.getitLink(locationsCtrl.item, 'lln32');
+    const vid = locationsCtrl.configurationUtil.vid;
+    const isNyush = () => vid === "NYUSH";
 
     const illButtonNyu = {
       label: 'Request ILL',
@@ -57,12 +59,17 @@ function customRequestIllComponentController($scope, $window) {
       id: 'blank-button'
     };
 
+    // If ezborrow link exists, use it
     if (ezborrowLink) { 
       $scope.button = ezborrowButton;
-    } else if (illLinkNyush) {
+    // If ill link for nyush exists and vid is nyush, use it
+    } else if (illLinkNyush && isNyush()) {
       $scope.button = illButtonNyush;
+    // If ill link exists and vid is not nyush, use it
     } else if (illLinkNyu) {
       $scope.button = illButtonNyu;
+    // Use the empty button if there are no recognized links
+    // hidden by CSS
     } else {
       $scope.button = emptyButton;
     }
@@ -72,8 +79,9 @@ function customRequestIllComponentController($scope, $window) {
   ctrl.getitLink = (item, lln) => {
     // We do a try/catch in case the structure of this data changes
     let getitLink;
+
     try {
-      const localLink = item.delivery.link.filter(({ displayLabel }) => displayLabel === lln );
+      const localLink = item.delivery.link.filter(({ linkType }) => linkType.endsWith(lln) );
       getitLink = localLink[0].linkURL;
     } catch (error) {
       console.warn("primo-explore-custom-requests: Cannot find getitLink in pnx link " + lln);
@@ -128,7 +136,7 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
     // $scope.isLoggedIn = () => ctrl.parentCtrl.isLoggedIn();
     // Use custom login module so we can mock the value out in testing
     $scope.isLoggedIn = () => primoExploreCustomLoginService.isLoggedIn;
-    $scope.showRequestILL = () => ctrl.showRequestILL();
+    $scope.showRequestButton = () => ctrl.showRequestButton();
 
     // Hide "Request Scan" link when this item has any online links
     if (ctrl.hasOnlineLinks()) {
@@ -158,7 +166,7 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
     return !!isAvailableOnline;
   };
 
-  ctrl.showRequestILL = () => {
+  ctrl.showRequestButton = () => {
     return primoExploreCustomLoginService.isLoggedIn && ctrl.isUnavailableItem();
   };
 
