@@ -3,17 +3,28 @@ import {
 } 
 from '../../common/js/customRequests.js';
 
-import { setupScope, setupItem, lln30, lln31, lln32 } from '../customRequests.helpers.js';
-
 describe('customRequestLoginComponentController', () => {
-  let $scope, $window;
-  let controller, vid, locationsCtrl;
+  let $scope, $injector;
+  let controller;
   beforeEach( () => {
     $scope = $scope || {};
-    $window = {
-      open: jest.fn(),
+    $injector = {
+      get: jest.fn(_ => {return { login: jest.fn() }})
     };
-    controller = new customRequestLoginComponentController($scope, $window);
+    controller = new customRequestLoginComponentController($scope, $injector);
+  });
+
+  describe('$onInit', () => {
+    beforeEach( () => {
+      controller.$onInit();
+      $scope.button.action($injector);
+    });
+    it('should have set the button on $scope', () => {
+      expect($injector.get).toBeCalled();
+      expect($scope.button.label).toEqual("Login to see request options");
+      expect($scope.button.prmIconBefore.icon).toEqual("sign-in");
+      expect($scope.button.prmIconBefore.set).toEqual("primo-ui");
+    });
   });
 
   describe('handleClick', () => {
