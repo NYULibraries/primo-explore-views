@@ -4,9 +4,11 @@ FROM node:12-alpine
 
 WORKDIR /app/
 
-COPY package.json yarn.lock lerna.json jest.config.js babel.config.js ./
+COPY package.json yarn.lock lerna.json ./
 
 RUN yarn install --frozen-lockfile --ignore-optional && yarn cache clean
+
+COPY jest.config.js babel.config.js ./
 
 COPY ./custom/ ./custom/
 
