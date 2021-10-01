@@ -20,7 +20,7 @@ describe('primo-explore-custom-request-wrapper', () => {
     it(`no other button is visible`, () => {
       cy.get(`prm-location-items .md-2-line > :nth-child(1) > .md-list-item-text`)
         .should('be.visible')
-        .get('primo-explore-custom-request-ill button')
+        .get('primo-explore-custom-request-button button')
         .should('not.be.visible')
     })
   })
@@ -72,7 +72,7 @@ describe('primo-explore-custom-request-wrapper', () => {
         [
           `Request ILL`,
         ].forEach(buttonLabel => {
-          cy.get('primo-explore-custom-request-ill button')
+          cy.get('primo-explore-custom-request-button button')
             .contains(buttonLabel)
             .should('be.visible')
         })
