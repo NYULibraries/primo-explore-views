@@ -8,3 +8,4 @@ modules/primo-explore-*
 custom/*/dist
 primo-explore-e2e-cypress/cypress/videos
 primo-explore-e2e-cypress/cypress/screenshots
+coverage
