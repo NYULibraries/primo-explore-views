@@ -196,8 +196,6 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
 
 }
 
-module.exports = {
-  customRequestButtonComponentController: customRequestButtonComponentController,
-  customRequestLoginComponentController: customRequestLoginComponentController,
-  customRequestsController: customRequestsController,
-}
+export { customRequestButtonComponentController }
+export { customRequestLoginComponentController }
+export { customRequestsController }
