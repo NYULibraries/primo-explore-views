@@ -91,7 +91,7 @@ function customRequestButtonComponentController($scope, $window) {
   };
 
   ctrl.handleClick = (event, { href }) => {
-    event.stopPropagation();
+    event.stopPropagation();    
     href && $window.open(href);
   };
 

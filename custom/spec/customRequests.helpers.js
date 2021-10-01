@@ -17,6 +17,14 @@ export let setupScope = (links, vid='NYU') => {
   }
 }
 
+export let setupItem = (links) => {
+  return {
+    delivery: {
+      link: links
+    }
+  }
+}
+
 export const lln32 = {
   linkType: "doesnt.matter.what.starts.with/lln32",
   linkURL: "https://library.nyu.edu/lln32",
