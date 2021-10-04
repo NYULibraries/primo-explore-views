@@ -20,5 +20,8 @@
   "env": {
     "node": true,
     "browser": true
-  }
+  },
+  "plugins": [
+    "jest"
+  ]
 }
