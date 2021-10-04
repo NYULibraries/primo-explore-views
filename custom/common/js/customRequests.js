@@ -35,8 +35,8 @@ function customRequestButtonComponentController($scope, $window) {
   ctrl.selectRequestButton = (locationsCtrl) => {
     const vid = locationsCtrl.configurationUtil.vid;
     const ezborrowLink = ctrl.getitLink(locationsCtrl.item, 'lln30');
-    const illLinkNyush = ctrl.getitLink(locationsCtrl.item, 'lln32');
-    const illLinkNyu = ctrl.getitLink(locationsCtrl.item, 'lln31');
+    const illLinkNyush = ctrl.getitLink(locationsCtrl.item, 'lln31');
+    const illLinkNyu = ctrl.getitLink(locationsCtrl.item, 'lln32');
     let requestButton;
 
     // If ezborrow link exists, use it
@@ -53,6 +53,7 @@ function customRequestButtonComponentController($scope, $window) {
     } else {
       requestButton = ctrl.emptyButton();
     }
+    
     return requestButton;
   };
 

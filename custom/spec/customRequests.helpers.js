@@ -1,11 +1,6 @@
-export let setupScope = (links, itemstatus='Available', vid='NYU') => {
+export let setupScope = (links, vid='NYU') => {
   return {
     $parent: {
-      item: {
-        _additionalData: {
-          itemstatusname: itemstatus
-        }
-      },
       $ctrl: {
         parentCtl: {
           configurationUtil: {

@@ -74,7 +74,6 @@ describe('customRequestsController', () => {
     });
   });
 
-  // showRequestButton
   // isUnavailableItem
   // checkIsAvailable
   

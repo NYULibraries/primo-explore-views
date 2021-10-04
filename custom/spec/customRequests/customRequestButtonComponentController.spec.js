@@ -20,7 +20,7 @@ describe('customRequestIllComponentController', () => {
     let selectRequestButton;
     describe('when E-ZBorrow link exists', () => {
       beforeAll( () => {
-        vid = 'NYU'
+        vid = 'NYU';
         $scope = setupScope([lln30, lln31, lln32], vid);
         locationsCtrl = $scope.$parent.$ctrl.parentCtl;
       });
@@ -38,7 +38,8 @@ describe('customRequestIllComponentController', () => {
       
       describe('and vid is NYUSH', () => {
         beforeAll( () => {
-          $scope = setupScope([lln32, lln31], "NYUSH");
+
+          $scope = setupScope([lln31, lln32], "NYUSH");
           locationsCtrl = $scope.$parent.$ctrl.parentCtl;
         });
         beforeEach( () => {
@@ -46,7 +47,7 @@ describe('customRequestIllComponentController', () => {
         });
         it('should return a Request ILL button and have the NYUSH link', () => {
           expect(selectRequestButton.label).toEqual("Request ILL");
-          expect(selectRequestButton.href).toEqual("https://library.nyu.edu/lln32");
+          expect(selectRequestButton.href).toEqual("https://library.nyu.edu/lln31");
           expect(selectRequestButton.prmIconAfter.icon).toEqual("ic_open_in_new_24px");
           expect(selectRequestButton.prmIconAfter.set).toEqual("action");
         });
@@ -61,7 +62,7 @@ describe('customRequestIllComponentController', () => {
         });
         it('should return a Request ILL button but with the NYU link', () => {
           expect(selectRequestButton.label).toEqual("Request ILL");
-          expect(selectRequestButton.href).toEqual("https://library.nyu.edu/lln31");
+          expect(selectRequestButton.href).toEqual("https://library.nyu.edu/lln32");
           expect(selectRequestButton.prmIconAfter.icon).toEqual("ic_open_in_new_24px");
           expect(selectRequestButton.prmIconAfter.set).toEqual("action");
         });
@@ -69,7 +70,7 @@ describe('customRequestIllComponentController', () => {
     });
     describe('when NYU ILL link exists', () => {
       beforeAll( () => {
-        $scope = setupScope([lln31], vid);
+        $scope = setupScope([lln32], vid);
         locationsCtrl = $scope.$parent.$ctrl.parentCtl;
       });
       beforeEach( () => {
@@ -77,7 +78,7 @@ describe('customRequestIllComponentController', () => {
       });
       it('should return a Request ILL button and have the NYU link', () => {
         expect(selectRequestButton.label).toEqual("Request ILL");
-        expect(selectRequestButton.href).toEqual("https://library.nyu.edu/lln31");
+        expect(selectRequestButton.href).toEqual("https://library.nyu.edu/lln32");
         expect(selectRequestButton.prmIconAfter.icon).toEqual("ic_open_in_new_24px");
         expect(selectRequestButton.prmIconAfter.set).toEqual("action");
       });
@@ -96,7 +97,7 @@ describe('customRequestIllComponentController', () => {
         expect(selectRequestButton.id).toBe("blank-button");
         expect(selectRequestButton.prmIconAfter).toBe(null);
       });
-    })
+    });
   });
 
   describe('isNyush', () => {
@@ -168,10 +169,10 @@ describe('customRequestIllComponentController', () => {
     let handleClick;
     const e = {
       stopPropagation: jest.fn(),
-    }
+    };
     const buttonObj = {
       href: "https://library.nyu.edu/lln30",
-    }
+    };
     beforeEach( () => {
       handleClick = controller.handleClick(e, buttonObj);
     });
