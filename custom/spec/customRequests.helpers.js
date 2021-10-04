@@ -1,6 +1,11 @@
-export let setupScope = (links, vid='NYU') => {
+export let setupScope = (links, itemstatus='Available', vid='NYU') => {
   return {
     $parent: {
+      item: {
+        _additionalData: {
+          itemstatusname: itemstatus
+        }
+      },
       $ctrl: {
         parentCtl: {
           configurationUtil: {
@@ -14,16 +19,28 @@ export let setupScope = (links, vid='NYU') => {
         }
       }
     }
-  }
-}
+  };
+};
+
+export let setupParentCtrl = (lsr08) => {
+  return {
+    item: {
+      pnx: {
+        search: {
+          "lsr08": lsr08
+        }
+      }
+    }
+  };
+};
 
 export let setupItem = (links) => {
   return {
     delivery: {
       link: links
     }
-  }
-}
+  };
+};
 
 export const lln32 = {
   linkType: "doesnt.matter.what.starts.with/lln32",
@@ -39,3 +56,7 @@ export const lln30 = {
   linkType: "doesnt.matter.what.starts.with/lln30",
   linkURL: "https://library.nyu.edu/lln30",
 };
+
+export let lsr08_online = ["etc", "Z_9CSC_0A09_0NYU_0", "etc"];
+
+export let lsr08_no_online = ["etc", "", "etc"];

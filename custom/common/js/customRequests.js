@@ -65,7 +65,7 @@ function customRequestButtonComponentController($scope, $window) {
       label: text,
       prmIconAfter: externalLinkIcon,
       href: lln
-    }
+    };
   };
 
   ctrl.emptyButton = (text, lln) => {
@@ -74,7 +74,7 @@ function customRequestButtonComponentController($scope, $window) {
       prmIconAfter: null,
       href: null,
       id: 'blank-button'
-    }
+    };
   };
 
   ctrl.getitLink = (item, lln) => {
@@ -132,9 +132,9 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
   ctrl.$onInit = () => {
     const $target = $element.parent().children('div.md-list-item-text');
     // Fetch the item status text from the parent
-    ctrl.itemStatus = $scope.$parent.item._additionalData.itemstatusname;
+    ctrl.itemStatus = ctrl.getItemStatusName();
     $scope.hasOnlineLinks = () => ctrl.hasOnlineLinks();
-    // $scope.isLoggedIn = () => ctrl.parentCtrl.isLoggedIn();
+    // $scope.isLoggedIn = () => ctrl.parent().isLoggedIn();
     // Use custom login module so we can mock the value out in testing
     $scope.isLoggedIn = () => primoExploreCustomLoginService.isLoggedIn;
     $scope.showRequestButton = () => ctrl.showRequestButton();
@@ -151,6 +151,15 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
   
   };
 
+  ctrl.getItemStatusName = () => {
+    return $scope.$parent.item._additionalData.itemstatusname;
+  };
+
+  // Abstracting this to a function so we can mock it easier in tests
+  ctrl.parent = () => {
+    return ctrl.parentCtrl;
+  };
+
   // Move custom element into prm-location element to match styles/spacing/etc
   ctrl.$postLink = () => {
     const $target = $element.parent().query('div.md-list-item-text');
@@ -161,7 +170,7 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
   // Determine if this item has any online links
   ctrl.hasOnlineLinks = () => {
     // Item has online links if pnx/search/lsr08 exists and contains the code Z_9CSC_0A09_0NYU_0
-    const availableOnlineField = ctrl.parentCtrl.item.pnx.search["lsr08"];
+    const availableOnlineField = ctrl.parent().item.pnx.search["lsr08"];
     const isAvailableOnline = availableOnlineField && availableOnlineField.some(type => type === "Z_9CSC_0A09_0NYU_0");
     // Cast undefined as a bool
     return !!isAvailableOnline;
@@ -172,7 +181,7 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
   };
 
   ctrl.isUnavailableItem = () => {
-    const isUnavailable = !checkIsAvailable(ctrl.itemStatus);
+    const isUnavailable = !checkIsAvailable(ctrl.getItemStatusName());
     return isUnavailable;
   };
 
@@ -196,6 +205,6 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
 
 }
 
-export { customRequestButtonComponentController }
-export { customRequestLoginComponentController }
-export { customRequestsController }
+export { customRequestButtonComponentController };
+export { customRequestLoginComponentController };
+export { customRequestsController };

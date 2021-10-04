@@ -19,7 +19,8 @@
   },
   "env": {
     "node": true,
-    "browser": true
+    "browser": true,
+    "jest/globals": true
   },
   "plugins": [
     "jest"
