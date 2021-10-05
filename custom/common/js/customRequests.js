@@ -37,28 +37,26 @@ function customRequestButtonComponentController($scope, $window) {
     const ezborrowLink = ctrl.getitLink(locationsCtrl.item, 'lln30');
     const illLinkNyush = ctrl.getitLink(locationsCtrl.item, 'lln31');
     const illLinkNyu = ctrl.getitLink(locationsCtrl.item, 'lln32');
+    const isNyuVid = () => ["NYU","NYUAD"].includes(vid);
+    const isNyushVid = () => ["NYUSH"].includes(vid);
     let requestButton;
 
-    // If ezborrow link exists, use it
-    if (ezborrowLink) { 
+    // If ezborrow link exists and vid is nyu or nyuad, use it
+    if (ezborrowLink && isNyuVid()) {
       requestButton = ctrl.requestButton('Request E-ZBorrow', ezborrowLink);
-    // If ill link for nyush exists and vid is nyush, use it
-    } else if (illLinkNyush && ctrl.isNyush(vid)) {
+    // If nyush ill link exists and vid and nyush, use it
+    } else if (illLinkNyush && isNyushVid()) {
       requestButton = ctrl.requestButton('Request ILL', illLinkNyush);
-    // If ill link exists and vid is not nyush, use it
+    // If ill link exists use it
     } else if (illLinkNyu) {
       requestButton = ctrl.requestButton('Request ILL', illLinkNyu);
-    // Use the empty button if there are no recognized links
-    // hidden by CSS
     } else {
       requestButton = ctrl.emptyButton();
     }
-    
-    return requestButton;
-  };
 
-  ctrl.isNyush = (vid) => {
-    return (vid === "NYUSH");
+    // Use the empty button if there are no recognized links
+    // hidden by CSS
+    return requestButton;
   };
 
   ctrl.requestButton = (text, lln) => {
@@ -69,7 +67,7 @@ function customRequestButtonComponentController($scope, $window) {
     };
   };
 
-  ctrl.emptyButton = (text, lln) => {
+  ctrl.emptyButton = () => {
     return {
       label: 'Blank button',
       prmIconAfter: null,

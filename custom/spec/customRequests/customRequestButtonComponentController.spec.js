@@ -35,10 +35,8 @@ describe('customRequestIllComponentController', () => {
       });
     });
     describe('when NYUSH ILL link exists', () => {
-      
       describe('and vid is NYUSH', () => {
         beforeAll( () => {
-
           $scope = setupScope([lln31, lln32], "NYUSH");
           locationsCtrl = $scope.$parent.$ctrl.parentCtl;
         });
@@ -96,22 +94,6 @@ describe('customRequestIllComponentController', () => {
         expect(selectRequestButton.href).toBe(null);
         expect(selectRequestButton.id).toBe("blank-button");
         expect(selectRequestButton.prmIconAfter).toBe(null);
-      });
-    });
-  });
-
-  describe('isNyush', () => {
-    beforeAll( () => {
-      $scope = {};
-    });
-    describe('when vid is NYUSH', () => {
-      it ('should be true', () => {
-        expect(controller.isNyush('NYUSH')).toBe(true);
-      });
-    });
-    describe('when vid is not NYUSH', () => {
-      it ('should be false', () => {
-        expect(controller.isNyush('HSL')).toBe(false);
       });
     });
   });
