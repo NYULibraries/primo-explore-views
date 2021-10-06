@@ -80,7 +80,7 @@ app
         layout-wrap
         flex-xs="100"
       >
-        <primo-explore-custom-request-ill ng-show="showRequestILL()"></primo-explore-custom-request-ill>
+        <primo-explore-custom-request-button ng-show="showRequestButton()"></primo-explore-custom-request-button>
         <primo-explore-custom-request-login ng-hide="isLoggedIn()"></primo-explore-custom-request-login>
       </primo-explore-custom-request-wrapper>
     `,

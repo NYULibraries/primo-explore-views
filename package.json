@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "prepare": "yarn lerna run prepare",
-    "test": "yarn babel-node --config-file=./custom/spec/.babelrc ./custom/spec/run.js"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -21,11 +21,14 @@
   "homepage": "https://github.com/NYULibraries/primo-explore-views#readme",
   "devDependencies": {
     "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.15.5",
     "@babel/node": "^7.5.5",
-    "@babel/preset-env": "^7.14.5",
-    "jasmine": "^3.4.0",
-    "jasmine-reporters": "^2.5.0",
-    "jasmine-spec-reporter": "^4.2.1",
+    "@babel/preset-env": "^7.15.6",
+    "angular": "^1.8.2",
+    "angular-mocks": "^1.8.2",
+    "babel-jest": "^27.2.1",
+    "eslint-plugin-jest": "^24.4.3",
+    "jest": "^27.2.1",
     "lerna": "^4.0.0"
   },
   "optionalDependencies": {
@@ -37,7 +40,5 @@
   "workspaces": [
     "custom/*"
   ],
-  "dependencies": {
-    "@babel/core": "^7.5.5"
-  }
+  "dependencies": {}
 }

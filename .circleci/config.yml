@@ -1,6 +1,6 @@
 docker-defaults: &docker-defaults
   docker:
-    - image: quay.io/nyulibraries/circleci_docker:18.06.3-dc-1.24.1-0
+    - image: cimg/base:2021.07
   working_directory: ~/app
 
 pull_docker: &pull_docker
@@ -48,16 +48,16 @@ jobs:
       - setup_remote_docker:
           version: 19.03.13
       - run:
-          name: Runs unit tests in Jasmine
+          name: Runs unit tests in Jest
           command: |
             mkdir -p junit
             docker-compose build unit-test
             docker-compose run unit-test
-            docker cp "$(docker ps -q -a -l -f name=unit-test)":/app/custom/spec/junit/. junit
+            docker cp "$(docker ps -q -a -l -f name=unit-test)":/app/custom/spec/coverage/. coverage
       - store_test_results:
-          path: junit
+          path: coverare
       - store_artifacts:
-          path: junit
+          path: coverage
 
   run-e2e-BHS:
     <<: *docker-defaults
