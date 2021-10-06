@@ -1,4 +1,4 @@
-#!/bin/sh -ex
+#!/bin/bash -ex
 
 # Exit if VIEW is not assigned
 [ $VIEW ] || (echo 'NO VIEW SPECIFIED. Please assign VIEW in environment' && exit 1)

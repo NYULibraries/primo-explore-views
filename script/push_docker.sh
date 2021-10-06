@@ -1,4 +1,4 @@
-#!/bin/sh -ex
+#!/bin/bash -ex
 
 docker tag primo-explore-views quay.io/nyulibraries/primo-explore-views:latest
 docker tag primo-explore-views quay.io/nyulibraries/primo-explore-views:${BRANCH_NO_SLASH}

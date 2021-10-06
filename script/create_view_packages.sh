@@ -1,4 +1,4 @@
-#!/bin/sh -ex
+#!/bin/bash -ex
 
 # This script creates package files only for a VIEW that has changed since origin/master.
 # All resuls will be copied locally to packages
