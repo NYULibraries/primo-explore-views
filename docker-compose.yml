@@ -29,14 +29,16 @@ services:
     <<: *x-ports
     environment:
       <<: *x-environment
-    volumes:
-    - ./custom:/app/primo-explore/custom/
+    # volumes:
+    #   - ./custom:/app/primo-explore/custom/
 
   unit-test:
     build:
       context: .
       dockerfile: ./custom/spec/Dockerfile
     image: primo-explore-views-unit-test
+    # volumes:
+    #   - ./custom:/app/custom/
 
   # Runs tests using production version dependencies
   # NODE_ENV=test will produce a production-like environment, including minified assets and a devserver without hot module reload
@@ -113,7 +115,7 @@ services:
     - ./modules:/app/primo-explore/modules/
 
   yarn:
-    image: node:10
+    image: node:12
     working_dir: /app
     entrypoint: ["yarn"]
     volumes:

@@ -8,10 +8,10 @@ angular
     template: customRequestsTemplate,
     controller: customRequestLoginComponentController,
   })
-  // "Request ILL" button component
-  .component('primoExploreCustomRequestIll', {
+  // "Request E-ZBorrow" and "Request ILL" button component
+  .component('primoExploreCustomRequestButton', {
     template: customRequestsTemplate,
-    controller: customRequestIllComponentController,
+    controller: customRequestButtonComponentController,
   })
   // Implement with prmLocationItemAfter
   // This controller 
@@ -22,34 +22,75 @@ angular
   .controller('customRequestsController', customRequestsController);
 
 // Controllers
-customRequestIllComponentController.$inject = ['$scope', '$window'];
-function customRequestIllComponentController($scope, $window) { 
+customRequestButtonComponentController.$inject = ['$scope', '$window'];
+function customRequestButtonComponentController($scope, $window) { 
   const ctrl = this;
 
   ctrl.$onInit = () => {
     const locationsCtrl = $scope.$parent.$ctrl.parentCtrl;
-    const illLink = ctrl.getitLink(locationsCtrl.item);
 
-    $scope.button = {
-      label: 'Request ILL',
+    $scope.button = ctrl.selectRequestButton(locationsCtrl);
+  };
+
+  ctrl.selectRequestButton = (locationsCtrl) => {
+    const vid = locationsCtrl.configurationUtil.vid;
+    const ezborrowLink = ctrl.getitLink(locationsCtrl.item, 'lln30');
+    const illLinkNyush = ctrl.getitLink(locationsCtrl.item, 'lln31');
+    const illLinkNyu = ctrl.getitLink(locationsCtrl.item, 'lln32');
+    const isNyuVid = () => ["NYU","NYUAD"].includes(vid);
+    const isNyushVid = () => ["NYUSH"].includes(vid);
+    let requestButton;
+
+    // If ezborrow link exists and vid is nyu or nyuad, use it
+    if (ezborrowLink && isNyuVid()) {
+      requestButton = ctrl.requestButton('Request E-ZBorrow', ezborrowLink);
+    // If nyush ill link exists and vid and nyush, use it
+    } else if (illLinkNyush && isNyushVid()) {
+      requestButton = ctrl.requestButton('Request ILL', illLinkNyush);
+    // If ill link exists use it
+    } else if (illLinkNyu) {
+      requestButton = ctrl.requestButton('Request ILL', illLinkNyu);
+    } else {
+      requestButton = ctrl.emptyButton();
+    }
+
+    // Use the empty button if there are no recognized links
+    // hidden by CSS
+    return requestButton;
+  };
+
+  ctrl.requestButton = (text, lln) => {
+    return {
+      label: text,
       prmIconAfter: externalLinkIcon,
-      href: illLink,
+      href: lln
     };
   };
 
-  ctrl.getitLink = (item) => {
+  ctrl.emptyButton = () => {
+    return {
+      label: 'Blank button',
+      prmIconAfter: null,
+      href: null,
+      id: 'blank-button'
+    };
+  };
+
+  ctrl.getitLink = (item, lln) => {
     // We do a try/catch in case the structure of this data changes
+    let getitLink;
+
     try {
-      const getitLink = item.delivery.link.filter(({ displayLabel }) => displayLabel === "lln40" );
-      return getitLink[0].linkURL;
+      const localLink = item.delivery.link.filter(({ linkType }) => linkType.endsWith(lln) );
+      getitLink = localLink[0].linkURL;
     } catch (error) {
-      console.warn("primo-explore-custom-requests: Cannot find getitLink in pnx link lln40.");
-      return '';
+      console.warn("primo-explore-custom-requests: Cannot find getitLink in pnx link " + lln);
     }
+    return getitLink;
   };
 
   ctrl.handleClick = (event, { href }) => {
-    event.stopPropagation();
+    event.stopPropagation();    
     href && $window.open(href);
   };
 
@@ -90,12 +131,12 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
   ctrl.$onInit = () => {
     const $target = $element.parent().children('div.md-list-item-text');
     // Fetch the item status text from the parent
-    ctrl.itemStatus = $scope.$parent.item._additionalData.itemstatusname;
+    ctrl.itemStatus = ctrl.getItemStatusName();
     $scope.hasOnlineLinks = () => ctrl.hasOnlineLinks();
-    // $scope.isLoggedIn = () => ctrl.parentCtrl.isLoggedIn();
+    // $scope.isLoggedIn = () => ctrl.parent().isLoggedIn();
     // Use custom login module so we can mock the value out in testing
     $scope.isLoggedIn = () => primoExploreCustomLoginService.isLoggedIn;
-    $scope.showRequestILL = () => ctrl.showRequestILL();
+    $scope.showRequestButton = () => ctrl.showRequestButton();
 
     // Hide "Request Scan" link when this item has any online links
     if (ctrl.hasOnlineLinks()) {
@@ -109,6 +150,15 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
   
   };
 
+  ctrl.getItemStatusName = () => {
+    return $scope.$parent.item._additionalData.itemstatusname;
+  };
+
+  // Abstracting this to a function so we can mock it easier in tests
+  ctrl.parent = () => {
+    return ctrl.parentCtrl;
+  };
+
   // Move custom element into prm-location element to match styles/spacing/etc
   ctrl.$postLink = () => {
     const $target = $element.parent().query('div.md-list-item-text');
@@ -119,18 +169,18 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
   // Determine if this item has any online links
   ctrl.hasOnlineLinks = () => {
     // Item has online links if pnx/search/lsr08 exists and contains the code Z_9CSC_0A09_0NYU_0
-    const availableOnlineField = ctrl.parentCtrl.item.pnx.search["lsr08"];
+    const availableOnlineField = ctrl.parent().item.pnx.search["lsr08"];
     const isAvailableOnline = availableOnlineField && availableOnlineField.some(type => type === "Z_9CSC_0A09_0NYU_0");
     // Cast undefined as a bool
     return !!isAvailableOnline;
   };
 
-  ctrl.showRequestILL = () => {
+  ctrl.showRequestButton = () => {
     return primoExploreCustomLoginService.isLoggedIn && ctrl.isUnavailableItem();
   };
 
   ctrl.isUnavailableItem = () => {
-    const isUnavailable = !checkIsAvailable(ctrl.itemStatus);
+    const isUnavailable = !checkIsAvailable(ctrl.getItemStatusName());
     return isUnavailable;
   };
 
@@ -153,3 +203,7 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
   };
 
 }
+
+export { customRequestButtonComponentController };
+export { customRequestLoginComponentController };
+export { customRequestsController };
