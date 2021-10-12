@@ -19,19 +19,50 @@ describe('customRequestIllComponentController', () => {
   describe('selectRequestButton', () => {
     let selectRequestButton;
     describe('when E-ZBorrow link exists', () => {
-      beforeAll( () => {
-        vid = 'NYU';
-        $scope = setupScope([lln30, lln31, lln32], vid);
-        locationsCtrl = $scope.$parent.$ctrl.parentCtl;
-      });
       beforeEach( () => {
         selectRequestButton = controller.selectRequestButton(locationsCtrl);
       });
-      it('should return an E-ZBorrow button', () => {
-        expect(selectRequestButton.label).toEqual("Request E-ZBorrow");
-        expect(selectRequestButton.href).toEqual("https://library.nyu.edu/lln30");
-        expect(selectRequestButton.prmIconAfter.icon).toEqual("ic_open_in_new_24px");
-        expect(selectRequestButton.prmIconAfter.set).toEqual("action");
+      describe('and vid is NYU', () => {
+        beforeAll( () => {
+          vid = 'NYU';
+          $scope = setupScope([lln30, lln31, lln32], vid);
+          locationsCtrl = $scope.$parent.$ctrl.parentCtl;
+        });
+        
+        it('should return an E-ZBorrow button', () => {
+          expect(selectRequestButton.label).toEqual("Request E-ZBorrow");
+          expect(selectRequestButton.href).toEqual("https://library.nyu.edu/lln30");
+          expect(selectRequestButton.prmIconAfter.icon).toEqual("ic_open_in_new_24px");
+          expect(selectRequestButton.prmIconAfter.set).toEqual("action");
+        });
+      });
+      describe('and vid is NYUAD', () => {
+        beforeAll( () => {
+          vid = 'NYUAD';
+          $scope = setupScope([lln30, lln31, lln32], vid);
+          locationsCtrl = $scope.$parent.$ctrl.parentCtl;
+        });
+        
+        it('should return an E-ZBorrow button', () => {
+          expect(selectRequestButton.label).toEqual("Request E-ZBorrow");
+          expect(selectRequestButton.href).toEqual("https://library.nyu.edu/lln30");
+          expect(selectRequestButton.prmIconAfter.icon).toEqual("ic_open_in_new_24px");
+          expect(selectRequestButton.prmIconAfter.set).toEqual("action");
+        });
+      });
+      describe('but vid is NYUSH', () => {
+        beforeAll( () => {
+          vid = 'NYUS';
+          $scope = setupScope([lln30, lln31, lln32], vid);
+          locationsCtrl = $scope.$parent.$ctrl.parentCtl;
+        });
+        
+        it('should NOT return an E-ZBorrow button', () => {
+          expect(selectRequestButton.label).toEqual("Request ILL");
+          expect(selectRequestButton.href).toEqual("https://library.nyu.edu/lln32");
+          expect(selectRequestButton.prmIconAfter.icon).toEqual("ic_open_in_new_24px");
+          expect(selectRequestButton.prmIconAfter.set).toEqual("action");
+        });
       });
     });
     describe('when NYUSH ILL link exists', () => {
