@@ -55,7 +55,7 @@ jobs:
             docker-compose run unit-test
             docker cp "$(docker ps -q -a -l -f name=unit-test)":/app/custom/spec/coverage/. coverage
       - store_test_results:
-          path: coverare
+          path: coverage
       - store_artifacts:
           path: coverage
 
