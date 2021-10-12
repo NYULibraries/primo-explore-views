@@ -38,8 +38,6 @@ describe('customRequestsController', () => {
   });
 
   describe('showRequestButton', () => {
-    beforeEach( () => {
-    });
     describe('when user is logged out', () => {
       beforeAll( () => {
         loggedIn = false;
@@ -74,7 +72,23 @@ describe('customRequestsController', () => {
     });
   });
 
-  // isUnavailableItem
-  // checkIsAvailable
+  describe('isUnavailableItem', () => {
+    describe('when item has an unavailable status', () => {
+      beforeEach( () => {
+        jest.spyOn(controller, 'getItemStatusName').mockReturnValue("Billed as Lost");
+      });
+      it('should return true', () => {
+        expect(controller.isUnavailableItem()).toBe(true);
+      });
+    });
+    describe('when item does not have an unavailable status', () => {
+      beforeEach( () => {
+        jest.spyOn(controller, 'getItemStatusName').mockReturnValue("Available");
+      });
+      it('should return false', () => {
+        expect(controller.isUnavailableItem()).toBe(false);
+      });
+    });
+  });
   
 });
