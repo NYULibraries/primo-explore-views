@@ -1,5 +1,7 @@
 import customRequestsTemplate from 'Common/html/custom_requests_template.html';
 
+// <primo-explore-custom-available-button ng-show="showAvailableButton()"></primo-explore-custom-available-button>
+
 angular
   // Name our module
   .module('customRequests', [])
@@ -13,6 +15,11 @@ angular
     template: customRequestsTemplate,
     controller: customRequestButtonComponentController,
   })
+  // Available button
+  .component('primoExploreCustomAvailableButton', {
+    template: customRequestsTemplate,
+    controller: customAvailableComponentController,
+  })
   // Implement with prmLocationItemAfter
   // This controller 
   //  - hides "Request Scan" when there are online links
@@ -20,6 +27,11 @@ angular
   //  - shows "Request ILL" component that links to ILLiad
   //  - shows "Login for options" component when logged out
   .controller('customRequestsController', customRequestsController);
+
+const externalLinkIcon = {
+  icon: "ic_open_in_new_24px",
+  set: "action",
+};
 
 // Controllers
 customRequestButtonComponentController.$inject = ['$scope', '$window'];
@@ -33,6 +45,7 @@ function customRequestButtonComponentController($scope, $window) {
   };
 
   ctrl.selectRequestButton = (locationsCtrl) => {
+    console.log(locationsCtrl);
     const vid = locationsCtrl.configurationUtil.vid;
     const ezborrowLink = ctrl.getitLink(locationsCtrl.item, 'lln30');
     const illLinkNyush = ctrl.getitLink(locationsCtrl.item, 'lln31');
@@ -94,10 +107,6 @@ function customRequestButtonComponentController($scope, $window) {
     href && $window.open(href);
   };
 
-  const externalLinkIcon = {
-    icon: "ic_open_in_new_24px",
-    set: "action",
-  };
   
 }
 
@@ -124,6 +133,25 @@ function customRequestLoginComponentController($scope, $injector) {
   };
 }
 
+customAvailableComponentController.$inject = ['$scope', '$window'];
+function customAvailableComponentController($scope, $window) {
+  const ctrl = this;
+
+  ctrl.$onInit = () => {
+    $scope.button = {
+      label: 'Check stacks for location',
+      //action: ($injector) => $injector.get('primoExploreCustomLoginService').login(),
+      prmIconAfter: externalLinkIcon,
+      href: 'https://library.nyu.edu'
+    };
+  };
+
+  ctrl.handleClick = (event, { href }) => {
+    event.stopPropagation();    
+    href && $window.open(href);
+  };
+}
+
 customRequestsController.$inject = ['$scope', '$element', 'primoExploreCustomLoginService'];
 function customRequestsController($scope, $element, primoExploreCustomLoginService) {
   const ctrl = this;
@@ -137,6 +165,7 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
     // Use custom login module so we can mock the value out in testing
     $scope.isLoggedIn = () => primoExploreCustomLoginService.isLoggedIn;
     $scope.showRequestButton = () => ctrl.showRequestButton();
+    $scope.showAvailableButton = () => ctrl.showAvailableButton();
 
     // Hide "Request Scan" link when this item has any online links
     if (ctrl.hasOnlineLinks()) {
@@ -177,6 +206,10 @@ function customRequestsController($scope, $element, primoExploreCustomLoginServi
 
   ctrl.showRequestButton = () => {
     return primoExploreCustomLoginService.isLoggedIn && ctrl.isUnavailableItem();
+  };
+
+  ctrl.showAvailableButton = () => {
+    return primoExploreCustomLoginService.isLoggedIn && !ctrl.isUnavailableItem();
   };
 
   ctrl.isUnavailableItem = () => {

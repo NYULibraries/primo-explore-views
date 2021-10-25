@@ -145,6 +145,7 @@ app
       >
         <primo-explore-custom-request-button ng-show="showRequestButton()"></primo-explore-custom-request-button>
         <primo-explore-custom-request-login ng-hide="isLoggedIn()"></primo-explore-custom-request-login>
+        <primo-explore-custom-available-button ng-show="showAvailableButton()"></primo-explore-custom-available-button>
       </primo-explore-custom-request-wrapper>
     `,
     require: {
