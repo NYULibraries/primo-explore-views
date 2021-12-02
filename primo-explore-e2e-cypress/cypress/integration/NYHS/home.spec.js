@@ -30,7 +30,6 @@ describe('The Home Page', function () {
       ["Manuscript Collections Finding Aids"]: `http://www.nyhistory.org/library/findingaids/manuscripts`,
       ["Graphic Collections Finding Aids"]: `http://www.nyhistory.org/library/findingaids/printroom`,
       ["Full-text Finding Aid Search"]: `https://specialcollections.library.nyu.edu/search/?f%5Brepository_sim%5D%5B%5D=nyhs`,
-      ["Printed Maps Database"]: `http://dlib.nyu.edu/nyhs/`,
       ["Dining Menu Collection"]: `http://www.nyhistory.org/sites/default/files/Menu_Collection.pdf`,
       ["Hotel File Collection"]: `http://www.nyhistory.org/library/research/hotel-files`,
       ["Digital Collections"]: `http://www.nyhistory.org/library/digital-collections`,
