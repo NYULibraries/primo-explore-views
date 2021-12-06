@@ -52,7 +52,7 @@ describe('primo-explore-custom-request-wrapper', () => {
         // PRIMOCIRCTEST-BOBST-MAIN-09-ZZ
         // cy.visit('/fulldisplay?docid=nyu_aleph008073830&vid=NYUSH', {
         // Need a new record that is unavailable
-        cy.visit('/fulldisplay?docid=nyu_aleph002682046&vid=NYUSH', {
+        cy.visit('/fulldisplay?docid=nyu_aleph008073830&vid=NYUSH', {
           onBeforeLoad: (contentWindow) => {
             contentWindow.$$mockUserLoggedIn = true
             contentWindow.$$mockUser = {
