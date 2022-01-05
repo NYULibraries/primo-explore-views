@@ -5,5 +5,6 @@ export default {
     defaultUrls: {
       eshelfBaseUrl: 'https://eshelf-dev.library.nyu.edu',
     },
+    toolbar: 'Saved Items'
   }
 };
