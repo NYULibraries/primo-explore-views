@@ -28,7 +28,6 @@ describe('The Home Page', function () {
       ["Ask A Librarian"]: `https://library.nyu.edu/ask/`,
       ["InterLibrary Loan"]: `https://library.nyu.edu/services/borrowing/from-non-nyu-libraries/interlibrary-loan/`,
       ["expert curated research guides"]: `http://guides.nyu.edu`,
-      ["our social media"]: `https://www.instagram.com/nyulibraries/`,
       ["WorldCat"]: `https://www.worldcat.org/search?qt=worldcat_org_all`,
     }
 
