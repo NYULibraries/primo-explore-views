@@ -23,6 +23,7 @@ import 'Common/js/sendToCourseReserves';
 // HTML to JS imports
 import customRequestsRequestInformationTemplate from 'Common/html/custom_requests_request_information.html';
 import citationLinkerAfterTemplate from 'Common/html/citation_linker_after.html';
+import illiadMyRequestsInformationTemplate from 'Common/html/illiad_my_requests_information.html';
 
 let app = angular.module('viewCustom', [
   'customActions',
@@ -103,6 +104,9 @@ app
   // TODO: We might want to remove this component.  See https://github.com/NYULibraries/primo-explore-views/issues/328.
   .component('prmRequestAfter', {
     template: `${customRequestsRequestInformationTemplate}`
+  })
+  .component('prmRequestsAfter', {
+    template: `${illiadMyRequestsInformationTemplate}`
   })
   .component('prmCitationLinkerAfter', {
     controller: ['$element', function ($element) {

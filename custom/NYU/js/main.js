@@ -29,6 +29,7 @@ import appendStatusEmbed from 'Common/js/statusPageEmbed';
 // HTML as JS imports
 import customRequestsRequestInformationTemplate from 'Common/html/custom_requests_request_information.html';
 import citationLinkerAfterTemplate from 'Common/html/citation_linker_after.html';
+import illiadMyRequestsInformationTemplate from 'Common/html/illiad_my_requests_information.html';
 
 let app = angular.module('viewCustom', [
   'angularLoad',
@@ -124,7 +125,7 @@ app
   })
   .component('prmSearchBarAfter', {
     template: /*html*/ `<search-bar-sub-menu></search-bar-sub-menu>`
-  })  
+  })
   .component('prmUserAreaExpandableAfter', {
     template: /*html*/ `<primo-explore-custom-login></primo-explore-custom-login>`
   })
@@ -158,6 +159,9 @@ app
   // TODO: We might want to remove this component.  See https://github.com/NYULibraries/primo-explore-views/issues/328.
   .component('prmRequestAfter', {
     template: `${customRequestsRequestInformationTemplate}`
+  })
+  .component('prmRequestsAfter', {
+    template: `${illiadMyRequestsInformationTemplate}`
   })
   .component('prmCitationLinkerAfter', {
     controller: ['$element', function($element) {
