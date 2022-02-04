@@ -155,6 +155,7 @@ app
   .component('prmLocationItemsAfter', {
     template: `${customRequestsRequestInformationTemplate}`
   })
+  // TODO: We might want to remove this component.  See https://github.com/NYULibraries/primo-explore-views/issues/328.
   .component('prmRequestAfter', {
     template: `${customRequestsRequestInformationTemplate}`
   })
