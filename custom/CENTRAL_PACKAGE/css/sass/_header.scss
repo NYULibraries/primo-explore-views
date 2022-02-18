@@ -69,7 +69,8 @@ md-menu-content {
 // Hide menu items we're not yet implementing
 md-menu-content {
   md-menu-divider,
-  .my-library-card-ctm,
+  // Un-hide link to My Accounts pages
+  // .my-library-card-ctm,
   .my-loans-ctm,
   .my-requests-ctm,
   // WARNING: this class name has a typo in it ("favorites" is misspelled "favorties").
