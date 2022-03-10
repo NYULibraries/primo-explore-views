@@ -36,14 +36,14 @@ button[class*="custom-request-"] {
   }
 }
 
-.custom-requests-hide-request-scan { 
-  prm-service-button > button[aria-label="Request Scan"] {
+.custom-requests-hide-request-scan {
+  prm-service-button > button[aria-label*="Request Scan"] {
     display: none !important;
   }
 }
 
-.custom-requests-hide-request  { 
-  prm-service-button > button[aria-label="Request Physical Copy"] {
+.custom-requests-hide-request {
+  prm-service-button > button[aria-label*="Request Physical Copy"] {
     display: none !important;
   }
 }
