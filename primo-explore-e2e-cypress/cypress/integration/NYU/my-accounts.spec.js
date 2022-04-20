@@ -55,13 +55,15 @@ describe('My Account', function () {
     // Here we see that we can successfully login in a separate initial test where
     // we visit dev.login.library.nyu.edu directly instead of clicking on Login in
     // Primo.  Unfortunately the second test appears to not benefit from the first test's
-    // successful login.
-    describe('Do login in initial test by visiting dev.login.library.nyu.edu directly', function () {
+    // successful login, because it apparently (and unsurprisingly) happens in a separate session.
+    describe.only('Do login in initial test by visiting dev.login.library.nyu.edu directly', function () {
         it('Login as Aleph test user', function () {
             devLogin()
         })
 
         it('Load local Primo after the first test has performed the login', function () {
+            printSessionStorageData()
+
             cy.visit('http://localhost:8004/primo-explore/search?vid=NYU')
 
             // If the user is still not logged in, click Login again, which often
