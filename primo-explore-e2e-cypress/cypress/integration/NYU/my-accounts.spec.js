@@ -4,7 +4,7 @@ describe('My Account', function () {
     const password = 'TEST'
 
     // NOTE: These functions were originally inlined in the individual tests, just
-    // in case Cypress that.  Later the code was extracted into these functions.
+    // in case Cypress required that.  Later the code was extracted into these functions.
     // The results are the same either way.
     function devLogin() {
         cy.visit('https://dev.login.library.nyu.edu')
