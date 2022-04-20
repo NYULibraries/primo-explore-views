@@ -32,8 +32,23 @@ describe('My Account', function () {
 
     // Minimum reproducible example demonstrating that the workaround documented here:
     // https://docs.cypress.io/guides/guides/web-security#Set-chromeWebSecurity-to-false
-    // ...does not work.
-    describe('Barebones test of `chromeWebSecurity:false` workaround', function () {
+    // ...does not work.  Fails with error:
+    //
+    // CypressError: cy.visit() failed because you are attempting to visit a second unique domain.
+    //
+    //     You may only visit a single unique domain per test.
+    //
+    //     Different subdomains are okay, but unique domains are not.
+    //
+    //     The previous domain you visited was: 'https://www.google.com'
+    //
+    // You're attempting to visit this new domain: 'https://nyu.edu'
+    //
+    //     You may need to restructure some of your code to prevent this from happening.
+    //
+    //     https://on.cypress.io/cannot-visit-second-unique-domain
+    //
+    describe.only('Barebones test of `chromeWebSecurity:false` workaround', function () {
         it('Visit two different domains in succession', function () {
             cy.log(`chromeWebSecurity = ${ JSON.stringify(Cypress.config('chromeWebSecurity') , null, '    ')}`)
 
