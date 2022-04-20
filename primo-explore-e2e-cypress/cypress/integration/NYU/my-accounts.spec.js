@@ -23,6 +23,13 @@ describe('My Account', function () {
         cy.get('input[type=submit]').click()
     }
 
+    // Helper function for debugging
+    function printSessionStorageData() {
+        cy.window().then(win => {
+            cy.log(JSON.stringify(win.sessionStorage, null, '   '))
+        })
+    }
+
     // Minimum reproducible example demonstrating that the workaround documented here:
     // https://docs.cypress.io/guides/guides/web-security#Set-chromeWebSecurity-to-false
     // ...does not work.
