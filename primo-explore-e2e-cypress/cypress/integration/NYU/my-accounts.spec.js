@@ -23,6 +23,18 @@ describe('My Account', function () {
         cy.get('input[type=submit]').click()
     }
 
+    // Minimum reproducible example demonstrating that the workaround documented here:
+    // https://docs.cypress.io/guides/guides/web-security#Set-chromeWebSecurity-to-false
+    // ...does not work.
+    describe('Barebones test of `chromeWebSecurity:false` workaround', function () {
+        it('Visit two different domains in succession', function () {
+            cy.log(`chromeWebSecurity = ${ JSON.stringify(Cypress.config('chromeWebSecurity') , null, '    ')}`)
+
+            cy.visit('https://www.google.com')
+            cy.visit('https://nyu.edu')
+        })
+    })
+
     // This fails because the "chromeWebSecurity":false workaround does not actually
     // work.  The single-origin per test limitation appears to be keeping the login from happening.
     describe('Do normal login relying solely on the "chromeWebSecurity":false workaround', function () {
