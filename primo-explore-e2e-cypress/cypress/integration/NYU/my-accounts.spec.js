@@ -23,6 +23,10 @@ describe('My Account', function () {
         cy.get('input[type=submit]').click()
     }
 
+    function printChromeWebSecurityConfigValue() {
+        cy.log(`chromeWebSecurity = ${ JSON.stringify(Cypress.config('chromeWebSecurity') , null, '    ')}`)
+    }
+
     // Helper function for debugging
     function printSessionStorageData() {
         cy.window().then(win => {
@@ -50,7 +54,7 @@ describe('My Account', function () {
     //
     describe.only('Barebones test of `chromeWebSecurity:false` workaround', function () {
         it('Visit two different domains in succession', function () {
-            cy.log(`chromeWebSecurity = ${ JSON.stringify(Cypress.config('chromeWebSecurity') , null, '    ')}`)
+            printChromeWebSecurityConfigValue()
 
             cy.visit('https://www.google.com')
             cy.visit('https://nyu.edu')
