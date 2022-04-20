@@ -40,6 +40,8 @@ describe('My Account', function () {
     describe('Do normal login relying solely on the "chromeWebSecurity":false workaround', function () {
         it('Login using Login button', function () {
             primoLogin()
+
+            cy.visit('http://localhost:8004/primo-explore/search?vid=NYU')
         })
     })
 
