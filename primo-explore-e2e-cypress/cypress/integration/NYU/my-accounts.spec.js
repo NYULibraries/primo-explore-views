@@ -15,7 +15,7 @@ describe('My Account', function () {
     }
 
     function primoLogin() {
-        cy.visit('http://localhost:8004/primo-explore/search?vid=NYU')
+        cy.visit('/primo-explore/search?vid=NYU')
         cy.get('button').contains('Login').click()
         cy.get('a').contains('Other Borrowers').click()
         cy.get('input[name=username]').type(username)
@@ -69,7 +69,7 @@ describe('My Account', function () {
 
             primoLogin()
 
-            cy.visit('http://localhost:8004/primo-explore/search?vid=NYU')
+            cy.visit('/primo-explore/search?vid=NYU')
         })
     })
 
@@ -89,7 +89,7 @@ describe('My Account', function () {
 
             printSessionStorageData()
 
-            cy.visit('http://localhost:8004/primo-explore/search?vid=NYU')
+            cy.visit('/primo-explore/search?vid=NYU')
 
             // If the user is still not logged in, click Login again, which often
             // causes login to magically happen without having to go through the
@@ -113,7 +113,7 @@ describe('My Account', function () {
     //
     //     The previous domain you visited was: 'https://dev.login.library.nyu.edu'
     //
-    //     You're attempting to visit this new domain: 'http://localhost:8004'
+    //     You're attempting to visit this new domain: ''
     //
     //     You may need to restructure some of your code to prevent this from happening.
     //
@@ -131,7 +131,7 @@ describe('My Account', function () {
         it('Load local Primo after the before() hook has performed the login', function () {
             printChromeWebSecurityConfigValue()
 
-            cy.visit('http://localhost:8004/primo-explore/search?vid=NYU')
+            cy.visit('/primo-explore/search?vid=NYU')
         })
     })
 
@@ -145,7 +145,7 @@ describe('My Account', function () {
     //
     //     The previous domain you visited was: 'https://dev.login.library.nyu.edu'
     //
-    //     You're attempting to visit this new domain: 'http://localhost:8004'
+    //     You're attempting to visit this new domain: ''
     //
     //     You may need to restructure some of your code to prevent this from happening.
     //
@@ -163,7 +163,7 @@ describe('My Account', function () {
         it('Load local Primo after the beforeEach() hook has performed the login', function () {
             printChromeWebSecurityConfigValue()
 
-            cy.visit('http://localhost:8004/primo-explore/search?vid=NYU')
+            cy.visit('/primo-explore/search?vid=NYU')
         })
     })
 
@@ -184,14 +184,14 @@ describe('My Account', function () {
             printChromeWebSecurityConfigValue()
 
             cy.devLoginCypressCommand()
-            cy.visit('http://localhost:8004/primo-explore/search?vid=NYU')
+            cy.visit('/primo-explore/search?vid=NYU')
         })
 
         it('Run cy.primoLoginCypressCommand then load local Primo', function () {
             printChromeWebSecurityConfigValue()
 
             cy.primoLoginCypressCommand()
-            cy.visit('http://localhost:8004/primo-explore/search?vid=NYU')
+            cy.visit('/primo-explore/search?vid=NYU')
         })
     })
 })
