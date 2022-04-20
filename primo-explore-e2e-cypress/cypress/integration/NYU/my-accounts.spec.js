@@ -52,7 +52,7 @@ describe('My Account', function () {
     //
     //     https://on.cypress.io/cannot-visit-second-unique-domain
     //
-    describe.only('Barebones test of `chromeWebSecurity:false` workaround', function () {
+    describe('Barebones test of `chromeWebSecurity:false` workaround', function () {
         it('Visit two different domains in succession', function () {
             printChromeWebSecurityConfigValue()
 
