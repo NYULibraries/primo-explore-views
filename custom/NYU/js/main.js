@@ -27,7 +27,14 @@ import 'Common/js/sendToCourseReserves';
 import appendStatusEmbed from 'Common/js/statusPageEmbed';
 
 // HTML as JS imports
-import customRequestsRequestInformationTemplate from 'Common/html/custom_requests_request_information.html';
+// TODO: We might only need one template `customRequestsRequestInformationTemplate`.
+// `customRequestsRequestInformationCommonTemplate` is being used for the "prmRequestAfter"
+// component (singular, as opposed to the "prmRequestsAfter" component, plural).
+// This component might be obsolete or in fact a buggy implementation (typo in component name?).
+// See https://github.com/NYULibraries/primo-explore-views/issues/328, and also the "prmRequestAfter"
+// component definition later in this file.
+import customRequestsRequestInformationCommonTemplate from 'Common/html/custom_requests_request_information.html';
+import customRequestsRequestInformationNYUTemplate from '../html/custom_requests_request_information.html';
 import citationLinkerAfterTemplate from 'Common/html/citation_linker_after.html';
 import illiadMyRequestsInformationTemplate from 'Common/html/illiad_my_requests_information.html';
 
@@ -154,11 +161,11 @@ app
     controller: 'customRequestsController',
   })
   .component('prmLocationItemsAfter', {
-    template: `${customRequestsRequestInformationTemplate}`
+    template: `${customRequestsRequestInformationNYUTemplate}`
   })
   // TODO: We might want to remove this component.  See https://github.com/NYULibraries/primo-explore-views/issues/328.
   .component('prmRequestAfter', {
-    template: `${customRequestsRequestInformationTemplate}`
+    template: `${customRequestsRequestInformationCommonTemplate}`
   })
   .component('prmRequestsAfter', {
     template: `${illiadMyRequestsInformationTemplate}`
