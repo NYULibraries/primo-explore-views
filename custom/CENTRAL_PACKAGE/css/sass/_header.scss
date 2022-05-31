@@ -69,16 +69,9 @@ md-menu-content {
 // Hide menu items we're not yet implementing
 md-menu-content {
   md-menu-divider,
-  // Un-hide link to My Accounts pages
-  // .my-library-card-ctm,
+  .my-library-card-ctm,
   .my-loans-ctm,
   .my-requests-ctm,
-  // WARNING: this class name has a typo in it ("favorites" is misspelled "favorties").
-  // There is a risk that in the future the Primo devs will fix this typo and thus
-  // cause the "My Favorites" menu item to become unhidden.
-  // We could preemptively add the correctly spelled class name .my-favorites-ctm
-  // to this list, but we prefer instead to let it break and let the tests catch
-  // it, so that we are alerted to the change.
   .my-favorties-ctm,
   .ovl-button-ctm {
     display: none !important;
