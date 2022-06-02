@@ -8,7 +8,6 @@ export default {
     },
     "bobcat.library.nyu.edu": {
       institution: "NYUSH"
-    },
-    toolbar: 'Saved Items'
+    }
   }
 };
