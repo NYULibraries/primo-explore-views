@@ -33,7 +33,7 @@ describe('The Home Page', function () {
       ["Dining Menus"]: `https://www.nyhistory.org/library`,
       ["Hotel Files"]: `https://www.nyhistory.org/library`,
       ["Apartment Building Files"]: `https://www.nyhistory.org/library`,
-      ["Digital Library"]: `https://www.nyhistory.org/library`,
+      ["Digital Library"]: `https://digitalcollections.nyhistory.org/`,
       ["Onsite Electronic Resources"]: `https://www.nyhistory.org/library`,
       ["E-mail Reference Form"]: `http://www.nyhistory.org/library/reference-assistance`,
       ["Rights and Reproductions"]: `http://www.nyhistory.org/about/rights-reproductions`,
