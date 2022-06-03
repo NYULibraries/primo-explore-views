@@ -29,16 +29,16 @@ services:
     <<: *x-ports
     environment:
       <<: *x-environment
-    # volumes:
-    #   - ./custom:/app/primo-explore/custom/
+    volumes:
+      - ./custom:/app/primo-explore/custom/
 
   unit-test:
     build:
       context: .
       dockerfile: ./custom/spec/Dockerfile
     image: primo-explore-views-unit-test
-    # volumes:
-    #   - ./custom:/app/custom/
+    volumes:
+      - ./custom:/app/custom/
 
   # Runs tests using production version dependencies
   # NODE_ENV=test will produce a production-like environment, including minified assets and a devserver without hot module reload
@@ -50,8 +50,8 @@ services:
       <<: *x-environment
       NODE_ENV: test
     <<: *x-ports
-    # volumes:
-    # - ./custom:/app/primo-explore/custom/
+    volumes:
+    - ./custom:/app/primo-explore/custom/
 
   # Creates VIEW packages using production version dependencies
   # Builds to /app/packages
@@ -64,9 +64,9 @@ services:
       NODE_ENV: ${NODE_ENV-staging}
       PACK: 'true'
     command: yarn build
-    # volumes:
-    # - ./packages/:/app/packages
-    # - ./custom:/app/primo-explore/custom/
+    volumes:
+    - ./packages/:/app/packages
+    - ./custom:/app/primo-explore/custom/
 
   # Runs e2e tests against the web-test service (defined above)
   # Uses only production version of modules published on NPM
@@ -86,9 +86,9 @@ services:
       DOMAIN: http://web-test:8004/primo-explore/search
       NODE_ENV: test
       CYPRESS_BASE_URL: http://web-test:8004/primo-explore/
-    # volumes:
-    # - ./primo-explore-e2e-cypress/cypress/:/app/cypress
-    # - ./custom:/app/primo-explore/custom/
+    volumes:
+    - ./primo-explore-e2e-cypress/cypress/:/app/cypress
+    - ./custom:/app/primo-explore/custom/
 
 
   # Dockerfile that relies on local symlink to 'modules' if required version matches current version
