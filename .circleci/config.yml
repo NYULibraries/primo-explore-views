@@ -46,7 +46,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          version: 20.10.2
+          version: 19.03.13
       - run:
           name: Runs unit tests in Jest
           command: |
