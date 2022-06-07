@@ -1,4 +1,4 @@
-FROM cypress/browsers:node12.18.3-chrome89-ff86
+FROM cypress/browsers:node14.17.6-chrome100-ff98
 
 ENV INSTALL_PATH /app
 
