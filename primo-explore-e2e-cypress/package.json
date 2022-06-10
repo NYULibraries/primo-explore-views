@@ -6,7 +6,8 @@
   "author": "Elliott Grieco",
   "license": "MIT",
   "private": true,
-  "devDependencies": {
-    "cypress": "^3.3.1"
+  "devDependencies": {},
+  "dependencies": {
+    "cypress": "^10.1.0"
   }
 }
