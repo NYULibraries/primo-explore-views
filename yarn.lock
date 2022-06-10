@@ -7781,6 +7781,14 @@ primo-explore-google-analytics@1.2.3:
     angulartics "^1.6.0"
     angulartics-google-tag-manager "^0.0.1"
 
+primo-explore-google-analytics@1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/primo-explore-google-analytics/-/primo-explore-google-analytics-1.2.4.tgz#30908c805c318ee2308e2401b1d896f8a6b77549"
+  integrity sha512-4esNRex2Y6zTVbYPbmkBUxRC+g9G79qM10ss+7nntXv1KPBrAhM1bBm0Uw/DJbRVqTl3D/+UYwoMwjzvVUbKaQ==
+  dependencies:
+    angulartics "^1.6.0"
+    angulartics-google-tag-manager "^0.0.1"
+
 primo-explore-libraryh3lp-widget@1.1.9:
   version "1.1.9"
   resolved "https://registry.yarnpkg.com/primo-explore-libraryh3lp-widget/-/primo-explore-libraryh3lp-widget-1.1.9.tgz#b8f8e618e5e7860d1a6eea5ef27f813e623a36f1"
