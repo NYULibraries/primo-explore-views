@@ -8,6 +8,6 @@
   "private": true,
   "devDependencies": {},
   "dependencies": {
-    "cypress": "^10.1.0"
+    "cypress": "9.7.0"
   }
 }
