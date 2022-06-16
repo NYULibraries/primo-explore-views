@@ -8,6 +8,7 @@ export default {
     },
     "bobcat.library.nyu.edu": {
       institution: "NYUAD"
-    }
+    },
+    toolbar: 'Saved Items'
   }
 };
