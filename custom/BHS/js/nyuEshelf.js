@@ -1,16 +1,16 @@
 export let nyuEshelfConfig = {
   name: 'nyuEshelfConfig',
   config: {
-    myEshelfButtonClasses: 'button-over-dark search-bookmark-filter-item',
-    toolbar: 'temporary e-Shelf',
-    inGuestEshelf: 'In temporary e-Shelf',
-    loginToSave: '',
+    "bobcat.library.nyu.edu": {
+      institution: "BHS"
+    },
     defaultUrls: {
       institution: "BHS",
       eshelfBaseUrl: 'https://eshelf-dev.library.nyu.edu',
     },
-    "bobcat.library.nyu.edu": {
-      institution: "BHS"
-    }
+    inGuestEshelf: 'In temporary e-Shelf',
+    loginToSave: '',
+    myEshelfButtonClasses: 'button-over-dark search-bookmark-filter-item',
+    toolbar: 'temporary e-Shelf',
   }
 };

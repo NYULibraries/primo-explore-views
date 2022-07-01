@@ -1,13 +1,13 @@
 export let nyuEshelfConfig = {
   name: 'nyuEshelfConfig',
   config: {
-    myEshelfButtonClasses: 'search-bookmark-filter-item',
+    "bobcat.library.nyu.edu": {
+      institution: "NYSID"
+    },
     defaultUrls: {
       institution: "NYSID",
       eshelfBaseUrl: 'https://eshelf-dev.library.nyu.edu',
     },
-    "bobcat.library.nyu.edu": {
-      institution: "NYSID"
-    }
+    myEshelfButtonClasses: 'search-bookmark-filter-item',
   }
 };
