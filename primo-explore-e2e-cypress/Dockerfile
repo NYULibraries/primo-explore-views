@@ -1,5 +1,11 @@
 FROM cypress/browsers:node12.18.3-chrome87-ff82
 
+# update apt due to outdated base image
+SHELL ["/bin/bash", "-eo", "pipefail", "-c"]
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -  \
+      && apt-get update --allow-releaseinfo-change \
+      && rm -rf /var/lib/apt/lists/*
+
 ENV INSTALL_PATH /app
 
 WORKDIR ${INSTALL_PATH}
