@@ -1,6 +1,7 @@
 describe('when searching', () => {
   before(() => {
     cy.visit('/search?vid=NYU')
+    cy.visit('/search?vid=NYU')
   })
 
   it('allows for a basic search', () => {
