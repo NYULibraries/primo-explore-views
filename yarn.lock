@@ -7801,9 +7801,9 @@ primo-explore-nyu-eshelf@3.2.1:
   dependencies:
     angular-sanitize "1.6.10"
 
-primo-explore-nyu-eshelf@NYULibraries/primo-explore-nyu-eshelf#feature/update-add-to-e-shelf-label-to-saved-items-2684152812:
+"primo-explore-nyu-eshelf@git+https://github.com/NYULibraries/primo-explore-nyu-eshelf.git#feature/update-add-to-e-shelf-label-to-saved-items-2684152812":
   version "3.2.1"
-  resolved "https://codeload.github.com/NYULibraries/primo-explore-nyu-eshelf/tar.gz/8c7d033069380361b1d040403e9f82523411f06d"
+  resolved "git+https://github.com/NYULibraries/primo-explore-nyu-eshelf.git#d3772ecf937b548ebf6d21aae1f726a52e4b0415"
   dependencies:
     angular-sanitize "1.6.10"
 
