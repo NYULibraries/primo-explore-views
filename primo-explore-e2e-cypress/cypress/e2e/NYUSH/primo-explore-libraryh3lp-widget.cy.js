@@ -11,7 +11,7 @@ describe('primo-explore-libraryh3lp-widget', () => {
 
     it('does not have a visible libraryh3lp element', () => {
       cy.get('.libraryh3lp')
-        .should('not.be.visible')
+        .should('not.exist')
     })
 
     it('does not have a visible close button', () => {
