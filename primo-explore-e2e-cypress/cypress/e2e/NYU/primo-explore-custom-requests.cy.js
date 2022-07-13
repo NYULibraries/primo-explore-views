@@ -65,7 +65,7 @@ describe('primo-explore-custom-request-wrapper', () => {
 
       it('does not have visible primo-explore-custom-request-wrapper options', () => {
         cy.get('primo-explore-custom-request-wrapper')
-          .should('not.be.visible')
+          .should('not.exist')
       })
 
       xit(`has visible 'Request ILL' button`, () => {
