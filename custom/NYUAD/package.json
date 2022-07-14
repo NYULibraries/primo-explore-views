@@ -23,7 +23,7 @@
     "primo-explore-custom-library-card-menu": "1.1.11",
     "primo-explore-custom-login": "2.0.7",
     "primo-explore-libraryh3lp-widget": "1.1.9",
-    "primo-explore-nyu-eshelf": "git+https://github.com/NYULibraries/primo-explore-nyu-eshelf.git#feature/update-add-to-e-shelf-label-to-saved-items-2684152812",
+    "primo-explore-nyu-eshelf": "^3.3.0",
     "primo-explore-search-bar-sub-menu": "1.0.14"
   },
   "devDependencies": {}
