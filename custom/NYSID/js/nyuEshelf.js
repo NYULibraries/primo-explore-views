@@ -1,13 +1,19 @@
 export let nyuEshelfConfig = {
-  name: 'nyuEshelfConfig',
+  name: "nyuEshelfConfig",
   config: {
-    myEshelfButtonClasses: 'search-bookmark-filter-item',
+    adding: "Adding to Saved Items...",
+    addToEshelf: "Add to Saved Items",
+    ariaLabel: "Toggle in Saved Items",
+    "bobcat.library.nyu.edu": {
+      institution: "NYSID",
+    },
+    deleting: "Removing from Saved Items...",
     defaultUrls: {
       institution: "NYSID",
-      eshelfBaseUrl: 'https://eshelf-dev.library.nyu.edu',
+      eshelfBaseUrl: "https://eshelf-dev.library.nyu.edu",
     },
-    "bobcat.library.nyu.edu": {
-      institution: "NYSID"
-    }
-  }
+    inEshelf: "In Saved Items",
+    inGuestEshelf: "In guest Saved Items",
+    myEshelfButtonClasses: "search-bookmark-filter-item",
+  },
 };

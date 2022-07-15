@@ -1,14 +1,20 @@
 export default {
-  name: 'nyuEshelfConfig',
+  name: "nyuEshelfConfig",
   config: {
-    myEshelfButtonClasses: 'button-over-dark search-bookmark-filter-item',
+    adding: "Adding to Saved Items...",
+    addToEshelf: "Add to Saved Items",
+    ariaLabel: "Toggle in Saved Items",
+    "bobcat.library.nyu.edu": {
+      institution: "NYUSH",
+    },
+    inEshelf: "In Saved Items",
+    inGuestEshelf: "In guest Saved Items",
     defaultUrls: {
       institution: "NYUSH",
-      eshelfBaseUrl: 'https://eshelf-dev.library.nyu.edu',
+      eshelfBaseUrl: "https://eshelf-dev.library.nyu.edu",
     },
-    "bobcat.library.nyu.edu": {
-      institution: "NYUSH"
-    },
-    toolbar: 'Saved Items'
-  }
+    deleting: "Removing from Saved Items...",
+    myEshelfButtonClasses: "button-over-dark search-bookmark-filter-item",
+    toolbar: "Saved Items",
+  },
 };
