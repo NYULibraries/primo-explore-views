@@ -1,7 +1,11 @@
 describe('Checks hidden elements', function() {
   describe('citation linker', function() {
     before(function() {
-      cy.visit(`/citationlinker?vid=NYU`)
+      cy.visit(`/citationlinker?vid=NYU`, {
+        qs: {
+          testAngularCompatibility: true,
+        }
+      })
     })
 
     describe('radio options', function() {

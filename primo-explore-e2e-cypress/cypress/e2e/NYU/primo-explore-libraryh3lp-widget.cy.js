@@ -1,7 +1,11 @@
 describe('primo-explore-libraryh3lp-widget', () => {
   describe('when visiting the homepage', () => {
     before(() => {
-      cy.visit('/search?vid=NYU')
+      cy.visit('/search?vid=NYU', {
+        qs: {
+          testAngularCompatibility: true,
+        }
+      })
     })
 
     it('has a visible open chat button', () => {

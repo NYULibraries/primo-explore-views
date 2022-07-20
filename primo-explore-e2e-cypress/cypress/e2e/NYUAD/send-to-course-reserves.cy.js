@@ -4,6 +4,9 @@ describe('send-to-course-reserves', () => {
       cy.visit('/search?query=any,contains,work&tab=crp&search_scope=cre&vid=NYUAD', {
         onBeforeLoad: (contentWindow) => {
           contentWindow.$$mockUserLoggedIn = false
+        },
+        qs: {
+          testAngularCompatibility: true,
         }
       })
     });
@@ -22,6 +25,9 @@ describe('send-to-course-reserves', () => {
       cy.visit('/search?query=any,contains,work&tab=crp&search_scope=cre&vid=NYUAD', {
         onBeforeLoad: (contentWindow) => {
           contentWindow.$$mockUserLoggedIn = true
+        },
+        qs: {
+          testAngularCompatibility: true,
         }
       })
     });
