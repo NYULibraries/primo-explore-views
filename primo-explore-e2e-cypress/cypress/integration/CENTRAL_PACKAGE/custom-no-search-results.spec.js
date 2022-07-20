@@ -3,8 +3,7 @@ describe('primo-explore-custom-no-search-results', function () {
     const searchTerm = `asdfhello;worldgoodbye;worldasdf`
 
     before(() => {
-      cy.visit(`?query=any,contains,${searchTerm}&tab=all&search_scope=all&vid=BHS&offset=0`,
-          {qs: {testAngularCompatibility: true }})
+      cy.visit(`?query=any,contains,${searchTerm}&tab=all&search_scope=all&vid=BHS&offset=0`)
     })
 
 

@@ -1,18 +1,10 @@
 describe('when searching', () => {
   before(() => {
-    cy.visit('/search?vid=NYUSH', {
-      qs: {
-        testAngularCompatibility: true,
-      }
-    })
+    cy.visit('/search?vid=NYUSH')
   })
 
   after(() => {
-    cy.visit('/search?vid=NYUSH', {
-      qs: {
-        testAngularCompatibility: true,
-      }
-    })
+    cy.visit('/search?vid=NYUSH')
   })
 
   it('allows for a basic search', () => {

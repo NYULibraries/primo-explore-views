@@ -1,10 +1,6 @@
 describe('The Home Page', function () {
   before(() => {
-    cy.visit('/search?vid=NYHS', {
-      qs: {
-        testAngularCompatibility: true,
-      }
-    }) // change URL to match your dev URL
+    cy.visit('/search?vid=NYHS') // change URL to match your dev URL
   })
 
   it('successfully loads', function () {
@@ -13,11 +9,7 @@ describe('The Home Page', function () {
 
   describe('when searching', () => {
     before(() => {
-      cy.visit('/search?vid=NYHS', {
-        qs: {
-          testAngularCompatibility: true,
-        }
-      })
+      cy.visit('/search?vid=NYHS')
     })
 
     it('allows for a basic search', () => {

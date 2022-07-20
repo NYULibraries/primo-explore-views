@@ -4,10 +4,7 @@ describe('send-to-course-reserves', () => {
       cy.visit('/search?query=any,contains,work&tab=crp&search_scope=cre&vid=NYU', {
         onBeforeLoad: (contentWindow) => {
           contentWindow.$$mockUserLoggedIn = false
-        },
-        qs: {
-          testAngularCompatibility: true,
-        },
+        }
       })
     });
 
@@ -25,9 +22,6 @@ describe('send-to-course-reserves', () => {
       cy.visit('/search?query=any,contains,work&tab=crp&search_scope=cre&vid=NYU', {
         onBeforeLoad: (contentWindow) => {
           contentWindow.$$mockUserLoggedIn = true
-        },
-        qs: {
-          testAngularCompatibility : true,
         }
       })
     });
@@ -43,11 +37,7 @@ describe('send-to-course-reserves', () => {
 
   describe('always-available-online', () => {
     before(() => {
-      cy.visit('/search?tab=crp&search_scope=cre&vid=NYU', {
-        qs: {
-          testAngularCompatibility: true,
-        }
-      })
+      cy.visit('/search?tab=crp&search_scope=cre&vid=NYU')
     });
 
     it('should have Always Available Online already selected', () => {

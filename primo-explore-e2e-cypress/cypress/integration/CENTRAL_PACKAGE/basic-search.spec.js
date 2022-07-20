@@ -1,10 +1,6 @@
 describe('The Home Page', function () {
   beforeEach(() => {
-    cy.visit('/search?vid=NYU', {
-      qs: {
-        testAngularCompatibility: true,
-      }
-    }) // change URL to match your dev URL
+    cy.visit('/search?vid=NYU') // change URL to match your dev URL
   })
 
   it('successfully loads', function () {

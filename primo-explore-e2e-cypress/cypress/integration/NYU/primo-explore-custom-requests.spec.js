@@ -5,10 +5,7 @@ describe('primo-explore-custom-request-wrapper', () => {
       cy.visit('/fulldisplay?docid=nyu_aleph008073830&vid=NYU', {
         onBeforeLoad: (contentWindow) => {
           contentWindow.$$mockUserLoggedIn = false
-        },
-        qs: {
-          testAngularCompatibility: true,
-        },
+        }
       })
     })
 
@@ -39,9 +36,6 @@ describe('primo-explore-custom-request-wrapper', () => {
               'id': '1234567',
               'bor-status': '50',
             }
-          },
-          qs: {
-            testAngularCompatibility: true,
           }
         })
       })
@@ -62,13 +56,10 @@ describe('primo-explore-custom-request-wrapper', () => {
           onBeforeLoad: (contentWindow) => {
             contentWindow.$$mockUserLoggedIn = true
             contentWindow.$$mockUser = {
-              'id'         : '1234567',
-              'bor-status' : '50',
+              'id': '1234567',
+              'bor-status': '50',
             }
-          },
-          qs: {
-            testAngularCompatibility: true,
-          },
+          }
         })
       })
 
