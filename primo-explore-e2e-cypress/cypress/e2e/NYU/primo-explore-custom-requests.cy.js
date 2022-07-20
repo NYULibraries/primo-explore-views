@@ -2,7 +2,7 @@ describe('primo-explore-custom-request-wrapper', () => {
   describe('if the user is not logged in', () => {
     before(() => {
       // PRIMOCIRCTEST-BOBST-MAIN-09-ZZ
-      cy.visit('/fulldisplay?docid=nyu_aleph008073830&vid=NYUSH', {
+      cy.visit('/fulldisplay?docid=nyu_aleph008073830&vid=NYU', {
         onBeforeLoad: (contentWindow) => {
           contentWindow.$$mockUserLoggedIn = false
         }
@@ -29,7 +29,7 @@ describe('primo-explore-custom-request-wrapper', () => {
     describe('and the item has electronic copies', () => {
       before(() => {
         // nyu_aleph002934513 - requires more permanent record
-        cy.visit('/fulldisplay?docid=nyu_aleph002934513&vid=NYUSH', {
+        cy.visit('/fulldisplay?docid=nyu_aleph002934513&vid=NYU', {
           onBeforeLoad: (contentWindow) => {
             contentWindow.$$mockUserLoggedIn = true
             contentWindow.$$mockUser = {
@@ -50,9 +50,9 @@ describe('primo-explore-custom-request-wrapper', () => {
     describe('and the item is unavailable', () => {
       before(() => {
         // PRIMOCIRCTEST-BOBST-MAIN-09-ZZ
-        // cy.visit('/fulldisplay?docid=nyu_aleph008073830&vid=NYUSH', {
+        // cy.visit('/fulldisplay?docid=nyu_aleph008073830&vid=NYU', {
         // Need a new record that is unavailable
-        cy.visit('/fulldisplay?docid=nyu_aleph008073830&vid=NYUSH', {
+        cy.visit('/fulldisplay?docid=nyu_aleph008073830&vid=NYU', {
           onBeforeLoad: (contentWindow) => {
             contentWindow.$$mockUserLoggedIn = true
             contentWindow.$$mockUser = {
@@ -65,7 +65,7 @@ describe('primo-explore-custom-request-wrapper', () => {
 
       it('does not have visible primo-explore-custom-request-wrapper options', () => {
         cy.get('primo-explore-custom-request-wrapper')
-          .should('not.be.visible')
+          .should('not.exist')
       })
 
       xit(`has visible 'Request ILL' button`, () => {
@@ -94,7 +94,3 @@ describe('primo-explore-custom-request-wrapper', () => {
     // Be sure to test this with a real user if making tweaks to this behavior.
 
 })
-
-// Potential test to reenable
-// with an NYUSH user in an NSHNG library
-// PRIMOCIRCTEST-NSHNG-PPL-11-ZZ
