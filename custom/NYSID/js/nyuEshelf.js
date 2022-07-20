@@ -13,6 +13,8 @@ export let nyuEshelfConfig = {
       eshelfBaseUrl: "https://eshelf-dev.library.nyu.edu",
     },
     inEshelf: "In Saved Items",
+    // ATTENTION: inGuestEshelf text is referenced in browbeat tests:
+    // https://github.com/NYULibraries/browbeat/blob/master/features/eshelf/add_record.feature
     inGuestEshelf: "In guest Saved Items",
     myEshelfButtonClasses: "search-bookmark-filter-item",
   },
