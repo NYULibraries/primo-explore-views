@@ -1,6 +1,10 @@
 describe('The Home Page', function () {
   before(() => {
-    cy.visit('/search?vid=BHS') // change URL to match your dev URL
+    cy.visit('/search?vid=BHS', {
+      qs: {
+        testAngularCompatibility: true,
+      }
+    }) // change URL to match your dev URL
   })
 
   it('successfully loads', function () {
