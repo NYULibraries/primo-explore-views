@@ -15,8 +15,8 @@ describe('primo-explore-libraryh3lp-widget', () => {
     })
 
     it('does not have a visible close button', () => {
-      cy.get('button.close-chat')
-        .should('not.exist')
+      cy.get('button.chat-close')
+        .should('not.be.visible')
     })
 
     describe('when the Chat with us button is clicked', () => {
