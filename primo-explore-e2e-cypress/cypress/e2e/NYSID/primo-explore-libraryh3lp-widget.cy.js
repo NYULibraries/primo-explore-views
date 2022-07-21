@@ -9,8 +9,8 @@ describe('primo-explore-libraryh3lp-widget', () => {
         .should('be.visible')
     })
 
-    it('does not have a visible libraryh3lp element', () => {
-      cy.get('.libraryh3lp')
+    it('does not have a visible div.chat-frame-wrap element', () => {
+      cy.get('div.chat-frame-wrap')
         .should('not.be.visible')
     })
 
