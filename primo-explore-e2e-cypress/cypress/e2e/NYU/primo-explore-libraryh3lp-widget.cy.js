@@ -13,14 +13,14 @@ describe('primo-explore-libraryh3lp-widget', () => {
         .should('be.visible')
     })
 
-    it('does not have a visible libraryh3lp element', () => {
-      cy.get('.libraryh3lp')
-        .should('not.be.visible')
+    it('does not have a visible div.chat-frame-wrap element', () => {
+      cy.get('div.chat-frame-wrap')
+          .should('not.be.visible')
     })
 
     it('does not have a visible close button', () => {
-      cy.get('button.close-chat')
-        .should('not.exist')
+      cy.get('button.chat-close')
+        .should('not.be.visible')
     })
 
     describe('when the Chat with us button is clicked', () => {
