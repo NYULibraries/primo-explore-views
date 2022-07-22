@@ -9,6 +9,8 @@ export default {
     },
     deleting: "Removing from Saved Items...",
     inEshelf: "In Saved Items",
+    // ATTENTION: inGuestEshelf text is referenced in browbeat tests:
+    // https://github.com/NYULibraries/browbeat/blob/master/features/eshelf/add_record.feature
     inGuestEshelf: "In guest Saved Items",
     myEshelfButtonClasses: "button-over-dark search-bookmark-filter-item",
     toolbar: "Saved Items",

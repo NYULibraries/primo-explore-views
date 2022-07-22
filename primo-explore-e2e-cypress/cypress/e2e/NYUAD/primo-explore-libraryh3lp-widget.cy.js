@@ -1,7 +1,7 @@
 describe('primo-explore-libraryh3lp-widget', () => {
   describe('when visiting the homepage', () => {
     before(() => {
-      cy.visit('/search?vid=NYU')
+      cy.visit('/search?vid=NYUAD')
     })
 
     it('has a visible open chat button', () => {
@@ -9,13 +9,13 @@ describe('primo-explore-libraryh3lp-widget', () => {
         .should('be.visible')
     })
 
-    it('does not have a visible libraryh3lp element', () => {
-      cy.get('.libraryh3lp')
-        .should('not.be.visible')
+    it('does not have a visible div.chat-frame-wrap element', () => {
+      cy.get('div.chat-frame-wrap')
+          .should('not.be.visible')
     })
 
     it('does not have a visible close button', () => {
-      cy.get('button.close-chat')
+      cy.get('button.chat-close')
         .should('not.be.visible')
     })
 

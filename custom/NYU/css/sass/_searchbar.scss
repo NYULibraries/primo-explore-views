@@ -73,7 +73,7 @@ search-bar-sub-menu .md-button.md-small {
 
 // Advanced and simple search buttons
 .switch-to-simple, .switch-to-advanced {
-  background-color: $purple;
+  background-color: $purple !important;
   color: #fff !important;
   font-weight: bold;
   padding: 0 20px;

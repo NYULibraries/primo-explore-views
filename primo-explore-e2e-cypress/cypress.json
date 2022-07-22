@@ -1,5 +1,0 @@
-{
-  "baseUrl": "http://localhost:8004/primo-explore/",
-  "defaultCommandTimeout": 12000,
-  "pageLoadTimeout": 120000
-}

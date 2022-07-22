@@ -5,6 +5,23 @@
   .md-button:hover:not([disabled]), .md-button:focus:not([disabled]), .md-button.hovered:not([disabled]), .md-button.md-focused:not([disabled]), .md-button._md-focused:not([disabled]) {
     color: #1d1616;
     background-color: rgba(51, 51, 51, 0.1); }
+
+  /* To match color contrast in top nav bar for keyboard-only experience */
+  /* ****************************************************************** */
+
+  a.md-button:hover:not([disabled]), a.md-button:focus:not([disabled]), a.md-button.hovered:not([disabled]), a.md-button.md-focused:not([disabled]), a.md-button._md-focused:not([disabled]),
+  .button-with-icon[aria-label="Go to Saved Items"]:focus:not([disabled]), .button-with-icon[aria-label="Go to Saved Items"].md-focused:not([disabled]), .button-with-icon[aria-label="Go to Saved Items"]._md-focused:not([disabled]) {
+    color: #1d1616 !important;
+    background-color: rgba(51, 51, 51, 0.1); }
+
+  button#qrCodeScanner:focus:not([disabled]), button#qrCodeScanner.md-focused:not([disabled]), button#qrCodeScanner._md-focused:not([disabled]),
+  .user-button[aria-label="Sign In"]:focus:not([disabled]), .user-button[aria-label="Sign In"].md-focused:not([disabled]), .user-button[aria-label="Sign In"]._md-focused:not([disabled]),
+  .button-with-menu-arrow[aria-label="Menu"]:focus:not([disabled]), .button-with-menu-arrow[aria-label="Menu"].md-focused:not([disabled]), .button-with-menu-arrow[aria-label="Menu"]._md-focused:not([disabled]) {
+    color: #1d1616 !important; }
+    
+  /* ****************************************************************** */
+
+
   .light-on-dark-dialog .md-button {
     color: white; }
     .light-on-dark-dialog .md-button:hover:not([disabled]), .light-on-dark-dialog .md-button:focus:not([disabled]), .light-on-dark-dialog .md-button.hovered:not([disabled]), .light-on-dark-dialog .md-button.md-focused:not([disabled]), .light-on-dark-dialog .md-button._md-focused:not([disabled]) {
