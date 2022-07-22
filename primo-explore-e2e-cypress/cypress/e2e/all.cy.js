@@ -32,4 +32,3 @@ import './NYUSH/home.cy.js';
 import './NYUSH/primo-explore-custom-requests.cy.js';
 import './NYUSH/primo-explore-libraryh3lp-widget.cy.js';
 import './NYUSH/send-to-course-reserves.cy.js';
-import './all.cy.js';
