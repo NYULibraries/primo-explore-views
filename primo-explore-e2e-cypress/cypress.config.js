@@ -10,5 +10,6 @@ module.exports = defineConfig({
       return require('./cypress/plugins/index.js')(on, config)
     },
     baseUrl: 'http://localhost:8004/primo-explore/',
+    excludeSpecPattern: process.env.CI ? ['cypress/e2e/all.cy.js'] : [],
   },
 })
