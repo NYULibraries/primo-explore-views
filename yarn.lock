@@ -7745,10 +7745,10 @@ pretty-format@^27.2.0:
     ansi-styles "^5.0.0"
     react-is "^17.0.1"
 
-primo-explore-clickable-logo-to-any-link@1.1.7:
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/primo-explore-clickable-logo-to-any-link/-/primo-explore-clickable-logo-to-any-link-1.1.7.tgz#5008aa9c470b5f22908e7dc0a236d0e42abbfad4"
-  integrity sha512-UVRQuRfjqSQYP7ITASbO+jUgpRiedwudnRQp9+22fsR+xZbakZe6mJ5tqaxAPjHWnqE8Jn6Ndw3IXRN+qiLWEw==
+primo-explore-clickable-logo-to-any-link@1.1.8:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/primo-explore-clickable-logo-to-any-link/-/primo-explore-clickable-logo-to-any-link-1.1.8.tgz#f338528fd293b0a1dd39044268c7e7dfa77d0417"
+  integrity sha512-iyKvDE5RC/93Olm9wRkALES+CD30TT9WyUeJYJHXhBt+jvk+g0Ag102NHG0s3Ics6NhngUCJP5YErv1SGDTRtg==
 
 primo-explore-custom-library-card-menu@1.1.11:
   version "1.1.11"
