@@ -4,12 +4,22 @@ module.exports = defineConfig({
   defaultCommandTimeout: 12000,
   pageLoadTimeout: 120000,
   e2e: {
-    // We've imported your old cypress plugins here.
-    // You may want to clean this up later by importing these.
     setupNodeEvents(on, config) {
-      return require('./cypress/plugins/index.js')(on, config)
+      // Running test files in batch is no longer supported in Cypress App
+      // as of version 10: https://github.com/cypress-io/cypress/discussions/21628
+      // The Cypress-endorsed workaround is to create special spec files that
+      // import the spec files that need to be run as a batch:
+      // https://glebbahmutov.com/blog/run-all-specs-cypress-v10/
+      // These workaround files are for use in Cypress App only, as
+      // batch mode execution is still supported by the command line cypress
+      // executable.  We in fact would not want these _all.cy.js files run
+      // on the command line, as they would cause each test to be run twice.
+      if (config.isTextTerminal) {
+        return {
+          excludeSpecPattern: ['cypress/e2e/*/_all.cy.js'],
+        }
+      }
     },
     baseUrl: 'http://localhost:8004/primo-explore/',
-    excludeSpecPattern: process.env.CI ? ['cypress/e2e/**/_all.cy.js'] : [],
   },
 })
