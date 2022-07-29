@@ -21,5 +21,9 @@ module.exports = defineConfig({
       }
     },
     baseUrl: 'http://localhost:8004/primo-explore/',
+    experimentalSessionAndOrigin: true,
   },
 })
+
+
+
