@@ -2550,7 +2550,7 @@ angular@^1.8.2:
 angulartics-google-tag-manager@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/angulartics-google-tag-manager/-/angulartics-google-tag-manager-0.0.1.tgz#59e8e4a9db5d85693b7cdec81a215136b04118e9"
-  integrity sha1-WejkqdtdhWk7fN7IGiFRNrBBGOk=
+  integrity sha512-EUzaUvKQN482bssnf8zmvgjGOtYrqiFYp3skZz8H86RLAPuLDmy2Oki4Z4VNAzxe3Qv6zRyumUMWsJn/Dw28dw==
 
 angulartics@^1.6.0:
   version "1.6.0"
@@ -7745,10 +7745,10 @@ pretty-format@^27.2.0:
     ansi-styles "^5.0.0"
     react-is "^17.0.1"
 
-primo-explore-clickable-logo-to-any-link@1.1.7:
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/primo-explore-clickable-logo-to-any-link/-/primo-explore-clickable-logo-to-any-link-1.1.7.tgz#5008aa9c470b5f22908e7dc0a236d0e42abbfad4"
-  integrity sha512-UVRQuRfjqSQYP7ITASbO+jUgpRiedwudnRQp9+22fsR+xZbakZe6mJ5tqaxAPjHWnqE8Jn6Ndw3IXRN+qiLWEw==
+primo-explore-clickable-logo-to-any-link@1.1.8:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/primo-explore-clickable-logo-to-any-link/-/primo-explore-clickable-logo-to-any-link-1.1.8.tgz#f338528fd293b0a1dd39044268c7e7dfa77d0417"
+  integrity sha512-iyKvDE5RC/93Olm9wRkALES+CD30TT9WyUeJYJHXhBt+jvk+g0Ag102NHG0s3Ics6NhngUCJP5YErv1SGDTRtg==
 
 primo-explore-custom-library-card-menu@1.1.11:
   version "1.1.11"
@@ -7773,18 +7773,10 @@ primo-explore-custom-search-bookmark-filter@1.0.9:
   resolved "https://registry.yarnpkg.com/primo-explore-custom-search-bookmark-filter/-/primo-explore-custom-search-bookmark-filter-1.0.9.tgz#26af2a4d01f723f1ffd541c78793de3d752dad2b"
   integrity sha512-gBtN65lTkWDHSgX7xn4omQExTsur1PF71Vc5F6OCfbfrhnDLVLIUy96ZphC/xuVBnBzzLj5gTTTEVuvf7SkFIQ==
 
-primo-explore-google-analytics@1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/primo-explore-google-analytics/-/primo-explore-google-analytics-1.2.3.tgz#aeed065cbc2f8148d5fddaed18863a01a3d10173"
-  integrity sha512-rexf5Eqjkdtos0Joc38LLXMczuXlC4wUDY6wDScI0TeLMIia+dJZwD5jZNia5K5X1VPn/kUP4QnbznkIUK+2Ng==
-  dependencies:
-    angulartics "^1.6.0"
-    angulartics-google-tag-manager "^0.0.1"
-
-primo-explore-google-analytics@1.2.4:
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/primo-explore-google-analytics/-/primo-explore-google-analytics-1.2.4.tgz#30908c805c318ee2308e2401b1d896f8a6b77549"
-  integrity sha512-4esNRex2Y6zTVbYPbmkBUxRC+g9G79qM10ss+7nntXv1KPBrAhM1bBm0Uw/DJbRVqTl3D/+UYwoMwjzvVUbKaQ==
+primo-explore-google-analytics@1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/primo-explore-google-analytics/-/primo-explore-google-analytics-1.2.5.tgz#1667a0077bcb78e9afe0f1cf16191ef7df5aca98"
+  integrity sha512-onMNTBuwtxdwe1qvi4oImdWKsCfmiR8xEEVT85ruNg4Gh2yaglU9mcqyfQL/FyHgZ7o0eyC5kWwzN6ocsc1K+w==
   dependencies:
     angulartics "^1.6.0"
     angulartics-google-tag-manager "^0.0.1"
