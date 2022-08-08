@@ -2,7 +2,7 @@ describe('primo-explore-custom-no-search-results', function () {
   describe('when a search returns no results', () => {
     const searchTerm = `asdfhello;worldgoodbye;worldasdf`
 
-    before(() => {
+    beforeEach(() => {
       cy.visit(`?query=any,contains,${searchTerm}&tab=all&search_scope=all&vid=BHS&offset=0`)
     })
 

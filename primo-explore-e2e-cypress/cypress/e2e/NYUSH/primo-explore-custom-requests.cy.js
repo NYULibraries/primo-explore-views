@@ -1,6 +1,6 @@
 describe('primo-explore-custom-request-wrapper', () => {
   describe('if the user is not logged in', () => {
-    before(() => {
+    beforeEach(() => {
       // PRIMOCIRCTEST-BOBST-MAIN-09-ZZ
       cy.visit('/fulldisplay?docid=nyu_aleph008073830&vid=NYUSH', {
         onBeforeLoad: (contentWindow) => {
@@ -27,7 +27,7 @@ describe('primo-explore-custom-request-wrapper', () => {
   describe(`if the user is logged in`, () => {
 
     describe('and the item has electronic copies', () => {
-      before(() => {
+      beforeEach(() => {
         // nyu_aleph002934513 - requires more permanent record
         cy.visit('/fulldisplay?docid=nyu_aleph002934513&vid=NYUSH', {
           onBeforeLoad: (contentWindow) => {
@@ -48,7 +48,7 @@ describe('primo-explore-custom-request-wrapper', () => {
     })
 
     describe('and the item is unavailable', () => {
-      before(() => {
+      beforeEach(() => {
         // PRIMOCIRCTEST-BOBST-MAIN-09-ZZ
         // cy.visit('/fulldisplay?docid=nyu_aleph008073830&vid=NYUSH', {
         // Need a new record that is unavailable

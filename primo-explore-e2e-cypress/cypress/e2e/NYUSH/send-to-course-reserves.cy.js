@@ -1,6 +1,6 @@
 describe('send-to-course-reserves', () => {
   describe('if the user is not logged in', () => {
-    before(() => {
+    beforeEach(() => {
       cy.visit('/search?query=any,contains,work&tab=crp&search_scope=cre&vid=NYUSH', {
         onBeforeLoad: (contentWindow) => {
           contentWindow.$$mockUserLoggedIn = false
@@ -18,7 +18,7 @@ describe('send-to-course-reserves', () => {
   });
 
   describe('if the user is logged in', () => {
-    before(() => {
+    beforeEach(() => {
       cy.visit('/search?query=any,contains,work&tab=crp&search_scope=cre&vid=NYUSH', {
         onBeforeLoad: (contentWindow) => {
           contentWindow.$$mockUserLoggedIn = true
