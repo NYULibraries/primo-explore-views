@@ -28,8 +28,8 @@ describe('My Account', () => {
 
           it('login', () => {
             cy.login({
-              username: Cypress.env('username'),
-              password: Cypress.env('password'),
+              username: Cypress.env('ALEPH_USERNAME'),
+              password: Cypress.env('ALEPH_PASSWORD'),
             }) // This is the login command.
             
             cy.visit('https://bobcatdev.library.nyu.edu/primo-explore/search?vid=NYU')
