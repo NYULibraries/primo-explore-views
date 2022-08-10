@@ -6,7 +6,7 @@ describe('My Account', () => {
             () => {
             cy.origin('https://bobcatdev.library.nyu.edu', { args: { username, password } }, ({ username, password }) => { 
                 cy.visit('https://bobcatdev.library.nyu.edu/primo-explore/search?vid=NYU')
-                // cy.wait(3000)
+                cy.wait(3000)
                 cy.contains('Login').should('be.visible').click()
                 cy.get('a').contains('Other Borrowers').should('be.visible').click()
                 cy.url().should('contain', '/auth/bobst/nyu')
