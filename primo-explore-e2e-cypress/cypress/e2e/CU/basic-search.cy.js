@@ -12,6 +12,10 @@ describe('The Home Page', function () {
       cy.visit('/search?vid=CU')
     })
 
+    afterEach(() => {
+      cy.visit('/search?vid=CU')
+    })
+
     it('allows for a basic search', () => {
       cy.wait(1000)
       cy.get('#searchBar')
