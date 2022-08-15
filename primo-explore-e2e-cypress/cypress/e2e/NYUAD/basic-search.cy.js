@@ -13,8 +13,10 @@ describe('The Home Page', function () {
     })
 
     it('allows for a basic search', () => {
+      cy.wait(1000)
       cy.get('#searchBar')
         .type('PRIMOTEST{enter}')
+      
       cy.url().should('include', 'PRIMOTEST')
       cy.get(`[id^='SEARCH_RESULT_RECORDID_']`)
         .first()
