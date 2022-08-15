@@ -32,7 +32,6 @@ run-e2e-steps: &run-e2e-steps
     - <<: *pull_docker
     - run:
         name: Run View E2E Tests
-        no_output_timeout: 30m
         command: |
           script/run_view_e2e_test.sh
     - store_artifacts:
