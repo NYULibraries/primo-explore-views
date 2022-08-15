@@ -19,4 +19,4 @@ RUN yarn cypress verify
 COPY asound.conf /etc/asound.conf
 COPY . .
 
-CMD /app/script/wait_for.sh $DOMAIN/primo-explore/search?vid=$VIEW && /app/script/wait_for.sh $DOMAIN && yarn cypress run --spec="cypress/e2e/$VIEW/**/*.cy.js" --env ALEPH_USERNAME=$ALEPH_USERNAME,ALEPH_PASSWORD=$ALEPH_PASSWORD --reporter junit --reporter-options="mochaFile=test-results/$VIEW/results-[hash].xml"
+CMD /app/script/wait_for.sh $DOMAIN/primo-explore/search?vid=$VIEW && /app/script/wait_for.sh $DOMAIN && yarn cypress run --spec="cypress/e2e/$VIEW/**/*.cy.js" --reporter junit --reporter-options="mochaFile=test-results/$VIEW/results-[hash].xml"
