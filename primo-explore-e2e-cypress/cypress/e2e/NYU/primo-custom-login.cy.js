@@ -2,7 +2,7 @@ describe('My Account', () => {
 
     Cypress.Commands.add('login', ({username, password}) => {
         cy.session(
-            [username, password, { log: false }],
+            [username],
             () => {
             cy.origin('https://bobcatdev.library.nyu.edu', { args: { username, password } }, ({ username, password }) => { 
                 cy.visit('https://bobcatdev.library.nyu.edu/primo-explore/search?vid=NYU')
