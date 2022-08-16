@@ -12,10 +12,6 @@ describe('The Home Page', function () {
       cy.visit('/search?vid=NYUAD')
     })
 
-    afterEach(() => {
-      cy.visit('/search?vid=NYUAD')
-    })
-
     it('allows for a basic search', () => {
       cy.get('#searchBar')
         .type('PRIMOTEST{enter}')
