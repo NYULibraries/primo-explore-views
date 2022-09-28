@@ -1,5 +1,5 @@
 describe('The Home Page', function () {
-  before(() => {
+  beforeEach(() => {
     cy.visit('/search?vid=CU') // change URL to match your dev URL
   })
 

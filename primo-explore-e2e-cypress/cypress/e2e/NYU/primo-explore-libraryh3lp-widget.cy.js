@@ -1,6 +1,6 @@
 describe('primo-explore-libraryh3lp-widget', () => {
   describe('when visiting the homepage', () => {
-    before(() => {
+    beforeEach(() => {
       cy.visit('/search?vid=NYU')
     })
 
@@ -20,7 +20,7 @@ describe('primo-explore-libraryh3lp-widget', () => {
     })
 
     describe('when the Chat with us button is clicked', () => {
-      before(() => {
+      beforeEach(() => {
         cy.contains('Chat with us')
           .click('center')
       })

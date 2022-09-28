@@ -1,7 +1,7 @@
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
-  defaultCommandTimeout: 12000,
+  defaultCommandTimeout: 24000,
   pageLoadTimeout: 120000,
   e2e: {
     setupNodeEvents(on, config) {
@@ -21,5 +21,9 @@ module.exports = defineConfig({
       }
     },
     baseUrl: 'http://localhost:8004/primo-explore/',
+    experimentalSessionAndOrigin: true,
   },
 })
+
+
+

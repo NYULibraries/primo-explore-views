@@ -1,5 +1,5 @@
 describe('The Home Page', function () {
-  before(() => {
+  beforeEach(() => {
     cy.visit('/search?vid=NYHS') // change URL to match your dev URL
   })
 
@@ -8,9 +8,10 @@ describe('The Home Page', function () {
   })
 
   describe('when searching', () => {
-    before(() => {
+    beforeEach(() => {
       cy.visit('/search?vid=NYHS')
     })
+
 
     it('allows for a basic search', () => {
       cy.get('#searchBar')

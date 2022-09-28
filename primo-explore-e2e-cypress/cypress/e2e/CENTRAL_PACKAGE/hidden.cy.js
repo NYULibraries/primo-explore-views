@@ -1,6 +1,6 @@
 describe('Checks hidden elements', function() {
   describe('citation linker', function() {
-    before(function() {
+    beforeEach(function() {
       cy.visit(`/citationlinker?vid=NYU`)
     })
 

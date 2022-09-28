@@ -1,5 +1,5 @@
 describe('The Home Page', function () {
-  before(() => {
+  beforeEach(() => {
     cy.visit('/search?vid=NYUAD') // change URL to match your dev URL
   })
 
@@ -8,13 +8,14 @@ describe('The Home Page', function () {
   })
 
   describe('when searching', () => {
-    before(() => {
+    beforeEach(() => {
       cy.visit('/search?vid=NYUAD')
     })
 
     it('allows for a basic search', () => {
       cy.get('#searchBar')
         .type('PRIMOTEST{enter}')
+      
       cy.url().should('include', 'PRIMOTEST')
       cy.get(`[id^='SEARCH_RESULT_RECORDID_']`)
         .first()

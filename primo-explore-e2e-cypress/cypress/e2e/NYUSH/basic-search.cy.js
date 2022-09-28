@@ -1,9 +1,9 @@
 describe('when searching', () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit('/search?vid=NYUSH')
   })
 
-  after(() => {
+  afterEach(() => {
     cy.visit('/search?vid=NYUSH')
   })
 
