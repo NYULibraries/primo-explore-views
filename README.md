@@ -85,7 +85,7 @@ The test items we require on BobCatDev/AlephStage for our integration tests to r
 
 1. Any record whose title includes "ALMATEST", for each of the supported views that we manage: BHS, CU, NYHS, NYSID, NYU, NYUAD, NYUSH. (We do a test search for "ALMATEST" in each view, which returns many results, so there's no need to document all the particular records that satisfy this)
 1. Any record whose title include "Work" and is available for course reserves ("always available online") for each of NYU, NYUAD, and NYUSH. Currently, this item is "Work" (`nyu_aleph006297799`)
-1. For custom requests tests, we refer to specific records by aleph ID (directly visiting the /fulldisplay page): "Documents algériens. Série politique." (`nyu_aleph008073830`), "ALMATEST NSHNG_PPL_ZZ_11 Loaned" (`nyu_aleph008076836`).
+1. For custom requests tests, we refer to specific records by aleph ID (directly visiting the /fulldisplay page): "Documents algériens. Série politique." (`nyu_aleph002138166`), "ALMATEST NSHNG_PPL_ZZ_11 Loaned" (`nyu_aleph009021088`).
 
 ### Cypress GUI (Running locally)
 
