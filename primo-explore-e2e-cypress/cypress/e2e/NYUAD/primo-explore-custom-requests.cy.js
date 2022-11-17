@@ -2,7 +2,7 @@ describe('primo-explore-custom-request-wrapper', () => {
   describe('if the user is not logged in', () => {
     before(() => {
       // PRIMOCIRCTEST-BOBST-MAIN-09-ZZ
-      cy.visit('/fulldisplay?docid=nyu_aleph008073830&vid=NYUAD', {
+      cy.visit('/fulldisplay?docid=nyu_aleph002872146&vid=NYUAD', {
         onBeforeLoad: (contentWindow) => {
           contentWindow.$$mockUserLoggedIn = false
         }
@@ -28,8 +28,8 @@ describe('primo-explore-custom-request-wrapper', () => {
 
     describe('and the item has electronic copies', () => {
       before(() => {
-        // nyu_aleph002934513 - requires more permanent record
-        cy.visit('/fulldisplay?docid=nyu_aleph002934513&vid=NYUAD', {
+        // nyu_aleph009021088 - requires more permanent record
+        cy.visit('/fulldisplay?docid=nyu_aleph009021088&vid=NYUAD', {
           onBeforeLoad: (contentWindow) => {
             contentWindow.$$mockUserLoggedIn = true
             contentWindow.$$mockUser = {
@@ -50,9 +50,9 @@ describe('primo-explore-custom-request-wrapper', () => {
     describe('and the item is unavailable', () => {
       before(() => {
         // PRIMOCIRCTEST-BOBST-MAIN-09-ZZ
-        // cy.visit('/fulldisplay?docid=nyu_aleph008073830&vid=NYUAD', {
+        // cy.visit('/fulldisplay?docid=nyu_aleph002872146&vid=NYUAD', {
         // Need a new record that is unavailable
-        cy.visit('/fulldisplay?docid=nyu_aleph008073830&vid=NYUAD', {
+        cy.visit('/fulldisplay?docid=nyu_aleph002872146&vid=NYUAD', {
           onBeforeLoad: (contentWindow) => {
             contentWindow.$$mockUserLoggedIn = true
             contentWindow.$$mockUser = {
