@@ -12,7 +12,7 @@ describe('The Home Page', function () {
       cy.visit('/search?vid=BHS')
     })
 
-    it('allows for a basic search', () => {
+    xit('allows for a basic search', () => {
       cy.get('#searchBar')
         .type('ALMATEST{enter}')
       cy.url().should('include', 'ALMATEST')
