@@ -44,6 +44,7 @@ app
   .constant(nyuEshelfConfig.name, nyuEshelfConfig.config)
   .constant(searchBarSubMenuItemsConfig.name, searchBarSubMenuItemsConfig.config)
   .constant(customLoginConfig.name, customLoginConfig.config)
+  .value('customFinesAndFeesTemplateUrl', `custom/${viewName}/html/custom_fines_and_fees.html`)
   .value('customNoSearchResultsTemplateUrl', `custom/${viewName}/html/no_search_results.html`)
   .filter('encodeURIComponent', ['$window', function($window) {
     return $window.encodeURIComponent;
