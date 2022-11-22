@@ -5,9 +5,11 @@ import * as Sentry from '@sentry/browser';
 import sentryConfig from './sentryConfig';
 
 import 'primo-explore-custom-no-search-results';
+import '../../common/js/customFinesAndFees';
 
 let app = angular.module('centralCustom', [
   'angularLoad',
+  'customFinesAndFees',
   'customNoSearchResults',
 ]);
 
@@ -15,6 +17,7 @@ app
   .filter('encodeURIComponent', ['$window', function($window) {
     return $window.encodeURIComponent;
   }])
+  .value('customFinesAndFeesTemplateUrl', 'custom/CENTRAL_PACKAGE/html/custom_fines_and_fees.html')
   .value('customNoSearchResultsTemplateUrl', 'custom/CENTRAL_PACKAGE/html/no_search_results.html')
   .config(['$httpProvider', function ($httpProvider) {
     // log response errors using $http to Sentry
@@ -27,7 +30,9 @@ app
         }
       };
     }]);
-  }]);
+  }]).component('prmFinesAfter', {
+    template: `<custom-fines-and-fees></custom-fines-and-fees>`
+  });
 //  .component('prmTopbarAfter', {
 //    template: /*html*/ `
 //    <primo-explore-top-alert>
