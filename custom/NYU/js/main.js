@@ -60,6 +60,7 @@ app
   .constant(searchBarSubMenuItemsConfig.name, searchBarSubMenuItemsConfig.config)
   .constant(googleAnalyticsConfig.name, googleAnalyticsConfig.config)
   .constant(customLoginConfig.name, customLoginConfig.config)
+  .value('customFinesAndFeesTemplateUrl', `custom/${viewName}/html/custom_fines_and_fees.html`)
   .value('customNoSearchResultsTemplateUrl', `custom/${viewName}/html/no_search_results.html`)
   .component('prmActionListAfter', {
     controller: ['$window', function($window) {
