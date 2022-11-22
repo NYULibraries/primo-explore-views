@@ -11,7 +11,6 @@ import 'primo-explore-search-bar-sub-menu';
 import { customActionsConfig } from './customActions';
 import { customLibraryCardMenuItemsConfig } from './customLibraryCardMenu';
 import { clickableLogoLinkConfig } from './clickableLogoToAnyLink';
-import { libraryh3lpWidgetConfig } from './libraryh3lpWidget';
 import { nyuEshelfConfig } from './nyuEshelf';
 import { searchBarSubMenuItemsConfig } from './searchBarSubMenu';
 
@@ -19,7 +18,6 @@ let app = angular.module('viewCustom', [
   'customActions',
   'customLibraryCardMenu',
   'clickableLogoToAnyLink',
-  'libraryh3lpWidget',
   'nyuEshelf',
   'searchBarSubMenu',
 ]);
@@ -28,7 +26,6 @@ app
   .constant(customLibraryCardMenuItemsConfig.name, customLibraryCardMenuItemsConfig.config)
   .constant(clickableLogoLinkConfig.name, clickableLogoLinkConfig.config)
   .constant(nyuEshelfConfig.name, nyuEshelfConfig.config)
-  .constant(libraryh3lpWidgetConfig.name, libraryh3lpWidgetConfig.config)
   .constant(searchBarSubMenuItemsConfig.name, searchBarSubMenuItemsConfig.config)
   .component('prmActionListAfter', {
     template: customActionsConfig.template
