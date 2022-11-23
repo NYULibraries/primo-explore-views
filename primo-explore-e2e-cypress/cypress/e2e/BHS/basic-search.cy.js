@@ -12,14 +12,14 @@ describe('The Home Page', function () {
       cy.visit('/search?vid=BHS')
     })
 
-    it('allows for a basic search', () => {
+    xit('allows for a basic search', () => {
       cy.get('#searchBar')
-        .type('PRIMOTEST{enter}')
-      cy.url().should('include', 'PRIMOTEST')
+        .type('ALMATEST{enter}')
+      cy.url().should('include', 'ALMATEST')
       cy.get(`[id^='SEARCH_RESULT_RECORDID_']`)
         .first()
         .then($el => {
-          // current bug with partial string matches with .should('contain.text', 'PRIMOTEST')
+          // current bug with partial string matches with .should('contain.text', 'ALMATEST')
           expect($el.text().length).to.be.at.least(1)
         })
     })
