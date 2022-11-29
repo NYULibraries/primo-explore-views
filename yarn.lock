@@ -6817,10 +6817,10 @@ primo-explore-custom-library-card-menu@1.1.11:
   resolved "https://registry.yarnpkg.com/primo-explore-custom-library-card-menu/-/primo-explore-custom-library-card-menu-1.1.11.tgz#0381b2a6a23ee58be41b99579ff915b78818074f"
   integrity sha512-ZmOmHcEFE9uvdUHPbq4Qsj1OfI8mXAsJ2FTEwy2c/TCqaBUGmEbBfKI9kzEDVZSy1Xs5XDOFj4sSofxSHW32Jw==
 
-primo-explore-custom-login@2.0.9:
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/primo-explore-custom-login/-/primo-explore-custom-login-2.0.9.tgz#04e35ef04848f07c45b2b46139bcc8cc2cc207e1"
-  integrity sha512-dcCNmrTm3zroyEtMW04v+zOghcTuAY3M4H6kVVDR8pGFncaVIuOgvmPXO/kAE8V8OITWcHQh5g1kXmQnpamcSw==
+primo-explore-custom-login@2.0.10:
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/primo-explore-custom-login/-/primo-explore-custom-login-2.0.10.tgz#151d4abd157c6f07f09e182c224e285fc5e532df"
+  integrity sha512-Iz1+llqLeW9fDlovPF78qg3gohTS3CVTHYA/HuxRVCsntYbuXLtmzqONrBZMj5DPZktPeSI0agiArgdLqNG0Qg==
   dependencies:
     angular-cookies "1.8.3"
 
