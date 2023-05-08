@@ -1,6 +1,6 @@
 x-environment: &x-environment
-  PROXY_SERVER: https://bobcatdev.library.nyu.edu:443
-  VIEW: ${VIEW-NYU}
+  PROXY_SERVER: https://sandbox02-na.primo.exlibrisgroup.com:443
+  VIEW: ${VIEW-01NYU_INST:TESTWS01}
   NODE_ENV: ${NODE_ENV-development}
   VE:
   SAML:
