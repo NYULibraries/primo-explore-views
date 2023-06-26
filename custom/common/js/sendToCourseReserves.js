@@ -4,7 +4,7 @@ angular
   .module('sendToCourseReserves', [])
   .constant('sendToCourseReservesConfig', {
     displayText: '{custom.push_to_ares1}',
-    actionLinkDisplayLabel: 'lln45',
+    actionLinkDisplayLabel: 'lln41',
     showLinkTab: "crp",
     icon: {
       set: 'content',
@@ -26,7 +26,7 @@ angular
       </div>
     `,
     // Controller for above scoped template
-    controller: ['sendToCourseReservesConfig', '$scope', '$location', '$filter', function(sendToCourseReservesConfig, $scope, $location, $filter) {
+    controller: ['sendToCourseReservesConfig', '$scope', '$location', '$filter', function (sendToCourseReservesConfig, $scope, $location, $filter) {
       const ctrl = this;
       ctrl.$onInit = () => {
         $scope.config = sendToCourseReservesConfig;
