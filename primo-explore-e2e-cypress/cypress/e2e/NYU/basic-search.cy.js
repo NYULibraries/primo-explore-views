@@ -5,8 +5,8 @@ describe('when searching', () => {
 
   it('allows for a basic search', () => {
     cy.get('#searchBar')
-      .type('ALMATEST{enter}')
-    cy.url().should('include', 'ALMATEST')
+      .type('TEST{enter}')
+    cy.url().should('include', 'TEST')
     cy.get(`[id^='SEARCH_RESULT_RECORDID_']`)
       .first()
       .then($el => {
