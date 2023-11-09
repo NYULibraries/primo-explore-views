@@ -24,9 +24,8 @@ services:
   # Dockerfile that uses production versions of dependencies from npm/yarn registries
   # VIEW=[VIEW-NAME] NODE_ENV=[env] docker-compose up web
   web:
-    <<: *x-build
+    <<: [*x-build, *x-ports]
     image: primo-explore-views
-    <<: *x-ports
     environment:
       <<: *x-environment
     # volumes:
@@ -44,12 +43,11 @@ services:
   # NODE_ENV=test will produce a production-like environment, including minified assets and a devserver without hot module reload
   # VIEW=[VIEW-NAME] NODE_ENV=[env] docker-compose up web-test
   web-test:
-    <<: *x-build
+    <<: [*x-build, *x-ports]
     image: primo-explore-views
     environment:
       <<: *x-environment
       NODE_ENV: test
-    <<: *x-ports
     # volumes:
     # - ./custom:/app/primo-explore/custom/
 
