@@ -19,3 +19,10 @@ prm-search-bookmark-filter a[aria-label="nui.favorites.goFavorites.tooltip"],
 prm-favorites md-tab-item:first-child {
   display: none !important;
 }
+
+/* Hide "Add to Saved Items" check box feature.
+https://nyu-lib.monday.com/boards/765008773/pulses/5276773633
+To avoid adding items to my e-shelf if they aren't going to be migrated to the new catalog. */
+div.nyu-eshelf.neutralized-button.md-button.md-primoExplore-theme {
+  display: none;
+}

@@ -14,10 +14,10 @@ describe('The Home Page', function () {
 
     it('allows for a basic search', () => {
       cy.get('#searchBar')
-        .type('ALMATEST{enter}')
-      cy.url().should('include', 'ALMATEST')
+        .type('TEST{enter}')
+      cy.url().should('include', 'TEST')
       cy.get(`[id^='SEARCH_RESULT_RECORDID_']`)
-      .first()
+        .first()
         .then($el => {
           // current bug with partial string matches with .should('contain.text', 'ALMATEST')
           expect($el.text().length).to.be.at.least(1)

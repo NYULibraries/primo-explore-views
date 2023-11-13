@@ -29,3 +29,10 @@ a.md-button[aria-label="Tags"],
 a.md-buttom[aria-label="nui.mainmenu.label.tags"] {
   display: none;
 }
+
+/* Hide "Add to Saved Items" check box feature.
+https://nyu-lib.monday.com/boards/765008773/pulses/5429384912
+To avoid adding items to my e-shelf if they aren't going to be migrated to the new catalog. */
+div.nyu-eshelf.neutralized-button.md-button.md-primoExplore-theme {
+  display: none;
+}
