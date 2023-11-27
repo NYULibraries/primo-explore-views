@@ -10,17 +10,17 @@ describe('primo-explore-custom-request-wrapper', () => {
     })
 
     it(`has a Login to see request options button`, () => {
-      cy.get(`prm-location-items .md-2-line > :nth-child(1) > .md-list-item-text`)
+      cy.get(`prm-authentication .button-with-icon.zero-margin.md-button.md-primoExplore-theme.md-ink-ripple`)
         .should('be.visible')
-        .get('primo-explore-custom-request-wrapper button')
-        .contains(`Login to see request options`)
+        .get('prm-request-services button')
+        .contains(`Login`)
         .should('be.visible')
     })
 
     it(`no other button is visible`, () => {
-      cy.get(`prm-location-items .md-2-line > :nth-child(1) > .md-list-item-text`)
+      cy.get(`prm-authentication .button-with-icon.zero-margin.md-button.md-primoExplore-theme.md-ink-ripple`)
         .should('be.visible')
-        .get('primo-explore-custom-request-button button')
+        .get('prm-location-items button')
         .should('not.be.visible')
     })
   })
@@ -82,15 +82,15 @@ describe('primo-explore-custom-request-wrapper', () => {
         [
           `Login to see request options`,
         ].forEach(buttonLabel => {
-          cy.get('primo-explore-custom-request-wrapper button')
+          cy.get('prm-location-items button')
             .contains(buttonLabel)
-            .should('not.be.visible')
+            .should('not.exist')
         })
       })
     })
   })
 
-    // Note: I cannot check if an actual "Request" button will render without an actual user being logged in!'
-    // Be sure to test this with a real user if making tweaks to this behavior.
+  // Note: I cannot check if an actual "Request" button will render without an actual user being logged in!'
+  // Be sure to test this with a real user if making tweaks to this behavior.
 
 })
