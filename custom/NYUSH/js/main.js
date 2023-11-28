@@ -19,6 +19,7 @@ import searchBarSubMenuItemsConfig from './searchBarSubMenu';
 import customLoginConfig from 'Common/js/customLoginConfig';
 import 'Common/js/customRequests';
 import 'Common/js/sendToCourseReserves';
+import appendStatusEmbed from 'Common/js/statusPageEmbed';
 
 // HTML to JS imports
 import customRequestsRequestInformationTemplate from 'Common/html/custom_requests_request_information.html';
@@ -132,4 +133,5 @@ runBlock.$inject = [
 function runBlock(nyuEshelfService, libraryh3lpInjectionService) {
   nyuEshelfService.initEshelf();
   libraryh3lpInjectionService.injectScript();
+  appendStatusEmbed();
 }
