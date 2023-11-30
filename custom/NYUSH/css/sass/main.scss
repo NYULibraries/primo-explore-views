@@ -12,3 +12,9 @@
 @import '~primo-explore-clickable-logo-to-any-link/css/custom1.css';
 @import '~primo-explore-libraryh3lp-widget/css/custom1.css';
 @import '~primo-explore-nyu-eshelf/css/custom1.css';
+
+/* Custom messaging for NYUs and Consortiums in the "Custom Request Information" display (Internal)
+   https://nyu-lib.monday.com/boards/765008773/pulses/5509782175 */
+prm-location-items-after .custom-requests .request-information h3 {
+    background-color: #FBAEB4;
+}
