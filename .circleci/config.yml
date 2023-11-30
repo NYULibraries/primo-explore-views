@@ -63,42 +63,42 @@ jobs:
     <<: *docker-defaults
     environment:
       VIEW: BHS
-    <<: *run-e2e-steps
+    <<: [ *run-e2e-steps ]
   run-e2e-CENTRAL_PACKAGE:
     <<: *docker-defaults
     environment:
       VIEW: CENTRAL_PACKAGE
-    <<: *run-e2e-steps
+    <<: [ *run-e2e-steps ]
   run-e2e-CU:
     <<: *docker-defaults
     environment:
       VIEW: CU
-    <<: *run-e2e-steps
+    <<: [ *run-e2e-steps ]
   run-e2e-NYHS:
     <<: *docker-defaults
     environment:
       VIEW: NYHS
-    <<: *run-e2e-steps
+    <<: [ *run-e2e-steps ]
   run-e2e-NYSID:
     <<: *docker-defaults
     environment:
       VIEW: NYSID
-    <<: *run-e2e-steps
+    <<: [ *run-e2e-steps ]
   run-e2e-NYU:
     <<: *docker-defaults
     environment:
       VIEW: NYU
-    <<: *run-e2e-steps
+    <<: [ *run-e2e-steps ]
   run-e2e-NYUAD:
     <<: *docker-defaults
     environment:
       VIEW: NYUAD
-    <<: *run-e2e-steps
+    <<: [ *run-e2e-steps ]
   run-e2e-NYUSH:
     <<: *docker-defaults
     environment:
       VIEW: NYUSH
-    <<: *run-e2e-steps
+    <<: [ *run-e2e-steps ]
 
   create-view-packages:
     <<: *docker-defaults
