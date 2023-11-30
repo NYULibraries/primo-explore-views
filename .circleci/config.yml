@@ -60,45 +60,37 @@ jobs:
           path: coverage
 
   run-e2e-BHS:
-    <<: *docker-defaults
+    <<: [ *docker-defaults, *run-e2e-steps ]
     environment:
       VIEW: BHS
-    <<: [ *run-e2e-steps ]
   run-e2e-CENTRAL_PACKAGE:
-    <<: *docker-defaults
+    <<: [ *docker-defaults, *run-e2e-steps ]
     environment:
       VIEW: CENTRAL_PACKAGE
-    <<: [ *run-e2e-steps ]
   run-e2e-CU:
-    <<: *docker-defaults
+    <<: [ *docker-defaults, *run-e2e-steps ]
     environment:
       VIEW: CU
-    <<: [ *run-e2e-steps ]
   run-e2e-NYHS:
-    <<: *docker-defaults
+    <<: [ *docker-defaults, *run-e2e-steps ]
     environment:
       VIEW: NYHS
-    <<: [ *run-e2e-steps ]
   run-e2e-NYSID:
-    <<: *docker-defaults
+    <<: [ *docker-defaults, *run-e2e-steps ]
     environment:
       VIEW: NYSID
-    <<: [ *run-e2e-steps ]
   run-e2e-NYU:
-    <<: *docker-defaults
+    <<: [ *docker-defaults, *run-e2e-steps ]
     environment:
       VIEW: NYU
-    <<: [ *run-e2e-steps ]
   run-e2e-NYUAD:
-    <<: *docker-defaults
+    <<: [ *docker-defaults, *run-e2e-steps ]
     environment:
       VIEW: NYUAD
-    <<: [ *run-e2e-steps ]
   run-e2e-NYUSH:
-    <<: *docker-defaults
+    <<: [ *docker-defaults, *run-e2e-steps ]
     environment:
       VIEW: NYUSH
-    <<: [ *run-e2e-steps ]
 
   create-view-packages:
     <<: *docker-defaults
